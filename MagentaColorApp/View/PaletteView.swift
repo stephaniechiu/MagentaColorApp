@@ -24,13 +24,9 @@ class PaletteView: UIView {
         button.layer.borderWidth = 2
         button.layer.borderColor = UIColor.white.cgColor
         button.layer.cornerRadius = 15
-        button.addTarget(self, action: #selector(randomPalette(sender: )), for: .touchUpInside)
+        button.addTarget(self, action: #selector(PaletteController.randomPalette(sender: )), for: .touchUpInside)
         return button
     }()
-    
-    @objc func randomPalette(sender: UIButton) {
-        print("click")
-    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)

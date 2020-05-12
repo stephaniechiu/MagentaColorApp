@@ -8,6 +8,6 @@
 
 import UIKit
 
-struct Color {
-    let hex: String?
+struct Color: Codable {
+    let colors: [String]
 }

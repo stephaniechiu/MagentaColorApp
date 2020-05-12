@@ -12,7 +12,7 @@ class PaletteController: UIViewController, UITableViewDataSource {
     
     let paletteView = PaletteView()
     let paletteTableView = UITableView()
-    let palette = ColorAPI.getColor()
+    var colorPalette = [Color]()
     let cellIdentifier = "ColorCell"
     let bottomHeight = CGFloat(60)
     
@@ -20,9 +20,11 @@ class PaletteController: UIViewController, UITableViewDataSource {
         super.viewDidLoad()
         view = paletteView
         
+        newPalette()
         setupTableView()
     }
-    
+
+// MARK: - Helper Functions
     fileprivate func setupTableView() {
         paletteTableView.dataSource = self
         paletteTableView.isScrollEnabled = false
@@ -39,21 +41,39 @@ class PaletteController: UIViewController, UITableViewDataSource {
         paletteView.bottomControllerView.anchor(top: paletteTableView.bottomAnchor, left: view.safeAreaLayoutGuide.leftAnchor, bottom: view.bottomAnchor, right: view.safeAreaLayoutGuide.rightAnchor, height: bottomHeight)
     }
     
+    // MARK: - Selectors
+    @objc func randomPalette(sender: UIButton) {
+        newPalette()
+        print("click")
+    }
+    
+    // MARK: - API Call
+    func newPalette() {
+        guard let url = URL(string: "https://www.colourlovers.com/api/palettes/top?format=json") else { return }
+        guard let data = try? Data(contentsOf: url) else { return }
+        
+        do {
+            let decoder = JSONDecoder()
+            let jsonData = try decoder.decode([Color].self, from: data)
+            print(jsonData[3])
+            paletteTableView.reloadData()
+        } catch let jsonError {
+            print("JSON Error: ", jsonError)
+        }
+    }
+    
+    func parse(json: Data) {
+        
+    }
+    
 // MARK: - TableView Data Source
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return palette.count
+        return colorPalette.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
-        cell.textLabel?.text = palette[indexPath.row].hex
-        
-        if indexPath.row == 0 {
-            cell.backgroundColor = .green
-        } else {
-            cell.backgroundColor = .orange
-        }
-        
+//        cell.textLabel?.text = colorPalette[indexPath.row]
         return cell
     }
 }
