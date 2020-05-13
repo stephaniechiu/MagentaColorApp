@@ -9,5 +9,5 @@
 import UIKit
 
 //struct Colors: Codable {
-//    var colors: [Color]
+//    var color: [Color]
 //}

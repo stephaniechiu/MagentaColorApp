@@ -8,6 +8,8 @@
 
 import UIKit
 
+typealias Palette = [Color]
+
 struct Color: Codable {
     let colors: [String]
 }
