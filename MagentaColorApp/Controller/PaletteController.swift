@@ -8,13 +8,13 @@
 
 import UIKit
 
-class PaletteController: UIViewController, UITableViewDataSource {
+class PaletteController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     let paletteView = PaletteView()
     let paletteTableView = UITableView()
     var colorPalette = [Color]()
     let cellIdentifier = "ColorCell"
-    let bottomHeight = CGFloat(60) //Height of bottom controller bar
+    let bottomHeight = CGFloat(80) //Height of bottom controller bar
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,6 +27,7 @@ class PaletteController: UIViewController, UITableViewDataSource {
 // MARK: - Helper Functions
     fileprivate func setupTableView() {
         paletteTableView.dataSource = self
+        paletteTableView.delegate = self
         paletteTableView.isScrollEnabled = false
         
         let heightOfCells: CGFloat = (UIScreen.main.bounds.height - bottomHeight) / 5
@@ -44,6 +45,7 @@ class PaletteController: UIViewController, UITableViewDataSource {
     // MARK: - Selectors
     @objc func randomPalette(sender: UIButton) {
         newPalette()
+        print("--------------tapped-------------")
     }
     
     // MARK: - API Call
@@ -54,7 +56,7 @@ class PaletteController: UIViewController, UITableViewDataSource {
         do {
             let decoder = JSONDecoder()
             let jsonData = try decoder.decode(Palette.self, from: data)
-            self.colorPalette = jsonData
+            self.colorPalette = jsonData.shuffled()
             paletteTableView.reloadData()
         } catch let jsonError {
             print("JSON Error: ", jsonError)
@@ -69,20 +71,23 @@ class PaletteController: UIViewController, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
         
-        //Shuffle the colorPalette array after API call to generate new palette on UI
-        let shuffledArray = colorPalette.shuffled()
-        
+        cell.selectionStyle = .none
+
         //Assigns a new color to each row. Colors are converted from HEX to RGB
-        for i in 0..<shuffledArray.count {
-            for j in 0..<shuffledArray[i].colors.count {
+        for i in 0..<colorPalette.count {
+            for j in 0..<colorPalette[i].colors.count {
                 if indexPath.row == j {
-                    cell.backgroundColor? = UIColor(hexString: shuffledArray[i].colors[j])
-                    cell.textLabel?.text = shuffledArray[i].colors[j]
-                    print("Palette color: " + shuffledArray[i].colors[j])
+                    cell.backgroundColor? = UIColor(hexString: colorPalette[i].colors[j])
+                    cell.textLabel?.text = colorPalette[i].colors[j]
+                    print("Palette color: " + colorPalette[i].colors[j])
                 }
             }
         }
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print("you tapped on me! \(colorPalette[indexPath.row].colors[indexPath.row])")
     }
 }
 
