@@ -9,6 +9,16 @@
 import UIKit
 
 extension UIView {
+    func colorTextView(text: String) -> UITextView {
+        let textView = UITextView()
+        textView.text = text
+        textView.font = UIFont(name: "Helectiva", size: 12)
+        textView.textAlignment = .center
+        textView.isEditable = true
+        textView.isScrollEnabled = false
+        return textView
+    }
+    
     func anchor(top: NSLayoutYAxisAnchor? = nil,
                 left: NSLayoutXAxisAnchor? = nil,
                 bottom: NSLayoutYAxisAnchor? = nil,

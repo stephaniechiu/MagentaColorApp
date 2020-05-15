@@ -16,12 +16,18 @@ class PaletteController: UIViewController, UITableViewDataSource, UITableViewDel
     let cellIdentifier = "ColorCell"
     let bottomHeight = CGFloat(80) //Height of bottom controller bar
     
+    let colorDetailsView: UIView = {
+        let view = UIView()
+        return view
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view = paletteView
         
         newPalette()
         setupTableView()
+        hideColor()
     }
 
 // MARK: - Helper Functions
@@ -42,15 +48,52 @@ class PaletteController: UIViewController, UITableViewDataSource, UITableViewDel
         paletteView.bottomControllerView.anchor(top: paletteTableView.bottomAnchor, left: view.safeAreaLayoutGuide.leftAnchor, bottom: view.bottomAnchor, right: view.safeAreaLayoutGuide.rightAnchor, height: bottomHeight)
     }
     
+    func hideColor() {
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissColor))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
+    }
+    
     // MARK: - Selectors
+    
+    //A new palette is generated when user taps on the Generate button
     @objc func randomPalette(sender: UIButton) {
         newPalette()
-        print("--------------tapped-------------")
+    }
+    
+    //Color cell expands to fill the screen of that color when user taps on the cell
+    @objc func userTap(sender: UITapGestureRecognizer) {
+        colorDetailsView.frame.size = CGSize(width: UIScreen.main.bounds.width, height: 0)
+        colorDetailsView.alpha = 0
+        
+        if sender.state == UIGestureRecognizer.State.ended {
+            let tapLocation = sender.location(in: self.paletteTableView)
+            
+            if let tapIndexPath = self.paletteTableView.indexPathForRow(at: tapLocation) {
+                if let tappedCell = self.paletteTableView.cellForRow(at: tapIndexPath) {
+                    let rect = tappedCell.convert(tappedCell.frame, to: self.view)
+                    colorDetailsView.center = CGPoint(x: rect.origin.x + rect.size.width/2, y: rect.origin.y + rect.size.height/2)
+                    
+                    UIView.animate(withDuration: 0.5) {
+                        self.colorDetailsView.bounds.size.width = UIScreen.main.bounds.width
+                        self.colorDetailsView.bounds.size.height = UIScreen.main.bounds.height - self.bottomHeight
+                        self.colorDetailsView.alpha = 1
+                        self.view.addSubview(self.colorDetailsView)
+                    }
+                }
+            }
+        }
+    }
+    
+    //Color will compress back to its cell when user taps anywhere on the screen
+    @objc func dismissColor() {
+        colorDetailsView.endEditing(true)
+        print("click")
     }
     
     // MARK: - API Call
     func newPalette() {
-        guard let url = URL(string: "https://www.colourlovers.com/api/palettes/top?format=json&numResults=100") else { return }
+        guard let url = URL(string: "https://www.colourlovers.com/api/palettes/top?format=json&numResults=20") else { return }
         guard let data = try? Data(contentsOf: url) else { return }
         
         do {
@@ -71,6 +114,10 @@ class PaletteController: UIViewController, UITableViewDataSource, UITableViewDel
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
         
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(userTap(sender:)))
+        cell.addGestureRecognizer(tapGesture)
+        cell.isUserInteractionEnabled = true
+
         cell.selectionStyle = .none
 
         //Assigns a new color to each row. Colors are converted from HEX to RGB
@@ -78,7 +125,7 @@ class PaletteController: UIViewController, UITableViewDataSource, UITableViewDel
             for j in 0..<colorPalette[i].colors.count {
                 if indexPath.row == j {
                     cell.backgroundColor? = UIColor(hexString: colorPalette[i].colors[j])
-                    cell.textLabel?.text = colorPalette[i].colors[j]
+                    colorDetailsView.backgroundColor = UIColor(hexString: colorPalette[i].colors[j])
                     print("Palette color: " + colorPalette[i].colors[j])
                 }
             }
