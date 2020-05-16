@@ -46,6 +46,8 @@ class PaletteController: UIViewController, UITableViewDataSource, UITableViewDel
         
         view.addSubview(paletteView.bottomControllerView)
         paletteView.bottomControllerView.anchor(top: paletteTableView.bottomAnchor, left: view.safeAreaLayoutGuide.leftAnchor, bottom: view.bottomAnchor, right: view.safeAreaLayoutGuide.rightAnchor, height: bottomHeight)
+        
+        view.addSubview(colorDetailsView)
     }
     
     func hideColor() {
@@ -63,31 +65,39 @@ class PaletteController: UIViewController, UITableViewDataSource, UITableViewDel
     
     //Color cell expands to fill the screen of that color when user taps on the cell
     @objc func userTap(sender: UITapGestureRecognizer) {
-        colorDetailsView.frame.size = CGSize(width: UIScreen.main.bounds.width, height: 0)
-        colorDetailsView.alpha = 0
-        
+//        colorDetailsView.frame.size = CGSize(width: UIScreen.main.bounds.width, height: 0)
+//        colorDetailsView.alpha = 0
+
         if sender.state == UIGestureRecognizer.State.ended {
             let tapLocation = sender.location(in: self.paletteTableView)
             
             if let tapIndexPath = self.paletteTableView.indexPathForRow(at: tapLocation) {
                 if let tappedCell = self.paletteTableView.cellForRow(at: tapIndexPath) {
-                    let rect = tappedCell.convert(tappedCell.frame, to: self.view)
-                    colorDetailsView.center = CGPoint(x: rect.origin.x + rect.size.width/2, y: rect.origin.y + rect.size.height/2)
+                    var rect = tappedCell.convert(tappedCell.frame, to: self.view)
+                    colorDetailsView.center = CGPoint(x: rect.origin.x + rect.size.width/2, y: rect.origin.y - rect.size.height/2)
                     
-                    UIView.animate(withDuration: 0.5) {
-                        self.colorDetailsView.bounds.size.width = UIScreen.main.bounds.width
-                        self.colorDetailsView.bounds.size.height = UIScreen.main.bounds.height - self.bottomHeight
-                        self.colorDetailsView.alpha = 1
-                        self.view.addSubview(self.colorDetailsView)
-                    }
+                    UIView.animate(withDuration: 1.0, animations: {
+//                        self.colorDetailsView.bounds.size.height = UIScreen.main.bounds.height
+//                        rect = rect.offsetBy(dx: 1, dy: 50)
+                        tappedCell.transform = CGAffineTransform(scaleX: 1, y: 50)
+//                        self.colorDetailsView.transform = .identity
+                        
+                        for i in 0..<self.colorPalette.count {
+                            for j in 0..<self.colorPalette[i].colors.count {
+                                if tapIndexPath.row == j {
+                                    self.colorDetailsView.backgroundColor = UIColor(hexString: self.colorPalette[i].colors[j])
+                                }
+                            }
+                        }
+                    } )
                 }
             }
         }
+
     }
     
     //Color will compress back to its cell when user taps anywhere on the screen
-    @objc func dismissColor() {
-        colorDetailsView.endEditing(true)
+    @objc func dismissColor(sender: UITapGestureRecognizer) {
         print("click")
     }
     
@@ -125,7 +135,6 @@ class PaletteController: UIViewController, UITableViewDataSource, UITableViewDel
             for j in 0..<colorPalette[i].colors.count {
                 if indexPath.row == j {
                     cell.backgroundColor? = UIColor(hexString: colorPalette[i].colors[j])
-                    colorDetailsView.backgroundColor = UIColor(hexString: colorPalette[i].colors[j])
                     print("Palette color: " + colorPalette[i].colors[j])
                 }
             }
