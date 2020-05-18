@@ -9,7 +9,7 @@
 import UIKit
 
 class PaletteView: UIView {
-
+ 
     let bottomControllerView: UIView = {
         let view = UIView()
         view.backgroundColor = .black

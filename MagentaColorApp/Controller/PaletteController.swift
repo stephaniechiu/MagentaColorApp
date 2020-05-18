@@ -14,12 +14,9 @@ class PaletteController: UIViewController, UITableViewDataSource, UITableViewDel
     let paletteTableView = UITableView()
     var colorPalette = [Color]()
     let cellIdentifier = "ColorCell"
-    let bottomHeight = CGFloat(80) //Height of bottom controller bar
     
-    let colorDetailsView: UIView = {
-        let view = UIView()
-        return view
-    }()
+    let bottomHeight = CGFloat(80) //Height of bottom controller bar
+    var currentAnimation = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,10 +24,31 @@ class PaletteController: UIViewController, UITableViewDataSource, UITableViewDel
         
         newPalette()
         setupTableView()
-        hideColor()
+        colorButtons()
     }
 
 // MARK: - Helper Functions
+    
+    //Creates buttons the size of each cell, which will expand to fill that cell's color when user taps on the button/cell
+    func colorButtons() {
+        var tag = 0
+        var buttonY: CGFloat = 0
+        
+        for i in 0..<1 {
+            for color in colorPalette[i].colors {
+                let button = UIButton(frame: CGRect(x: 15, y: buttonY, width: UIScreen.main.bounds.width - 30, height: (UIScreen.main.bounds.height - 100) / 5))
+                    buttonY = buttonY + (UIScreen.main.bounds.height/5 - 15)
+                    button.backgroundColor = .darkGray
+                    button.setTitle("Oh boy! \(color)", for: .normal)
+                    button.titleLabel?.text = "\(color)"
+                    button.addTarget(self, action: #selector(openColor(sender:)), for: .touchUpInside)
+                    button.tag = tag
+                    view.addSubview(button)
+                    tag += 1
+            }
+        }
+    }
+    
     fileprivate func setupTableView() {
         paletteTableView.dataSource = self
         paletteTableView.delegate = self
@@ -46,14 +64,10 @@ class PaletteController: UIViewController, UITableViewDataSource, UITableViewDel
         
         view.addSubview(paletteView.bottomControllerView)
         paletteView.bottomControllerView.anchor(top: paletteTableView.bottomAnchor, left: view.safeAreaLayoutGuide.leftAnchor, bottom: view.bottomAnchor, right: view.safeAreaLayoutGuide.rightAnchor, height: bottomHeight)
-        
-        view.addSubview(colorDetailsView)
     }
-    
-    func hideColor() {
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissColor))
-        tap.cancelsTouchesInView = false
-        view.addGestureRecognizer(tap)
+
+    @objc func openColor(sender: UIButton) {
+        print("click")
     }
     
     // MARK: - Selectors
@@ -62,45 +76,7 @@ class PaletteController: UIViewController, UITableViewDataSource, UITableViewDel
     @objc func randomPalette(sender: UIButton) {
         newPalette()
     }
-    
-    //Color cell expands to fill the screen of that color when user taps on the cell
-    @objc func userTap(sender: UITapGestureRecognizer) {
-//        colorDetailsView.frame.size = CGSize(width: UIScreen.main.bounds.width, height: 0)
-//        colorDetailsView.alpha = 0
 
-        if sender.state == UIGestureRecognizer.State.ended {
-            let tapLocation = sender.location(in: self.paletteTableView)
-            
-            if let tapIndexPath = self.paletteTableView.indexPathForRow(at: tapLocation) {
-                if let tappedCell = self.paletteTableView.cellForRow(at: tapIndexPath) {
-                    var rect = tappedCell.convert(tappedCell.frame, to: self.view)
-                    colorDetailsView.center = CGPoint(x: rect.origin.x + rect.size.width/2, y: rect.origin.y - rect.size.height/2)
-                    
-                    UIView.animate(withDuration: 1.0, animations: {
-//                        self.colorDetailsView.bounds.size.height = UIScreen.main.bounds.height
-//                        rect = rect.offsetBy(dx: 1, dy: 50)
-                        tappedCell.transform = CGAffineTransform(scaleX: 1, y: 50)
-//                        self.colorDetailsView.transform = .identity
-                        
-                        for i in 0..<self.colorPalette.count {
-                            for j in 0..<self.colorPalette[i].colors.count {
-                                if tapIndexPath.row == j {
-                                    self.colorDetailsView.backgroundColor = UIColor(hexString: self.colorPalette[i].colors[j])
-                                }
-                            }
-                        }
-                    } )
-                }
-            }
-        }
-
-    }
-    
-    //Color will compress back to its cell when user taps anywhere on the screen
-    @objc func dismissColor(sender: UITapGestureRecognizer) {
-        print("click")
-    }
-    
     // MARK: - API Call
     func newPalette() {
         guard let url = URL(string: "https://www.colourlovers.com/api/palettes/top?format=json&numResults=20") else { return }
@@ -123,11 +99,6 @@ class PaletteController: UIViewController, UITableViewDataSource, UITableViewDel
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
-        
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(userTap(sender:)))
-        cell.addGestureRecognizer(tapGesture)
-        cell.isUserInteractionEnabled = true
-
         cell.selectionStyle = .none
 
         //Assigns a new color to each row. Colors are converted from HEX to RGB
@@ -141,7 +112,8 @@ class PaletteController: UIViewController, UITableViewDataSource, UITableViewDel
         }
         return cell
     }
-    
+
+// MARK: - TableView Delegate
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("you tapped on me! \(colorPalette[indexPath.row].colors[indexPath.row])")
     }
