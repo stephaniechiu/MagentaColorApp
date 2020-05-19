@@ -15,6 +15,7 @@ class PaletteController: UIViewController, UITableViewDataSource, UITableViewDel
     var colorPalette = [Color]()
     var colorArray = [UIButton]()
     let cellIdentifier = "ColorCell"
+    var cellColor: String = ""
     
     let bottomHeight = CGFloat(80) //Height of bottom controller bar
     var currentAnimation = 0
@@ -39,13 +40,26 @@ class PaletteController: UIViewController, UITableViewDataSource, UITableViewDel
         
         paletteTableView.register(UITableViewCell.self, forCellReuseIdentifier: cellIdentifier)
         
+        view.addSubview(paletteView.colorStackView)
+        paletteView.colorStackView.centerX(inView: view)
+        paletteView.colorStackView.centerY(inView: view)
+        
         view.addSubview(paletteTableView)
         paletteTableView.anchor(top: view.topAnchor, left: view.safeAreaLayoutGuide.leftAnchor, right: view.safeAreaLayoutGuide.rightAnchor)
         
         view.addSubview(paletteView.bottomControllerView)
         paletteView.bottomControllerView.anchor(top: paletteTableView.bottomAnchor, left: view.safeAreaLayoutGuide.leftAnchor, bottom: view.bottomAnchor, right: view.safeAreaLayoutGuide.rightAnchor, height: bottomHeight)
     }
+    
+    fileprivate func setupColorDetails() {
+        self.view.addSubview(self.paletteView.colorStackView)
+        self.paletteView.colorStackView.centerX(inView: self.view)
+        self.paletteView.colorStackView.centerY(inView: self.view)
+        self.paletteView.colorStackView.alpha = 1
+    }
 
+    // MARK: - Selectors
+    
     @objc func openColor(sender: UIButton) {
         let buttonTag = sender.tag
         for i in 0..<5 {
@@ -53,11 +67,15 @@ class PaletteController: UIViewController, UITableViewDataSource, UITableViewDel
                 UIView.animate(withDuration: 0.7, animations: {
                     switch self.currentAnimation {
                     case 0:
-                        self.colorArray[i].transform = CGAffineTransform(scaleX: 2, y: 50)
+                        self.colorArray[i].transform = CGAffineTransform(scaleX: 1.1, y: 50)
                         self.colorArray[i].backgroundColor = UIColor(hexString: self.colorPalette[0].colors[i])
                         self.view.bringSubviewToFront(self.colorArray[i])
+                        self.setupColorDetails()
+                        self.cellColor = self.colorPalette[0].colors[i]
+                        print("This is the color \(self.cellColor)")
                     case 1:
                         self.colorArray[i].transform = CGAffineTransform.identity
+                        self.paletteView.colorStackView.alpha = 0
                     default:
                         break
                         }
@@ -71,8 +89,6 @@ class PaletteController: UIViewController, UITableViewDataSource, UITableViewDel
         }
     }
     
-    // MARK: - Selectors
-    
     //A new palette is generated when user taps on the Generate button
     @objc func randomPalette(sender: UIButton) {
         newPalette()
@@ -80,7 +96,7 @@ class PaletteController: UIViewController, UITableViewDataSource, UITableViewDel
 
     // MARK: - API Call
     func newPalette() {
-        guard let url = URL(string: "https://www.colourlovers.com/api/palettes/top?format=json&numResults=20") else { return }
+        guard let url = URL(string: "https://www.colourlovers.com/api/palettes/?format=json&numResults=100") else { return }
         guard let data = try? Data(contentsOf: url) else { return }
         
         do {
@@ -113,6 +129,7 @@ class PaletteController: UIViewController, UITableViewDataSource, UITableViewDel
                 let button = UIButton(frame: CGRect(x: 15, y: buttonY, width: UIScreen.main.bounds.width - 30, height: (UIScreen.main.bounds.height - 100) / 5))
                 buttonY = buttonY + (UIScreen.main.bounds.height/5 - 15)
                 button.addTarget(self, action: #selector(openColor(sender:)), for: .touchUpInside)
+                button.layer.cornerRadius = 10
                 button.tag = tag
                 tag += 1
 

@@ -10,10 +10,10 @@ import UIKit
 
 extension UIView {
     
-    func colorInfoLabel(text: String, color: String) -> UILabel {
+    func colorInfoLabel(text: String) -> UILabel {
         let label = UILabel()
         label.font = UIFont(name: "Helectiva", size: 10)
-        label.text = "\(text): " + "\(color)"
+        label.text = "\(text): "
         return label
     }
     
