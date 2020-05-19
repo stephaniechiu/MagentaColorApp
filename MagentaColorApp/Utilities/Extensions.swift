@@ -9,14 +9,12 @@
 import UIKit
 
 extension UIView {
-    func colorTextView(text: String) -> UITextView {
-        let textView = UITextView()
-        textView.text = text
-        textView.font = UIFont(name: "Helectiva", size: 12)
-        textView.textAlignment = .center
-        textView.isEditable = true
-        textView.isScrollEnabled = false
-        return textView
+    
+    func colorInfoLabel(text: String, color: String) -> UILabel {
+        let label = UILabel()
+        label.font = UIFont(name: "Helectiva", size: 10)
+        label.text = "\(text): " + "\(color)"
+        return label
     }
     
     func anchor(top: NSLayoutYAxisAnchor? = nil,

@@ -13,6 +13,7 @@ class PaletteController: UIViewController, UITableViewDataSource, UITableViewDel
     let paletteView = PaletteView()
     let paletteTableView = UITableView()
     var colorPalette = [Color]()
+    var colorArray = [UIButton]()
     let cellIdentifier = "ColorCell"
     
     let bottomHeight = CGFloat(80) //Height of bottom controller bar
@@ -24,30 +25,9 @@ class PaletteController: UIViewController, UITableViewDataSource, UITableViewDel
         
         newPalette()
         setupTableView()
-        colorButtons()
     }
 
 // MARK: - Helper Functions
-    
-    //Creates buttons the size of each cell, which will expand to fill that cell's color when user taps on the button/cell
-    func colorButtons() {
-        var tag = 0
-        var buttonY: CGFloat = 0
-        
-        for i in 0..<1 {
-            for color in colorPalette[i].colors {
-                let button = UIButton(frame: CGRect(x: 15, y: buttonY, width: UIScreen.main.bounds.width - 30, height: (UIScreen.main.bounds.height - 100) / 5))
-                    buttonY = buttonY + (UIScreen.main.bounds.height/5 - 15)
-                    button.backgroundColor = .darkGray
-                    button.setTitle("Oh boy! \(color)", for: .normal)
-                    button.titleLabel?.text = "\(color)"
-                    button.addTarget(self, action: #selector(openColor(sender:)), for: .touchUpInside)
-                    button.tag = tag
-                    view.addSubview(button)
-                    tag += 1
-            }
-        }
-    }
     
     fileprivate func setupTableView() {
         paletteTableView.dataSource = self
@@ -67,7 +47,28 @@ class PaletteController: UIViewController, UITableViewDataSource, UITableViewDel
     }
 
     @objc func openColor(sender: UIButton) {
-        print("click")
+        let buttonTag = sender.tag
+        for i in 0..<5 {
+            if buttonTag == i {
+                UIView.animate(withDuration: 0.7, animations: {
+                    switch self.currentAnimation {
+                    case 0:
+                        self.colorArray[i].transform = CGAffineTransform(scaleX: 2, y: 50)
+                        self.colorArray[i].backgroundColor = UIColor(hexString: self.colorPalette[0].colors[i])
+                        self.view.bringSubviewToFront(self.colorArray[i])
+                    case 1:
+                        self.colorArray[i].transform = CGAffineTransform.identity
+                    default:
+                        break
+                        }
+                    })
+                    currentAnimation += 1
+                    if currentAnimation > 1 {
+                        currentAnimation = 0
+                    }
+                print("click \(buttonTag)")
+            }
+        }
     }
     
     // MARK: - Selectors
@@ -98,15 +99,30 @@ class PaletteController: UIViewController, UITableViewDataSource, UITableViewDel
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        var buttonY: CGFloat = 0
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
         cell.selectionStyle = .none
 
         //Assigns a new color to each row. Colors are converted from HEX to RGB
-        for i in 0..<colorPalette.count {
+        for i in 0..<1 {
+            var tag = 0
             for j in 0..<colorPalette[i].colors.count {
+                
+                let button = UIButton(frame: CGRect(x: 15, y: buttonY, width: UIScreen.main.bounds.width - 30, height: (UIScreen.main.bounds.height - 100) / 5))
+                buttonY = buttonY + (UIScreen.main.bounds.height/5 - 15)
+                button.addTarget(self, action: #selector(openColor(sender:)), for: .touchUpInside)
+                button.tag = tag
+                tag += 1
+
+                view.addSubview(button)
+                colorArray.append(button)
+                
                 if indexPath.row == j {
                     cell.backgroundColor? = UIColor(hexString: colorPalette[i].colors[j])
-                    print("Palette color: " + colorPalette[i].colors[j])
+                    button.backgroundColor = UIColor(hexString: colorPalette[0].colors[indexPath.row])
+                    print("Palette color: " + colorPalette[0].colors[button.tag])
                 }
             }
         }
