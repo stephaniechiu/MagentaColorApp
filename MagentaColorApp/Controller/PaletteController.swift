@@ -16,6 +16,7 @@ class PaletteController: UIViewController, UITableViewDataSource, UITableViewDel
     var colorArray = [UIButton]()
     let cellIdentifier = "ColorCell"
     var cellColor: String = ""
+    var gradientLayer = CAGradientLayer()
     
     let bottomHeight = CGFloat(80) //Height of bottom controller bar
     var currentAnimation = 0
@@ -25,10 +26,26 @@ class PaletteController: UIViewController, UITableViewDataSource, UITableViewDel
         view = paletteView
         
         newPalette()
+        setupNavigationItem()
         setupTableView()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.setNavigationBarHidden(true, animated: animated)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.setNavigationBarHidden(false, animated: animated)
     }
 
 // MARK: - Helper Functions
+
+    fileprivate func setupNavigationItem() {
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        navigationItem.backBarButtonItem?.tintColor = .white
+    }
     
     fileprivate func setupTableView() {
         paletteTableView.dataSource = self
@@ -59,6 +76,11 @@ class PaletteController: UIViewController, UITableViewDataSource, UITableViewDel
     }
 
     // MARK: - Selectors
+    
+    @objc func openGradientController() {
+        let gradientController = GradientController()
+        self.navigationController?.pushViewController(gradientController, animated: true)
+    }
     
     @objc func openColor(sender: UIButton) {
         let buttonTag = sender.tag
