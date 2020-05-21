@@ -9,10 +9,28 @@
 import UIKit
 
 extension UIView {
+    func containerView(color: UIColor) -> UIView {
+        let container = UIView()
+        container.backgroundColor = color
+        return container
+    }
     
-    func colorInfoLabel(text: String) -> UILabel {
+    func generateButton(borderColor: UIColor, textColor: UIColor) -> UIButton {
+        let button = UIButton()
+        button.setTitle("Generate", for: .normal)
+        button.titleLabel?.font = UIFont(name: "Helectiva", size: 13)
+        button.setTitleColor(textColor, for: .normal)
+        button.backgroundColor = .clear
+        button.layer.borderWidth = 2
+        button.layer.borderColor = borderColor.cgColor
+        button.layer.cornerRadius = 15
+        return button
+       }
+    
+    func colorInfoLabel(text: String, color: UIColor) -> UILabel {
         let label = UILabel()
         label.font = UIFont(name: "Helectiva", size: 10)
+        label.textColor = .label
         label.text = "\(text): "
         return label
     }

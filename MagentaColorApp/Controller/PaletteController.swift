@@ -10,6 +10,8 @@ import UIKit
 
 class PaletteController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
+// MARK: - Properties
+    
     let paletteView = PaletteView()
     let paletteTableView = UITableView()
     var colorPalette = [Color]()
@@ -21,13 +23,15 @@ class PaletteController: UIViewController, UITableViewDataSource, UITableViewDel
     let bottomHeight = CGFloat(80) //Height of bottom controller bar
     var currentAnimation = 0
     
+// MARK: - Lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view = paletteView
         
         newPalette()
         setupNavigationItem()
-        setupTableView()
+        setupView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -44,10 +48,10 @@ class PaletteController: UIViewController, UITableViewDataSource, UITableViewDel
 
     fileprivate func setupNavigationItem() {
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
-        navigationItem.backBarButtonItem?.tintColor = .white
+        navigationItem.backBarButtonItem?.tintColor = .black
     }
     
-    fileprivate func setupTableView() {
+    fileprivate func setupView() {
         paletteTableView.dataSource = self
         paletteTableView.delegate = self
         paletteTableView.isScrollEnabled = false
@@ -56,6 +60,8 @@ class PaletteController: UIViewController, UITableViewDataSource, UITableViewDel
         paletteTableView.rowHeight = heightOfCells
         
         paletteTableView.register(UITableViewCell.self, forCellReuseIdentifier: cellIdentifier)
+        
+        paletteView.paletteGenerateButton.addTarget(self, action: #selector(randomPalette(sender:)), for: .touchUpInside)
         
         view.addSubview(paletteView.colorStackView)
         paletteView.colorStackView.centerX(inView: view)
@@ -117,6 +123,7 @@ class PaletteController: UIViewController, UITableViewDataSource, UITableViewDel
     }
 
     // MARK: - API Call
+    
     func newPalette() {
         guard let url = URL(string: "https://www.colourlovers.com/api/palettes/?format=json&numResults=100") else { return }
         guard let data = try? Data(contentsOf: url) else { return }
@@ -132,6 +139,7 @@ class PaletteController: UIViewController, UITableViewDataSource, UITableViewDel
     }
     
 // MARK: - TableView Data Source
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 5
     }
@@ -169,6 +177,7 @@ class PaletteController: UIViewController, UITableViewDataSource, UITableViewDel
     }
 
 // MARK: - TableView Delegate
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("you tapped on me! \(colorPalette[indexPath.row].colors[indexPath.row])")
     }
