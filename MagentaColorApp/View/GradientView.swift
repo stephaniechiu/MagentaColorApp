@@ -11,43 +11,55 @@ import UIKit
 class GradientView: UIView {
 
 // MARK: - Properties
-    let circleGradientView: UIView = {
-        let circle = UIView()
-        circle.frame.size = CGSize(width: 380, height: 380)
-        circle.layer.cornerRadius = circle.frame.size.width / 2
-        circle.clipsToBounds = true
-        return circle
-    }()
-    
+    //Container Views
     let topContainerView = UIView().containerView(color: .systemBackground)
     let leftInfoContainerView = UIView().containerView(color: .systemBackground)
     let rightInfoContainerView = UIView().containerView(color: .systemBackground)
     let bottomContainerView = UIView().containerView(color: .systemBackground)
-    let gradientGenerateButton = UIView().generateButton(borderColor: .black, textColor: .label)
     
+    //Stack Views
     let leftStackView: UIStackView
     let rightStackView: UIStackView
+    let middleStackView: UIStackView
     
-    let colorLabelDarkModeHEX = UIView().colorInfoLabel(text: "HEX", color: .label)
-    let colorLabelDarkModeRGB = UIView().colorInfoLabel(text: "RGB", color: .label)
-    let colorLabelDarkModeCMYK = UIView().colorInfoLabel(text: "CMYK", color: .label)
-    let colorLabelDarkModeHSL = UIView().colorInfoLabel(text: "HSL", color: .label)
-    let colorLabelDarkModeHSV = UIView().colorInfoLabel(text: "HSV", color: .label)
+    //Color Codes - Left
+    let colorLabelDarkLeftHEX = UIView().colorInfoLabel(text: "HEX", color: .label)
+    let colorLabelDarkLeftRGB = UIView().colorInfoLabel(text: "RGB", color: .label)
+    let colorLabelDarkLeftCMYK = UIView().colorInfoLabel(text: "CMYK", color: .label)
+    let colorLabelDarkLeftHSL = UIView().colorInfoLabel(text: "HSL", color: .label)
+    let colorLabelDarkLeftHSV = UIView().colorInfoLabel(text: "HSV", color: .label)
+    
+    //Color Codes - Right
+    let colorLabelDarkRightHEX = UIView().colorInfoLabel(text: "HEX", color: .label)
+    let colorLabelDarkRightRGB = UIView().colorInfoLabel(text: "RGB", color: .label)
+    let colorLabelDarkRightCMYK = UIView().colorInfoLabel(text: "CMYK", color: .label)
+    let colorLabelDarkRightHSL = UIView().colorInfoLabel(text: "HSL", color: .label)
+    let colorLabelDarkRightHSV = UIView().colorInfoLabel(text: "HSV", color: .label)
+    
+    //Objects
+    let gradientGenerateButton = UIView().generateButton(borderColor: .label, textColor: .label)
+    let circleGradientView = UIView().circleView(width: 380, height: 380)
+    let colorCircleLeftView = UIView().circleView(width: 40, height: 40)
+    let colorCircleRightView = UIView().circleView(width: 40, height: 40)
     
 // MARK: - Init
     
     override init(frame: CGRect) {
-//        self.leftInfoContainerView.backgroundColor = .orange
-        self.leftStackView = UIStackView(arrangedSubviews: [colorLabelDarkModeHEX, colorLabelDarkModeRGB, colorLabelDarkModeCMYK, colorLabelDarkModeHSL, colorLabelDarkModeHSV])
+        self.topContainerView.backgroundColor = .systemBackground
+        
+        self.leftStackView = UIStackView(arrangedSubviews: [colorLabelDarkLeftHEX, colorLabelDarkLeftRGB, colorLabelDarkLeftCMYK, colorLabelDarkLeftHSL, colorLabelDarkLeftHSV])
         leftStackView.spacing = 20
         leftStackView.distribution = .fillEqually
         leftStackView.axis = .vertical
         
-//        self.rightInfoContainerView.backgroundColor = .blue
-        self.rightStackView = UIStackView(arrangedSubviews: [colorLabelDarkModeHEX, colorLabelDarkModeRGB, colorLabelDarkModeCMYK, colorLabelDarkModeHSL, colorLabelDarkModeHSV])
+        self.rightStackView = UIStackView(arrangedSubviews: [colorLabelDarkRightHEX, colorLabelDarkRightRGB, colorLabelDarkRightCMYK, colorLabelDarkRightHSL, colorLabelDarkRightHSV])
         rightStackView.spacing = 20
         rightStackView.distribution = .fillEqually
         rightStackView.axis = .vertical
+        
+        self.middleStackView = UIStackView(arrangedSubviews: [leftStackView, rightStackView])
+        middleStackView.spacing = 40
+        middleStackView.distribution = .fillEqually
         
         super.init(frame: frame)
         setupLayout()
@@ -63,6 +75,8 @@ class GradientView: UIView {
         
         //Top container layout
         circleGradientView.setupGradientBackground(colorOne: .magenta, colorTwo: .orange)
+        colorCircleLeftView.backgroundColor = .magenta
+        colorCircleRightView.backgroundColor = .orange
         
         addSubview(topContainerView)
         topContainerView.anchor(top: topAnchor, left: leftAnchor, right: rightAnchor)
@@ -73,26 +87,20 @@ class GradientView: UIView {
         circleGradientView.centerY(inView: topContainerView)
         circleGradientView.anchor(width: 380, height: 380)
         
-        //Left info container layout of color codes
-        addSubview(leftInfoContainerView)
-        leftInfoContainerView.anchor(top: topContainerView.bottomAnchor, left: leftAnchor, paddingTop: 100)
-        leftInfoContainerView.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.5).isActive = true
+        topContainerView.addSubview(colorCircleLeftView)
+        colorCircleLeftView.anchor(top: circleGradientView.bottomAnchor, left: topContainerView.leftAnchor, paddingTop: 20, paddingLeft: 50, width: 40, height: 40)
         
-        leftInfoContainerView.addSubview(leftStackView)
-        leftStackView.centerX(inView: leftInfoContainerView)
-        leftStackView.centerY(inView: leftInfoContainerView)
+        topContainerView.addSubview(colorCircleRightView)
+        colorCircleRightView.anchor(top: circleGradientView.bottomAnchor, right: topContainerView.rightAnchor, paddingTop: 20, paddingRight: 50, width: 40, height: 40)
         
-        //Right info container layout of color codes
-        addSubview(rightInfoContainerView)
-        rightInfoContainerView.anchor(top: topContainerView.bottomAnchor, left: leftInfoContainerView.rightAnchor, right: rightAnchor, paddingTop: 100)
-
-        rightInfoContainerView.addSubview(rightStackView)
-        rightStackView.centerX(inView: rightInfoContainerView)
-        rightStackView.centerY(inView: rightInfoContainerView)
-
+        
+        //Middle container layout
+        addSubview(middleStackView)
+        middleStackView.anchor(top: topContainerView.bottomAnchor, left: leftAnchor, right: rightAnchor, paddingTop: 20, paddingLeft: 20, paddingBottom: 20, paddingRight: 20)
+        
         //Bottom container layout
         addSubview(bottomContainerView)
-        bottomContainerView.anchor(top: leftInfoContainerView.bottomAnchor, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, height: 80)
+        bottomContainerView.anchor(top: middleStackView.bottomAnchor, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, height: 80)
         
         bottomContainerView.addSubview(gradientGenerateButton)
         gradientGenerateButton.anchor(width: 150, height: 30)
