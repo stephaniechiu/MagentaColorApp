@@ -13,6 +13,8 @@ class GradientController: UIViewController {
 // MARK: - Properties
     
     let gradientView = GradientView()
+    let leftGradientColor: UIColor = .random
+    let rightGradientColor: UIColor = .random
 
 // MARK: - Lifecycle
     
@@ -20,9 +22,7 @@ class GradientController: UIViewController {
         super.viewDidLoad()
         view = gradientView
         setupNavigationController()
-        
-//        NotificationCenter.default.addObserver(self, selector: #selector(darkModeEnabled(_:)), name: .darkModeEnabled, object: nil)  
-//        NotificationCenter.default.addObserver(self, selector: #selector(darkModeDisabled(_:)), name: .darkModeDisabled, object: nil)
+        newGradient()
     }
     
 // MARK: - Helper Functions
@@ -33,5 +33,22 @@ class GradientController: UIViewController {
         navigationController?.navigationBar.shadowImage = UIImage()
     }
     
+    func newGradient() {
+        gradientView.circleGradientView.setupGradientBackground(colorOne: leftGradientColor, colorTwo: rightGradientColor)
+        gradientView.colorCircleLeftView.backgroundColor = leftGradientColor
+        gradientView.colorCircleRightView.backgroundColor = rightGradientColor
+        gradientView.gradientGenerateButton.addTarget(self, action: #selector(randomGradient(sender:)), for: .touchUpInside)
+    }
+    
 // MARK: - Selectors
+    
+    @objc func randomGradient(sender: UIButton)
+    {
+        let leftGradient = UIColor.random
+        let rightGradient = UIColor.random
+        
+        gradientView.colorCircleLeftView.backgroundColor = leftGradient
+        gradientView.colorCircleRightView.backgroundColor = rightGradient
+        gradientView.circleGradientView.setupGradientBackground(colorOne: leftGradient, colorTwo: rightGradient)
+    }
 }

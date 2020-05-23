@@ -45,15 +45,13 @@ class GradientView: UIView {
 // MARK: - Init
     
     override init(frame: CGRect) {
-        self.topContainerView.backgroundColor = .systemBackground
-        
         self.leftStackView = UIStackView(arrangedSubviews: [colorLabelDarkLeftHEX, colorLabelDarkLeftRGB, colorLabelDarkLeftCMYK, colorLabelDarkLeftHSL, colorLabelDarkLeftHSV])
-        leftStackView.spacing = 20
+        leftStackView.spacing = 10
         leftStackView.distribution = .fillEqually
         leftStackView.axis = .vertical
         
         self.rightStackView = UIStackView(arrangedSubviews: [colorLabelDarkRightHEX, colorLabelDarkRightRGB, colorLabelDarkRightCMYK, colorLabelDarkRightHSL, colorLabelDarkRightHSV])
-        rightStackView.spacing = 20
+        rightStackView.spacing = 10
         rightStackView.distribution = .fillEqually
         rightStackView.axis = .vertical
         
@@ -74,10 +72,6 @@ class GradientView: UIView {
         backgroundColor = .systemBackground
         
         //Top container layout
-        circleGradientView.setupGradientBackground(colorOne: .magenta, colorTwo: .orange)
-        colorCircleLeftView.backgroundColor = .magenta
-        colorCircleRightView.backgroundColor = .orange
-        
         addSubview(topContainerView)
         topContainerView.anchor(top: topAnchor, left: leftAnchor, right: rightAnchor)
         topContainerView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.6).isActive = true
@@ -88,15 +82,14 @@ class GradientView: UIView {
         circleGradientView.anchor(width: 380, height: 380)
         
         topContainerView.addSubview(colorCircleLeftView)
-        colorCircleLeftView.anchor(top: circleGradientView.bottomAnchor, left: topContainerView.leftAnchor, paddingTop: 20, paddingLeft: 50, width: 40, height: 40)
+        colorCircleLeftView.anchor(top: circleGradientView.bottomAnchor, left: topContainerView.leftAnchor, paddingTop: 10, paddingLeft: 50, width: 40, height: 40)
         
         topContainerView.addSubview(colorCircleRightView)
-        colorCircleRightView.anchor(top: circleGradientView.bottomAnchor, right: topContainerView.rightAnchor, paddingTop: 20, paddingRight: 50, width: 40, height: 40)
-        
+        colorCircleRightView.anchor(top: circleGradientView.bottomAnchor, right: topContainerView.rightAnchor, paddingTop: 10, paddingRight: 50, width: 40, height: 40)
         
         //Middle container layout
         addSubview(middleStackView)
-        middleStackView.anchor(top: topContainerView.bottomAnchor, left: leftAnchor, right: rightAnchor, paddingTop: 20, paddingLeft: 20, paddingBottom: 20, paddingRight: 20)
+        middleStackView.anchor(top: topContainerView.bottomAnchor, left: leftAnchor, right: rightAnchor, paddingTop: 40, paddingLeft: 15, paddingBottom: 20, paddingRight: 20)
         
         //Bottom container layout
         addSubview(bottomContainerView)

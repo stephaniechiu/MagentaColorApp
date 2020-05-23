@@ -26,7 +26,7 @@ extension UIView {
     func generateButton(borderColor: UIColor, textColor: UIColor) -> UIButton {
         let button = UIButton()
         button.setTitle("Generate", for: .normal)
-        button.titleLabel?.font = UIFont(name: "Helectiva", size: 13)
+        button.titleLabel?.font = UIFont(name: "Gotham", size: 13)
         button.setTitleColor(textColor, for: .normal)
         button.backgroundColor = .clear
         button.layer.borderWidth = 2
@@ -37,13 +37,17 @@ extension UIView {
     
     func colorInfoLabel(text: String, color: UIColor) -> UILabel {
         let label = UILabel()
-        label.font = UIFont(name: "Helectiva", size: 10)
+        label.font = UIFont(name: "Gotham", size: 20)
         label.textColor = .label
         label.text = "\(text): "
         return label
     }
     
     func setupGradientBackground(colorOne: UIColor, colorTwo: UIColor) {
+        if let gradientLayer = (self.layer.sublayers?.compactMap { $0 as? CAGradientLayer })?.first {
+               gradientLayer.removeFromSuperlayer()
+        }
+        
         let gradientLayer: CAGradientLayer = CAGradientLayer()
         gradientLayer.colors = [colorOne.cgColor, colorTwo.cgColor]
         gradientLayer.locations = [0.0, 1.0]
@@ -134,5 +138,9 @@ extension UIColor {
         getRed(&r, green: &g, blue: &b, alpha: &a)
         let rgb:Int = (Int)(r*255)<<16 | (Int)(g*255)<<8 | (Int)(b*255)<<0
         return String(format:"#%06x", rgb)
+    }
+    
+    static var random: UIColor {
+        return UIColor(red: .random(in: 0...1), green: .random(in: 0...1), blue: .random(in: 0...1), alpha: 1.0)
     }
 }
