@@ -41,6 +41,19 @@ class GradientView: UIView {
     let circleGradientView = UIView().circleView(width: 380, height: 380)
     let colorCircleLeftView = UIView().circleView(width: 40, height: 40)
     let colorCircleRightView = UIView().circleView(width: 40, height: 40)
+    let darkModeLabel = UIView().colorInfoLabel(text: "Dark Mode", color: .label)
+    let darkModeToggle = UISwitch()
+    
+    let darkThemeButton: UIButton = {
+        let button = UIButton()
+        button.layer.borderWidth = 1
+        button.layer.borderColor = UIColor.label.cgColor
+        button.setTitle("Dark Mode", for: .normal)
+        button.setTitleColor(.label, for: .normal)
+        button.titleLabel?.font = UIFont(name: "Helectiva", size: 13)
+        button.layer.cornerRadius = 15
+        return button
+    }()
     
 // MARK: - Init
     
@@ -86,6 +99,9 @@ class GradientView: UIView {
         
         topContainerView.addSubview(colorCircleRightView)
         colorCircleRightView.anchor(top: circleGradientView.bottomAnchor, right: topContainerView.rightAnchor, paddingTop: 10, paddingRight: 50, width: 40, height: 40)
+
+        topContainerView.addSubview(darkThemeButton)
+        darkThemeButton.anchor(top: colorCircleLeftView.bottomAnchor, bottom: topContainerView.bottomAnchor, paddingTop: 10, width: 150, height: 30)
         
         //Middle container layout
         addSubview(middleStackView)
