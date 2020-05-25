@@ -48,7 +48,7 @@ class PaletteController: UIViewController, UITableViewDataSource, UITableViewDel
 
     fileprivate func setupNavigationItem() {
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
-        navigationItem.backBarButtonItem?.tintColor = .label
+        navigationController?.navigationBar.tintColor = .label
     }
     
     fileprivate func setupView() {

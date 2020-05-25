@@ -25,7 +25,22 @@ class GradientController: UIViewController {
         setupNavigationController()
         newGradient()
         
-        gradientView.darkThemeButton.addTarget(self, action: #selector(themeButtonPressed), for: .touchUpInside)
+        let lightTheme = UIBarButtonItem(customView: gradientView.lightModeImage)
+        let darkTheme = UIBarButtonItem(customView: gradientView.darkModeImage)
+
+        if traitCollection.userInterfaceStyle == .dark {
+            navigationItem.rightBarButtonItem = lightTheme
+            gradientView.lightModeImage.addTarget(self, action: #selector(themeButtonPressed), for: .touchUpInside)
+            navigationController?.navigationBar.tintColor = .label
+            navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+            gradientView.gradientGenerateButton.layer.borderColor = UIColor.white.cgColor
+        } else {
+            navigationItem.rightBarButtonItem = darkTheme
+            gradientView.darkModeImage.addTarget(self, action: #selector(themeButtonPressed), for: .touchUpInside)
+            navigationController?.navigationBar.tintColor = .label
+            navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
+            gradientView.gradientGenerateButton.layer.borderColor = UIColor.black.cgColor
+        }
     }
     
 // MARK: - Helper Functions
@@ -37,11 +52,10 @@ class GradientController: UIViewController {
     }
     
     //Objects will automatically adjust their color based on the user interface style
-    fileprivate func setObjectThemeColors(_ title: String, _ textColor: UIColor, _ color: UIColor, _ borderColor: UIColor, _ backgroundColor: UIColor) {
-          gradientView.darkThemeButton.setTitle(title, for: .normal)
-          gradientView.darkThemeButton.setTitleColor(textColor, for: .normal)
-          gradientView.darkThemeButton.backgroundColor = color
-          gradientView.darkThemeButton.layer.borderColor = borderColor.cgColor
+    fileprivate func setObjectThemeColors(_ image: UIImage, _ textColor: UIColor, _ color: UIColor, _ borderColor: UIColor, _ backgroundColor: UIColor, _ barTintColor: UIColor) {
+        
+          gradientView.lightModeImage.setImage(image, for: .normal)
+          gradientView.darkModeImage.setImage(image, for: .normal)
           view.backgroundColor = backgroundColor
           
           gradientView.gradientGenerateButton.layer.borderColor = borderColor.cgColor
@@ -61,10 +75,18 @@ class GradientController: UIViewController {
           gradientView.colorLabelDarkRightCMYK.textColor = textColor
           gradientView.colorLabelDarkRightHSL.textColor = textColor
           gradientView.colorLabelDarkRightHSV.textColor = textColor
+        
+        navigationController?.navigationBar.tintColor = borderColor
+        
+        navigationController?.navigationBar.barTintColor = barTintColor
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: textColor]
       }
     
     //Randomly generates two new gradient colors
     func newGradient() {
+        print("leftGradientColor: \(leftGradientColor)")
+        print("rightGradientColor: \(rightGradientColor)")
+        
         gradientView.circleGradientView.setupGradientBackground(colorOne: leftGradientColor, colorTwo: rightGradientColor)
         gradientView.colorCircleLeftView.backgroundColor = leftGradientColor
         gradientView.colorCircleRightView.backgroundColor = rightGradientColor
@@ -73,34 +95,29 @@ class GradientController: UIViewController {
     
     //When user interface style is in Light Mode, this function allow users to manually switch the view to Dark Mode
     func activatedDarkButton(bool: Bool) {
+        print("click")
         isOn = bool
         let color = bool ? UIColor.black : UIColor.white
-        let title = bool ? "Light Mode" : "Dark Mode"
+        let image = bool ? #imageLiteral(resourceName: "light on-object-color") : #imageLiteral(resourceName: "light off-object-color")
         let borderColor = bool ? UIColor.white : UIColor.black
         let backgroundColor = bool ? UIColor.black : UIColor.white
         let textColor = bool ? UIColor.white : UIColor.black
         let barTintColor = bool ? UIColor.black : UIColor.white
         
-        setObjectThemeColors(title, textColor, color, borderColor, backgroundColor)
-        
-        navigationController?.navigationBar.barTintColor = barTintColor
-        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: textColor]
+        setObjectThemeColors(image, textColor, color, borderColor, backgroundColor, barTintColor)
     }
     
     //When user interface style is in Dark Mode, this function allow users to manually switch the view to Light Mode
     func activatedLightButton(bool: Bool) {
             isOn = bool
             let color = bool ? UIColor.white : UIColor.black
-            let title = bool ? "Light Mode" : "Dark Mode"
+            let image = bool ? #imageLiteral(resourceName: "light off-object-color") : #imageLiteral(resourceName: "light on-object-color")
             let borderColor = bool ? UIColor.black : UIColor.white
             let backgroundColor = bool ? UIColor.white : UIColor.black
             let textColor = bool ? UIColor.black : UIColor.white
             let barTintColor = bool ? UIColor.white : UIColor.black
             
-            setObjectThemeColors(title, textColor, color, borderColor, backgroundColor)
-            
-            navigationController?.navigationBar.barTintColor = barTintColor
-            navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: textColor]
+            setObjectThemeColors(image, textColor, color, borderColor, backgroundColor, barTintColor)
         }
     
 // MARK: - Selectors
@@ -110,6 +127,10 @@ class GradientController: UIViewController {
     {
         let leftGradient = UIColor.random
         let rightGradient = UIColor.random
+        print("left HEX: \(leftGradient.toHexString())")
+        print("left RGB: \(leftGradient)")
+        print("right RGB: \(rightGradient)")
+        
         
         gradientView.colorCircleLeftView.backgroundColor = leftGradient
         gradientView.colorCircleRightView.backgroundColor = rightGradient
@@ -117,11 +138,11 @@ class GradientController: UIViewController {
     }
     
     //User can manually change the interface to Light if interface theme is Dark Mode, and vice versa
-    @objc func themeButtonPressed() {
+    @objc func themeButtonPressed(sender: UIButton) {
         if traitCollection.userInterfaceStyle == .dark {
-            activatedLightButton(bool: !isOn)
-        } else {
             activatedDarkButton(bool: !isOn)
+        } else {
+            activatedLightButton(bool: !isOn)
         }
     }
 }

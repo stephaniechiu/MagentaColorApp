@@ -35,6 +35,14 @@ extension UIView {
         return button
        }
     
+    func themeButton(themeImage: UIImage) -> UIButton {
+        let button = UIButton(type: .custom)
+        button.frame.size = CGSize(width: 40, height: 40)
+        button.setImage(themeImage, for: .normal)
+        button.imageView?.contentMode = .scaleAspectFit
+        return button
+    }
+    
     func colorInfoLabel(text: String, color: UIColor) -> UILabel {
         let label = UILabel()
         label.font = UIFont(name: "Gotham", size: 20)

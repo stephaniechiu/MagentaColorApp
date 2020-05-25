@@ -27,7 +27,7 @@ class PaletteView: UIView {
     
     let gradientButton: UIButton = {
         let button = UIButton()
-        button.layer.borderColor = UIColor.white.cgColor
+        button.layer.borderColor = UIColor.label.cgColor
         button.layer.borderWidth = 0.7
         button.layer.masksToBounds = true
         button.frame.size = CGSize(width: 30, height: 30)
