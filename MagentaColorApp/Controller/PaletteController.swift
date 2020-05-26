@@ -18,6 +18,7 @@ class PaletteController: UIViewController, UITableViewDataSource, UITableViewDel
     var colorArray = [UIButton]()
     let cellIdentifier = "ColorCell"
     var cellColor: String = ""
+    var specificColor = UIColor()
     var gradientLayer = CAGradientLayer()
     
     let bottomHeight = CGFloat(80) //Height of bottom controller bar
@@ -95,11 +96,19 @@ class PaletteController: UIViewController, UITableViewDataSource, UITableViewDel
                 UIView.animate(withDuration: 0.7, animations: {
                     switch self.currentAnimation {
                     case 0:
+                        self.specificColor = UIColor(hexString:self.colorPalette[0].colors[i])
+                        
                         self.colorArray[i].transform = CGAffineTransform(scaleX: 1.1, y: 50)
                         self.colorArray[i].backgroundColor = UIColor(hexString: self.colorPalette[0].colors[i])
                         self.view.bringSubviewToFront(self.colorArray[i])
                         self.setupColorDetails()
                         self.cellColor = self.colorPalette[0].colors[i]
+                        self.paletteView.colorLabelHEX.text = "HEX: #\(self.cellColor)"
+                        self.paletteView.colorLabelRGB.text = "RGB: \(Int(self.specificColor.rgba.red)), \(Int(self.specificColor.rgba.green)), \( Int(self.specificColor.rgba.blue))"
+                        self.paletteView.colorLabelHSB.text = "HSB: \(Int(self.specificColor.hsba.hue)), \(Int(self.specificColor.hsba.saturation)), \(Int(self.specificColor.hsba.brightness))"
+                        self.paletteView.colorLabelCMYK.text = "CMY: \(Int(round(self.specificColor.cmy.cyan * 100))), \(Int(round(self.specificColor.cmy.magenta * 100))), \(Int(round(self.specificColor.cmy.yellow * 100)))"
+                        self.paletteView.colorLabelCMYK.text = "CMYK: \(Int(round(self.specificColor.cmyk.cyan * 100))), \(Int(round(self.specificColor.cmyk.magenta * 100))), \(Int(round(self.specificColor.cmyk.yellow * 100))), \(Int(round(self.specificColor.cmyk.black * 100)))"
+                        
                         print("This is the color \(self.cellColor)")
                     case 1:
                         self.colorArray[i].transform = CGAffineTransform.identity

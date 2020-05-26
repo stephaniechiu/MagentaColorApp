@@ -12,11 +12,11 @@ class PaletteView: UIView {
  
 // MARK: - Properties
     
-    let colorLabelHEX = UIView().colorInfoLabel(text: "HEX", color: .darkGray)
-    let colorLabelRGB = UIView().colorInfoLabel(text: "RGB", color: .darkGray)
-    let colorLabelCMYK = UIView().colorInfoLabel(text: "CMYK", color: .darkGray)
-    let colorLabelHSL = UIView().colorInfoLabel(text: "HSL", color: .darkGray)
-    let colorLabelHSV = UIView().colorInfoLabel(text: "HSV", color: .darkGray)
+    let colorLabelHEX = UIView().colorInfoLabel(color: .label)
+    let colorLabelRGB = UIView().colorInfoLabel(color: .label)
+    let colorLabelHSB = UIView().colorInfoLabel(color: .label)
+    let colorLabelCMY = UIView().colorInfoLabel(color: .label)
+    let colorLabelCMYK = UIView().colorInfoLabel(color: .label)
     
     var colorStackView: UIStackView
     var gradientStackView: UIStackView
@@ -47,7 +47,7 @@ class PaletteView: UIView {
 
 // MARK: - Init
     override init(frame: CGRect) {
-        self.colorStackView = UIStackView(arrangedSubviews: [colorLabelHEX, colorLabelRGB, colorLabelCMYK, colorLabelHSL, colorLabelHSV])
+        self.colorStackView = UIStackView(arrangedSubviews: [colorLabelHEX, colorLabelRGB, colorLabelHSB, colorLabelCMY, colorLabelCMYK])
         colorStackView.spacing = 20
         colorStackView.distribution = .fillEqually
         colorStackView.axis = .vertical

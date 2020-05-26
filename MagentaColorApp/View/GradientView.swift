@@ -23,18 +23,18 @@ class GradientView: UIView {
     let middleStackView: UIStackView
     
     //Color Codes - Left
-    let colorLabelDarkLeftHEX = UIView().colorInfoLabel(text: "HEX", color: .label)
-    let colorLabelDarkLeftRGB = UIView().colorInfoLabel(text: "RGB", color: .label)
-    let colorLabelDarkLeftCMYK = UIView().colorInfoLabel(text: "CMYK", color: .label)
-    let colorLabelDarkLeftHSL = UIView().colorInfoLabel(text: "HSL", color: .label)
-    let colorLabelDarkLeftHSV = UIView().colorInfoLabel(text: "HSV", color: .label)
+    let colorLabelLeftHEX = UIView().colorInfoLabel(color: .label)
+    let colorLabelLeftRGB = UIView().colorInfoLabel(color: .label)
+    let colorLabelLeftHSB = UIView().colorInfoLabel(color: .label)
+    let colorLabelLeftCMY = UIView().colorInfoLabel(color: .label)
+    let colorLabelLeftCMYK = UIView().colorInfoLabel(color: .label)
     
     //Color Codes - Right
-    let colorLabelDarkRightHEX = UIView().colorInfoLabel(text: "HEX", color: .label)
-    let colorLabelDarkRightRGB = UIView().colorInfoLabel(text: "RGB", color: .label)
-    let colorLabelDarkRightCMYK = UIView().colorInfoLabel(text: "CMYK", color: .label)
-    let colorLabelDarkRightHSL = UIView().colorInfoLabel(text: "HSL", color: .label)
-    let colorLabelDarkRightHSV = UIView().colorInfoLabel(text: "HSV", color: .label)
+    let colorLabelRightHEX = UIView().colorInfoLabel(color: .label)
+    let colorLabelRightRGB = UIView().colorInfoLabel(color: .label)
+    let colorLabelRightHSB = UIView().colorInfoLabel(color: .label)
+    let colorLabelRightCMY = UIView().colorInfoLabel(color: .label)
+    let colorLabelRightCMYK = UIView().colorInfoLabel(color: .label)
     
     //Objects
     let gradientGenerateButton = UIView().generateButton(borderColor: .label, textColor: .label)
@@ -59,18 +59,18 @@ class GradientView: UIView {
 // MARK: - Init
     
     override init(frame: CGRect) {
-        self.leftStackView = UIStackView(arrangedSubviews: [colorLabelDarkLeftHEX, colorLabelDarkLeftRGB, colorLabelDarkLeftCMYK, colorLabelDarkLeftHSL, colorLabelDarkLeftHSV])
-        leftStackView.spacing = 10
+        self.leftStackView = UIStackView(arrangedSubviews: [colorLabelLeftHEX, colorLabelLeftRGB, colorLabelLeftCMYK, colorLabelLeftHSB])
+        leftStackView.spacing = 5
         leftStackView.distribution = .fillEqually
         leftStackView.axis = .vertical
         
-        self.rightStackView = UIStackView(arrangedSubviews: [colorLabelDarkRightHEX, colorLabelDarkRightRGB, colorLabelDarkRightCMYK, colorLabelDarkRightHSL, colorLabelDarkRightHSV])
-        rightStackView.spacing = 10
+        self.rightStackView = UIStackView(arrangedSubviews: [colorLabelRightHEX, colorLabelRightRGB, colorLabelRightCMYK, colorLabelRightHSB])
+        rightStackView.spacing = 5
         rightStackView.distribution = .fillEqually
         rightStackView.axis = .vertical
         
         self.middleStackView = UIStackView(arrangedSubviews: [leftStackView, rightStackView])
-        middleStackView.spacing = 40
+        middleStackView.spacing = 10
         middleStackView.distribution = .fillEqually
         
         super.init(frame: frame)
@@ -103,7 +103,7 @@ class GradientView: UIView {
         
         //Middle container layout
         addSubview(middleStackView)
-        middleStackView.anchor(top: topContainerView.bottomAnchor, left: leftAnchor, right: rightAnchor, paddingTop: 10, paddingLeft: 15, paddingBottom: 20, paddingRight: 20)
+        middleStackView.anchor(top: topContainerView.bottomAnchor, left: leftAnchor, right: rightAnchor, paddingTop: 10, paddingLeft: 15, paddingBottom: 40, paddingRight: 10)
         
         //Bottom container layout
         addSubview(bottomContainerView)
