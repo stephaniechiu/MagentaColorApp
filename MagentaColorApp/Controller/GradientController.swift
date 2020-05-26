@@ -94,19 +94,18 @@ class GradientController: UIViewController {
         gradientView.colorLabelLeftHEX.text = "HEX: \(leftGradientColor.toHexString().uppercased())"
         gradientView.colorLabelLeftRGB.text = "RGB: \(Int(leftGradientColor.rgba.red)), \(Int(leftGradientColor.rgba.green)), \(Int(leftGradientColor.rgba.blue))"
         gradientView.colorLabelLeftHSB.text = "HSB: \(Int(leftGradientColor.hsba.hue)), \(Int(leftGradientColor.hsba.brightness))%, \(Int(leftGradientColor.hsba.saturation))%"
-        gradientView.colorLabelLeftCMYK.text = "CMY: \(Double(round(leftGradientColor.cmy.cyan * 100) / 100)), \(Double(round(leftGradientColor.cmy.magenta * 100) / 100)), \(Double(round(leftGradientColor.cmy.yellow * 100) / 100))"
+        gradientView.colorLabelLeftCMY.text = "CMY: \(Double(round(leftGradientColor.cmy.cyan * 100) / 100)), \(Double(round(leftGradientColor.cmy.magenta * 100) / 100)), \(Double(round(leftGradientColor.cmy.yellow * 100) / 100))"
         gradientView.colorLabelLeftCMYK.text = "CMYK: \(Double(round(leftGradientColor.cmyk.cyan * 100) / 100)), \(Double(round(leftGradientColor.cmyk.magenta * 100) / 100)), \(Double(round(leftGradientColor.cmyk.yellow * 100) / 100)), \(Double(round(leftGradientColor.cmyk.black * 100) / 100))"
 
         gradientView.colorLabelRightHEX.text = "HEX: \(rightGradientColor.toHexString().uppercased())"
         gradientView.colorLabelRightRGB.text = "RGB: \(Int(rightGradientColor.rgba.red)), \(Int(rightGradientColor.rgba.green)),  \(Int(rightGradientColor.rgba.blue))"
         gradientView.colorLabelRightHSB.text = "HSB: \(Int(rightGradientColor.hsba.hue)), \(Int(rightGradientColor.hsba.brightness))%,  \(Int(rightGradientColor.hsba.saturation))%"
+        gradientView.colorLabelRightCMY.text = "CMY: \(Double(round(rightGradientColor.cmyk.cyan * 100) / 100)), \(Double(round(rightGradientColor.cmyk.magenta * 100) / 100)), \(Double(round(rightGradientColor.cmyk.yellow * 100) / 100))"
         gradientView.colorLabelRightCMYK.text = "CMYK: \(Double(round(rightGradientColor.cmyk.cyan * 100) / 100)), \(Double(round(rightGradientColor.cmyk.magenta * 100) / 100)), \(Double(round(rightGradientColor.cmyk.yellow * 100) / 100)), \(Double(round(rightGradientColor.cmyk.black * 100) / 100))"
-        gradientView.colorLabelRightCMYK.text = "CMY: \(Double(round(rightGradientColor.cmyk.cyan * 100) / 100)), \(Double(round(rightGradientColor.cmyk.magenta * 100) / 100)), \(Double(round(rightGradientColor.cmyk.yellow * 100) / 100))"
     }
     
     //When user interface style is in Light Mode, this function allow users to manually switch the view to Dark Mode
     func activatedDarkButton(bool: Bool) {
-        print("click")
         isOn = bool
         let color = bool ? UIColor.black : UIColor.white
         let image = bool ? #imageLiteral(resourceName: "light on-object-color") : #imageLiteral(resourceName: "light off-object-color")

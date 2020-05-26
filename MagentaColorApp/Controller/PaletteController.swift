@@ -56,6 +56,7 @@ class PaletteController: UIViewController, UITableViewDataSource, UITableViewDel
         paletteTableView.dataSource = self
         paletteTableView.delegate = self
         paletteTableView.isScrollEnabled = false
+        paletteTableView.separatorStyle = UITableViewCell.SeparatorStyle.none
         
         let heightOfCells: CGFloat = (UIScreen.main.bounds.height - bottomHeight) / 5
         paletteTableView.rowHeight = heightOfCells
@@ -106,10 +107,10 @@ class PaletteController: UIViewController, UITableViewDataSource, UITableViewDel
                         self.paletteView.colorLabelHEX.text = "HEX: #\(self.cellColor)"
                         self.paletteView.colorLabelRGB.text = "RGB: \(Int(self.specificColor.rgba.red)), \(Int(self.specificColor.rgba.green)), \( Int(self.specificColor.rgba.blue))"
                         self.paletteView.colorLabelHSB.text = "HSB: \(Int(self.specificColor.hsba.hue)), \(Int(self.specificColor.hsba.saturation)), \(Int(self.specificColor.hsba.brightness))"
-                        self.paletteView.colorLabelCMYK.text = "CMY: \(Int(round(self.specificColor.cmy.cyan * 100))), \(Int(round(self.specificColor.cmy.magenta * 100))), \(Int(round(self.specificColor.cmy.yellow * 100)))"
+                        self.paletteView.colorLabelCMY.text = "CMY: \(Int(round(self.specificColor.cmy.cyan * 100))), \(Int(round(self.specificColor.cmy.magenta * 100))), \(Int(round(self.specificColor.cmy.yellow * 100)))"
                         self.paletteView.colorLabelCMYK.text = "CMYK: \(Int(round(self.specificColor.cmyk.cyan * 100))), \(Int(round(self.specificColor.cmyk.magenta * 100))), \(Int(round(self.specificColor.cmyk.yellow * 100))), \(Int(round(self.specificColor.cmyk.black * 100)))"
                         
-                        print("This is the color \(self.cellColor)")
+//                        print("This is the color \(self.cellColor)")
                     case 1:
                         self.colorArray[i].transform = CGAffineTransform.identity
                         self.paletteView.colorStackView.alpha = 0
@@ -121,7 +122,7 @@ class PaletteController: UIViewController, UITableViewDataSource, UITableViewDel
                     if currentAnimation > 1 {
                         currentAnimation = 0
                     }
-                print("click \(buttonTag)")
+//                print("click \(buttonTag)")
             }
         }
     }
@@ -169,6 +170,7 @@ class PaletteController: UIViewController, UITableViewDataSource, UITableViewDel
                 buttonY = buttonY + (UIScreen.main.bounds.height/5 - 15)
                 button.addTarget(self, action: #selector(openColor(sender:)), for: .touchUpInside)
                 button.layer.cornerRadius = 10
+                button.layer.borderColor = UIColor.clear.cgColor
                 button.tag = tag
                 tag += 1
 
@@ -178,7 +180,7 @@ class PaletteController: UIViewController, UITableViewDataSource, UITableViewDel
                 if indexPath.row == j {
                     cell.backgroundColor? = UIColor(hexString: colorPalette[i].colors[j])
                     button.backgroundColor = UIColor(hexString: colorPalette[0].colors[indexPath.row])
-                    print("Palette color: " + colorPalette[0].colors[button.tag])
+//                    print("Palette color: " + colorPalette[0].colors[button.tag])
                 }
             }
         }
@@ -188,7 +190,7 @@ class PaletteController: UIViewController, UITableViewDataSource, UITableViewDel
 // MARK: - TableView Delegate
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("you tapped on me! \(colorPalette[indexPath.row].colors[indexPath.row])")
+//        print("you tapped on me! \(colorPalette[indexPath.row].colors[indexPath.row])")
     }
 }
 

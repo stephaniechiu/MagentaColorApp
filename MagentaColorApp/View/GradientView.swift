@@ -42,8 +42,8 @@ class GradientView: UIView {
     let colorCircleLeftView = UIView().circleView(width: 40, height: 40)
     let colorCircleRightView = UIView().circleView(width: 40, height: 40)
     
-    let darkModeImage = UIView().themeButton(themeImage: #imageLiteral(resourceName: "light off-object-color"))
-    let lightModeImage = UIView().themeButton(themeImage: #imageLiteral(resourceName: "light on-object-color"))
+    let darkModeImage = UIView().imageButton(image: #imageLiteral(resourceName: "light off-object-color"), width: 35, height: 35)
+    let lightModeImage = UIView().imageButton(image: #imageLiteral(resourceName: "light on-object-color"), width: 35, height: 35)
     
     let darkThemeButton: UIButton = {
         let button = UIButton()
@@ -51,7 +51,7 @@ class GradientView: UIView {
         button.layer.borderColor = UIColor.label.cgColor
         button.setTitle("Dark Mode", for: .normal)
         button.setTitleColor(.label, for: .normal)
-        button.titleLabel?.font = UIFont(name: "Helectiva", size: 13)
+        button.titleLabel?.font = UIFont(name: "Helvetica Neue", size: 13)
         button.layer.cornerRadius = 15
         return button
     }()
@@ -59,12 +59,12 @@ class GradientView: UIView {
 // MARK: - Init
     
     override init(frame: CGRect) {
-        self.leftStackView = UIStackView(arrangedSubviews: [colorLabelLeftHEX, colorLabelLeftRGB, colorLabelLeftCMYK, colorLabelLeftHSB])
+        self.leftStackView = UIStackView(arrangedSubviews: [colorLabelLeftHEX, colorLabelLeftRGB, colorLabelLeftCMY, colorLabelLeftCMYK, colorLabelLeftHSB])
         leftStackView.spacing = 5
         leftStackView.distribution = .fillEqually
         leftStackView.axis = .vertical
         
-        self.rightStackView = UIStackView(arrangedSubviews: [colorLabelRightHEX, colorLabelRightRGB, colorLabelRightCMYK, colorLabelRightHSB])
+        self.rightStackView = UIStackView(arrangedSubviews: [colorLabelRightHEX, colorLabelRightRGB, colorLabelRightCMY, colorLabelRightCMYK, colorLabelRightHSB])
         rightStackView.spacing = 5
         rightStackView.distribution = .fillEqually
         rightStackView.axis = .vertical

@@ -26,7 +26,7 @@ extension UIView {
     func generateButton(borderColor: UIColor, textColor: UIColor) -> UIButton {
         let button = UIButton()
         button.setTitle("Generate", for: .normal)
-        button.titleLabel?.font = UIFont(name: "Gotham", size: 13)
+        button.titleLabel?.font = UIFont(name: "Helvetica Neue", size: 16)
         button.setTitleColor(textColor, for: .normal)
         button.backgroundColor = .clear
         button.layer.borderWidth = 2
@@ -35,17 +35,17 @@ extension UIView {
         return button
        }
     
-    func themeButton(themeImage: UIImage) -> UIButton {
+    func imageButton(image: UIImage, width: CGFloat, height: CGFloat) -> UIButton {
         let button = UIButton(type: .custom)
-        button.frame.size = CGSize(width: 40, height: 40)
-        button.setImage(themeImage, for: .normal)
+        button.frame.size = CGSize(width: width, height: height)
+        button.setImage(image, for: .normal)
         button.imageView?.contentMode = .scaleAspectFit
         return button
     }
     
     func colorInfoLabel(color: UIColor) -> UILabel {
         let label = UILabel()
-        label.font = UIFont(name: "Gotham", size: 20)
+        label.font = UIFont(name: "Helvetica Neue", size: 16)
         label.textColor = .label
 //        label.text = "\(text): "
         return label
