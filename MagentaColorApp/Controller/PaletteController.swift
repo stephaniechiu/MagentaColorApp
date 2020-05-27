@@ -15,14 +15,14 @@ class PaletteController: UIViewController, UITableViewDataSource, UITableViewDel
     let paletteView = PaletteView()
     let paletteTableView = UITableView()
     var colorPalette = [Color]()
-    var colorArray = [UIButton]()
+    var colorButton = [UIButton]() //Array of buttons the size and color of each tableView cell
+    var arrayText = [String]()
     let cellIdentifier = "ColorCell"
-    var cellColor: String = ""
-    var specificColor = UIColor()
-    var gradientLayer = CAGradientLayer()
-    
-    let bottomHeight = CGFloat(80) //Height of bottom controller bar
+    var cellColorFromAPI: String = ""
+    var cellColorInRGB = UIColor()
+    let bottomControllerHeight = CGFloat(80)
     var currentAnimation = 0
+    let vibrateFeedback = UIImpactFeedbackGenerator()
     
 // MARK: - Lifecycle
     
@@ -32,7 +32,8 @@ class PaletteController: UIViewController, UITableViewDataSource, UITableViewDel
         
         newPalette()
         setupNavigationItem()
-        setupView()
+        setupTableView()
+        setupBottomController()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -52,18 +53,25 @@ class PaletteController: UIViewController, UITableViewDataSource, UITableViewDel
         navigationController?.navigationBar.tintColor = .label
     }
     
-    fileprivate func setupView() {
+    fileprivate func setupBottomController() {
+        paletteView.paletteGenerateButton.addTarget(self, action: #selector(randomPalette(sender:)), for: .touchUpInside)
+        paletteView.shareButton.addTarget(self, action: #selector(setupActivityViewController(sender:)), for: .touchUpInside)
+        printArray()
+        
+        view.addSubview(paletteView.bottomControllerView)
+        paletteView.bottomControllerView.anchor(top: paletteTableView.bottomAnchor, left: view.safeAreaLayoutGuide.leftAnchor, bottom: view.bottomAnchor, right: view.safeAreaLayoutGuide.rightAnchor, height: bottomControllerHeight)
+    }
+    
+    fileprivate func setupTableView() {
         paletteTableView.dataSource = self
         paletteTableView.delegate = self
         paletteTableView.isScrollEnabled = false
         paletteTableView.separatorStyle = UITableViewCell.SeparatorStyle.none
         
-        let heightOfCells: CGFloat = (UIScreen.main.bounds.height - bottomHeight) / 5
+        let heightOfCells: CGFloat = (UIScreen.main.bounds.height - bottomControllerHeight) / 5
         paletteTableView.rowHeight = heightOfCells
         
         paletteTableView.register(UITableViewCell.self, forCellReuseIdentifier: cellIdentifier)
-        
-        paletteView.paletteGenerateButton.addTarget(self, action: #selector(randomPalette(sender:)), for: .touchUpInside)
         
         view.addSubview(paletteView.colorStackView)
         paletteView.colorStackView.centerX(inView: view)
@@ -71,23 +79,39 @@ class PaletteController: UIViewController, UITableViewDataSource, UITableViewDel
         
         view.addSubview(paletteTableView)
         paletteTableView.anchor(top: view.topAnchor, left: view.safeAreaLayoutGuide.leftAnchor, right: view.safeAreaLayoutGuide.rightAnchor)
-        
-        view.addSubview(paletteView.bottomControllerView)
-        paletteView.bottomControllerView.anchor(top: paletteTableView.bottomAnchor, left: view.safeAreaLayoutGuide.leftAnchor, bottom: view.bottomAnchor, right: view.safeAreaLayoutGuide.rightAnchor, height: bottomHeight)
     }
     
     fileprivate func setupColorDetails() {
         self.view.addSubview(self.paletteView.colorStackView)
+        self.view.addSubview(self.paletteView.colorShareButton)
+        self.paletteView.colorShareButton.anchor()
         self.paletteView.colorStackView.centerX(inView: self.view)
         self.paletteView.colorStackView.centerY(inView: self.view)
         self.paletteView.colorStackView.alpha = 1
     }
+    
+        func printArray() {
+    //        let buttonTag = sender.tag
+            for i in 0..<5 {
+                    self.cellColorFromAPI = self.colorPalette[0].colors[i]
+                    arrayText.append(self.cellColorFromAPI)
+            }
+            print("Magenta Color App: { \n\(arrayText) \n}")
+        }
 
     // MARK: - Selectors
     
     @objc func openGradientController() {
         let gradientController = GradientController()
         self.navigationController?.pushViewController(gradientController, animated: true)
+    }
+    
+    @objc func setupActivityViewController(sender: UIButton) {
+        let string = "Magenta Color App: { \n\(arrayText) \n}"
+//        let pdf = Bundle.main.url(forResource: "Q4 Projections", withExtension: "pdf")
+        let activityViewController = UIActivityViewController(activityItems: [string], applicationActivities: nil)
+        
+        present(activityViewController, animated: true, completion: nil)
     }
     
     @objc func openColor(sender: UIButton) {
@@ -97,22 +121,22 @@ class PaletteController: UIViewController, UITableViewDataSource, UITableViewDel
                 UIView.animate(withDuration: 0.7, animations: {
                     switch self.currentAnimation {
                     case 0:
-                        self.specificColor = UIColor(hexString:self.colorPalette[0].colors[i])
+                        self.cellColorInRGB = UIColor(hexString:self.colorPalette[0].colors[i])
                         
-                        self.colorArray[i].transform = CGAffineTransform(scaleX: 1.1, y: 50)
-                        self.colorArray[i].backgroundColor = UIColor(hexString: self.colorPalette[0].colors[i])
-                        self.view.bringSubviewToFront(self.colorArray[i])
+                        self.colorButton[i].transform = CGAffineTransform(scaleX: 1.1, y: 50)
+                        self.colorButton[i].backgroundColor = UIColor(hexString: self.colorPalette[0].colors[i])
+                        self.view.bringSubviewToFront(self.colorButton[i])
                         self.setupColorDetails()
-                        self.cellColor = self.colorPalette[0].colors[i]
-                        self.paletteView.colorLabelHEX.text = "HEX: #\(self.cellColor)"
-                        self.paletteView.colorLabelRGB.text = "RGB: \(Int(self.specificColor.rgba.red)), \(Int(self.specificColor.rgba.green)), \( Int(self.specificColor.rgba.blue))"
-                        self.paletteView.colorLabelHSB.text = "HSB: \(Int(self.specificColor.hsba.hue)), \(Int(self.specificColor.hsba.saturation)), \(Int(self.specificColor.hsba.brightness))"
-                        self.paletteView.colorLabelCMY.text = "CMY: \(Int(round(self.specificColor.cmy.cyan * 100))), \(Int(round(self.specificColor.cmy.magenta * 100))), \(Int(round(self.specificColor.cmy.yellow * 100)))"
-                        self.paletteView.colorLabelCMYK.text = "CMYK: \(Int(round(self.specificColor.cmyk.cyan * 100))), \(Int(round(self.specificColor.cmyk.magenta * 100))), \(Int(round(self.specificColor.cmyk.yellow * 100))), \(Int(round(self.specificColor.cmyk.black * 100)))"
+                        self.cellColorFromAPI = self.colorPalette[0].colors[i]
+                        self.paletteView.colorLabelHEX.text = "HEX: #\(self.cellColorFromAPI)"
+                        self.paletteView.colorLabelRGB.text = "RGB: \(Int(self.cellColorInRGB.rgba.red)), \(Int(self.cellColorInRGB.rgba.green)), \( Int(self.cellColorInRGB.rgba.blue))"
+                        self.paletteView.colorLabelHSB.text = "HSB: \(Int(self.cellColorInRGB.hsba.hue)), \(Int(self.cellColorInRGB.hsba.saturation)), \(Int(self.cellColorInRGB.hsba.brightness))"
+                        self.paletteView.colorLabelCMY.text = "CMY: \(Int(round(self.cellColorInRGB.cmy.cyan * 100))), \(Int(round(self.cellColorInRGB.cmy.magenta * 100))), \(Int(round(self.cellColorInRGB.cmy.yellow * 100)))"
+                        self.paletteView.colorLabelCMYK.text = "CMYK: \(Int(round(self.cellColorInRGB.cmyk.cyan * 100))), \(Int(round(self.cellColorInRGB.cmyk.magenta * 100))), \(Int(round(self.cellColorInRGB.cmyk.yellow * 100))), \(Int(round(self.cellColorInRGB.cmyk.black * 100)))"
                         
 //                        print("This is the color \(self.cellColor)")
                     case 1:
-                        self.colorArray[i].transform = CGAffineTransform.identity
+                        self.colorButton[i].transform = CGAffineTransform.identity
                         self.paletteView.colorStackView.alpha = 0
                     default:
                         break
@@ -130,6 +154,7 @@ class PaletteController: UIViewController, UITableViewDataSource, UITableViewDel
     //A new palette is generated when user taps on the Generate button
     @objc func randomPalette(sender: UIButton) {
         newPalette()
+        vibrateFeedback.impactOccurred()
     }
 
     // MARK: - API Call
@@ -175,7 +200,7 @@ class PaletteController: UIViewController, UITableViewDataSource, UITableViewDel
                 tag += 1
 
                 view.addSubview(button)
-                colorArray.append(button)
+                colorButton.append(button)
                 
                 if indexPath.row == j {
                     cell.backgroundColor? = UIColor(hexString: colorPalette[i].colors[j])

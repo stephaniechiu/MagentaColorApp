@@ -20,13 +20,14 @@ class PaletteView: UIView {
     let colorLabelHSB = UIView().colorInfoLabel(color: .label)
     let colorLabelCMY = UIView().colorInfoLabel(color: .label)
     let colorLabelCMYK = UIView().colorInfoLabel(color: .label)
+    let colorShareButton = UIView().imageButton(image: #imageLiteral(resourceName: "share-office-color-black"), width: 35, height: 35)
     
     //Bottom controller
     let bottomControllerView = UIView()
 //    let bottomStackView: UIStackView
     let paletteGenerateButton = UIView().generateButton(borderColor: .white, textColor: .white)
     let menuButton = UIView().imageButton(image: #imageLiteral(resourceName: "menu editing-white"), width: 30, height: 30)
-    let shareButton = UIView().imageButton(image: #imageLiteral(resourceName: "share-office-color-white"), width: 35, height: 35)
+    let shareButton = UIView().imageButton(image: #imageLiteral(resourceName: "share-office-color-whitepink"), width: 35, height: 35)
     
     //Button for Gradient Controller
     var gradientStackView: UIStackView

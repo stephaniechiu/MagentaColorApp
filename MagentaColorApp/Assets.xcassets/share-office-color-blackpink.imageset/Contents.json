@@ -2,12 +2,12 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "share-office-color@1x-black.png",
+      "filename" : "share-office-color-black@1x.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "share-office-color@2x-black.png",
+      "filename" : "share-office-color-black@2x.png",
       "scale" : "2x"
     },
     {

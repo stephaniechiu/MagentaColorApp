@@ -15,6 +15,7 @@ class GradientController: UIViewController {
     let gradientView = GradientView()
     let leftGradientColor: UIColor = .random
     let rightGradientColor: UIColor = .random
+    let vibrateFeedback = UIImpactFeedbackGenerator()
     var isOn = false
 
 // MARK: - Lifecycle
@@ -75,10 +76,8 @@ class GradientController: UIViewController {
           gradientView.colorLabelRightHSB.textColor = textColor
           gradientView.colorLabelRightCMY.textColor = textColor
           gradientView.colorLabelRightCMYK.textColor = textColor
-
         
         navigationController?.navigationBar.tintColor = borderColor
-        
         navigationController?.navigationBar.barTintColor = barTintColor
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: textColor]
       }
@@ -135,6 +134,8 @@ class GradientController: UIViewController {
     //Generates two random colors to create a gradient
     @objc func randomGradient(sender: UIButton)
     {
+        vibrateFeedback.impactOccurred()
+        
         let leftGradient = UIColor.random
         let rightGradient = UIColor.random
         

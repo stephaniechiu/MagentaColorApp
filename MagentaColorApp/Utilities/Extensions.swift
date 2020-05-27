@@ -45,9 +45,8 @@ extension UIView {
     
     func colorInfoLabel(color: UIColor) -> UILabel {
         let label = UILabel()
-        label.font = UIFont(name: "Helvetica Neue", size: 16)
+        label.font = UIFont(name: "Helvetica Neue 35 Thin", size: 16)
         label.textColor = .label
-//        label.text = "\(text): "
         return label
     }
     
