@@ -87,4 +87,48 @@ extension UIColor {
     static var random: UIColor {
         return UIColor(red: .random(in: 0...1), green: .random(in: 0...1), blue: .random(in: 0...1), alpha: 1.0)
     }
+    
+    func contrastColor(color: UIColor) -> UIColor {
+        var fontColor = CGFloat(0)
+
+        var r = CGFloat(0)
+        var g = CGFloat(0)
+        var b = CGFloat(0)
+        var a = CGFloat(0)
+
+        color.getRed(&r, green: &g, blue: &b, alpha: &a)
+
+        //Calculates perceived luminance; human eyes prefer green
+        let luminance = 1 - ((0.299 * r) + (0.587 * g) + (0.114 * b))
+
+        if luminance < 0.5 {
+            fontColor = CGFloat(0) // bright colors - black font
+        } else {
+            fontColor = CGFloat(1) // dark colors - white font
+        }
+
+        return UIColor( red: fontColor, green: fontColor, blue: fontColor, alpha: a)
+    }
+    
+        func contrastColorForIcon(color: UIColor, whiteIcon: UIImage, blackIcon: UIImage, width: CGFloat, height: CGFloat) -> UIButton {
+            var r = CGFloat(0)
+            var g = CGFloat(0)
+            var b = CGFloat(0)
+            var a = CGFloat(0)
+            
+            color.getRed(&r, green: &g, blue: &b, alpha: &a)
+            
+            let button = UIButton(type: .custom)
+            button.frame.size = CGSize(width: width, height: height)
+            button.imageView?.contentMode = .scaleAspectFit
+            
+            let luminance = 1 - ((0.299 * r) + (0.587 * g) + (0.114 * b))
+            if luminance < 0.5 {
+                button.setImage(blackIcon, for: .normal) // bright colors - black icon
+                } else {
+                button.setImage(whiteIcon, for: .normal) // dark colors - white icon
+            }
+            
+            return button
+    }
 }

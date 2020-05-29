@@ -35,18 +35,16 @@ extension UIView {
         return button
        }
     
-    func imageButton(image: UIImage, width: CGFloat, height: CGFloat) -> UIButton {
+    func imageButton(image: UIImage? = nil, width: CGFloat, height: CGFloat) -> UIButton {
         let button = UIButton(type: .custom)
         button.frame.size = CGSize(width: width, height: height)
-        button.setImage(image, for: .normal)
         button.imageView?.contentMode = .scaleAspectFit
         return button
     }
     
     func colorInfoLabel(color: UIColor) -> UILabel {
         let label = UILabel()
-        label.font = UIFont(name: "HelveticaNeue-Thin", size: 20)
-        label.textColor = .label
+        label.font = UIFont(name: "HelveticaNeue-Thin", size: 17)
         label.numberOfLines = 0
         return label
     }

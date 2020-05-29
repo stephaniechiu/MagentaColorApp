@@ -92,7 +92,7 @@ class GradientView: UIView {
         
         //Middle container layout
         addSubview(middleStackView)
-        middleStackView.anchor(top: topContainerView.bottomAnchor, left: leftAnchor, right: rightAnchor, paddingTop: 10, paddingLeft: 10, paddingBottom: 40, paddingRight: 10)
+        middleStackView.anchor(top: topContainerView.bottomAnchor, left: leftAnchor, right: rightAnchor, paddingLeft: 15, paddingBottom: 40, paddingRight: 10)
         
         //Bottom container layout
         addSubview(bottomContainerView)
