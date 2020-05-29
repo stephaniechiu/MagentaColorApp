@@ -15,7 +15,7 @@ class GradientController: UIViewController {
     let gradientView = GradientView()
     let leftGradientColor: UIColor = .random
     let rightGradientColor: UIColor = .random
-    let vibrateFeedback = UIImpactFeedbackGenerator()
+    let hapticFeedback = UIImpactFeedbackGenerator()
     var isOn = false
 
 // MARK: - Lifecycle
@@ -26,17 +26,17 @@ class GradientController: UIViewController {
         setupNavigationController()
         newGradient()
         
-        let lightTheme = UIBarButtonItem(customView: gradientView.lightModeImage)
-        let darkTheme = UIBarButtonItem(customView: gradientView.darkModeImage)
+        let lightThemeButton = UIBarButtonItem(customView: gradientView.lightModeImage)
+        let darkThemeButton = UIBarButtonItem(customView: gradientView.darkModeImage)
 
         if traitCollection.userInterfaceStyle == .dark {
-            navigationItem.rightBarButtonItem = lightTheme
+            navigationItem.rightBarButtonItem = lightThemeButton
             gradientView.lightModeImage.addTarget(self, action: #selector(themeButtonPressed), for: .touchUpInside)
             navigationController?.navigationBar.tintColor = .label
             navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
             gradientView.gradientGenerateButton.layer.borderColor = UIColor.white.cgColor
         } else {
-            navigationItem.rightBarButtonItem = darkTheme
+            navigationItem.rightBarButtonItem = darkThemeButton
             gradientView.darkModeImage.addTarget(self, action: #selector(themeButtonPressed), for: .touchUpInside)
             navigationController?.navigationBar.tintColor = .label
             navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
@@ -90,17 +90,20 @@ class GradientController: UIViewController {
         
         gradientView.gradientGenerateButton.addTarget(self, action: #selector(randomGradient(sender:)), for: .touchUpInside)
         
-        gradientView.colorLabelLeftHEX.text = "HEX: \(leftGradientColor.toHexString().uppercased())"
-        gradientView.colorLabelLeftRGB.text = "RGB: \(Int(leftGradientColor.rgba.red)), \(Int(leftGradientColor.rgba.green)), \(Int(leftGradientColor.rgba.blue))"
-        gradientView.colorLabelLeftHSB.text = "HSB: \(Int(leftGradientColor.hsba.hue)), \(Int(leftGradientColor.hsba.brightness))%, \(Int(leftGradientColor.hsba.saturation))%"
-        gradientView.colorLabelLeftCMY.text = "CMY: \(Double(round(leftGradientColor.cmy.cyan * 100) / 100)), \(Double(round(leftGradientColor.cmy.magenta * 100) / 100)), \(Double(round(leftGradientColor.cmy.yellow * 100) / 100))"
-        gradientView.colorLabelLeftCMYK.text = "CMYK: \(Double(round(leftGradientColor.cmyk.cyan * 100) / 100)), \(Double(round(leftGradientColor.cmyk.magenta * 100) / 100)), \(Double(round(leftGradientColor.cmyk.yellow * 100) / 100)), \(Double(round(leftGradientColor.cmyk.black * 100) / 100))"
+//        self.paletteView.colorLabelHEX.attributedText = "HEX: #".attributedStringWithColor(["\(self.cellColorFromAPI)"], color: .systemPink)
+        
+        gradientView.colorLabelLeftHEX.attributedText = "HEX  \n\(leftGradientColor.toHexString().uppercased())".attributedStringWithBoldness(["HEX"], fontSize: 10)
+//        gradientView.colorLabelLeftHEX.text = "HEX: \(leftGradientColor.toHexString().uppercased())"
+        gradientView.colorLabelLeftRGB.attributedText = "RGB \n\(Int(leftGradientColor.rgba.red)), \(Int(leftGradientColor.rgba.green)), \(Int(leftGradientColor.rgba.blue))".attributedStringWithBoldness(["RGB"], fontSize: 10)
+        gradientView.colorLabelLeftHSB.attributedText = "HSB \n\(Int(leftGradientColor.hsba.hue)), \(Int(leftGradientColor.hsba.brightness))%, \(Int(leftGradientColor.hsba.saturation))%".attributedStringWithBoldness(["HSB"], fontSize: 10)
+        gradientView.colorLabelLeftCMY.attributedText = "CMY \n\(Double(round(leftGradientColor.cmy.cyan * 100) / 100)), \(Double(round(leftGradientColor.cmy.magenta * 100) / 100)), \(Double(round(leftGradientColor.cmy.yellow * 100) / 100))".attributedStringWithBoldness(["CMY"], fontSize: 10)
+        gradientView.colorLabelLeftCMYK.attributedText = "CMYK \n\(Double(round(leftGradientColor.cmyk.cyan * 100) / 100)), \(Double(round(leftGradientColor.cmyk.magenta * 100) / 100)), \(Double(round(leftGradientColor.cmyk.yellow * 100) / 100)), \(Double(round(leftGradientColor.cmyk.black * 100) / 100))".attributedStringWithBoldness(["CMYK"], fontSize: 10)
 
-        gradientView.colorLabelRightHEX.text = "HEX: \(rightGradientColor.toHexString().uppercased())"
-        gradientView.colorLabelRightRGB.text = "RGB: \(Int(rightGradientColor.rgba.red)), \(Int(rightGradientColor.rgba.green)),  \(Int(rightGradientColor.rgba.blue))"
-        gradientView.colorLabelRightHSB.text = "HSB: \(Int(rightGradientColor.hsba.hue)), \(Int(rightGradientColor.hsba.brightness))%,  \(Int(rightGradientColor.hsba.saturation))%"
-        gradientView.colorLabelRightCMY.text = "CMY: \(Double(round(rightGradientColor.cmyk.cyan * 100) / 100)), \(Double(round(rightGradientColor.cmyk.magenta * 100) / 100)), \(Double(round(rightGradientColor.cmyk.yellow * 100) / 100))"
-        gradientView.colorLabelRightCMYK.text = "CMYK: \(Double(round(rightGradientColor.cmyk.cyan * 100) / 100)), \(Double(round(rightGradientColor.cmyk.magenta * 100) / 100)), \(Double(round(rightGradientColor.cmyk.yellow * 100) / 100)), \(Double(round(rightGradientColor.cmyk.black * 100) / 100))"
+        gradientView.colorLabelRightHEX.attributedText = "HEX \n\(rightGradientColor.toHexString().uppercased())".attributedStringWithBoldness(["HEX"], fontSize: 10)
+        gradientView.colorLabelRightRGB.attributedText = "RGB \n\(Int(rightGradientColor.rgba.red)), \(Int(rightGradientColor.rgba.green)),  \(Int(rightGradientColor.rgba.blue))".attributedStringWithBoldness(["RGB"], fontSize: 10)
+        gradientView.colorLabelRightHSB.attributedText = "HSB \n\(Int(rightGradientColor.hsba.hue)), \(Int(rightGradientColor.hsba.brightness))%,  \(Int(rightGradientColor.hsba.saturation))%".attributedStringWithBoldness(["HSB"], fontSize: 10)
+        gradientView.colorLabelRightCMY.attributedText = "CMY \n\(Double(round(rightGradientColor.cmy.cyan * 100) / 100)), \(Double(round(rightGradientColor.cmy.magenta * 100) / 100)), \(Double(round(rightGradientColor.cmy.yellow * 100) / 100))".attributedStringWithBoldness(["CMY"], fontSize: 10)
+        gradientView.colorLabelRightCMYK.attributedText = "CMYK \n\(Double(round(rightGradientColor.cmyk.cyan * 100) / 100)), \(Double(round(rightGradientColor.cmyk.magenta * 100) / 100)), \(Double(round(rightGradientColor.cmyk.yellow * 100) / 100)), \(Double(round(rightGradientColor.cmyk.black * 100) / 100))".attributedStringWithBoldness(["CMYK"], fontSize: 10)
     }
     
     //When user interface style is in Light Mode, this function allow users to manually switch the view to Dark Mode
@@ -134,7 +137,7 @@ class GradientController: UIViewController {
     //Generates two random colors to create a gradient
     @objc func randomGradient(sender: UIButton)
     {
-        vibrateFeedback.impactOccurred()
+        hapticFeedback.impactOccurred()
         
         let leftGradient = UIColor.random
         let rightGradient = UIColor.random
@@ -143,17 +146,17 @@ class GradientController: UIViewController {
         gradientView.colorCircleRightView.backgroundColor = rightGradient
         gradientView.circleGradientView.setupGradientBackground(colorOne: leftGradient, colorTwo: rightGradient)
         
-        gradientView.colorLabelLeftHEX.text = "HEX: \(leftGradient.toHexString().uppercased())"
-        gradientView.colorLabelLeftRGB.text = "RGB: \(Int(leftGradient.rgba.red)), \(Int(leftGradient.rgba.green)), \(Int(leftGradient.rgba.blue))"
-        gradientView.colorLabelLeftHSB.text = "HSB: \(Int(leftGradient.hsba.hue)), \(Int(leftGradient.hsba.brightness))%, \(Int(leftGradient.hsba.saturation))%"
-        gradientView.colorLabelLeftCMY.text = "CMY: \(Double(round(leftGradient.cmyk.cyan * 100) / 100)), \(Double(round(leftGradient.cmyk.magenta * 100) / 100)), \(Double(round(leftGradient.cmyk.yellow * 100) / 100))"
-        gradientView.colorLabelLeftCMYK.text = "CMYK: \(Double(round(leftGradient.cmyk.cyan * 100) / 100)), \(Double(round(leftGradient.cmyk.magenta * 100) / 100)), \(Double(round(leftGradient.cmyk.yellow * 100) / 100)), \(Double(round(leftGradient.cmyk.black * 100) / 100))"
+        gradientView.colorLabelLeftHEX.attributedText = "HEX \n\(leftGradient.toHexString().uppercased())".attributedStringWithBoldness(["HEX"], fontSize: 10)
+        gradientView.colorLabelLeftRGB.attributedText = "RGB \n\(Int(leftGradient.rgba.red)), \(Int(leftGradient.rgba.green)), \(Int(leftGradient.rgba.blue))".attributedStringWithBoldness(["RGB"], fontSize: 10)
+        gradientView.colorLabelLeftHSB.attributedText = "HSB \n\(Int(leftGradient.hsba.hue)), \(Int(leftGradient.hsba.brightness))%, \(Int(leftGradient.hsba.saturation))%".attributedStringWithBoldness(["HSB"], fontSize: 10)
+        gradientView.colorLabelLeftCMY.attributedText = "CMY \n\(Double(round(leftGradient.cmyk.cyan * 100) / 100)), \(Double(round(leftGradient.cmyk.magenta * 100) / 100)), \(Double(round(leftGradient.cmyk.yellow * 100) / 100))".attributedStringWithBoldness(["CMY"], fontSize: 10)
+        gradientView.colorLabelLeftCMYK.attributedText = "CMYK \n\(Double(round(leftGradient.cmyk.cyan * 100) / 100)), \(Double(round(leftGradient.cmyk.magenta * 100) / 100)), \(Double(round(leftGradient.cmyk.yellow * 100) / 100)), \(Double(round(leftGradient.cmyk.black * 100) / 100))".attributedStringWithBoldness(["CMYK"], fontSize: 10)
         
-        gradientView.colorLabelRightHEX.text = "HEX: \(rightGradient.toHexString().uppercased())"
-        gradientView.colorLabelRightRGB.text = "RGB: \(Int(rightGradient.rgba.red)), \(Int(rightGradient.rgba.green)), \(Int(rightGradient.rgba.blue))"
-        gradientView.colorLabelRightCMY.text = "CMY: \(Double(round(rightGradient.cmyk.cyan * 100) / 100)), \(Double(round(rightGradient.cmy.magenta * 100) / 100)), \(Double(round(rightGradient.cmyk.yellow * 100) / 100))"
-        gradientView.colorLabelRightHSB.text = "HSB: \(Int(rightGradient.hsba.hue)), \(Int(rightGradient.hsba.brightness))%,  \(Int(rightGradient.hsba.saturation))%"
-        gradientView.colorLabelRightCMYK.text = "CMYK: \(Double(round(rightGradient.cmyk.cyan * 100) / 100)), \(Double(round(rightGradient.cmyk.magenta * 100) / 100)), \(Double(round(rightGradient.cmyk.yellow * 100) / 100)), \(Double(round(rightGradient.cmyk.black * 100) / 100))"
+        gradientView.colorLabelRightHEX.attributedText = "HEX \n\(rightGradient.toHexString().uppercased())".attributedStringWithBoldness(["HEX"], fontSize: 10)
+        gradientView.colorLabelRightRGB.attributedText = "RGB \n\(Int(rightGradient.rgba.red)), \(Int(rightGradient.rgba.green)), \(Int(rightGradient.rgba.blue))".attributedStringWithBoldness(["RGB"], fontSize: 10)
+        gradientView.colorLabelRightHSB.attributedText = "HSB \n\(Int(rightGradient.hsba.hue)), \(Int(rightGradient.hsba.brightness))%,  \(Int(rightGradient.hsba.saturation))%".attributedStringWithBoldness(["HSB"], fontSize: 10)
+        gradientView.colorLabelRightCMY.attributedText = "CMY \n\(Double(round(rightGradient.cmyk.cyan * 100) / 100)), \(Double(round(rightGradient.cmy.magenta * 100) / 100)), \(Double(round(rightGradient.cmyk.yellow * 100) / 100))".attributedStringWithBoldness(["CMY"], fontSize: 10)
+        gradientView.colorLabelRightCMYK.attributedText = "CMYK \n\(Double(round(rightGradient.cmyk.cyan * 100) / 100)), \(Double(round(rightGradient.cmyk.magenta * 100) / 100)), \(Double(round(rightGradient.cmyk.yellow * 100) / 100)), \(Double(round(rightGradient.cmyk.black * 100) / 100))".attributedStringWithBoldness(["CMYK"], fontSize: 10)
     }
     
     //User can manually change the interface to Light if interface theme is Dark Mode, and vice versa

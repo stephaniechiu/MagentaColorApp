@@ -45,27 +45,16 @@ class GradientView: UIView {
     let darkModeImage = UIView().imageButton(image: #imageLiteral(resourceName: "light off-object-color"), width: 35, height: 35)
     let lightModeImage = UIView().imageButton(image: #imageLiteral(resourceName: "light on-object-color"), width: 35, height: 35)
     
-    let darkThemeButton: UIButton = {
-        let button = UIButton()
-        button.layer.borderWidth = 1
-        button.layer.borderColor = UIColor.label.cgColor
-        button.setTitle("Dark Mode", for: .normal)
-        button.setTitleColor(.label, for: .normal)
-        button.titleLabel?.font = UIFont(name: "Helvetica Neue", size: 13)
-        button.layer.cornerRadius = 15
-        return button
-    }()
-    
 // MARK: - Init
     
     override init(frame: CGRect) {
         self.leftStackView = UIStackView(arrangedSubviews: [colorLabelLeftHEX, colorLabelLeftRGB, colorLabelLeftCMY, colorLabelLeftCMYK, colorLabelLeftHSB])
-        leftStackView.spacing = 5
+        leftStackView.spacing = 2
         leftStackView.distribution = .fillEqually
         leftStackView.axis = .vertical
         
         self.rightStackView = UIStackView(arrangedSubviews: [colorLabelRightHEX, colorLabelRightRGB, colorLabelRightCMY, colorLabelRightCMYK, colorLabelRightHSB])
-        rightStackView.spacing = 5
+        rightStackView.spacing = 2
         rightStackView.distribution = .fillEqually
         rightStackView.axis = .vertical
         
@@ -103,7 +92,7 @@ class GradientView: UIView {
         
         //Middle container layout
         addSubview(middleStackView)
-        middleStackView.anchor(top: topContainerView.bottomAnchor, left: leftAnchor, right: rightAnchor, paddingTop: 10, paddingLeft: 15, paddingBottom: 40, paddingRight: 10)
+        middleStackView.anchor(top: topContainerView.bottomAnchor, left: leftAnchor, right: rightAnchor, paddingTop: 10, paddingLeft: 10, paddingBottom: 40, paddingRight: 10)
         
         //Bottom container layout
         addSubview(bottomContainerView)

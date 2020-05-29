@@ -26,7 +26,7 @@ class PaletteView: UIView {
     let bottomControllerView = UIView()
 //    let bottomStackView: UIStackView
     let paletteGenerateButton = UIView().generateButton(borderColor: .white, textColor: .white)
-    let menuButton = UIView().imageButton(image: #imageLiteral(resourceName: "menu editing-white"), width: 30, height: 30)
+    let menuButton = UIView().imageButton(image: #imageLiteral(resourceName: "menu editing-white"), width: 25, height: 25)
     let shareButton = UIView().imageButton(image: #imageLiteral(resourceName: "share-office-color-whitepink"), width: 35, height: 35)
     
     //Button for Gradient Controller
@@ -77,21 +77,20 @@ class PaletteView: UIView {
 // MARK: - Helper Functions
     fileprivate func setupLayout() {
         bottomControllerView.addSubview(paletteGenerateButton)
-        paletteGenerateButton.anchor(width: 150, height: 30)
+        paletteGenerateButton.anchor(top: bottomControllerView.topAnchor, paddingTop: 20, width: 150, height: 30)
         paletteGenerateButton.centerX(inView: bottomControllerView)
-        paletteGenerateButton.centerY(inView: bottomControllerView)
         
         bottomControllerView.addSubview(gradientButton)
         gradientButton.setupGradientBackground(colorOne: .magenta, colorTwo: .orange)
-        gradientButton.centerY(inView: bottomControllerView)
         gradientButton.anchor(right: bottomControllerView.rightAnchor, paddingRight: 50, width: 30, height: 30)
-        
-        bottomControllerView.addSubview(menuButton)
-        menuButton.anchor(left: bottomControllerView.leftAnchor, paddingLeft: 15, width: 30, height: 30)
-        menuButton.centerY(inView: bottomControllerView)
+        gradientButton.centerY(inView: paletteGenerateButton)
         
         bottomControllerView.addSubview(shareButton)
         shareButton.anchor(right: paletteGenerateButton.leftAnchor, paddingRight: 20, width: 35, height: 35)
-        shareButton.centerY(inView: bottomControllerView)
+        shareButton.centerY(inView: paletteGenerateButton)
+        
+        bottomControllerView.addSubview(menuButton)
+        menuButton.anchor(left: bottomControllerView.leftAnchor, paddingLeft: 20, width: 25, height: 25)
+        menuButton.centerY(inView: paletteGenerateButton)
     }
 }

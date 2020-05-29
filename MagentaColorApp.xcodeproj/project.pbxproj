@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		900647442470C6CE00DDEF14 /* Editing shapes (female)-animated-illustration.json in Resources */ = {isa = PBXBuildFile; fileRef = 900647432470C6CE00DDEF14 /* Editing shapes (female)-animated-illustration.json */; };
+		903DB8E624808CFA008474AC /* ColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 903DB8E524808CF9008474AC /* ColorExtensions.swift */; };
+		903DB8E824808D3F008474AC /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 903DB8E724808D3F008474AC /* StringExtensions.swift */; };
 		9042986F2473C35A0053B216 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9042986E2473C35A0053B216 /* GradientView.swift */; };
 		904298712473C36F0053B216 /* GradientController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904298702473C36F0053B216 /* GradientController.swift */; };
 		90E4B699246755A400ED3D29 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90E4B698246755A400ED3D29 /* AppDelegate.swift */; };
@@ -18,7 +20,7 @@
 		90E4B6A8246755A800ED3D29 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 90E4B6A6246755A800ED3D29 /* LaunchScreen.storyboard */; };
 		90E4B6B324675C0500ED3D29 /* PaletteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90E4B6B224675C0500ED3D29 /* PaletteView.swift */; };
 		90E4B6B524676DCD00ED3D29 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90E4B6B424676DCD00ED3D29 /* Color.swift */; };
-		90E4B6BA24676FC500ED3D29 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90E4B6B924676FC500ED3D29 /* Extensions.swift */; };
+		90E4B6BA24676FC500ED3D29 /* UIViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90E4B6B924676FC500ED3D29 /* UIViewExtensions.swift */; };
 		BF8EBAD102F59178576091A1 /* Pods_MagentaColorApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FA49417E4ACF9E48B53FBB4 /* Pods_MagentaColorApp.framework */; };
 /* End PBXBuildFile section */
 
@@ -26,6 +28,8 @@
 		0FA49417E4ACF9E48B53FBB4 /* Pods_MagentaColorApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MagentaColorApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7CE894D1AD8E57A36B8DF054 /* Pods-MagentaColorApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MagentaColorApp.release.xcconfig"; path = "Target Support Files/Pods-MagentaColorApp/Pods-MagentaColorApp.release.xcconfig"; sourceTree = "<group>"; };
 		900647432470C6CE00DDEF14 /* Editing shapes (female)-animated-illustration.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "Editing shapes (female)-animated-illustration.json"; sourceTree = "<group>"; };
+		903DB8E524808CF9008474AC /* ColorExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtensions.swift; sourceTree = "<group>"; };
+		903DB8E724808D3F008474AC /* StringExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
 		9042986E2473C35A0053B216 /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		904298702473C36F0053B216 /* GradientController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientController.swift; sourceTree = "<group>"; };
 		90E4B695246755A400ED3D29 /* MagentaColorApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MagentaColorApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -38,7 +42,7 @@
 		90E4B6A9246755A800ED3D29 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		90E4B6B224675C0500ED3D29 /* PaletteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaletteView.swift; sourceTree = "<group>"; };
 		90E4B6B424676DCD00ED3D29 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
-		90E4B6B924676FC500ED3D29 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		90E4B6B924676FC500ED3D29 /* UIViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtensions.swift; sourceTree = "<group>"; };
 		A7CB9E57245386A1CB1BAE43 /* Pods-MagentaColorApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MagentaColorApp.debug.xcconfig"; path = "Target Support Files/Pods-MagentaColorApp/Pods-MagentaColorApp.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -128,7 +132,9 @@
 		90E4B6B824676FB400ED3D29 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
-				90E4B6B924676FC500ED3D29 /* Extensions.swift */,
+				90E4B6B924676FC500ED3D29 /* UIViewExtensions.swift */,
+				903DB8E524808CF9008474AC /* ColorExtensions.swift */,
+				903DB8E724808D3F008474AC /* StringExtensions.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -257,10 +263,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				90E4B69D246755A400ED3D29 /* PaletteController.swift in Sources */,
+				903DB8E624808CFA008474AC /* ColorExtensions.swift in Sources */,
 				90E4B6A3246755A400ED3D29 /* MagentaColorApp.xcdatamodeld in Sources */,
 				90E4B699246755A400ED3D29 /* AppDelegate.swift in Sources */,
-				90E4B6BA24676FC500ED3D29 /* Extensions.swift in Sources */,
+				90E4B6BA24676FC500ED3D29 /* UIViewExtensions.swift in Sources */,
 				90E4B6B324675C0500ED3D29 /* PaletteView.swift in Sources */,
+				903DB8E824808D3F008474AC /* StringExtensions.swift in Sources */,
 				90E4B69B246755A400ED3D29 /* SceneDelegate.swift in Sources */,
 				904298712473C36F0053B216 /* GradientController.swift in Sources */,
 				9042986F2473C35A0053B216 /* GradientView.swift in Sources */,

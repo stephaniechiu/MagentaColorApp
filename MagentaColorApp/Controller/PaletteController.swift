@@ -22,7 +22,7 @@ class PaletteController: UIViewController, UITableViewDataSource, UITableViewDel
     var cellColorInRGB = UIColor()
     let bottomControllerHeight = CGFloat(80)
     var currentAnimation = 0
-    let vibrateFeedback = UIImpactFeedbackGenerator()
+    let hapticFeedback = UIImpactFeedbackGenerator()
     
 // MARK: - Lifecycle
     
@@ -31,24 +31,14 @@ class PaletteController: UIViewController, UITableViewDataSource, UITableViewDel
         view = paletteView
         
         newPalette()
-        setupNavigationItem()
+        setupNavigationController()
         setupTableView()
         setupBottomController()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        self.navigationController?.setNavigationBarHidden(true, animated: animated)
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        self.navigationController?.setNavigationBarHidden(false, animated: animated)
     }
 
 // MARK: - Helper Functions
 
-    fileprivate func setupNavigationItem() {
+    fileprivate func setupNavigationController() {
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         navigationController?.navigationBar.tintColor = .label
     }
@@ -56,6 +46,7 @@ class PaletteController: UIViewController, UITableViewDataSource, UITableViewDel
     fileprivate func setupBottomController() {
         paletteView.paletteGenerateButton.addTarget(self, action: #selector(randomPalette(sender:)), for: .touchUpInside)
         paletteView.shareButton.addTarget(self, action: #selector(setupActivityViewController(sender:)), for: .touchUpInside)
+        paletteView.menuButton.addTarget(self, action: #selector(openMenu(sender:)), for: .touchUpInside)
         printArray()
         
         view.addSubview(paletteView.bottomControllerView)
@@ -84,7 +75,8 @@ class PaletteController: UIViewController, UITableViewDataSource, UITableViewDel
     fileprivate func setupColorDetails() {
         self.view.addSubview(self.paletteView.colorStackView)
         self.view.addSubview(self.paletteView.colorShareButton)
-        self.paletteView.colorShareButton.anchor()
+        self.paletteView.colorShareButton.anchor(top: view.topAnchor, right: view.rightAnchor, paddingTop: 50, paddingRight: 30, width: 35, height: 35)
+        self.paletteView.colorShareButton.alpha = 1
         self.paletteView.colorStackView.centerX(inView: self.view)
         self.paletteView.colorStackView.centerY(inView: self.view)
         self.paletteView.colorStackView.alpha = 1
@@ -128,16 +120,19 @@ class PaletteController: UIViewController, UITableViewDataSource, UITableViewDel
                         self.view.bringSubviewToFront(self.colorButton[i])
                         self.setupColorDetails()
                         self.cellColorFromAPI = self.colorPalette[0].colors[i]
-                        self.paletteView.colorLabelHEX.text = "HEX: #\(self.cellColorFromAPI)"
-                        self.paletteView.colorLabelRGB.text = "RGB: \(Int(self.cellColorInRGB.rgba.red)), \(Int(self.cellColorInRGB.rgba.green)), \( Int(self.cellColorInRGB.rgba.blue))"
-                        self.paletteView.colorLabelHSB.text = "HSB: \(Int(self.cellColorInRGB.hsba.hue)), \(Int(self.cellColorInRGB.hsba.saturation)), \(Int(self.cellColorInRGB.hsba.brightness))"
-                        self.paletteView.colorLabelCMY.text = "CMY: \(Int(round(self.cellColorInRGB.cmy.cyan * 100))), \(Int(round(self.cellColorInRGB.cmy.magenta * 100))), \(Int(round(self.cellColorInRGB.cmy.yellow * 100)))"
-                        self.paletteView.colorLabelCMYK.text = "CMYK: \(Int(round(self.cellColorInRGB.cmyk.cyan * 100))), \(Int(round(self.cellColorInRGB.cmyk.magenta * 100))), \(Int(round(self.cellColorInRGB.cmyk.yellow * 100))), \(Int(round(self.cellColorInRGB.cmyk.black * 100)))"
+//                        self.paletteView.colorLabelHEX.text
+                        
+                        self.paletteView.colorLabelHEX.attributedText = "HEX: #\(self.cellColorFromAPI)".attributedStringWithBoldness(["HEX:"], fontSize: 20, characterSpacing: 1)
+                        self.paletteView.colorLabelRGB.attributedText = "RGB: \(Int(self.cellColorInRGB.rgba.red)), \(Int(self.cellColorInRGB.rgba.green)), \( Int(self.cellColorInRGB.rgba.blue))".attributedStringWithBoldness(["RGB:"], fontSize: 20, characterSpacing: 1)
+                        self.paletteView.colorLabelHSB.attributedText = "HSB: \(Int(self.cellColorInRGB.hsba.hue)), \(Int(self.cellColorInRGB.hsba.saturation)), \(Int(self.cellColorInRGB.hsba.brightness))".attributedStringWithBoldness(["HSB:"], fontSize: 20, characterSpacing: 1)
+                        self.paletteView.colorLabelCMY.attributedText = "CMY: \(Int(round(self.cellColorInRGB.cmy.cyan * 100))), \(Int(round(self.cellColorInRGB.cmy.magenta * 100))), \(Int(round(self.cellColorInRGB.cmy.yellow * 100)))".attributedStringWithBoldness(["CMY:"], fontSize: 20, characterSpacing: 1)
+                        self.paletteView.colorLabelCMYK.attributedText = "CMYK: \(Int(round(self.cellColorInRGB.cmyk.cyan * 100))), \(Int(round(self.cellColorInRGB.cmyk.magenta * 100))), \(Int(round(self.cellColorInRGB.cmyk.yellow * 100))), \(Int(round(self.cellColorInRGB.cmyk.black * 100)))".attributedStringWithBoldness(["CMYK:"], fontSize: 20, characterSpacing: 1)
                         
 //                        print("This is the color \(self.cellColor)")
                     case 1:
                         self.colorButton[i].transform = CGAffineTransform.identity
                         self.paletteView.colorStackView.alpha = 0
+                        self.paletteView.colorShareButton.alpha = 0
                     default:
                         break
                         }
@@ -154,7 +149,11 @@ class PaletteController: UIViewController, UITableViewDataSource, UITableViewDel
     //A new palette is generated when user taps on the Generate button
     @objc func randomPalette(sender: UIButton) {
         newPalette()
-        vibrateFeedback.impactOccurred()
+        hapticFeedback.impactOccurred()
+    }
+    
+    @objc func openMenu(sender: UIButton) {
+        
     }
 
     // MARK: - API Call
