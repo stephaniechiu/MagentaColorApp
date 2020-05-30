@@ -34,6 +34,8 @@ class PaletteController: UIViewController, UITableViewDataSource, UITableViewDel
         setupNavigationController()
         setupTableView()
         setupBottomController()
+        
+        paletteView.colorShareButton.addTarget(self, action: #selector(setupColorActivityViewController(sender:)), for: .touchUpInside)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -55,7 +57,7 @@ class PaletteController: UIViewController, UITableViewDataSource, UITableViewDel
     
     fileprivate func setupBottomController() {
         paletteView.paletteGenerateButton.addTarget(self, action: #selector(randomPalette(sender:)), for: .touchUpInside)
-        paletteView.shareButton.addTarget(self, action: #selector(setupActivityViewController(sender:)), for: .touchUpInside)
+        paletteView.shareButton.addTarget(self, action: #selector(setupPaletteActivityViewController), for: .touchUpInside)
         paletteView.menuButton.addTarget(self, action: #selector(openMenu(sender:)), for: .touchUpInside)
         printArray()
         
@@ -82,6 +84,17 @@ class PaletteController: UIViewController, UITableViewDataSource, UITableViewDel
         paletteTableView.anchor(top: view.topAnchor, left: view.safeAreaLayoutGuide.leftAnchor, right: view.safeAreaLayoutGuide.rightAnchor)
     }
     
+    //UI of the view when a color is tapped on
+    fileprivate func setupColorLayout() {
+        self.view.addSubview(self.paletteView.colorStackView)
+        self.paletteView.colorStackView.centerX(inView: self.view)
+        self.paletteView.colorStackView.centerY(inView: self.view)
+        self.paletteView.colorStackView.alpha = 1
+        
+        self.view.addSubview(self.paletteView.colorShareButton)
+        self.paletteView.colorShareButton.anchor(top: self.view.topAnchor, right: self.view.rightAnchor, paddingTop: 50, paddingRight: 30, width: 35, height: 35)
+        self.paletteView.colorShareButton.alpha = 0.5
+    }
     
         func printArray() {
     //        let buttonTag = sender.tag
@@ -116,7 +129,7 @@ class PaletteController: UIViewController, UITableViewDataSource, UITableViewDel
         self.navigationController?.pushViewController(gradientController, animated: true)
     }
     
-    @objc func setupActivityViewController(sender: UIButton) {
+    @objc func setupPaletteActivityViewController(sender: UIButton) {
         let string = "Magenta Color App: { \n\(arrayText) \n}"
 //        let pdf = Bundle.main.url(forResource: "Q4 Projections", withExtension: "pdf")
         let activityViewController = UIActivityViewController(activityItems: [string], applicationActivities: nil)
@@ -124,18 +137,15 @@ class PaletteController: UIViewController, UITableViewDataSource, UITableViewDel
         present(activityViewController, animated: true, completion: nil)
     }
     
-    //UI of the view when a color is tapped on
-    fileprivate func setupColorLayout() {
-        self.view.addSubview(self.paletteView.colorStackView)
-        self.paletteView.colorStackView.centerX(inView: self.view)
-        self.paletteView.colorStackView.centerY(inView: self.view)
-        self.paletteView.colorStackView.alpha = 1
-        
-        self.view.addSubview(self.paletteView.colorShareButton)
-        self.paletteView.colorShareButton.anchor(top: self.view.topAnchor, right: self.view.rightAnchor, paddingTop: 50, paddingRight: 30, width: 35, height: 35)
-        self.paletteView.colorShareButton.alpha = 0.5
+    @objc func setupColorActivityViewController(sender: UIButton) {
+        let string = "Magenta Color App: { \n\(cellColorFromAPI) \n}"
+        print(cellColorFromAPI)
+        let activityViewController = UIActivityViewController(activityItems: [string], applicationActivities: nil)
+            
+        present(activityViewController, animated: true, completion: nil)
     }
     
+    //When user taps on a color in the palette, it "opens" to fill the screen with that color with it's color codes
     @objc func openColor(sender: UIButton) {
         let buttonTag = sender.tag
         for i in 0..<5 {
@@ -156,19 +166,19 @@ class PaletteController: UIViewController, UITableViewDataSource, UITableViewDel
                         self.contrastColorForIcon(color: self.cellColorInRGB)
                         
                         self.paletteView.colorLabelHEX.textColor = UIColor().contrastColor(color: self.cellColorInRGB)
-                        self.paletteView.colorLabelHEX.attributedText = "HEX #\(self.cellColorFromAPI)".attributedStringWithBoldness(["HEX"], fontSize: 20, characterSpacing: 1)
+                        self.paletteView.colorLabelHEX.attributedText = "HEX \n#\(self.cellColorFromAPI)".attributedStringWithBoldness(["HEX"], fontSize: 10, characterSpacing: 1)
                
                         self.paletteView.colorLabelRGB.textColor = UIColor().contrastColor(color: self.cellColorInRGB)
-                        self.paletteView.colorLabelRGB.attributedText = "RGB \(Int(self.cellColorInRGB.rgba.red)), \(Int(self.cellColorInRGB.rgba.green)), \( Int(self.cellColorInRGB.rgba.blue))".attributedStringWithBoldness(["RGB"], fontSize: 20, characterSpacing: 1)
+                        self.paletteView.colorLabelRGB.attributedText = "RGB \n\(Int(self.cellColorInRGB.rgba.red)), \(Int(self.cellColorInRGB.rgba.green)), \( Int(self.cellColorInRGB.rgba.blue))".attributedStringWithBoldness(["RGB"], fontSize: 10, characterSpacing: 1)
                         
                         self.paletteView.colorLabelHSB.textColor = UIColor().contrastColor(color: self.cellColorInRGB)
-                        self.paletteView.colorLabelHSB.attributedText = "HSB \(Int(self.cellColorInRGB.hsba.hue)), \(Int(self.cellColorInRGB.hsba.saturation)), \(Int(self.cellColorInRGB.hsba.brightness))".attributedStringWithBoldness(["HSB"], fontSize: 20, characterSpacing: 1)
+                        self.paletteView.colorLabelHSB.attributedText = "HSB \n\(Int(self.cellColorInRGB.hsba.hue)), \(Int(self.cellColorInRGB.hsba.saturation)), \(Int(self.cellColorInRGB.hsba.brightness))".attributedStringWithBoldness(["HSB"], fontSize: 10, characterSpacing: 1)
                         
                         self.paletteView.colorLabelCMY.textColor = UIColor().contrastColor(color: self.cellColorInRGB)
-                        self.paletteView.colorLabelCMY.attributedText = "CMY \(Int(round(self.cellColorInRGB.cmy.cyan * 100))), \(Int(round(self.cellColorInRGB.cmy.magenta * 100))), \(Int(round(self.cellColorInRGB.cmy.yellow * 100)))".attributedStringWithBoldness(["CMY"], fontSize: 20, characterSpacing: 1)
+                        self.paletteView.colorLabelCMY.attributedText = "CMY \n\(Int(round(self.cellColorInRGB.cmy.cyan * 100))), \(Int(round(self.cellColorInRGB.cmy.magenta * 100))), \(Int(round(self.cellColorInRGB.cmy.yellow * 100)))".attributedStringWithBoldness(["CMY"], fontSize: 10, characterSpacing: 1)
                         
                         self.paletteView.colorLabelCMYK.textColor = UIColor().contrastColor(color: self.cellColorInRGB)
-                        self.paletteView.colorLabelCMYK.attributedText = "CMYK \(Int(round(self.cellColorInRGB.cmyk.cyan * 100))), \(Int(round(self.cellColorInRGB.cmyk.magenta * 100))), \(Int(round(self.cellColorInRGB.cmyk.yellow * 100))), \(Int(round(self.cellColorInRGB.cmyk.black * 100)))".attributedStringWithBoldness(["CMYK"], fontSize: 20, characterSpacing: 1)
+                        self.paletteView.colorLabelCMYK.attributedText = "CMYK \n\(Int(round(self.cellColorInRGB.cmyk.cyan * 100))), \(Int(round(self.cellColorInRGB.cmyk.magenta * 100))), \(Int(round(self.cellColorInRGB.cmyk.yellow * 100))), \(Int(round(self.cellColorInRGB.cmyk.black * 100)))".attributedStringWithBoldness(["CMYK"], fontSize: 10, characterSpacing: 1)
                         
 //                        print("This is the color \(self.cellColor)")
                     case 1:

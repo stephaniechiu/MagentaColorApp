@@ -35,9 +35,10 @@ extension UIView {
         return button
        }
     
-    func imageButton(image: UIImage? = nil, width: CGFloat, height: CGFloat) -> UIButton {
+    func imageButton(image: UIImage, width: CGFloat, height: CGFloat) -> UIButton {
         let button = UIButton(type: .custom)
         button.frame.size = CGSize(width: width, height: height)
+        button.setImage(image, for: .normal)
         button.imageView?.contentMode = .scaleAspectFit
         return button
     }

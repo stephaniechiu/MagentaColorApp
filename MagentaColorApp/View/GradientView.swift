@@ -37,10 +37,11 @@ class GradientView: UIView {
     let colorLabelRightCMYK = UIView().colorInfoLabel(color: .label)
     
     //Objects
-    let gradientGenerateButton = UIView().generateButton(borderColor: .label, textColor: .label)
+    let generateGradientButton = UIView().generateButton(borderColor: .label, textColor: .label)
     let circleGradientView = UIView().circleView(width: 380, height: 380)
-    let colorCircleLeftView = UIView().circleView(width: 40, height: 40)
-    let colorCircleRightView = UIView().circleView(width: 40, height: 40)
+    let colorCircleLeftView = UIView().circleView(width: 50, height: 50)
+    let colorCircleRightView = UIView().circleView(width: 50, height: 50)
+    let shareButton = UIView().imageButton(image: #imageLiteral(resourceName: "share-office-color-blackpink"), width: 30, height: 30)
     
     let darkModeImage = UIView().imageButton(image: #imageLiteral(resourceName: "light off-object-color"), width: 35, height: 35)
     let lightModeImage = UIView().imageButton(image: #imageLiteral(resourceName: "light on-object-color"), width: 35, height: 35)
@@ -48,12 +49,12 @@ class GradientView: UIView {
 // MARK: - Init
     
     override init(frame: CGRect) {
-        self.leftStackView = UIStackView(arrangedSubviews: [colorLabelLeftHEX, colorLabelLeftRGB, colorLabelLeftCMY, colorLabelLeftCMYK, colorLabelLeftHSB])
+        self.leftStackView = UIStackView(arrangedSubviews: [colorLabelLeftHEX, colorLabelLeftRGB, colorLabelLeftHSB, colorLabelLeftCMY, colorLabelLeftCMYK])
         leftStackView.spacing = 2
         leftStackView.distribution = .fillEqually
         leftStackView.axis = .vertical
         
-        self.rightStackView = UIStackView(arrangedSubviews: [colorLabelRightHEX, colorLabelRightRGB, colorLabelRightCMY, colorLabelRightCMYK, colorLabelRightHSB])
+        self.rightStackView = UIStackView(arrangedSubviews: [colorLabelRightHEX, colorLabelRightRGB, colorLabelRightHSB, colorLabelRightCMY, colorLabelRightCMYK])
         rightStackView.spacing = 2
         rightStackView.distribution = .fillEqually
         rightStackView.axis = .vertical
@@ -85,10 +86,10 @@ class GradientView: UIView {
         circleGradientView.anchor(width: 380, height: 380)
         
         topContainerView.addSubview(colorCircleLeftView)
-        colorCircleLeftView.anchor(top: circleGradientView.bottomAnchor, left: topContainerView.leftAnchor, paddingTop: 10, paddingLeft: 50, width: 40, height: 40)
+        colorCircleLeftView.anchor(top: circleGradientView.bottomAnchor, left: topContainerView.leftAnchor, paddingTop: 10, paddingLeft: 50, width: 50, height: 50)
         
         topContainerView.addSubview(colorCircleRightView)
-        colorCircleRightView.anchor(top: circleGradientView.bottomAnchor, right: topContainerView.rightAnchor, paddingTop: 10, paddingRight: 50, width: 40, height: 40)
+        colorCircleRightView.anchor(top: circleGradientView.bottomAnchor, right: topContainerView.rightAnchor, paddingTop: 10, paddingRight: 50, width: 50, height: 50)
         
         //Middle container layout
         addSubview(middleStackView)
@@ -98,9 +99,13 @@ class GradientView: UIView {
         addSubview(bottomContainerView)
         bottomContainerView.anchor(top: middleStackView.bottomAnchor, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, height: 80)
         
-        bottomContainerView.addSubview(gradientGenerateButton)
-        gradientGenerateButton.anchor(width: 150, height: 30)
-        gradientGenerateButton.centerX(inView: bottomContainerView)
-        gradientGenerateButton.centerY(inView: bottomContainerView)
+        bottomContainerView.addSubview(generateGradientButton)
+        generateGradientButton.anchor(width: 150, height: 30)
+        generateGradientButton.centerX(inView: bottomContainerView)
+        generateGradientButton.centerY(inView: bottomContainerView)
+        
+        bottomContainerView.addSubview(shareButton)
+        shareButton.anchor(right: generateGradientButton.leftAnchor, paddingRight: 50, width: 30, height: 30)
+        shareButton.centerY(inView: generateGradientButton)
     }
 }

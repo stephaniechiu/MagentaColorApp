@@ -26,7 +26,7 @@ class PaletteView: UIView {
     let bottomControllerView = UIView()
     let paletteGenerateButton = UIView().generateButton(borderColor: .white, textColor: .white)
     let menuButton = UIView().imageButton(image: #imageLiteral(resourceName: "menu editing-white"), width: 25, height: 25)
-    let shareButton = UIView().imageButton(image: #imageLiteral(resourceName: "share-office-color-whitepink"), width: 35, height: 35)
+    let shareButton = UIView().imageButton(image: #imageLiteral(resourceName: "share-office-color-whitepink"), width: 30, height: 30)
     
     //Button for Gradient Controller
     var gradientStackView: UIStackView
@@ -53,7 +53,7 @@ class PaletteView: UIView {
 // MARK: - Init
     override init(frame: CGRect) {
         self.colorStackView = UIStackView(arrangedSubviews: [colorLabelHEX, colorLabelRGB, colorLabelHSB, colorLabelCMY, colorLabelCMYK])
-        colorStackView.spacing = 20
+        colorStackView.spacing = 10
         colorStackView.distribution = .fillEqually
         colorStackView.axis = .vertical
         
@@ -85,7 +85,7 @@ class PaletteView: UIView {
         gradientButton.centerY(inView: paletteGenerateButton)
         
         bottomControllerView.addSubview(shareButton)
-        shareButton.anchor(right: paletteGenerateButton.leftAnchor, paddingRight: 20, width: 35, height: 35)
+        shareButton.anchor(right: paletteGenerateButton.leftAnchor, paddingRight: 20, width: 30, height: 30)
         shareButton.centerY(inView: paletteGenerateButton)
         
         bottomControllerView.addSubview(menuButton)

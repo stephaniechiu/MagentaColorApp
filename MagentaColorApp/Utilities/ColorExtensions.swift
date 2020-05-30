@@ -124,9 +124,11 @@ extension UIColor {
             
             let luminance = 1 - ((0.299 * r) + (0.587 * g) + (0.114 * b))
             if luminance < 0.5 {
-                button.setImage(blackIcon, for: .normal) // bright colors - black icon
+                // bright colors - black icon
+                button.setImage(blackIcon, for: .normal)
                 } else {
-                button.setImage(whiteIcon, for: .normal) // dark colors - white icon
+                // dark colors - white icon
+                button.setImage(whiteIcon, for: .normal)
             }
             
             return button
