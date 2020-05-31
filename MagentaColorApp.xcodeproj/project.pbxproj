@@ -8,8 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		900647442470C6CE00DDEF14 /* Editing shapes (female)-animated-illustration.json in Resources */ = {isa = PBXBuildFile; fileRef = 900647432470C6CE00DDEF14 /* Editing shapes (female)-animated-illustration.json */; };
+		902D708C248229A500E24CF3 /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902D708B248229A500E24CF3 /* MenuView.swift */; };
+		902D708E248229B800E24CF3 /* MenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902D708D248229B800E24CF3 /* MenuController.swift */; };
 		903DB8E624808CFA008474AC /* ColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 903DB8E524808CF9008474AC /* ColorExtensions.swift */; };
 		903DB8E824808D3F008474AC /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 903DB8E724808D3F008474AC /* StringExtensions.swift */; };
+		903E168C2483923A006348F1 /* NavigationExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 903E168B2483923A006348F1 /* NavigationExtension.swift */; };
 		9042986F2473C35A0053B216 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9042986E2473C35A0053B216 /* GradientView.swift */; };
 		904298712473C36F0053B216 /* GradientController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904298702473C36F0053B216 /* GradientController.swift */; };
 		90E4B699246755A400ED3D29 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90E4B698246755A400ED3D29 /* AppDelegate.swift */; };
@@ -28,8 +31,11 @@
 		0FA49417E4ACF9E48B53FBB4 /* Pods_MagentaColorApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MagentaColorApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7CE894D1AD8E57A36B8DF054 /* Pods-MagentaColorApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MagentaColorApp.release.xcconfig"; path = "Target Support Files/Pods-MagentaColorApp/Pods-MagentaColorApp.release.xcconfig"; sourceTree = "<group>"; };
 		900647432470C6CE00DDEF14 /* Editing shapes (female)-animated-illustration.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "Editing shapes (female)-animated-illustration.json"; sourceTree = "<group>"; };
+		902D708B248229A500E24CF3 /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
+		902D708D248229B800E24CF3 /* MenuController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuController.swift; sourceTree = "<group>"; };
 		903DB8E524808CF9008474AC /* ColorExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtensions.swift; sourceTree = "<group>"; };
 		903DB8E724808D3F008474AC /* StringExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
+		903E168B2483923A006348F1 /* NavigationExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationExtension.swift; sourceTree = "<group>"; };
 		9042986E2473C35A0053B216 /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		904298702473C36F0053B216 /* GradientController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientController.swift; sourceTree = "<group>"; };
 		90E4B695246755A400ED3D29 /* MagentaColorApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MagentaColorApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -116,6 +122,7 @@
 			children = (
 				90E4B6B224675C0500ED3D29 /* PaletteView.swift */,
 				9042986E2473C35A0053B216 /* GradientView.swift */,
+				902D708B248229A500E24CF3 /* MenuView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -125,6 +132,7 @@
 			children = (
 				90E4B69C246755A400ED3D29 /* PaletteController.swift */,
 				904298702473C36F0053B216 /* GradientController.swift */,
+				902D708D248229B800E24CF3 /* MenuController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -135,6 +143,7 @@
 				90E4B6B924676FC500ED3D29 /* UIViewExtensions.swift */,
 				903DB8E524808CF9008474AC /* ColorExtensions.swift */,
 				903DB8E724808D3F008474AC /* StringExtensions.swift */,
+				903E168B2483923A006348F1 /* NavigationExtension.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -263,6 +272,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				90E4B69D246755A400ED3D29 /* PaletteController.swift in Sources */,
+				902D708C248229A500E24CF3 /* MenuView.swift in Sources */,
 				903DB8E624808CFA008474AC /* ColorExtensions.swift in Sources */,
 				90E4B6A3246755A400ED3D29 /* MagentaColorApp.xcdatamodeld in Sources */,
 				90E4B699246755A400ED3D29 /* AppDelegate.swift in Sources */,
@@ -270,8 +280,10 @@
 				90E4B6B324675C0500ED3D29 /* PaletteView.swift in Sources */,
 				903DB8E824808D3F008474AC /* StringExtensions.swift in Sources */,
 				90E4B69B246755A400ED3D29 /* SceneDelegate.swift in Sources */,
+				903E168C2483923A006348F1 /* NavigationExtension.swift in Sources */,
 				904298712473C36F0053B216 /* GradientController.swift in Sources */,
 				9042986F2473C35A0053B216 /* GradientView.swift in Sources */,
+				902D708E248229B800E24CF3 /* MenuController.swift in Sources */,
 				90E4B6B524676DCD00ED3D29 /* Color.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

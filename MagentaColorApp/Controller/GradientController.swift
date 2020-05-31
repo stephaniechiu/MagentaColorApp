@@ -18,7 +18,7 @@ class GradientController: UIViewController {
     var shareLeftColor = String()
     var shareRightColor = String()
     let hapticFeedback = UIImpactFeedbackGenerator()
-    var isOn = false
+    var lightIsOn = false
 
 // MARK: - Lifecycle
     
@@ -121,7 +121,7 @@ class GradientController: UIViewController {
     
     //When user interface style is in Light Mode, this function allow users to manually switch the view to Dark Mode
     func activatedDarkButton(bool: Bool) {
-        isOn = bool
+        lightIsOn = bool
         let color = bool ? UIColor.black : UIColor.white
         let image = bool ? #imageLiteral(resourceName: "light on-object-color") : #imageLiteral(resourceName: "light off-object-color")
         let share = bool ? #imageLiteral(resourceName: "share-office-color-whitepink") : #imageLiteral(resourceName: "share-office-color-blackpink")
@@ -135,7 +135,7 @@ class GradientController: UIViewController {
     
     //When user interface style is in Dark Mode, this function allow users to manually switch the view to Light Mode
     func activatedLightButton(bool: Bool) {
-            isOn = bool
+            lightIsOn = bool
             let color = bool ? UIColor.white : UIColor.black
             let image = bool ? #imageLiteral(resourceName: "light off-object-color") : #imageLiteral(resourceName: "light on-object-color")
             let share = bool ? #imageLiteral(resourceName: "share-office-color-blackpink") : #imageLiteral(resourceName: "share-office-color-whitepink")
@@ -146,6 +146,22 @@ class GradientController: UIViewController {
             
         setObjectThemeColors(share, image, textColor, color, borderColor, backgroundColor, barTintColor)
         }
+    
+    //Cross fade animation transition each time Generate button is tapped
+    fileprivate func textFadeAnimation() {
+         gradientView.colorLabelLeftHEX.fadeTransition(0.4)
+         gradientView.colorLabelLeftRGB.fadeTransition(0.4)
+         gradientView.colorLabelLeftHSB.fadeTransition(0.4)
+         gradientView.colorLabelLeftCMY.fadeTransition(0.4)
+         gradientView.colorLabelLeftCMYK.fadeTransition(0.4)
+         
+         gradientView.colorLabelRightHEX.fadeTransition(0.4)
+         gradientView.colorLabelRightRGB.fadeTransition(0.4)
+         gradientView.colorLabelRightHSB.fadeTransition(0.4)
+         gradientView.colorLabelRightCMY.fadeTransition(0.4)
+         gradientView.colorLabelRightCMYK.fadeTransition(0.4)
+     }
+     
     
 // MARK: - Selectors
     
@@ -163,6 +179,8 @@ class GradientController: UIViewController {
         gradientView.colorCircleRightView.backgroundColor = rightGradient
         gradientView.circleGradientView.setupGradientBackground(colorOne: leftGradient, colorTwo: rightGradient)
         
+        textFadeAnimation()
+        
         gradientView.colorLabelLeftHEX.attributedText = "HEX \n\(leftGradient.toHexString().uppercased())".attributedStringWithBoldness(["HEX"], fontSize: 10)
         gradientView.colorLabelLeftRGB.attributedText = "RGB \n\(Int(leftGradient.rgba.red)), \(Int(leftGradient.rgba.green)), \(Int(leftGradient.rgba.blue))".attributedStringWithBoldness(["RGB"], fontSize: 10)
         gradientView.colorLabelLeftHSB.attributedText = "HSB \n\(Int(leftGradient.hsba.hue)), \(Int(leftGradient.hsba.brightness))%, \(Int(leftGradient.hsba.saturation))%".attributedStringWithBoldness(["HSB"], fontSize: 10)
@@ -179,9 +197,9 @@ class GradientController: UIViewController {
     //User can manually change the interface to Light if interface theme is Dark Mode, and vice versa
     @objc func themeButtonPressed(sender: UIButton) {
         if traitCollection.userInterfaceStyle == .dark {
-            activatedDarkButton(bool: !isOn)
+            activatedDarkButton(bool: !lightIsOn)
         } else {
-            activatedLightButton(bool: !isOn)
+            activatedLightButton(bool: !lightIsOn)
         }
     }
     

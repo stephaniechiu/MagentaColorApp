@@ -49,6 +49,16 @@ class PaletteView: UIView {
         label.font = label.font.withSize(12)
         return label
     }()
+    
+    let copiedNotificationLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = .black
+        label.text = "Copied!"
+        label.alpha = 0
+        label.font = UIFont(name: "HelveticaNeue", size: 12)
+        
+        return label
+    }()
 
 // MARK: - Init
     override init(frame: CGRect) {

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PaletteController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class PaletteController: UIViewController, UITableViewDataSource, UITableViewDelegate, UIViewControllerTransitioningDelegate {
     
 // MARK: - Properties
     
@@ -23,6 +23,7 @@ class PaletteController: UIViewController, UITableViewDataSource, UITableViewDel
     let bottomControllerHeight = CGFloat(80)
     var currentAnimation = 0
     let hapticFeedback = UIImpactFeedbackGenerator()
+    let pasteboard = UIPasteboard.general
     
 // MARK: - Lifecycle
     
@@ -34,8 +35,6 @@ class PaletteController: UIViewController, UITableViewDataSource, UITableViewDel
         setupNavigationController()
         setupTableView()
         setupBottomController()
-        
-        paletteView.colorShareButton.addTarget(self, action: #selector(setupColorActivityViewController(sender:)), for: .touchUpInside)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -59,7 +58,7 @@ class PaletteController: UIViewController, UITableViewDataSource, UITableViewDel
         paletteView.paletteGenerateButton.addTarget(self, action: #selector(randomPalette(sender:)), for: .touchUpInside)
         paletteView.shareButton.addTarget(self, action: #selector(setupPaletteActivityViewController), for: .touchUpInside)
         paletteView.menuButton.addTarget(self, action: #selector(openMenu(sender:)), for: .touchUpInside)
-        printArray()
+//        printArray()
         
         view.addSubview(paletteView.bottomControllerView)
         paletteView.bottomControllerView.anchor(top: paletteTableView.bottomAnchor, left: view.safeAreaLayoutGuide.leftAnchor, bottom: view.bottomAnchor, right: view.safeAreaLayoutGuide.rightAnchor, height: bottomControllerHeight)
@@ -94,17 +93,22 @@ class PaletteController: UIViewController, UITableViewDataSource, UITableViewDel
         self.view.addSubview(self.paletteView.colorShareButton)
         self.paletteView.colorShareButton.anchor(top: self.view.topAnchor, right: self.view.rightAnchor, paddingTop: 50, paddingRight: 30, width: 35, height: 35)
         self.paletteView.colorShareButton.alpha = 0.5
+        self.paletteView.colorShareButton.addTarget(self, action: #selector(setupColorActivityViewController(sender:)), for: .touchUpInside)
+        
+        self.view.addSubview(paletteView.copiedNotificationLabel)
+        self.paletteView.copiedNotificationLabel.centerX(inView: self.view)
+        self.paletteView.copiedNotificationLabel.anchor(top: self.view.topAnchor, paddingTop: 10, width: 20, height: 10)
     }
-    
-        func printArray() {
-    //        let buttonTag = sender.tag
-            for i in 0..<5 {
-                    self.cellColorFromAPI = self.colorPalette[0].colors[i]
-                    arrayText.append(self.cellColorFromAPI)
-            }
-            print("Magenta Color App: { \n\(arrayText) \n}")
-        }
-    
+//
+//        func printArray() {
+//    //        let buttonTag = sender.tag
+//            for i in 0..<5 {
+//                    self.cellColorFromAPI = self.colorPalette[0].colors[i]
+//                    arrayText.append(self.cellColorFromAPI)
+//            }
+//            print("Magenta Color App: { \n\(arrayText) \n}")
+//        }
+//
     //Determines the color contrast of the share button against the cell color background
     func contrastColorForIcon(color: UIColor) {
         var r = CGFloat(0)
@@ -129,6 +133,11 @@ class PaletteController: UIViewController, UITableViewDataSource, UITableViewDel
         self.navigationController?.pushViewController(gradientController, animated: true)
     }
     
+    @objc func openMenu(sender: UIButton) {
+        let menuController = MenuController()
+        self.navigationController?.pushViewController(menuController, animated: true)
+    }
+    
     @objc func setupPaletteActivityViewController(sender: UIButton) {
         let string = "Magenta Color App: { \n\(arrayText) \n}"
 //        let pdf = Bundle.main.url(forResource: "Q4 Projections", withExtension: "pdf")
@@ -145,9 +154,27 @@ class PaletteController: UIViewController, UITableViewDataSource, UITableViewDel
         present(activityViewController, animated: true, completion: nil)
     }
     
+    @objc func copyText(sender: UIGestureRecognizer) {
+        UIPasteboard.general.string = paletteView.colorLabelHEX.text
+        UIPasteboard.general.string = paletteView.colorLabelRGB.text
+        UIPasteboard.general.string = paletteView.colorLabelHSB.text
+        UIPasteboard.general.string = paletteView.colorLabelCMY.text
+        UIPasteboard.general.string = paletteView.colorLabelCMYK.text
+        
+        let alert = UIAlertController(title: "Copied!", message: "", preferredStyle: UIAlertController.Style.alert)
+        self.present(alert, animated: true, completion: nil)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+              alert.dismiss(animated: true, completion: nil)
+          }
+    }
+    
     //When user taps on a color in the palette, it "opens" to fill the screen with that color with it's color codes
     @objc func openColor(sender: UIButton) {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(copyText(sender:)))
+        view.addGestureRecognizer(tapGesture)
+        
         let buttonTag = sender.tag
+        
         for i in 0..<5 {
             if buttonTag == i {
                 UIView.animate(withDuration: 0.7, animations: {
@@ -202,10 +229,6 @@ class PaletteController: UIViewController, UITableViewDataSource, UITableViewDel
     @objc func randomPalette(sender: UIButton) {
         newPalette()
         hapticFeedback.impactOccurred()
-    }
-    
-    @objc func openMenu(sender: UIButton) {
-        
     }
 
     // MARK: - API Call
