@@ -7,12 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		900647442470C6CE00DDEF14 /* Editing shapes (female)-animated-illustration.json in Resources */ = {isa = PBXBuildFile; fileRef = 900647432470C6CE00DDEF14 /* Editing shapes (female)-animated-illustration.json */; };
+		5CB727CAA91680EF106DBC4B /* Pods_MagentaColorApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B61673D4F7B3A258D9DDB31 /* Pods_MagentaColorApp.framework */; };
 		902D708C248229A500E24CF3 /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902D708B248229A500E24CF3 /* MenuView.swift */; };
 		902D708E248229B800E24CF3 /* MenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902D708D248229B800E24CF3 /* MenuController.swift */; };
 		903DB8E624808CFA008474AC /* ColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 903DB8E524808CF9008474AC /* ColorExtensions.swift */; };
 		903DB8E824808D3F008474AC /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 903DB8E724808D3F008474AC /* StringExtensions.swift */; };
 		903E168C2483923A006348F1 /* NavigationExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 903E168B2483923A006348F1 /* NavigationExtension.swift */; };
+		903E169C248468BB006348F1 /* Office Desk-light mode.json in Resources */ = {isa = PBXBuildFile; fileRef = 903E169A248468BB006348F1 /* Office Desk-light mode.json */; };
+		903E169D248468BB006348F1 /* Office Desk-dark mode.json in Resources */ = {isa = PBXBuildFile; fileRef = 903E169B248468BB006348F1 /* Office Desk-dark mode.json */; };
 		9042986F2473C35A0053B216 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9042986E2473C35A0053B216 /* GradientView.swift */; };
 		904298712473C36F0053B216 /* GradientController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904298702473C36F0053B216 /* GradientController.swift */; };
 		90E4B699246755A400ED3D29 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90E4B698246755A400ED3D29 /* AppDelegate.swift */; };
@@ -24,21 +26,19 @@
 		90E4B6B324675C0500ED3D29 /* PaletteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90E4B6B224675C0500ED3D29 /* PaletteView.swift */; };
 		90E4B6B524676DCD00ED3D29 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90E4B6B424676DCD00ED3D29 /* Color.swift */; };
 		90E4B6BA24676FC500ED3D29 /* UIViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90E4B6B924676FC500ED3D29 /* UIViewExtensions.swift */; };
-		BF8EBAD102F59178576091A1 /* Pods_MagentaColorApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FA49417E4ACF9E48B53FBB4 /* Pods_MagentaColorApp.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		0FA49417E4ACF9E48B53FBB4 /* Pods_MagentaColorApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MagentaColorApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		7CE894D1AD8E57A36B8DF054 /* Pods-MagentaColorApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MagentaColorApp.release.xcconfig"; path = "Target Support Files/Pods-MagentaColorApp/Pods-MagentaColorApp.release.xcconfig"; sourceTree = "<group>"; };
-		900647432470C6CE00DDEF14 /* Editing shapes (female)-animated-illustration.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "Editing shapes (female)-animated-illustration.json"; sourceTree = "<group>"; };
 		902D708B248229A500E24CF3 /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
 		902D708D248229B800E24CF3 /* MenuController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuController.swift; sourceTree = "<group>"; };
 		903DB8E524808CF9008474AC /* ColorExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtensions.swift; sourceTree = "<group>"; };
 		903DB8E724808D3F008474AC /* StringExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
 		903E168B2483923A006348F1 /* NavigationExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationExtension.swift; sourceTree = "<group>"; };
+		903E169A248468BB006348F1 /* Office Desk-light mode.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "Office Desk-light mode.json"; sourceTree = SOURCE_ROOT; };
+		903E169B248468BB006348F1 /* Office Desk-dark mode.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "Office Desk-dark mode.json"; sourceTree = SOURCE_ROOT; };
+		903E16A424847768006348F1 /* MagentaColorApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MagentaColorApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9042986E2473C35A0053B216 /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		904298702473C36F0053B216 /* GradientController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientController.swift; sourceTree = "<group>"; };
-		90E4B695246755A400ED3D29 /* MagentaColorApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MagentaColorApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		90E4B698246755A400ED3D29 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		90E4B69A246755A400ED3D29 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		90E4B69C246755A400ED3D29 /* PaletteController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaletteController.swift; sourceTree = "<group>"; };
@@ -49,7 +49,9 @@
 		90E4B6B224675C0500ED3D29 /* PaletteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaletteView.swift; sourceTree = "<group>"; };
 		90E4B6B424676DCD00ED3D29 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		90E4B6B924676FC500ED3D29 /* UIViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtensions.swift; sourceTree = "<group>"; };
-		A7CB9E57245386A1CB1BAE43 /* Pods-MagentaColorApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MagentaColorApp.debug.xcconfig"; path = "Target Support Files/Pods-MagentaColorApp/Pods-MagentaColorApp.debug.xcconfig"; sourceTree = "<group>"; };
+		9B61673D4F7B3A258D9DDB31 /* Pods_MagentaColorApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MagentaColorApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C1C0318142BA4F32BBB6B152 /* Pods-MagentaColorApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MagentaColorApp.debug.xcconfig"; path = "Target Support Files/Pods-MagentaColorApp/Pods-MagentaColorApp.debug.xcconfig"; sourceTree = "<group>"; };
+		ED834D53688C8AC556244D8A /* Pods-MagentaColorApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MagentaColorApp.release.xcconfig"; path = "Target Support Files/Pods-MagentaColorApp/Pods-MagentaColorApp.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,18 +59,26 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BF8EBAD102F59178576091A1 /* Pods_MagentaColorApp.framework in Frameworks */,
+				5CB727CAA91680EF106DBC4B /* Pods_MagentaColorApp.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		09B8C3E33271E04F9FB2BAB9 /* Pods */ = {
+		11CAE768F4D3FC9A09E779B6 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				A7CB9E57245386A1CB1BAE43 /* Pods-MagentaColorApp.debug.xcconfig */,
-				7CE894D1AD8E57A36B8DF054 /* Pods-MagentaColorApp.release.xcconfig */,
+				9B61673D4F7B3A258D9DDB31 /* Pods_MagentaColorApp.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		1EEA50155D89C262570C4D6E /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				C1C0318142BA4F32BBB6B152 /* Pods-MagentaColorApp.debug.xcconfig */,
+				ED834D53688C8AC556244D8A /* Pods-MagentaColorApp.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -76,25 +86,18 @@
 		90E4B68C246755A400ED3D29 = {
 			isa = PBXGroup;
 			children = (
-				900647432470C6CE00DDEF14 /* Editing shapes (female)-animated-illustration.json */,
 				90E4B697246755A400ED3D29 /* MagentaColorApp */,
-				90E4B696246755A400ED3D29 /* Products */,
-				09B8C3E33271E04F9FB2BAB9 /* Pods */,
-				98F4B8D1A290B0C2FD432FF1 /* Frameworks */,
+				903E16A424847768006348F1 /* MagentaColorApp.app */,
+				1EEA50155D89C262570C4D6E /* Pods */,
+				11CAE768F4D3FC9A09E779B6 /* Frameworks */,
 			);
-			sourceTree = "<group>";
-		};
-		90E4B696246755A400ED3D29 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				90E4B695246755A400ED3D29 /* MagentaColorApp.app */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 		90E4B697246755A400ED3D29 /* MagentaColorApp */ = {
 			isa = PBXGroup;
 			children = (
+				903E169B248468BB006348F1 /* Office Desk-dark mode.json */,
+				903E169A248468BB006348F1 /* Office Desk-light mode.json */,
 				90E4B6AF24675BD300ED3D29 /* Model */,
 				90E4B6B024675BD800ED3D29 /* View */,
 				90E4B6B124675BDC00ED3D29 /* Controller */,
@@ -148,14 +151,6 @@
 			path = Utilities;
 			sourceTree = "<group>";
 		};
-		98F4B8D1A290B0C2FD432FF1 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				0FA49417E4ACF9E48B53FBB4 /* Pods_MagentaColorApp.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -167,7 +162,7 @@
 				90E4B691246755A400ED3D29 /* Sources */,
 				90E4B692246755A400ED3D29 /* Frameworks */,
 				90E4B693246755A400ED3D29 /* Resources */,
-				F23D18F47245CDD497B0B555 /* [CP] Embed Pods Frameworks */,
+				231665E54BEA1E957B0FC9B8 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -175,7 +170,7 @@
 			);
 			name = MagentaColorApp;
 			productName = MagentaColorApp;
-			productReference = 90E4B695246755A400ED3D29 /* MagentaColorApp.app */;
+			productReference = 903E16A424847768006348F1 /* MagentaColorApp.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -202,7 +197,7 @@
 				Base,
 			);
 			mainGroup = 90E4B68C246755A400ED3D29;
-			productRefGroup = 90E4B696246755A400ED3D29 /* Products */;
+			productRefGroup = 90E4B68C246755A400ED3D29;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
@@ -216,8 +211,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				903E169C248468BB006348F1 /* Office Desk-light mode.json in Resources */,
+				903E169D248468BB006348F1 /* Office Desk-dark mode.json in Resources */,
 				90E4B6A8246755A800ED3D29 /* LaunchScreen.storyboard in Resources */,
-				900647442470C6CE00DDEF14 /* Editing shapes (female)-animated-illustration.json in Resources */,
 				90E4B6A5246755A800ED3D29 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -225,6 +221,23 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		231665E54BEA1E957B0FC9B8 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MagentaColorApp/Pods-MagentaColorApp-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MagentaColorApp/Pods-MagentaColorApp-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MagentaColorApp/Pods-MagentaColorApp-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		26E48FCBEFA4D7678E5ACF39 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -245,23 +258,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		F23D18F47245CDD497B0B555 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-MagentaColorApp/Pods-MagentaColorApp-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-MagentaColorApp/Pods-MagentaColorApp-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MagentaColorApp/Pods-MagentaColorApp-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -418,7 +414,7 @@
 		};
 		90E4B6AD246755A800ED3D29 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A7CB9E57245386A1CB1BAE43 /* Pods-MagentaColorApp.debug.xcconfig */;
+			baseConfigurationReference = C1C0318142BA4F32BBB6B152 /* Pods-MagentaColorApp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -437,7 +433,7 @@
 		};
 		90E4B6AE246755A800ED3D29 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7CE894D1AD8E57A36B8DF054 /* Pods-MagentaColorApp.release.xcconfig */;
+			baseConfigurationReference = ED834D53688C8AC556244D8A /* Pods-MagentaColorApp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;

@@ -58,7 +58,7 @@ class PaletteController: UIViewController, UITableViewDataSource, UITableViewDel
         paletteView.paletteGenerateButton.addTarget(self, action: #selector(randomPalette(sender:)), for: .touchUpInside)
         paletteView.shareButton.addTarget(self, action: #selector(setupPaletteActivityViewController), for: .touchUpInside)
         paletteView.menuButton.addTarget(self, action: #selector(openMenu(sender:)), for: .touchUpInside)
-//        printArray()
+        printArray()
         
         view.addSubview(paletteView.bottomControllerView)
         paletteView.bottomControllerView.anchor(top: paletteTableView.bottomAnchor, left: view.safeAreaLayoutGuide.leftAnchor, bottom: view.bottomAnchor, right: view.safeAreaLayoutGuide.rightAnchor, height: bottomControllerHeight)
@@ -99,16 +99,16 @@ class PaletteController: UIViewController, UITableViewDataSource, UITableViewDel
         self.paletteView.copiedNotificationLabel.centerX(inView: self.view)
         self.paletteView.copiedNotificationLabel.anchor(top: self.view.topAnchor, paddingTop: 10, width: 20, height: 10)
     }
-//
-//        func printArray() {
-//    //        let buttonTag = sender.tag
-//            for i in 0..<5 {
-//                    self.cellColorFromAPI = self.colorPalette[0].colors[i]
-//                    arrayText.append(self.cellColorFromAPI)
-//            }
-//            print("Magenta Color App: { \n\(arrayText) \n}")
-//        }
-//
+
+        func printArray() {
+    //        let buttonTag = sender.tag
+            for i in 0..<5 {
+                    self.cellColorFromAPI = self.colorPalette[0].colors[i]
+                    arrayText.append(self.cellColorFromAPI)
+            }
+            print("Magenta Color App: { \n\(arrayText) \n}")
+        }
+
     //Determines the color contrast of the share button against the cell color background
     func contrastColorForIcon(color: UIColor) {
         var r = CGFloat(0)

@@ -43,6 +43,44 @@ extension UIView {
         return button
     }
     
+    func menuItemButton(darkModeImage: UIImage, lightModeImage: UIImage, titleLabel: String, subLabel: String) -> UIButton {
+        let button = UIButton()
+
+        var imageView = UIImageView()
+        if traitCollection.userInterfaceStyle == .dark {
+            imageView = UIImageView(image: darkModeImage)
+        } else {
+            imageView = UIImageView(image: lightModeImage)
+        }
+        imageView.contentMode = .scaleAspectFit
+        button.addSubview(imageView)
+        imageView.anchor(left: button.leftAnchor, paddingLeft: 5)
+        imageView.centerY(inView: button)
+            
+        let label = UILabel()
+        label.text = titleLabel
+        label.font = UIFont(name: "HelveticaNeue-Bold", size: 12)
+        label.textColor = .label
+        button.addSubview(label)
+            
+        let sublabel = UILabel()
+        sublabel.text = subLabel
+        sublabel.font = UIFont(name: "HelveticaNeue-Light", size: 16)
+        sublabel.textColor = .label
+        sublabel.numberOfLines = 0
+        button.addSubview(sublabel)
+            
+        var stackView = UIStackView()
+        stackView = UIStackView(arrangedSubviews: [label, sublabel])
+        stackView.axis = .vertical
+        stackView.distribution = .fillEqually
+        button.addSubview(stackView)
+        stackView.anchor(left: imageView.rightAnchor, paddingLeft: 10, width: 300)
+        stackView.centerY(inView: button)
+            
+        return button
+    }
+    
     func colorInfoLabel(color: UIColor) -> UILabel {
         let label = UILabel()
         label.font = UIFont(name: "HelveticaNeue-Thin", size: 17)
