@@ -8,8 +8,9 @@
 
 import UIKit
 import Lottie
+import MessageUI
 
-class MenuController: UIViewController {
+class MenuController: UIViewController, MFMailComposeViewControllerDelegate {
     
     // MARK: - Properties
     
@@ -22,6 +23,9 @@ class MenuController: UIViewController {
         view.backgroundColor = .systemBackground
         
         setupNavigationController()
+        menuView.emailButton.addTarget(self, action: #selector(sendEmail), for: .touchUpInside)
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector((sendEmail)))
+        view.addGestureRecognizer(tapGesture)
     }
     
     // MARK: - Helper Functions
@@ -31,7 +35,36 @@ class MenuController: UIViewController {
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         navigationController?.navigationBar.shadowImage = UIImage()
     }
+    
+    @objc func sendEmail() {
+        if MFMailComposeViewController.canSendMail() {
+            let mail = MFMailComposeViewController()
+            mail.mailComposeDelegate = self
+            mail.setToRecipients(["stephaniechiu@outlook.com"])
+            mail.setSubject("My Thoughts on Magenta")
+            mail.setMessageBody("", isHTML: true)
+
+            present(mail, animated: true)
+        } else {
+            let sendMailErrorAlert = UIAlertController(title: "Could Not Send Email", message: "Your device could not send e-mail.  Please check if Apple Main is installed and try again.", preferredStyle: UIAlertController.Style.alert)
+            sendMailErrorAlert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default))
+            self.present(sendMailErrorAlert, animated: true)
+        }
+    }
+
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        controller.dismiss(animated: true)
+    }
         
     // MARK: - Selectors
 
+//    @objc func sendEmailTapped(sender: UIButton) {
+//        let mailComposeViewController = sendEmail()
+//        if MFMailComposeViewController.canSendMail() {
+//            self.present(mailComposeController, animated: true, completion: nil)
+//        } else {
+//            self.shows
+//        }
+//    }
+    
 }
