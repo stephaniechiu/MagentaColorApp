@@ -16,6 +16,7 @@ class PaletteController: UIViewController, UITableViewDataSource, UITableViewDel
     let paletteTableView = UITableView()
     var colorPalette = [Color]()
     var colorButton = [UIButton]() //Array of buttons the size and color of each tableView cell
+    var appendedPalettes = [Color]()
     var arrayText = [String]()
     let cellIdentifier = "ColorCell"
     var cellColorFromAPI: String = ""
@@ -174,16 +175,17 @@ class PaletteController: UIViewController, UITableViewDataSource, UITableViewDel
         view.addGestureRecognizer(tapGesture)
         
         let buttonTag = sender.tag
+        let firstPalette = appendedPalettes[0]
         
         for i in 0..<5 {
             if buttonTag == i {
                 UIView.animate(withDuration: 0.7, animations: {
                     switch self.currentAnimation {
                     case 0:
-                        self.cellColorInRGB = UIColor(hexString:self.colorPalette[0].colors[i])
+                        self.cellColorInRGB = UIColor(hexString:firstPalette.colors[i])
                         
                         self.colorButton[i].transform = CGAffineTransform(scaleX: 1.1, y: 50)
-                        self.colorButton[i].backgroundColor = UIColor(hexString: self.colorPalette[0].colors[i])
+                        self.colorButton[i].backgroundColor = UIColor(hexString: firstPalette.colors[i])
                         self.view.bringSubviewToFront(self.colorButton[i])
                         
                         //UI of a color cell when it is "opened"
@@ -240,11 +242,14 @@ class PaletteController: UIViewController, UITableViewDataSource, UITableViewDel
         do {
             let decoder = JSONDecoder()
             let jsonData = try decoder.decode(Palette.self, from: data)
-            self.colorPalette = jsonData.shuffled()
+            self.colorPalette = jsonData
+            appendedPalettes = colorPalette.shuffled()
             paletteTableView.reloadData()
+            print(appendedPalettes)
         } catch let jsonError {
             print("JSON Error: ", jsonError)
         }
+
     }
     
 // MARK: - TableView Data Source
@@ -254,16 +259,17 @@ class PaletteController: UIViewController, UITableViewDataSource, UITableViewDel
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
+//        let firstPalette = colorPalette[0]
+        let firstPalette = appendedPalettes[0]
         var buttonY: CGFloat = 0
-        
+        var tag = 0
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
         cell.selectionStyle = .none
 
         //Assigns a new color to each row. Colors are converted from HEX to RGB
-        for i in 0..<1 {
-            var tag = 0
-            for j in 0..<colorPalette[i].colors.count {
+//        for i in 0..<1 {
+//            var tag = 0
+        for j in 0..<firstPalette.colors.count {
                 
                 let button = UIButton(frame: CGRect(x: 15, y: buttonY, width: UIScreen.main.bounds.width - 30, height: (UIScreen.main.bounds.height - 100) / 5))
                 buttonY = buttonY + (UIScreen.main.bounds.height/5 - 15)
@@ -277,12 +283,12 @@ class PaletteController: UIViewController, UITableViewDataSource, UITableViewDel
                 colorButton.append(button)
                 
                 if indexPath.row == j {
-                    cell.backgroundColor? = UIColor(hexString: colorPalette[i].colors[j])
-                    button.backgroundColor = UIColor(hexString: colorPalette[0].colors[indexPath.row])
+                    cell.backgroundColor? = UIColor(hexString: firstPalette.colors[j])
+                    button.backgroundColor = UIColor(hexString: firstPalette.colors[indexPath.row])
 //                    print("Palette color: " + colorPalette[0].colors[button.tag])
                 }
             }
-        }
+//        }
         return cell
     }
 

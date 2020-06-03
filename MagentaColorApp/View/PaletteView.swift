@@ -86,7 +86,7 @@ class PaletteView: UIView {
 // MARK: - Helper Functions
     fileprivate func setupLayout() {
         bottomControllerView.addSubview(paletteGenerateButton)
-        paletteGenerateButton.anchor(top: bottomControllerView.topAnchor, paddingTop: 20, width: 150, height: 30)
+        paletteGenerateButton.anchor(top: bottomControllerView.topAnchor, paddingTop: 20, width: 150, height: 40)
         paletteGenerateButton.centerX(inView: bottomControllerView)
         
         bottomControllerView.addSubview(gradientButton)

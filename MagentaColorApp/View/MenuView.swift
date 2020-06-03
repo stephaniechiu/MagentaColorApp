@@ -14,9 +14,16 @@ class MenuView: UIView {
 // MARK: - Properties
     
     //Review, Contact/Email, Favorites, Purchase
+    let animationView = UIView()
     let emailButton = UIView().menuItemButton(darkModeImage: #imageLiteral(resourceName: "email-darkmode"), lightModeImage: #imageLiteral(resourceName: "email-lightmode"), titleLabel: "Contact", subLabel: "We'd love to hear what's on your mind")
     
-    let animationView = UIView()
+    let versionLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Version 1.00"
+        label.font = UIFont(name: "HelveticaNeue", size: 14)
+        label.textColor = .label
+        return label
+    }()
     
 // MARK: - Init
     override init(frame: CGRect) {
@@ -35,6 +42,10 @@ class MenuView: UIView {
         addSubview(emailButton)
         emailButton.anchor(top: animationView.bottomAnchor, paddingTop: 50, width: 360, height: 80)
         emailButton.centerX(inView: self)
+        
+        addSubview(versionLabel)
+        versionLabel.anchor(bottom: safeAreaLayoutGuide.bottomAnchor)
+        versionLabel.centerX(inView: self)
     }
     
     required init?(coder: NSCoder) {

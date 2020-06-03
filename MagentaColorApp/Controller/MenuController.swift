@@ -46,8 +46,12 @@ class MenuController: UIViewController, MFMailComposeViewControllerDelegate {
 
             present(mail, animated: true)
         } else {
-            let sendMailErrorAlert = UIAlertController(title: "Could Not Send Email", message: "Your device could not send e-mail.  Please check if Apple Main is installed and try again.", preferredStyle: UIAlertController.Style.alert)
-            sendMailErrorAlert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default))
+            let sendMailErrorAlert = UIAlertController(title: "Could Not Send Email", message: "Your device could not send e-mail.  Please check if Apple Mail is installed and try again.", preferredStyle: UIAlertController.Style.alert)
+            sendMailErrorAlert.addAction(UIAlertAction(title: "Open App Store", style: UIAlertAction.Style.default, handler: {(action:UIAlertAction!) in
+                    let urlStr = "itms-apps://apps.apple.com/us/app/mail/id1108187098"
+                    UIApplication.shared.openURL(URL(string: urlStr)!)
+                }))
+            sendMailErrorAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
             self.present(sendMailErrorAlert, animated: true)
         }
     }
@@ -58,13 +62,4 @@ class MenuController: UIViewController, MFMailComposeViewControllerDelegate {
         
     // MARK: - Selectors
 
-//    @objc func sendEmailTapped(sender: UIButton) {
-//        let mailComposeViewController = sendEmail()
-//        if MFMailComposeViewController.canSendMail() {
-//            self.present(mailComposeController, animated: true, completion: nil)
-//        } else {
-//            self.shows
-//        }
-//    }
-    
 }
