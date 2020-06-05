@@ -20,7 +20,7 @@ class PaletteController: UIViewController, UITableViewDataSource, UITableViewDel
     var appendedPalettes: [Color] {
         var appendedPalette: [Color]!
         concurrentPalettesQueue.sync {
-            appendedPalette = self.colorPalette.shuffled()
+            appendedPalette = self.colorPalette
         }
         return appendedPalette
     }
@@ -71,7 +71,7 @@ class PaletteController: UIViewController, UITableViewDataSource, UITableViewDel
         paletteView.paletteGenerateButton.addTarget(self, action: #selector(randomPalette(sender:)), for: .touchUpInside)
         paletteView.shareButton.addTarget(self, action: #selector(setupPaletteActivityViewController), for: .touchUpInside)
         paletteView.menuButton.addTarget(self, action: #selector(openMenu(sender:)), for: .touchUpInside)
-//        printArray()
+        printArray()
         
         view.addSubview(paletteView.bottomControllerView)
         paletteView.bottomControllerView.anchor(top: paletteTableView.bottomAnchor, left: view.safeAreaLayoutGuide.leftAnchor, bottom: view.bottomAnchor, right: view.safeAreaLayoutGuide.rightAnchor, height: bottomControllerHeight)
@@ -94,7 +94,7 @@ class PaletteController: UIViewController, UITableViewDataSource, UITableViewDel
         
         view.addSubview(paletteTableView)
         paletteTableView.anchor(top: view.topAnchor, left: view.safeAreaLayoutGuide.leftAnchor, right: view.safeAreaLayoutGuide.rightAnchor)
-        print(appendedPalettes)
+//        print(appendedPalettes)
     }
     
     //UI of the view when a color is tapped on
@@ -163,7 +163,7 @@ class PaletteController: UIViewController, UITableViewDataSource, UITableViewDel
     
     @objc func setupColorActivityViewController(sender: UIButton) {
         let string = "Magenta Color App: { \n\(cellColorFromAPI) \n}"
-//        print(cellColorFromAPI)
+        print(cellColorFromAPI)
         let activityViewController = UIActivityViewController(activityItems: [string], applicationActivities: nil)
             
         present(activityViewController, animated: true, completion: nil)
@@ -189,19 +189,18 @@ class PaletteController: UIViewController, UITableViewDataSource, UITableViewDel
         view.addGestureRecognizer(tapGesture)
         
         let buttonTag = sender.tag
-        let firstPalette = appendedPalettes[0]
         
-        for i in 0..<5 {
+        for i in 0..<4{
             if buttonTag == i {
                 UIView.animate(withDuration: 0.7, animations: {
                     switch self.currentAnimation {
                     case 0:
-                        self.cellColorInRGB = UIColor(hexString:firstPalette.colors[i])
+                        self.cellColorInRGB = UIColor(hexString: self.appendedPalettes[0].colors[i])
                         print("Button color: \(self.cellColorInRGB)")
-                        print("First palette color: \(firstPalette.colors[i])")
+                        print("First palette color: \(self.appendedPalettes[0].colors[i])")
                         
                         self.colorButton[i].transform = CGAffineTransform(scaleX: 1.1, y: 50)
-                        self.colorButton[i].backgroundColor = UIColor(hexString: firstPalette.colors[i])
+                        self.colorButton[i].backgroundColor = UIColor(hexString: self.appendedPalettes[0].colors[i])
                         self.view.bringSubviewToFront(self.colorButton[i])
                         
                         //UI of a color cell when it is "opened"
@@ -211,7 +210,7 @@ class PaletteController: UIViewController, UITableViewDataSource, UITableViewDel
                         self.contrastColorForIcon(color: self.cellColorInRGB)
                         
                         self.paletteView.colorLabelHEX.textColor = UIColor().contrastColor(color: self.cellColorInRGB)
-                        self.paletteView.colorLabelHEX.attributedText = "HEX \n#\(self.cellColorFromAPI)".attributedStringWithBoldness(["HEX"], fontSize: 10, characterSpacing: 1)
+                        self.paletteView.colorLabelHEX.attributedText = "HEX \n\(self.cellColorInRGB.toHexString().uppercased())".attributedStringWithBoldness(["HEX"], fontSize: 10, characterSpacing: 1)
                
                         self.paletteView.colorLabelRGB.textColor = UIColor().contrastColor(color: self.cellColorInRGB)
                         self.paletteView.colorLabelRGB.attributedText = "RGB \n\(Int(self.cellColorInRGB.rgba.red)), \(Int(self.cellColorInRGB.rgba.green)), \( Int(self.cellColorInRGB.rgba.blue))".attributedStringWithBoldness(["RGB"], fontSize: 10, characterSpacing: 1)
@@ -272,7 +271,7 @@ class PaletteController: UIViewController, UITableViewDataSource, UITableViewDel
             do {
                 let decoder = JSONDecoder()
                 let jsonData = try decoder.decode(Palette.self, from: data)
-                self.colorPalette = jsonData
+                self.colorPalette = jsonData.shuffled()
 //                self.appendedPalettes = self.colorPalette.shuffled()
 //                self.arrayText.append(self.cellColorFromAPI)
                 
@@ -305,7 +304,7 @@ class PaletteController: UIViewController, UITableViewDataSource, UITableViewDel
         //Assigns a new color to each row. Colors are converted from HEX to RGB
 //        for i in 0..<1 {
 //            var tag = 0
-        for j in 0..<firstPalette.colors.count {
+        for j in 0..<5 {
                 
                 let button = UIButton(frame: CGRect(x: 15, y: buttonY, width: UIScreen.main.bounds.width - 30, height: (UIScreen.main.bounds.height - 100) / 5))
                 buttonY = buttonY + (UIScreen.main.bounds.height/5 - 15)
@@ -321,7 +320,7 @@ class PaletteController: UIViewController, UITableViewDataSource, UITableViewDel
                 if indexPath.row == j {
                     cell.backgroundColor? = UIColor(hexString: firstPalette.colors[j])
                     button.backgroundColor = UIColor(hexString: firstPalette.colors[indexPath.row])
-//                    print("Palette color: " + colorPalette[0].colors[button.tag])
+                    print("Palette color: " + firstPalette.colors[button.tag])
                 }
             }
 //        }
