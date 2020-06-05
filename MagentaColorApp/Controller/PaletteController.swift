@@ -16,7 +16,14 @@ class PaletteController: UIViewController, UITableViewDataSource, UITableViewDel
     let paletteTableView = UITableView()
     var colorPalette = [Color]()
     var colorButton = [UIButton]() //Array of buttons the size and color of each tableView cell
-    var appendedPalettes = [Color]()
+//    var appendedPalettes = [Color]()
+    var appendedPalettes: [Color] {
+        var appendedPalette: [Color]!
+        concurrentPalettesQueue.sync {
+            appendedPalette = self.colorPalette.shuffled()
+        }
+        return appendedPalette
+    }
     var arrayText = [String]()
     let cellIdentifier = "ColorCell"
     var cellColorFromAPI: String = ""
@@ -30,12 +37,17 @@ class PaletteController: UIViewController, UITableViewDataSource, UITableViewDel
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        let start = Date()
+        
         view = paletteView
         
         newPalette()
         setupNavigationController()
         setupTableView()
         setupBottomController()
+        
+        let end = Date()
+        print("Elapsed Time at start of app: \(end.timeIntervalSince(start))")
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -59,7 +71,7 @@ class PaletteController: UIViewController, UITableViewDataSource, UITableViewDel
         paletteView.paletteGenerateButton.addTarget(self, action: #selector(randomPalette(sender:)), for: .touchUpInside)
         paletteView.shareButton.addTarget(self, action: #selector(setupPaletteActivityViewController), for: .touchUpInside)
         paletteView.menuButton.addTarget(self, action: #selector(openMenu(sender:)), for: .touchUpInside)
-        printArray()
+//        printArray()
         
         view.addSubview(paletteView.bottomControllerView)
         paletteView.bottomControllerView.anchor(top: paletteTableView.bottomAnchor, left: view.safeAreaLayoutGuide.leftAnchor, bottom: view.bottomAnchor, right: view.safeAreaLayoutGuide.rightAnchor, height: bottomControllerHeight)
@@ -82,6 +94,7 @@ class PaletteController: UIViewController, UITableViewDataSource, UITableViewDel
         
         view.addSubview(paletteTableView)
         paletteTableView.anchor(top: view.topAnchor, left: view.safeAreaLayoutGuide.leftAnchor, right: view.safeAreaLayoutGuide.rightAnchor)
+        print(appendedPalettes)
     }
     
     //UI of the view when a color is tapped on
@@ -103,8 +116,8 @@ class PaletteController: UIViewController, UITableViewDataSource, UITableViewDel
 
         func printArray() {
     //        let buttonTag = sender.tag
-            for i in 0..<5 {
-                    self.cellColorFromAPI = self.colorPalette[0].colors[i]
+            for i in 0..<appendedPalettes[0].colors.count {
+                    self.cellColorFromAPI = self.appendedPalettes[0].colors[i]
                     arrayText.append(self.cellColorFromAPI)
             }
             print("Magenta Color App: { \n\(arrayText) \n}")
@@ -139,6 +152,7 @@ class PaletteController: UIViewController, UITableViewDataSource, UITableViewDel
         self.navigationController?.pushViewController(menuController, animated: true)
     }
     
+    //When user taps Share button when a palette is shown, t
     @objc func setupPaletteActivityViewController(sender: UIButton) {
         let string = "Magenta Color App: { \n\(arrayText) \n}"
 //        let pdf = Bundle.main.url(forResource: "Q4 Projections", withExtension: "pdf")
@@ -149,7 +163,7 @@ class PaletteController: UIViewController, UITableViewDataSource, UITableViewDel
     
     @objc func setupColorActivityViewController(sender: UIButton) {
         let string = "Magenta Color App: { \n\(cellColorFromAPI) \n}"
-        print(cellColorFromAPI)
+//        print(cellColorFromAPI)
         let activityViewController = UIActivityViewController(activityItems: [string], applicationActivities: nil)
             
         present(activityViewController, animated: true, completion: nil)
@@ -183,6 +197,8 @@ class PaletteController: UIViewController, UITableViewDataSource, UITableViewDel
                     switch self.currentAnimation {
                     case 0:
                         self.cellColorInRGB = UIColor(hexString:firstPalette.colors[i])
+                        print("Button color: \(self.cellColorInRGB)")
+                        print("First palette color: \(firstPalette.colors[i])")
                         
                         self.colorButton[i].transform = CGAffineTransform(scaleX: 1.1, y: 50)
                         self.colorButton[i].backgroundColor = UIColor(hexString: firstPalette.colors[i])
@@ -229,27 +245,47 @@ class PaletteController: UIViewController, UITableViewDataSource, UITableViewDel
     
     //A new palette is generated when user taps on the Generate button
     @objc func randomPalette(sender: UIButton) {
+        let randomStart = Date()
         newPalette()
         hapticFeedback.impactOccurred()
+        let randomEnd = Date()
+        
+        print("Elapsed Time after click: \(randomEnd.timeIntervalSince(randomStart))")
     }
 
     // MARK: - API Call
     
+    private let concurrentPalettesQueue =
+        DispatchQueue(label: "com.stephaniechiu.Magenta.PalettesQueue", attributes: .concurrent)
+    
     func newPalette() {
-        guard let url = URL(string: "https://www.colourlovers.com/api/palettes/?format=json&numResults=100") else { return }
-        guard let data = try? Data(contentsOf: url) else { return }
-        
-        do {
-            let decoder = JSONDecoder()
-            let jsonData = try decoder.decode(Palette.self, from: data)
-            self.colorPalette = jsonData
-            appendedPalettes = colorPalette.shuffled()
-            paletteTableView.reloadData()
-            print(appendedPalettes)
-        } catch let jsonError {
-            print("JSON Error: ", jsonError)
+        //Retrieve JSON data in background thread. Write method to modify array object
+        concurrentPalettesQueue.async(flags: .barrier) {
+            [weak self] in
+            guard let self = self else {
+                return
+            }
+            
+            guard let url = URL(string: "https://www.colourlovers.com/api/palettes/?format=json&numResults=100") else { return }
+            guard let data = try? Data(contentsOf: url) else { return }
+            
+            do {
+                let decoder = JSONDecoder()
+                let jsonData = try decoder.decode(Palette.self, from: data)
+                self.colorPalette = jsonData
+//                self.appendedPalettes = self.colorPalette.shuffled()
+//                self.arrayText.append(self.cellColorFromAPI)
+                
+                //Present UI into the UI
+                DispatchQueue.main.async{
+                    [weak self] in
+                    self?.paletteTableView.reloadData()
+                }
+    //            print(appendedPalettes)
+            } catch let jsonError {
+                    print("JSON Error: ", jsonError)
+                }
         }
-
     }
     
 // MARK: - TableView Data Source
