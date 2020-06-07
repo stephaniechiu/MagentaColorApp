@@ -71,7 +71,6 @@ class PaletteController: UIViewController, UITableViewDataSource, UITableViewDel
         paletteView.paletteGenerateButton.addTarget(self, action: #selector(randomPalette(sender:)), for: .touchUpInside)
         paletteView.shareButton.addTarget(self, action: #selector(setupPaletteActivityViewController), for: .touchUpInside)
         paletteView.menuButton.addTarget(self, action: #selector(openMenu(sender:)), for: .touchUpInside)
-        printArray()
         
         view.addSubview(paletteView.bottomControllerView)
         paletteView.bottomControllerView.anchor(top: paletteTableView.bottomAnchor, left: view.safeAreaLayoutGuide.leftAnchor, bottom: view.bottomAnchor, right: view.safeAreaLayoutGuide.rightAnchor, height: bottomControllerHeight)
@@ -94,7 +93,6 @@ class PaletteController: UIViewController, UITableViewDataSource, UITableViewDel
         
         view.addSubview(paletteTableView)
         paletteTableView.anchor(top: view.topAnchor, left: view.safeAreaLayoutGuide.leftAnchor, right: view.safeAreaLayoutGuide.rightAnchor)
-//        print(appendedPalettes)
     }
     
     //UI of the view when a color is tapped on
@@ -113,15 +111,6 @@ class PaletteController: UIViewController, UITableViewDataSource, UITableViewDel
         self.paletteView.copiedNotificationLabel.centerX(inView: self.view)
         self.paletteView.copiedNotificationLabel.anchor(top: self.view.topAnchor, paddingTop: 10, width: 20, height: 10)
     }
-
-        func printArray() {
-    //        let buttonTag = sender.tag
-            for i in 0..<appendedPalettes[0].colors.count {
-                    self.cellColorFromAPI = self.appendedPalettes[0].colors[i]
-                    arrayText.append(self.cellColorFromAPI)
-            }
-            print("Magenta Color App: { \n\(arrayText) \n}")
-        }
 
     //Determines the color contrast of the share button against the cell color background
     func contrastColorForIcon(color: UIColor) {
@@ -240,6 +229,7 @@ class PaletteController: UIViewController, UITableViewDataSource, UITableViewDel
 //                print("click \(buttonTag)")
             }
         }
+        print("Magenta Color App: { \n\(arrayText) \n}")
     }
     
     //A new palette is generated when user taps on the Generate button
@@ -294,36 +284,34 @@ class PaletteController: UIViewController, UITableViewDataSource, UITableViewDel
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        let firstPalette = colorPalette[0]
         let firstPalette = appendedPalettes[0]
         var buttonY: CGFloat = 0
         var tag = 0
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
         cell.selectionStyle = .none
-
+        
+        arrayText = firstPalette.colors
+        print(arrayText)
+        
         //Assigns a new color to each row. Colors are converted from HEX to RGB
-//        for i in 0..<1 {
-//            var tag = 0
         for j in 0..<5 {
-                
-                let button = UIButton(frame: CGRect(x: 15, y: buttonY, width: UIScreen.main.bounds.width - 30, height: (UIScreen.main.bounds.height - 100) / 5))
-                buttonY = buttonY + (UIScreen.main.bounds.height/5 - 15)
-                button.addTarget(self, action: #selector(openColor(sender:)), for: .touchUpInside)
-                button.layer.cornerRadius = 10
-                button.layer.borderColor = UIColor.clear.cgColor
-                button.tag = tag
-                tag += 1
+            let button = UIButton(frame: CGRect(x: 15, y: buttonY, width: UIScreen.main.bounds.width - 30, height: (UIScreen.main.bounds.height - 100) / 5))
+            buttonY = buttonY + (UIScreen.main.bounds.height/5 - 15)
+            button.addTarget(self, action: #selector(openColor(sender:)), for: .touchUpInside)
+            button.layer.cornerRadius = 10
+            button.layer.borderColor = UIColor.clear.cgColor
+            button.tag = tag
+            tag += 1
 
-                view.addSubview(button)
-                colorButton.append(button)
+            view.addSubview(button)
+            colorButton.append(button)
                 
-                if indexPath.row == j {
-                    cell.backgroundColor? = UIColor(hexString: firstPalette.colors[j])
-                    button.backgroundColor = UIColor(hexString: firstPalette.colors[indexPath.row])
-                    print("Palette color: " + firstPalette.colors[button.tag])
-                }
+            if indexPath.row == j {
+                cell.backgroundColor? = UIColor(hexString: firstPalette.colors[j])
+                button.backgroundColor = UIColor(hexString: firstPalette.colors[indexPath.row])
+                print("Palette color: " + firstPalette.colors[button.tag])
             }
-//        }
+        }
         return cell
     }
 
