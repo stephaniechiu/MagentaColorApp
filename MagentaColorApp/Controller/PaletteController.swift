@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CloudKit
 
 class PaletteController: UIViewController, UITableViewDataSource, UITableViewDelegate, UIViewControllerTransitioningDelegate {
     

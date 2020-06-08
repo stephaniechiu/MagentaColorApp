@@ -15,11 +15,12 @@ class MenuView: UIView {
     
     //Review, Contact/Email, Favorites, Purchase
     let animationView = UIView()
+    let favoritesButton = UIView().menuItemButton(darkModeImage: #imageLiteral(resourceName: "favourite-empty-darkMode"), lightModeImage: #imageLiteral(resourceName: "favourite-empty-lightMode"), titleLabel: "Favorites", subLabel: "View and edit your palettes and gradients")
     let emailButton = UIView().menuItemButton(darkModeImage: #imageLiteral(resourceName: "email-darkmode"), lightModeImage: #imageLiteral(resourceName: "email-lightmode"), titleLabel: "Contact", subLabel: "We'd love to hear what's on your mind")
     
     let versionLabel: UILabel = {
         let label = UILabel()
-        label.text = "Version 1.00"
+        label.text = "Version 1.0.0"
         label.font = UIFont(name: "HelveticaNeue", size: 14)
         label.textColor = .label
         return label
@@ -39,8 +40,12 @@ class MenuView: UIView {
         menuControllerAnimation.play()
         menuControllerAnimation.loopMode = .loop
         
+        addSubview(favoritesButton)
+        favoritesButton.anchor(top: animationView.bottomAnchor, paddingTop: 50, width: 360, height: 80)
+        favoritesButton.centerX(inView: self)
+        
         addSubview(emailButton)
-        emailButton.anchor(top: animationView.bottomAnchor, paddingTop: 50, width: 360, height: 80)
+        emailButton.anchor(top: favoritesButton.bottomAnchor, paddingTop: 20, width: 360, height: 80)
         emailButton.centerX(inView: self)
         
         addSubview(versionLabel)
@@ -51,9 +56,5 @@ class MenuView: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-// MARK: - Helper Functions
-    
-// MARK: - Selectors
     
 }

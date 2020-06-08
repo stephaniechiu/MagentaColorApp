@@ -25,6 +25,7 @@ extension UIView {
     
     func generateButton(borderColor: UIColor, textColor: UIColor) -> UIButton {
         let button = UIButton()
+        button.frame.size = CGSize(width: 80, height: 20)
         button.setTitle("Generate", for: .normal)
         button.titleLabel?.font = UIFont(name: "HelveticaNeue", size: 16)
         button.setTitleColor(textColor, for: .normal)
@@ -45,6 +46,7 @@ extension UIView {
     
     func menuItemButton(darkModeImage: UIImage, lightModeImage: UIImage, titleLabel: String, subLabel: String) -> UIButton {
         let button = UIButton()
+        button.backgroundColor = .orange
 
         var imageView = UIImageView()
         if traitCollection.userInterfaceStyle == .dark {

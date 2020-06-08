@@ -23,9 +23,10 @@ class MenuController: UIViewController, MFMailComposeViewControllerDelegate {
         view.backgroundColor = .systemBackground
         
         setupNavigationController()
+        menuView.favoritesButton.addTarget(self, action: #selector(openFavorites), for: .touchUpInside)
         menuView.emailButton.addTarget(self, action: #selector(sendEmail), for: .touchUpInside)
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector((sendEmail)))
-        view.addGestureRecognizer(tapGesture)
+//        let tapGesture = UITapGestureRecognizer(target: self, action: #selector((sendEmail)))
+//        view.addGestureRecognizer(tapGesture)
     }
     
     // MARK: - Helper Functions
@@ -36,7 +37,9 @@ class MenuController: UIViewController, MFMailComposeViewControllerDelegate {
         navigationController?.navigationBar.shadowImage = UIImage()
     }
     
-    @objc func sendEmail() {
+    // MARK: - Selectors
+    
+    @objc func sendEmail(sender: UIGestureRecognizer) {
         if MFMailComposeViewController.canSendMail() {
             let mail = MFMailComposeViewController()
             mail.mailComposeDelegate = self
@@ -59,7 +62,9 @@ class MenuController: UIViewController, MFMailComposeViewControllerDelegate {
     func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
         controller.dismiss(animated: true)
     }
-        
-    // MARK: - Selectors
 
+    @objc func openFavorites(sender: UIButton) {
+        let favoritesController = FavoritesController()
+        self.navigationController?.pushViewController(favoritesController, animated: true)
+    }
 }
