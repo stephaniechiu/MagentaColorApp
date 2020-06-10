@@ -50,6 +50,7 @@
 		90400780248DFB8700BEFC4A /* FavoritesPalettes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesPalettes.swift; sourceTree = "<group>"; };
 		90400782248DFC5600BEFC4A /* FavoritesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesView.swift; sourceTree = "<group>"; };
 		90400784248E03BC00BEFC4A /* FavoritesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesController.swift; sourceTree = "<group>"; };
+		90400786248F39AE00BEFC4A /* MagentaColorAppDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MagentaColorAppDebug.entitlements; sourceTree = "<group>"; };
 		9042986E2473C35A0053B216 /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		904298702473C36F0053B216 /* GradientController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientController.swift; sourceTree = "<group>"; };
 		90E4B698246755A400ED3D29 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -111,6 +112,7 @@
 		90E4B697246755A400ED3D29 /* MagentaColorApp */ = {
 			isa = PBXGroup;
 			children = (
+				90400786248F39AE00BEFC4A /* MagentaColorAppDebug.entitlements */,
 				90400779248C93BA00BEFC4A /* MagentaColorAppRelease.entitlements */,
 				9040077D248D9C3A00BEFC4A /* favourite-darkMode.json */,
 				9040077C248D9C3900BEFC4A /* favourite-lightMode.json */,
@@ -443,6 +445,7 @@
 			baseConfigurationReference = C1C0318142BA4F32BBB6B152 /* Pods-MagentaColorApp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = MagentaColorApp/MagentaColorAppDebug.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = PAF88N9AZQ;
 				INFOPLIST_FILE = MagentaColorApp/Info.plist;

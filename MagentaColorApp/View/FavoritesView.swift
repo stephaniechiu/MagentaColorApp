@@ -42,10 +42,10 @@ class FavoritesView: UIView {
         super.init(frame: frame)
         backgroundColor = .systemBackground
         
-        addSubview(paletteView)
-        paletteView.anchor(width: 150, height: 50)
-        paletteView.centerY(inView: self)
-        paletteView.centerX(inView: self)
+//        addSubview(paletteView)
+//        paletteView.anchor(width: 150, height: 50)
+//        paletteView.centerY(inView: self)
+//        paletteView.centerX(inView: self)
     }
     
     required init?(coder: NSCoder) {

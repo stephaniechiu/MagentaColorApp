@@ -34,6 +34,9 @@ class PaletteController: UIViewController, UITableViewDataSource, UITableViewDel
     let hapticFeedback = UIImpactFeedbackGenerator()
     let pasteboard = UIPasteboard.general
     
+    let privateDatabase = CKContainer.default().privateCloudDatabase
+//    var retrieveFavoritePalette = [CKRecord]()
+    
 // MARK: - Lifecycle
     
     override func viewDidLoad() {
@@ -46,6 +49,7 @@ class PaletteController: UIViewController, UITableViewDataSource, UITableViewDel
         setupNavigationController()
         setupTableView()
         setupBottomController()
+//        queryDatabase()
         
         let end = Date()
         print("Elapsed Time at start of app: \(end.timeIntervalSince(start))")
@@ -69,9 +73,10 @@ class PaletteController: UIViewController, UITableViewDataSource, UITableViewDel
     }
     
     fileprivate func setupBottomController() {
-        paletteView.paletteGenerateButton.addTarget(self, action: #selector(randomPalette(sender:)), for: .touchUpInside)
-        paletteView.shareButton.addTarget(self, action: #selector(setupPaletteActivityViewController), for: .touchUpInside)
         paletteView.menuButton.addTarget(self, action: #selector(openMenu(sender:)), for: .touchUpInside)
+        paletteView.shareButton.addTarget(self, action: #selector(setupPaletteActivityViewController), for: .touchUpInside)
+        paletteView.paletteGenerateButton.addTarget(self, action: #selector(randomPalette(sender:)), for: .touchUpInside)
+        paletteView.favoriteButton.addTarget(self, action: #selector(saveFavoritePalette), for: .touchUpInside)
         
         view.addSubview(paletteView.bottomControllerView)
         paletteView.bottomControllerView.anchor(top: paletteTableView.bottomAnchor, left: view.safeAreaLayoutGuide.leftAnchor, bottom: view.bottomAnchor, right: view.safeAreaLayoutGuide.rightAnchor, height: bottomControllerHeight)
@@ -153,7 +158,7 @@ class PaletteController: UIViewController, UITableViewDataSource, UITableViewDel
     
     @objc func setupColorActivityViewController(sender: UIButton) {
         let string = "Magenta Color App: { \n\(cellColorFromAPI) \n}"
-        print(cellColorFromAPI)
+//        print(cellColorFromAPI)
         let activityViewController = UIActivityViewController(activityItems: [string], applicationActivities: nil)
             
         present(activityViewController, animated: true, completion: nil)
@@ -171,6 +176,23 @@ class PaletteController: UIViewController, UITableViewDataSource, UITableViewDel
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
               alert.dismiss(animated: true, completion: nil)
           }
+    }
+    
+    @objc func saveFavoritePalette() {
+        saveToCloud(palette: arrayText)
+    }
+    
+    func saveToCloud(palette: [String]) {
+        let record = CKRecord(recordType: "Favorite")
+        record.setValue(palette, forKey: "FavoritePalette")
+        
+        privateDatabase.save(record) { (savedRecord, error) in
+            if error == nil {
+                print("Record saved")
+            } else {
+                print("Record not saved: \(String(describing: error))")
+            }
+        }
     }
     
     //When user taps on a color in the palette, it "opens" to fill the screen with that color with it's color codes

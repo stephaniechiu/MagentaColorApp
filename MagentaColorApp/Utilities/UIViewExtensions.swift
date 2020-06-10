@@ -44,9 +44,17 @@ extension UIView {
         return button
     }
     
-    func menuItemButton(darkModeImage: UIImage, lightModeImage: UIImage, titleLabel: String, subLabel: String) -> UIButton {
+    func menuItemButton(darkModeImage: UIImage, lightModeImage: UIImage, text: String) -> UIButton {
         let button = UIButton()
-        button.backgroundColor = .orange
+//        button.titleLabel?.text = label
+//        button.setAttributedTitle(text, for: .normal)
+        button.setTitle(text, for: .normal)
+        button.setTitleColor(.label, for: .normal)
+        
+//        button.titleLabel?.lineBreakMode = .byWordWrapping
+//        button.titleLabel?.numberOfLines = 0
+        button.titleLabel?.font = UIFont(name: "HelveticaNeue", size: 16)
+        button.titleLabel?.textColor = .label
 
         var imageView = UIImageView()
         if traitCollection.userInterfaceStyle == .dark {
@@ -59,26 +67,20 @@ extension UIView {
         imageView.anchor(left: button.leftAnchor, paddingLeft: 5)
         imageView.centerY(inView: button)
             
-        let label = UILabel()
-        label.text = titleLabel
-        label.font = UIFont(name: "HelveticaNeue-Bold", size: 12)
-        label.textColor = .label
-        button.addSubview(label)
+//        let label = UILabel()
+//        label.text = text
+//        label.font = UIFont(name: "HelveticaNeue-Bold", size: 12)
+//        label.textColor = .label
+//        label.numberOfLines = 0
+//        button.addSubview(label)
             
-        let sublabel = UILabel()
-        sublabel.text = subLabel
-        sublabel.font = UIFont(name: "HelveticaNeue-Light", size: 16)
-        sublabel.textColor = .label
-        sublabel.numberOfLines = 0
-        button.addSubview(sublabel)
-            
-        var stackView = UIStackView()
-        stackView = UIStackView(arrangedSubviews: [label, sublabel])
-        stackView.axis = .vertical
-        stackView.distribution = .fillEqually
-        button.addSubview(stackView)
-        stackView.anchor(left: imageView.rightAnchor, paddingLeft: 10, width: 300)
-        stackView.centerY(inView: button)
+//        var stackView = UIStackView()
+//        stackView = UIStackView(arrangedSubviews: [label, sublabel])
+//        stackView.axis = .vertical
+//        stackView.distribution = .fillEqually
+//        button.addSubview(stackView)
+//        stackView.anchor(left: imageView.rightAnchor, paddingLeft: 10, width: 300)
+//        stackView.centerY(inView: button)
             
         return button
     }
