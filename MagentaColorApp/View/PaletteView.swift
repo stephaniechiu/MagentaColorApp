@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CloudKit
 
 class PaletteView: UIView {
  
@@ -17,7 +18,6 @@ class PaletteView: UIView {
     
     //Color info stack view
     var colorStackView: UIStackView
-//    var bottomControllerStackView: UIStackView
     
     var leftStackView: UIStackView
     

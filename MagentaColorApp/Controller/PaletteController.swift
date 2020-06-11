@@ -49,7 +49,6 @@ class PaletteController: UIViewController, UITableViewDataSource, UITableViewDel
         setupNavigationController()
         setupTableView()
         setupBottomController()
-//        queryDatabase()
         
         let end = Date()
         print("Elapsed Time at start of app: \(end.timeIntervalSince(start))")
@@ -336,12 +335,6 @@ class PaletteController: UIViewController, UITableViewDataSource, UITableViewDel
             }
         }
         return cell
-    }
-
-// MARK: - TableView Delegate
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        print("you tapped on me! \(colorPalette[indexPath.row].colors[indexPath.row])")
     }
 }
 

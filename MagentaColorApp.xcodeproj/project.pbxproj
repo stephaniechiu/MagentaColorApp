@@ -21,6 +21,7 @@
 		90400781248DFB8700BEFC4A /* FavoritesPalettes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90400780248DFB8700BEFC4A /* FavoritesPalettes.swift */; };
 		90400783248DFC5600BEFC4A /* FavoritesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90400782248DFC5600BEFC4A /* FavoritesView.swift */; };
 		90400785248E03BC00BEFC4A /* FavoritesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90400784248E03BC00BEFC4A /* FavoritesController.swift */; };
+		904007882490DCD800BEFC4A /* FavoritesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904007872490DCD800BEFC4A /* FavoritesTableViewCell.swift */; };
 		9042986F2473C35A0053B216 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9042986E2473C35A0053B216 /* GradientView.swift */; };
 		904298712473C36F0053B216 /* GradientController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904298702473C36F0053B216 /* GradientController.swift */; };
 		90E4B699246755A400ED3D29 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90E4B698246755A400ED3D29 /* AppDelegate.swift */; };
@@ -51,6 +52,7 @@
 		90400782248DFC5600BEFC4A /* FavoritesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesView.swift; sourceTree = "<group>"; };
 		90400784248E03BC00BEFC4A /* FavoritesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesController.swift; sourceTree = "<group>"; };
 		90400786248F39AE00BEFC4A /* MagentaColorAppDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MagentaColorAppDebug.entitlements; sourceTree = "<group>"; };
+		904007872490DCD800BEFC4A /* FavoritesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesTableViewCell.swift; sourceTree = "<group>"; };
 		9042986E2473C35A0053B216 /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		904298702473C36F0053B216 /* GradientController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientController.swift; sourceTree = "<group>"; };
 		90E4B698246755A400ED3D29 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -97,6 +99,15 @@
 				ED834D53688C8AC556244D8A /* Pods-MagentaColorApp.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		904007892490DCE300BEFC4A /* Favorites */ = {
+			isa = PBXGroup;
+			children = (
+				90400782248DFC5600BEFC4A /* FavoritesView.swift */,
+				904007872490DCD800BEFC4A /* FavoritesTableViewCell.swift */,
+			);
+			path = Favorites;
 			sourceTree = "<group>";
 		};
 		90E4B68C246755A400ED3D29 = {
@@ -147,7 +158,7 @@
 				90E4B6B224675C0500ED3D29 /* PaletteView.swift */,
 				9042986E2473C35A0053B216 /* GradientView.swift */,
 				902D708B248229A500E24CF3 /* MenuView.swift */,
-				90400782248DFC5600BEFC4A /* FavoritesView.swift */,
+				904007892490DCE300BEFC4A /* Favorites */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -293,6 +304,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				90E4B69D246755A400ED3D29 /* PaletteController.swift in Sources */,
+				904007882490DCD800BEFC4A /* FavoritesTableViewCell.swift in Sources */,
 				902D708C248229A500E24CF3 /* MenuView.swift in Sources */,
 				903DB8E624808CFA008474AC /* ColorExtensions.swift in Sources */,
 				90400785248E03BC00BEFC4A /* FavoritesController.swift in Sources */,

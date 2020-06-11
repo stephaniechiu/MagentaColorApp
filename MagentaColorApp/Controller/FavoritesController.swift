@@ -12,15 +12,14 @@ import CloudKit
 class FavoritesController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
 // MARK: - Properties
-    
-    let favoritesView = FavoritesView()
+
     let paletteController = PaletteController()
     let favoritesTableView = UITableView()
+    let reuseIdentifier = "favoritesCell"
+    let hapticFeedback = UIImpactFeedbackGenerator()
     
     let privateDatabase = CKContainer.default().privateCloudDatabase
-    var retrieveFavoritePalette = [CKRecord]()
-    
-//    let predicate = NSPredicate(value: true)
+    var retrieveFavoritePalette: Array<CKRecord> = []
     
 // MARK: - Init
     
@@ -28,11 +27,6 @@ class FavoritesController: UIViewController, UITableViewDataSource, UITableViewD
         super.viewDidLoad()
         setupTableView()
         queryDatabase()
-//        let query = CKQuery(recordType: "Favorite", predicate: predicate)
-//        query.sortDescriptors = [NSSortDescriptor(key: "modificationDate", ascending: false)]
-//
-//        let operation = CKQueryOperation(query: query)
-        
     }
     
 // MARK: - Helper Functions
@@ -40,10 +34,10 @@ class FavoritesController: UIViewController, UITableViewDataSource, UITableViewD
     func setupTableView() {
         favoritesTableView.dataSource = self
         favoritesTableView.delegate = self
-        favoritesTableView.register(UITableViewCell.self, forCellReuseIdentifier: "favoriteCell")
-        favoritesTableView.separatorStyle = UITableViewCell.SeparatorStyle.none
+        favoritesTableView.register(UITableViewCell.self, forCellReuseIdentifier: reuseIdentifier)
+//        favoritesTableView.separatorStyle = UITableViewCell.SeparatorStyle.none
         
-        let heightOfCells: CGFloat = 400
+        let heightOfCells: CGFloat = 100
         favoritesTableView.rowHeight = heightOfCells
         
         
@@ -56,6 +50,10 @@ class FavoritesController: UIViewController, UITableViewDataSource, UITableViewD
         privateDatabase.perform(query, inZoneWith: nil) { (records, error) in
             if error == nil {
                 print("Record retrieved")
+                
+                for record in records! {
+                    self.retrieveFavoritePalette.append(record)
+                }
             } else {
                 print("Record not retrieved: \(String(describing: error))")
             }
@@ -70,15 +68,37 @@ class FavoritesController: UIViewController, UITableViewDataSource, UITableViewD
 // MARK: - Selectors
     
 // MARK: - TableView Data Source
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
         return retrieveFavoritePalette.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell()
-//        cell.selectionStyle = .none
-        cell.textLabel?.text = retrieveFavoritePalette[indexPath.row].value(forKey: "FavoritePalette") as! String
+        let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath)
+        let paletteRecord: CKRecord = retrieveFavoritePalette[indexPath.row]
+        let line = retrieveFavoritePalette[indexPath.row].value(forKey: "FavoritePalette") as? [String] ?? []
+        var individualColorView: [UIView] = []
+//        print(paletteRecord.value(forKey: "FavoritePalette"))
+        
+        for i in 0..<5 {
+            let xAxis = i * 20
+            let individualView = UIView(frame: CGRect(x: xAxis, y: 0, width: 20, height: 80))
+            individualColorView.append(individualView)
+        }
+        
+        for j in 0..<line.count {
+            let allColorsView = individualColorView[j]
+            allColorsView.backgroundColor = UIColor(hexString: line[j])
+            cell.addSubview(allColorsView)
+        }
+        cell.selectionStyle = .none
         return cell
+    }
+    
+    // MARK: - TableView Delegate
+        
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        hapticFeedback.impactOccurred()
+        print("hello")
     }
 }
