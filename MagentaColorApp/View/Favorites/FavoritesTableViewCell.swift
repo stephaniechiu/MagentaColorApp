@@ -20,23 +20,6 @@ class FavoritesTableViewCell: UITableViewCell {
         let view = UIView()
         view.frame.size = CGSize(width: 300, height: 80)
         view.layer.cornerRadius = 15
-   
-//        let color1 = UIView()
-//        color1.backgroundColor = .red
-//        let color2 = UIView()
-//        color2.backgroundColor = .orange
-//        let color3 = UIView()
-//        color3.backgroundColor = .yellow
-//        let color4 = UIView()
-//        color4.backgroundColor = .green
-//        let color5 = UIView()
-//        color5.backgroundColor = .blue
-//
-//        let stack = UIStackView(arrangedSubviews: [color1, color2, color3, color4, color5])
-//        stack.distribution = .fillEqually
-//
-//        view.addSubview(stack)
-//        stack.anchor(top: view.topAnchor, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor)
         
         return view
     }()
@@ -45,29 +28,10 @@ class FavoritesTableViewCell: UITableViewCell {
     
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-//        var paletteRecord: CKRecord
-//        let paletteRecord: CKRecord = retrieveFavoritePalette[indexPath.row]
-//        let line = paletteRecord.value(forKey: "FavoritePalette") as? [String] ?? []
-//        var individualColorView: [UIView] = []
-//        for i in 0..<5 {
-//            let xAxis = i * 20
-//            let individualView = UIView(frame: CGRect(x: xAxis, y: 0, width: 20, height: 80))
-//            individualColorView.append(individualView)
-//        }
-//        
-//         for j in 0..<line.count {
-//            let allColorsView = individualColorView[j]
-//        //            print(individualColorView[j])
-//            allColorsView.backgroundColor = UIColor(hexString: line[j])
-//            tableView.addSubview(allColorsView)
-//        }
-        
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         setupCellLayout()
         deleteRecord()
-        
-        
      }
 
      required init?(coder aDecoder: NSCoder) {
@@ -77,14 +41,6 @@ class FavoritesTableViewCell: UITableViewCell {
 // MARK: - Helper Functions
     
     fileprivate func setupCellLayout() {
-//        addSubview(paletteView)
-//        paletteView.anchor(width: 250, height: 10)
-//        paletteView.centerY(inView: self)
-//        paletteView.centerX(inView: self)
-        
-//        addSubview(deleteButton)
-//        deleteButton.anchor(right: rightAnchor, paddingRight: 15)
-//        deleteButton.centerY(inView: self)
     }
     
     func retrieve() {

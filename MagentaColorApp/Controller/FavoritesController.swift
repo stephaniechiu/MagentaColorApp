@@ -19,7 +19,7 @@ class FavoritesController: UIViewController, UITableViewDataSource, UITableViewD
     let hapticFeedback = UIImpactFeedbackGenerator()
     
     let privateDatabase = CKContainer.default().privateCloudDatabase
-    var retrieveFavoritePalette: Array<CKRecord> = []
+    var retrieveFavoritePalette: [CKRecord] = []
     
 // MARK: - Init
     
@@ -65,8 +65,12 @@ class FavoritesController: UIViewController, UITableViewDataSource, UITableViewD
         }
     }
     
-// MARK: - Selectors
-    
+    func deleteRecordWithID(recordID: CKRecord, completion: ((_ recordID: CKRecord?, _ error: Error?) -> Void)?) {
+        privateDatabase.delete(withRecordID: recordID.recordID) { (recordIDs, error) in
+            completion?(recordID, error)
+        }
+    }
+
 // MARK: - TableView Data Source
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -93,6 +97,18 @@ class FavoritesController: UIViewController, UITableViewDataSource, UITableViewD
         }
         cell.selectionStyle = .none
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if (editingStyle == .delete) {
+            let paletteRecord: CKRecord = retrieveFavoritePalette[indexPath.row]
+            deleteRecordWithID(recordID: paletteRecord, completion: { (paletteRecord, error) in
+                self.retrieveFavoritePalette.remove(at: indexPath.row)
+                DispatchQueue.main.async {
+                    self.favoritesTableView.deleteRows(at: [indexPath], with: .right)
+                }
+            })
+        }
     }
     
     // MARK: - TableView Delegate
