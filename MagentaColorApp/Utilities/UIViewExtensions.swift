@@ -44,44 +44,29 @@ extension UIView {
         return button
     }
     
-    func menuItemButton(darkModeImage: UIImage, lightModeImage: UIImage, text: String? = nil) -> UIButton {
+    func menuItemButton(title: String, subtitle: String, darkModeImage: UIImage, lightModeImage: UIImage) -> UIButton {
         let button = UIButton()
-//        button.titleLabel?.text = label
-//        button.setAttributedTitle(text, for: .normal)
-        button.setTitle(text, for: .normal)
-        button.setTitleColor(.label, for: .normal)
         
-//        button.titleLabel?.lineBreakMode = .byWordWrapping
-//        button.titleLabel?.numberOfLines = 0
-        button.titleLabel?.font = UIFont(name: "HelveticaNeue", size: 16)
-        button.titleLabel?.textColor = .label
-
+        let buttonText = NSMutableAttributedString(string: title, attributes: [NSAttributedString.Key.foregroundColor: UIColor.label, NSAttributedString.Key.font: UIFont(name: "HelveticaNeue-Bold", size: 12) ?? "HelveticaNeue"])
+        let subtitleText = NSMutableAttributedString(string: subtitle, attributes: [NSAttributedString.Key.foregroundColor: UIColor.label, NSAttributedString.Key.font: UIFont(name: "HelveticaNeue-Thin", size: 16) as Any])
+        buttonText.append(subtitleText)
+        button.setAttributedTitle(buttonText, for: .normal)
+        button.titleLabel?.lineBreakMode = .byWordWrapping
+        button.titleLabel?.numberOfLines = 0
+        
         var imageView = UIImageView()
         if traitCollection.userInterfaceStyle == .dark {
             imageView = UIImageView(image: darkModeImage)
-        } else {
+            } else {
             imageView = UIImageView(image: lightModeImage)
         }
+            
         imageView.contentMode = .scaleAspectFit
         button.addSubview(imageView)
         imageView.anchor(left: button.leftAnchor, paddingLeft: 5)
         imageView.centerY(inView: button)
-            
-//        let label = UILabel()
-//        label.text = text
-//        label.font = UIFont(name: "HelveticaNeue-Bold", size: 12)
-//        label.textColor = .label
-//        label.numberOfLines = 0
-//        button.addSubview(label)
-            
-//        var stackView = UIStackView()
-//        stackView = UIStackView(arrangedSubviews: [label, sublabel])
-//        stackView.axis = .vertical
-//        stackView.distribution = .fillEqually
-//        button.addSubview(stackView)
-//        stackView.anchor(left: imageView.rightAnchor, paddingLeft: 10, width: 300)
-//        stackView.centerY(inView: button)
-            
+        button.titleLabel?.anchor(left: imageView.rightAnchor, paddingLeft: 10)
+        
         return button
     }
     

@@ -15,10 +15,9 @@ class MenuView: UIView {
     
     //Review, Contact/Email, Favorites, Purchase
     let animationView = UIView()
-    let favoritesButton = UIView().menuItemButton(darkModeImage: #imageLiteral(resourceName: "favourite-empty-darkMode"), lightModeImage: #imageLiteral(resourceName: "favourite-empty-lightMode"), text: "View and edit your palettes and gradients")
-        //label: "Favorites \nView and edit your palettes and gradients".attributedStringWithBoldness(["Favorites"], fontSize: 10)
-    let emailButton = UIView().menuItemButton(darkModeImage: #imageLiteral(resourceName: "email-darkmode"), lightModeImage: #imageLiteral(resourceName: "email-lightmode"), text: "We'd love to hear what's on your")
-        //"We'd love to hear what's on your mind")
+    
+    let favoritesButton = UIView().menuItemButton(title: "Favorites \n", subtitle: "View and edit your palettes and gradients", darkModeImage: #imageLiteral(resourceName: "favourite-empty-darkMode"), lightModeImage: #imageLiteral(resourceName: "favourite-empty-lightMode"))
+    let emailButton = UIView().menuItemButton(title: "Contact \n", subtitle: "We'd love to hear what's on your mind", darkModeImage: #imageLiteral(resourceName: "email-darkmode"), lightModeImage: #imageLiteral(resourceName: "email-lightmode"))
     
     let versionLabel: UILabel = {
         let label = UILabel()
@@ -30,9 +29,6 @@ class MenuView: UIView {
     
 // MARK: - Init
     override init(frame: CGRect) {
-//        self.favoritesButton.titleLabel?.attributedText = "View and edit your palettes and gradients".attributedStringWithBoldness(["Favorites"], fontSize: 12)
-        favoritesButton.titleLabel?.lineBreakMode = .byWordWrapping
-//        favoritesButton.titleLabel?.numberOfLines = 0
         
         super.init(frame: frame)
         

@@ -27,6 +27,7 @@ class FavoritesController: UIViewController, UITableViewDataSource, UITableViewD
         super.viewDidLoad()
         setupTableView()
         queryDatabase()
+        setupNavigationController()
     }
     
 // MARK: - Helper Functions
@@ -69,6 +70,13 @@ class FavoritesController: UIViewController, UITableViewDataSource, UITableViewD
         privateDatabase.delete(withRecordID: recordID.recordID) { (recordIDs, error) in
             completion?(recordID, error)
         }
+    }
+    
+    func setupNavigationController() {
+        navigationItem.title = "Favorites"
+        self.navigationController?.navigationBar.barTintColor = .systemBackground
+        self.navigationController?.navigationBar.isTranslucent = false
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.label]
     }
 
 // MARK: - TableView Data Source
