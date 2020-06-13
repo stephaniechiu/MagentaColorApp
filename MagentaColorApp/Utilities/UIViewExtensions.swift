@@ -25,7 +25,7 @@ extension UIView {
     
     func generateButton(borderColor: UIColor, textColor: UIColor) -> UIButton {
         let button = UIButton()
-        button.frame.size = CGSize(width: 80, height: 20)
+        button.frame.size = CGSize(width: 80, height: 12)
         button.setTitle("Generate", for: .normal)
         button.titleLabel?.font = UIFont(name: "HelveticaNeue", size: 16)
         button.setTitleColor(textColor, for: .normal)
@@ -36,7 +36,7 @@ extension UIView {
         return button
        }
     
-    func imageButton(image: UIImage, darkModeImage: UIImage? = nil, width: CGFloat, height: CGFloat) -> UIButton {
+    func imageButton(image: UIImage, width: CGFloat, height: CGFloat) -> UIButton {
         let button = UIButton(type: .custom)
         button.frame.size = CGSize(width: width, height: height)
         button.setImage(image, for: .normal)

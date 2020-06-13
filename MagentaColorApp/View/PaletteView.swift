@@ -18,7 +18,7 @@ class PaletteView: UIView {
     
     //Color info stack view
     var colorStackView: UIStackView
-    
+    var rightStackView: UIStackView
     var leftStackView: UIStackView
     
     let colorLabelHEX = UIView().colorInfoLabel(color: .label)
@@ -83,6 +83,10 @@ class PaletteView: UIView {
         leftStackView.spacing = 3
         leftStackView.distribution = .fillEqually
         
+        self.rightStackView = UIStackView(arrangedSubviews: [favoriteButton, gradientButton])
+        rightStackView.spacing = 3
+        rightStackView.distribution = .fillEqually
+        
         super.init(frame: frame)
         backgroundColor = .clear
         setupLayout()
@@ -95,12 +99,14 @@ class PaletteView: UIView {
 // MARK: - Helper Functions
     fileprivate func setupLayout() {
         bottomControllerView.addSubview(paletteGenerateButton)
-        paletteGenerateButton.anchor(top: bottomControllerView.topAnchor, bottom: bottomControllerView.safeAreaLayoutGuide.bottomAnchor, paddingTop: 15, width: 150, height: 15)
+        paletteGenerateButton.anchor(top: bottomControllerView.topAnchor, bottom: bottomControllerView.safeAreaLayoutGuide.bottomAnchor, paddingTop: 15, width: 150)
         paletteGenerateButton.centerX(inView: bottomControllerView)
         
         bottomControllerView.addSubview(leftStackView)
-        leftStackView.anchor(top: bottomControllerView.topAnchor, left: bottomControllerView.leftAnchor, bottom: bottomControllerView.safeAreaLayoutGuide.bottomAnchor, right: paletteGenerateButton.leftAnchor, paddingTop: 15, paddingLeft: 20)
+        leftStackView.anchor(top: bottomControllerView.topAnchor, left: bottomControllerView.leftAnchor, bottom: bottomControllerView.safeAreaLayoutGuide.bottomAnchor, right: paletteGenerateButton.leftAnchor, paddingTop: 15, paddingLeft: 20, paddingRight: 20)
         
+        bottomControllerView.addSubview(rightStackView)
+        rightStackView.anchor(top: bottomControllerView.topAnchor, left: paletteGenerateButton.rightAnchor, bottom: bottomControllerView.safeAreaLayoutGuide.bottomAnchor, right: bottomControllerView.rightAnchor, paddingTop: 15, paddingLeft: 20, paddingRight: 20)
         bottomControllerView.addSubview(favoriteButton)
         favoriteButton.anchor(left: paletteGenerateButton.rightAnchor, paddingLeft: 20, width: 35, height: 35)
         favoriteButton.centerY(inView: paletteGenerateButton)

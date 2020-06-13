@@ -176,8 +176,28 @@ class PaletteController: UIViewController, UITableViewDataSource, UITableViewDel
           }
     }
     
-    @objc func saveFavoritePalette() {
-        saveToCloud(palette: arrayText)
+    @objc func saveFavoritePalette(sender: UIButton) {
+        
+        hapticFeedback.impactOccurred()
+        
+        if sender.isSelected {
+            sender.isSelected = false
+            paletteView.favoriteButton.setImage(#imageLiteral(resourceName: "favourite-filled"), for: .selected)
+            
+            let recordID = recordIDs.first!
+            privateDatabase.delete(withRecordID: recordID) { (deleteRecordID, error) in
+                if error == nil {
+                    print("Record deleted")
+                } else {
+                    print("Record unable to delete: \(String(describing: error))")
+                }
+            }
+        } else {
+            sender.isSelected = true
+            paletteView.favoriteButton.setImage(#imageLiteral(resourceName: "favourite-empty-darkMode"), for: .normal)
+            saveToCloud(palette: arrayText)
+
+        }
     }
     
     func saveToCloud(palette: [String]) {
@@ -187,6 +207,7 @@ class PaletteController: UIViewController, UITableViewDataSource, UITableViewDel
         privateDatabase.save(record) { (savedRecord, error) in
             if error == nil {
                 print("Record saved")
+                recordIDs.append(record.recordID)
             } else {
                 print("Record not saved: \(String(describing: error))")
             }

@@ -44,18 +44,4 @@ class FavoritesTableViewCell: UITableViewCell {
             }
         }
     }
-    
-// MARK: - Selector
-    
-    @objc func delete(sender: UIButton) {
-        let recordID = recordIDs.first!
-        privateDatabase.delete(withRecordID: recordID) { (deleteRecordID, error) in
-            if error == nil {
-                print("Record deleted")
-            } else {
-                print("Record unable to delete: \(String(describing: error))")
-            }
-        }
-    }
-    
 }
