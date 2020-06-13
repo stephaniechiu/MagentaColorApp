@@ -15,15 +15,6 @@ class FavoritesTableViewCell: UITableViewCell {
     let privateDatabase = CKContainer.default().privateCloudDatabase
     var retrieveFavoritePalette = [CKRecord]()
     
-    let deleteButton = UIView().imageButton(image: #imageLiteral(resourceName: "trash lightMode"), darkModeImage: #imageLiteral(resourceName: "trash darkMode"), width: 20, height: 20)
-    let paletteView: UIView = {
-        let view = UIView()
-        view.frame.size = CGSize(width: 300, height: 80)
-        view.layer.cornerRadius = 15
-        
-        return view
-    }()
-    
 // MARK: - Init
     
 
@@ -31,7 +22,6 @@ class FavoritesTableViewCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         setupCellLayout()
-        deleteRecord()
      }
 
      required init?(coder aDecoder: NSCoder) {
@@ -53,10 +43,6 @@ class FavoritesTableViewCell: UITableViewCell {
                 print("Record not retrieved: \(String(describing: error))")
             }
         }
-    }
-    
-    func deleteRecord() {
-        deleteButton.addTarget(self, action: #selector(delete(sender:)), for: .touchUpInside)
     }
     
 // MARK: - Selector

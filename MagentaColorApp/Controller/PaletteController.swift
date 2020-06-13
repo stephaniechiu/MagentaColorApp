@@ -17,7 +17,6 @@ class PaletteController: UIViewController, UITableViewDataSource, UITableViewDel
     let paletteTableView = UITableView()
     var colorPalette = [Color]()
     var colorButton = [UIButton]() //Array of buttons the size and color of each tableView cell
-//    var appendedPalettes = [Color]()
     var appendedPalettes: [Color] {
         var appendedPalette: [Color]!
         concurrentPalettesQueue.sync {

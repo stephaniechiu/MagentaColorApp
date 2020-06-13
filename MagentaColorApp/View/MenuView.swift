@@ -16,6 +16,7 @@ class MenuView: UIView {
     //Review, Contact/Email, Favorites, Purchase
     let animationView = UIView()
     
+    let premiumButton = UIView().menuItemButton(title: "Premium \n", subtitle: "Save more palettes and enjoy future premium features", darkModeImage: #imageLiteral(resourceName: "star-darkMode"), lightModeImage: #imageLiteral(resourceName: "star-lightMode"))
     let favoritesButton = UIView().menuItemButton(title: "Favorites \n", subtitle: "View and edit your palettes and gradients", darkModeImage: #imageLiteral(resourceName: "favourite-empty-darkMode"), lightModeImage: #imageLiteral(resourceName: "favourite-empty-lightMode"))
     let emailButton = UIView().menuItemButton(title: "Contact \n", subtitle: "We'd love to hear what's on your mind", darkModeImage: #imageLiteral(resourceName: "email-darkmode"), lightModeImage: #imageLiteral(resourceName: "email-lightmode"))
     
@@ -42,8 +43,12 @@ class MenuView: UIView {
         menuControllerAnimation.play()
         menuControllerAnimation.loopMode = .loop
         
+        addSubview(premiumButton)
+        premiumButton.anchor(top: animationView.bottomAnchor, paddingTop: 50, width: 360, height: 80)
+        premiumButton.centerX(inView: self)
+        
         addSubview(favoritesButton)
-        favoritesButton.anchor(top: animationView.bottomAnchor, paddingTop: 50, width: 360, height: 80)
+        favoritesButton.anchor(top: premiumButton.bottomAnchor, paddingTop: 20, width: 360, height: 80)
         favoritesButton.centerX(inView: self)
         
         addSubview(emailButton)

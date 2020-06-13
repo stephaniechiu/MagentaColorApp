@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FavoritesView: UIView {
+class FavoritesPaletteView: UIView {
     
 // MARK: - Properties
     
