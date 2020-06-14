@@ -33,7 +33,7 @@ class PaletteView: UIView {
     let paletteGenerateButton = UIView().generateButton(borderColor: .white, textColor: .white)
     let menuButton = UIView().imageButton(image: #imageLiteral(resourceName: "menu editing-white"), width: 20, height: 20)
     let shareButton = UIView().imageButton(image: #imageLiteral(resourceName: "share-office-color-whitepink"), width: 20, height: 20)
-    let favoriteButton = UIView().imageButton(image: #imageLiteral(resourceName: "favourite-empty-darkMode"), width: 30, height: 30)
+    let favoriteButton = UIView().imageButton(image: #imageLiteral(resourceName: "favourite-pink"), width: 30, height: 30)
     
     //Button for Gradient Controller
     var gradientStackView: UIStackView

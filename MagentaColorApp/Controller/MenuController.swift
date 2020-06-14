@@ -25,8 +25,6 @@ class MenuController: UIViewController, MFMailComposeViewControllerDelegate {
         setupNavigationController()
         menuView.favoritesButton.addTarget(self, action: #selector(openFavorites), for: .touchUpInside)
         menuView.emailButton.addTarget(self, action: #selector(sendEmail), for: .touchUpInside)
-//        let tapGesture = UITapGestureRecognizer(target: self, action: #selector((sendEmail)))
-//        view.addGestureRecognizer(tapGesture)
     }
     
     // MARK: - Helper Functions

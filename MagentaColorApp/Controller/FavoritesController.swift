@@ -42,7 +42,6 @@ class FavoritesController: UIViewController, UITableViewDataSource, UITableViewD
         let heightOfCells: CGFloat = 100
         favoritesTableView.rowHeight = heightOfCells
         
-        
         view.addSubview(favoritesTableView)
         favoritesTableView.anchor(top: view.topAnchor, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor)
     }
@@ -130,9 +129,10 @@ class FavoritesController: UIViewController, UITableViewDataSource, UITableViewD
         let individualColorInRecord = retrieveFavoritePalette[indexPath.row].value(forKey: "FavoritePalette") as? [String] ?? []
         var individualColorView: [UIView] = []
         
+        let individualGradientInRecord = retrieveFavoritePalette[indexPath.row].value(forKey: "FavoriteGradient") as? [String] ?? []
         
-        for i in 0..<5 {
-            let xAxis = (i * Int(UIScreen.main.bounds.width / 5))
+        for colorView in 0..<5 {
+            let xAxis = (colorView * Int(UIScreen.main.bounds.width / 5))
             let individualView = UIView(frame: CGRect(x: xAxis, y: 0, width: Int(UIScreen.main.bounds.width / 5), height: 100))
             individualColorView.append(individualView)
         }
@@ -140,8 +140,20 @@ class FavoritesController: UIViewController, UITableViewDataSource, UITableViewD
         for j in 0..<individualColorInRecord.count {
             let allColorsView = individualColorView[j]
             allColorsView.backgroundColor = UIColor(hexString: individualColorInRecord[j])
+//            print(individualColorInRecord[j])
             cell.addSubview(allColorsView)
         }
+
+        for k in 0..<individualGradientInRecord.count {
+            let gradientColorLeft = UIColor(hexString: individualGradientInRecord[0])
+            let gradientColorRight = UIColor(hexString: individualGradientInRecord[1])
+
+            let individualView = UIView(frame: CGRect(x: 0, y: 0, width: Int(UIScreen.main.bounds.width), height: Int(UIScreen.main.bounds.height)))
+            individualView.setupGradientBackground(colorOne: gradientColorLeft, colorTwo: gradientColorRight)
+            cell.addSubview(individualView)
+            cell.insertSubview(individualView, at: 0)
+        }
+  
         cell.selectionStyle = .none
         cell.backgroundColor = .systemBackground
 //        }
@@ -151,8 +163,11 @@ class FavoritesController: UIViewController, UITableViewDataSource, UITableViewD
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let shareAction = UIContextualAction(style: .normal, title: "Share", handler: { (ac: UIContextualAction, view: UIView, success: (Bool) -> Void) in
             let individualColorInRecord = self.retrieveFavoritePalette[indexPath.row].value(forKey: "FavoritePalette") as? [String] ?? []
+            let individualGradientInRecord = self.retrieveFavoritePalette[indexPath.row].value(forKey: "FavoriteGradient") as? [String] ?? []
+            
             print(individualColorInRecord)
-            let string = "Magenta Color App {\n\(individualColorInRecord)\n}"
+            var string = "Magenta Color App {\n\(individualColorInRecord)\n}"
+            string = "Magenta Color App {\n\(individualGradientInRecord)\n}"
             
             let activityViewController = UIActivityViewController(activityItems: [string], applicationActivities: nil)
             self.present(activityViewController, animated: true, completion: nil)

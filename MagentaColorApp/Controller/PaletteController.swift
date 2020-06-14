@@ -176,44 +176,6 @@ class PaletteController: UIViewController, UITableViewDataSource, UITableViewDel
           }
     }
     
-    @objc func saveFavoritePalette(sender: UIButton) {
-        
-        hapticFeedback.impactOccurred()
-        
-        if sender.isSelected {
-            sender.isSelected = false
-            paletteView.favoriteButton.setImage(#imageLiteral(resourceName: "favourite-filled"), for: .selected)
-            
-            let recordID = recordIDs.first!
-            privateDatabase.delete(withRecordID: recordID) { (deleteRecordID, error) in
-                if error == nil {
-                    print("Record deleted")
-                } else {
-                    print("Record unable to delete: \(String(describing: error))")
-                }
-            }
-        } else {
-            sender.isSelected = true
-            paletteView.favoriteButton.setImage(#imageLiteral(resourceName: "favourite-empty-darkMode"), for: .normal)
-            saveToCloud(palette: arrayText)
-
-        }
-    }
-    
-    func saveToCloud(palette: [String]) {
-        let record = CKRecord(recordType: "Favorite")
-        record.setValue(palette, forKey: "FavoritePalette")
-        
-        privateDatabase.save(record) { (savedRecord, error) in
-            if error == nil {
-                print("Record saved")
-                recordIDs.append(record.recordID)
-            } else {
-                print("Record not saved: \(String(describing: error))")
-            }
-        }
-    }
-    
     //When user taps on a color in the palette, it "opens" to fill the screen with that color with it's color codes
     @objc func openColor(sender: UIButton) {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(copyText(sender:)))
@@ -227,8 +189,8 @@ class PaletteController: UIViewController, UITableViewDataSource, UITableViewDel
                     switch self.currentAnimation {
                     case 0:
                         self.cellColorInRGB = UIColor(hexString: self.appendedPalettes[0].colors[i])
-                        print("Button color: \(self.cellColorInRGB)")
-                        print("First palette color: \(self.appendedPalettes[0].colors[i])")
+//                        print("Button color: \(self.cellColorInRGB)")
+//                        print("First palette color: \(self.appendedPalettes[0].colors[i])")
                         
                         self.colorButton[i].transform = CGAffineTransform(scaleX: 1.1, y: 50)
                         self.colorButton[i].backgroundColor = UIColor(hexString: self.appendedPalettes[0].colors[i])
@@ -277,6 +239,7 @@ class PaletteController: UIViewController, UITableViewDataSource, UITableViewDel
     //A new palette is generated when user taps on the Generate button
     @objc func randomPalette(sender: UIButton) {
         let randomStart = Date()
+        paletteView.favoriteButton.setImage(#imageLiteral(resourceName: "favourite-empty-darkMode"), for: .selected)
         newPalette()
         hapticFeedback.impactOccurred()
         let randomEnd = Date()
@@ -319,6 +282,47 @@ class PaletteController: UIViewController, UITableViewDataSource, UITableViewDel
         }
     }
     
+// MARK: - Data Persistance
+    
+    @objc func saveFavoritePalette(sender: UIButton) {
+        
+        hapticFeedback.impactOccurred()
+        
+        if sender.isSelected {
+            sender.isSelected = false
+            paletteView.favoriteButton.setImage(#imageLiteral(resourceName: "favourite-pink"), for: .selected)
+            
+            let recordID = recordIDs.first!
+            
+            privateDatabase.delete(withRecordID: recordID) { (deleteRecordID, error) in
+                if error == nil {
+                    print("Record deleted")
+                } else {
+                    print("Record unable to delete: \(String(describing: error))")
+                }
+            }
+        } else {
+            sender.isSelected = true
+            paletteView.favoriteButton.setImage(#imageLiteral(resourceName: "favourite-filled"), for: .selected)
+            
+            saveToCloud(palette: arrayText)
+        }
+    }
+    
+    func saveToCloud(palette: [String]) {
+        let record = CKRecord(recordType: "Favorite")
+        record.setValue(palette, forKey: "FavoritePalette")
+        
+        privateDatabase.save(record) { (savedRecord, error) in
+            if error == nil {
+                print("Record saved")
+                recordIDs.append(record.recordID)
+            } else {
+                print("Record not saved: \(String(describing: error))")
+            }
+        }
+    }
+    
 // MARK: - TableView Data Source
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -333,7 +337,7 @@ class PaletteController: UIViewController, UITableViewDataSource, UITableViewDel
         cell.selectionStyle = .none
         
         arrayText = firstPalette.colors
-        print(arrayText)
+//        print(arrayText)
         
         //Assigns a new color to each row. Colors are converted from HEX to RGB
         for j in 0..<5 {
@@ -351,7 +355,7 @@ class PaletteController: UIViewController, UITableViewDataSource, UITableViewDel
             if indexPath.row == j {
                 cell.backgroundColor? = UIColor(hexString: firstPalette.colors[j])
                 button.backgroundColor = UIColor(hexString: firstPalette.colors[indexPath.row])
-                print("Palette color: " + firstPalette.colors[button.tag])
+//                print("Palette color: " + firstPalette.colors[button.tag])
             }
         }
         return cell

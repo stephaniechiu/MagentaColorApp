@@ -20,6 +20,9 @@ class GradientController: UIViewController {
     var shareRightColor = String()
     let hapticFeedback = UIImpactFeedbackGenerator()
     var lightIsOn = false
+    
+    let privateDatabase = CKContainer.default().privateCloudDatabase
+    var gradientArray = [String]()
 
 // MARK: - Lifecycle
     
@@ -27,7 +30,7 @@ class GradientController: UIViewController {
         super.viewDidLoad()
         view = gradientView
         setupNavigationController()
-        setupSharing()
+        setupBottomController()
         setupThemeButton()
         
         newGradient()
@@ -41,8 +44,9 @@ class GradientController: UIViewController {
         navigationController?.navigationBar.shadowImage = UIImage()
     }
     
-    fileprivate func setupSharing() {
+    fileprivate func setupBottomController() {
         gradientView.shareButton.addTarget(self, action: #selector(setupGradientaActivityViewController(sender:)), for: .touchUpInside)
+        gradientView.favoriteButton.addTarget(self, action: #selector(saveFavoriteGradient(sender:)), for: .touchUpInside)
     }
     
     fileprivate func setupThemeButton() {
@@ -74,6 +78,14 @@ class GradientController: UIViewController {
         shareLeftColor = leftGradientColor.toHexString()
         shareRightColor = rightGradientColor.toHexString()
         
+        var gradientColors: [String] = []
+        let leftGradient = leftGradientColor.toHexString().uppercased().replacingOccurrences(of: "#", with: "")
+        let rightGradient = rightGradientColor.toHexString().uppercased().replacingOccurrences(of: "#", with: "")
+        gradientColors.append(leftGradient)
+        gradientColors.append(rightGradient)
+        gradientArray = gradientColors
+        print(gradientColors)
+        
         gradientView.generateGradientButton.addTarget(self, action: #selector(randomGradient(sender:)), for: .touchUpInside)
         
         gradientView.colorLabelLeftHEX.attributedText = "HEX  \n\(leftGradientColor.toHexString().uppercased())".attributedStringWithBoldness(["HEX"], fontSize: 10, characterSpacing: 1)
@@ -92,28 +104,29 @@ class GradientController: UIViewController {
     //Objects will automatically adjust their color based on the user interface style
     fileprivate func setObjectThemeColors(_ share: UIImage, _ image: UIImage, _ textColor: UIColor, _ color: UIColor, _ borderColor: UIColor, _ backgroundColor: UIColor, _ barTintColor: UIColor) {
         
-          gradientView.shareButton.setImage(share, for: .normal)
-          gradientView.lightModeImage.setImage(image, for: .normal)
-          gradientView.darkModeImage.setImage(image, for: .normal)
-          view.backgroundColor = backgroundColor
+        gradientView.lightModeImage.setImage(image, for: .normal)
+        gradientView.darkModeImage.setImage(image, for: .normal)
+        view.backgroundColor = backgroundColor
+        
+        gradientView.shareButton.setImage(share, for: .normal)
+    
+        gradientView.generateGradientButton.layer.borderColor = borderColor.cgColor
+        gradientView.generateGradientButton.setTitleColor(textColor, for: .normal)
           
-          gradientView.generateGradientButton.layer.borderColor = borderColor.cgColor
-          gradientView.generateGradientButton.setTitleColor(textColor, for: .normal)
+        gradientView.topContainerView.backgroundColor = backgroundColor
+        gradientView.bottomContainerView.backgroundColor = backgroundColor
           
-          gradientView.topContainerView.backgroundColor = backgroundColor
-          gradientView.bottomContainerView.backgroundColor = backgroundColor
+        gradientView.colorLabelLeftHEX.textColor = textColor
+        gradientView.colorLabelLeftRGB.textColor = textColor
+        gradientView.colorLabelLeftHSB.textColor = textColor
+        gradientView.colorLabelLeftCMY.textColor = textColor
+        gradientView.colorLabelLeftCMYK.textColor = textColor
           
-          gradientView.colorLabelLeftHEX.textColor = textColor
-          gradientView.colorLabelLeftRGB.textColor = textColor
-          gradientView.colorLabelLeftHSB.textColor = textColor
-          gradientView.colorLabelLeftCMY.textColor = textColor
-          gradientView.colorLabelLeftCMYK.textColor = textColor
-          
-          gradientView.colorLabelRightHEX.textColor = textColor
-          gradientView.colorLabelRightRGB.textColor = textColor
-          gradientView.colorLabelRightHSB.textColor = textColor
-          gradientView.colorLabelRightCMY.textColor = textColor
-          gradientView.colorLabelRightCMYK.textColor = textColor
+        gradientView.colorLabelRightHEX.textColor = textColor
+        gradientView.colorLabelRightRGB.textColor = textColor
+        gradientView.colorLabelRightHSB.textColor = textColor
+        gradientView.colorLabelRightCMY.textColor = textColor
+        gradientView.colorLabelRightCMYK.textColor = textColor
         
         navigationController?.navigationBar.tintColor = borderColor
         navigationController?.navigationBar.barTintColor = barTintColor
@@ -136,14 +149,14 @@ class GradientController: UIViewController {
     
     //When user interface style is in Dark Mode, this function allow users to manually switch the view to Light Mode
     func activatedLightButton(bool: Bool) {
-            lightIsOn = bool
-            let color = bool ? UIColor.white : UIColor.black
-            let image = bool ? #imageLiteral(resourceName: "light off-object-color") : #imageLiteral(resourceName: "light on-object-color")
-            let share = bool ? #imageLiteral(resourceName: "share-office-color-blackpink") : #imageLiteral(resourceName: "share-office-color-whitepink")
-            let borderColor = bool ? UIColor.black : UIColor.white
-            let backgroundColor = bool ? UIColor.white : UIColor.black
-            let textColor = bool ? UIColor.black : UIColor.white
-            let barTintColor = bool ? UIColor.white : UIColor.black
+        lightIsOn = bool
+        let color = bool ? UIColor.white : UIColor.black
+        let image = bool ? #imageLiteral(resourceName: "light off-object-color") : #imageLiteral(resourceName: "light on-object-color")
+        let share = bool ? #imageLiteral(resourceName: "share-office-color-blackpink") : #imageLiteral(resourceName: "share-office-color-whitepink")
+        let borderColor = bool ? UIColor.black : UIColor.white
+        let backgroundColor = bool ? UIColor.white : UIColor.black
+        let textColor = bool ? UIColor.black : UIColor.white
+        let barTintColor = bool ? UIColor.white : UIColor.black
             
         setObjectThemeColors(share, image, textColor, color, borderColor, backgroundColor, barTintColor)
         }
@@ -179,6 +192,12 @@ class GradientController: UIViewController {
         gradientView.colorCircleLeftView.backgroundColor = leftGradient
         gradientView.colorCircleRightView.backgroundColor = rightGradient
         gradientView.circleGradientView.setupGradientBackground(colorOne: leftGradient, colorTwo: rightGradient)
+
+        var gradientColorsRandom: [String] = []
+        gradientColorsRandom.append(leftGradient.toHexString().uppercased().replacingOccurrences(of: "#", with: ""))
+        gradientColorsRandom.append(rightGradient.toHexString().uppercased().replacingOccurrences(of: "#", with: ""))
+        gradientArray = gradientColorsRandom
+        print(gradientColorsRandom)
         
         textFadeAnimation()
         
@@ -209,5 +228,45 @@ class GradientController: UIViewController {
         let activityViewController = UIActivityViewController(activityItems: [string], applicationActivities: nil)
         
         present(activityViewController, animated: true, completion: nil)
+    }
+    
+// MARK: - Data Persistance
+    
+    @objc func saveFavoriteGradient(sender: UIButton) {
+         
+        hapticFeedback.impactOccurred()
+        
+        if sender.isSelected {
+            sender.isSelected = false
+            gradientView.favoriteButton.setImage(#imageLiteral(resourceName: "favourite-pink"), for: .selected)
+//
+            let recordID = recordIDs.first!
+            
+            privateDatabase.delete(withRecordID: recordID) { (deleteRecordID, error) in
+                if error == nil {
+                    print("Record deleted")
+                } else {
+                    print("Record unable to delete: \(String(describing: error))")
+                }
+            }
+        } else {
+            sender.isSelected = true
+            gradientView.favoriteButton.setImage(#imageLiteral(resourceName: "favourite-filled"), for: .selected)
+            saveToCloud(palette: gradientArray)
+        }
+    }
+    
+    func saveToCloud(palette: [String]) {
+        let record = CKRecord(recordType: "Favorite")
+        record.setValue(palette, forKey: "FavoriteGradient")
+        
+        privateDatabase.save(record) { (savedRecord, error) in
+            if error == nil {
+                print("Record saved")
+                recordIDs.append(record.recordID)
+            } else {
+                print("Record not saved: \(String(describing: error))")
+            }
+        }
     }
 }
