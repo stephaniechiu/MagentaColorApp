@@ -142,7 +142,8 @@ class PaletteController: UIViewController, UITableViewDataSource, UITableViewDel
     
     @objc func openMenu(sender: UIButton) {
         let menuController = MenuController()
-        self.navigationController?.pushViewController(menuController, animated: true)
+//        self.navigationController?.pushViewController(menuController, animated: true)
+        self.navigationController?.pushViewControllerFromLeft(controller: menuController)
     }
     
     //When user taps Share button when a palette is shown, t

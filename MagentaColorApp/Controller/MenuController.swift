@@ -15,6 +15,7 @@ class MenuController: UIViewController, MFMailComposeViewControllerDelegate {
     // MARK: - Properties
     
     let menuView = MenuView()
+    lazy var popToLeftBarButtonItem = UIBarButtonItem(title: "Back", style: .done, target: self, action: #selector(popToLeftBarButtonItemTapped))
         
     // MARK: - Init
     override func viewDidLoad() {
@@ -33,9 +34,15 @@ class MenuController: UIViewController, MFMailComposeViewControllerDelegate {
         navigationController?.navigationBar.isTranslucent = true
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         navigationController?.navigationBar.shadowImage = UIImage()
+        navigationItem.hidesBackButton = true
+        navigationItem.setRightBarButton(popToLeftBarButtonItem, animated: true)
     }
     
     // MARK: - Selectors
+    
+    @objc fileprivate func popToLeftBarButtonItemTapped() {
+        navigationController?.popViewControllerToLeft()
+    }
     
     @objc func sendEmail(sender: UIGestureRecognizer) {
         if MFMailComposeViewController.canSendMail() {
