@@ -73,7 +73,25 @@ extension UIView {
     func colorInfoLabel(color: UIColor) -> UILabel {
         let label = UILabel()
         label.font = UIFont(name: "HelveticaNeue-Thin", size: 17)
+        label.text = "RGB(0.0, 0.0, 0.0)"
         label.numberOfLines = 0
+        return label
+    }
+    
+    func colorSlider(tintColor: UIColor) -> UISlider {
+        let slider = UISlider()
+        slider.minimumValue = 0
+        slider.maximumValue = 255
+        slider.isContinuous = true
+        slider.tintColor = tintColor
+        slider.frame.size = CGSize(width: 250, height: 20)
+        return slider
+    }
+    
+    func rgbLabel() -> UILabel {
+        let label = UILabel()
+        label.font = UIFont(name: "HelveticaNeue-Bold", size: 16)
+        label.textColor = .black
         return label
     }
     

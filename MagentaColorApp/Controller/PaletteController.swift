@@ -142,7 +142,6 @@ class PaletteController: UIViewController, UITableViewDataSource, UITableViewDel
     
     @objc func openMenu(sender: UIButton) {
         let menuController = MenuController()
-//        self.navigationController?.pushViewController(menuController, animated: true)
         self.navigationController?.pushViewControllerFromLeft(controller: menuController)
     }
     

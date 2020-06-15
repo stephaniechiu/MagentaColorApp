@@ -18,6 +18,8 @@ class FavoritesController: UIViewController, UITableViewDataSource, UITableViewD
     let reuseIdentifier = "favoritesCell"
     let hapticFeedback = UIImpactFeedbackGenerator()
     
+    lazy var popToLeftBarButtonItem = UIBarButtonItem(title: "Back", style: .done, target: self, action: #selector(popToLeftBarButtonItemTapped))
+    
     let privateDatabase = CKContainer.default().privateCloudDatabase
     var retrieveFavoritePalette: [CKRecord] = []
     
@@ -77,6 +79,15 @@ class FavoritesController: UIViewController, UITableViewDataSource, UITableViewD
         self.navigationController?.navigationBar.barTintColor = .systemBackground
         self.navigationController?.navigationBar.isTranslucent = false
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.label]
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+        self.navigationItem.hidesBackButton = true
+        self.navigationItem.setRightBarButton(popToLeftBarButtonItem, animated: true)
+    }
+    
+// MARK: - Selectors
+    
+    @objc fileprivate func popToLeftBarButtonItemTapped() {
+        navigationController?.popViewControllerToLeft()
     }
 
 // MARK: - TableView Data Source
@@ -164,10 +175,10 @@ class FavoritesController: UIViewController, UITableViewDataSource, UITableViewD
         let shareAction = UIContextualAction(style: .normal, title: "Share", handler: { (ac: UIContextualAction, view: UIView, success: (Bool) -> Void) in
             let individualColorInRecord = self.retrieveFavoritePalette[indexPath.row].value(forKey: "FavoritePalette") as? [String] ?? []
             let individualGradientInRecord = self.retrieveFavoritePalette[indexPath.row].value(forKey: "FavoriteGradient") as? [String] ?? []
+            var string = ""
             
             print(individualColorInRecord)
-            var string = "Magenta Color App {\n\(individualColorInRecord)\n}"
-            string = "Magenta Color App {\n\(individualGradientInRecord)\n}"
+            string = "Magenta Color App {\n\(individualGradientInRecord) \(individualColorInRecord)\n}"
             
             let activityViewController = UIActivityViewController(activityItems: [string], applicationActivities: nil)
             self.present(activityViewController, animated: true, completion: nil)

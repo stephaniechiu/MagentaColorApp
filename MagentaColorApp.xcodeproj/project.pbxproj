@@ -23,6 +23,9 @@
 		904007882490DCD800BEFC4A /* FavoritesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904007872490DCD800BEFC4A /* FavoritesTableViewCell.swift */; };
 		9042986F2473C35A0053B216 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9042986E2473C35A0053B216 /* GradientView.swift */; };
 		904298712473C36F0053B216 /* GradientController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904298702473C36F0053B216 /* GradientController.swift */; };
+		906F82732496945200D5967B /* SliderController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 906F82722496945100D5967B /* SliderController.swift */; };
+		906F82772496950300D5967B /* SliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 906F82762496950300D5967B /* SliderView.swift */; };
+		906F82792496E3B300D5967B /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 906F82782496E3B300D5967B /* StoreKit.framework */; };
 		90E4B699246755A400ED3D29 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90E4B698246755A400ED3D29 /* AppDelegate.swift */; };
 		90E4B69B246755A400ED3D29 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90E4B69A246755A400ED3D29 /* SceneDelegate.swift */; };
 		90E4B69D246755A400ED3D29 /* PaletteController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90E4B69C246755A400ED3D29 /* PaletteController.swift */; };
@@ -53,6 +56,9 @@
 		904007872490DCD800BEFC4A /* FavoritesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesTableViewCell.swift; sourceTree = "<group>"; };
 		9042986E2473C35A0053B216 /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		904298702473C36F0053B216 /* GradientController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientController.swift; sourceTree = "<group>"; };
+		906F82722496945100D5967B /* SliderController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SliderController.swift; sourceTree = "<group>"; };
+		906F82762496950300D5967B /* SliderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SliderView.swift; sourceTree = "<group>"; };
+		906F82782496E3B300D5967B /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		90E4B698246755A400ED3D29 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		90E4B69A246755A400ED3D29 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		90E4B69C246755A400ED3D29 /* PaletteController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaletteController.swift; sourceTree = "<group>"; };
@@ -73,6 +79,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				906F82792496E3B300D5967B /* StoreKit.framework in Frameworks */,
 				5CB727CAA91680EF106DBC4B /* Pods_MagentaColorApp.framework in Frameworks */,
 				9040077B248C93CF00BEFC4A /* CloudKit.framework in Frameworks */,
 			);
@@ -84,6 +91,7 @@
 		11CAE768F4D3FC9A09E779B6 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				906F82782496E3B300D5967B /* StoreKit.framework */,
 				9040077A248C93CF00BEFC4A /* CloudKit.framework */,
 				9B61673D4F7B3A258D9DDB31 /* Pods_MagentaColorApp.framework */,
 			);
@@ -155,6 +163,7 @@
 				90E4B6B224675C0500ED3D29 /* PaletteView.swift */,
 				9042986E2473C35A0053B216 /* GradientView.swift */,
 				902D708B248229A500E24CF3 /* MenuView.swift */,
+				906F82762496950300D5967B /* SliderView.swift */,
 				904007892490DCE300BEFC4A /* Favorites */,
 			);
 			path = View;
@@ -167,6 +176,7 @@
 				904298702473C36F0053B216 /* GradientController.swift */,
 				902D708D248229B800E24CF3 /* MenuController.swift */,
 				90400784248E03BC00BEFC4A /* FavoritesController.swift */,
+				906F82722496945100D5967B /* SliderController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -310,6 +320,7 @@
 				90E4B6BA24676FC500ED3D29 /* UIViewExtensions.swift in Sources */,
 				90E4B6B324675C0500ED3D29 /* PaletteView.swift in Sources */,
 				903DB8E824808D3F008474AC /* StringExtensions.swift in Sources */,
+				906F82732496945200D5967B /* SliderController.swift in Sources */,
 				90E4B69B246755A400ED3D29 /* SceneDelegate.swift in Sources */,
 				903E168C2483923A006348F1 /* NavigationExtension.swift in Sources */,
 				904298712473C36F0053B216 /* GradientController.swift in Sources */,
@@ -317,6 +328,7 @@
 				90400781248DFB8700BEFC4A /* FavoritesPalettes.swift in Sources */,
 				902D708E248229B800E24CF3 /* MenuController.swift in Sources */,
 				90E4B6B524676DCD00ED3D29 /* Color.swift in Sources */,
+				906F82772496950300D5967B /* SliderView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

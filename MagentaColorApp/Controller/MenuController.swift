@@ -70,6 +70,6 @@ class MenuController: UIViewController, MFMailComposeViewControllerDelegate {
 
     @objc func openFavorites(sender: UIButton) {
         let favoritesController = FavoritesController()
-        self.navigationController?.pushViewController(favoritesController, animated: true)
+        self.navigationController?.pushViewControllerFromLeft(controller: favoritesController)
     }
 }
