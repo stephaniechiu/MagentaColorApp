@@ -22,4 +22,11 @@ extension String {
 
         return attributedString
     }
+    
+    func lineSpaced(_ spacing: CGFloat) -> NSAttributedString {
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineSpacing = spacing
+        let attributedString = NSAttributedString(string: self, attributes: [NSAttributedString.Key.paragraphStyle: paragraphStyle])
+        return attributedString
+    }
 }

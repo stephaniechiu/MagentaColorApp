@@ -14,10 +14,10 @@ class MenuView: UIView {
 // MARK: - Properties
     
     //Review, Contact/Email, Favorites, Purchase
-    let animationView = UIView()
-    
+//    let animationView = UIView()
+    let menuControllerAnimation = AnimationView(name: "Office Desk-light mode")
     let premiumButton = UIView().menuItemButton(title: "Premium \n", subtitle: "Save more palettes and enjoy future premium features", darkModeImage: #imageLiteral(resourceName: "star-darkMode"), lightModeImage: #imageLiteral(resourceName: "star-lightMode"))
-    let favoritesButton = UIView().menuItemButton(title: "Favorites \n", subtitle: "View and edit your palettes and gradients", darkModeImage: #imageLiteral(resourceName: "favourite-empty-darkMode"), lightModeImage: #imageLiteral(resourceName: "favourite-empty-lightMode"))
+    let favoritesButton = UIView().menuItemButton(title: "Favorites\n", subtitle: "View and edit your palettes and gradients", darkModeImage: #imageLiteral(resourceName: "favourite-pink"), lightModeImage: #imageLiteral(resourceName: "favourite-pink"))
     let emailButton = UIView().menuItemButton(title: "Contact \n", subtitle: "We'd love to hear what's on your mind", darkModeImage: #imageLiteral(resourceName: "email-darkmode"), lightModeImage: #imageLiteral(resourceName: "email-lightmode"))
     
     let versionLabel: UILabel = {
@@ -28,23 +28,24 @@ class MenuView: UIView {
         return label
     }()
     
+    var scrollView: UIScrollView = {
+        let scroll = UIScrollView()
+        scroll.isPagingEnabled = true
+        return scroll
+    }()
+    
 // MARK: - Init
     override init(frame: CGRect) {
         
         super.init(frame: frame)
         
-        let menuControllerAnimation = AnimationView(name: "Office Desk-light mode")
-        
-        addSubview(animationView)
-        animationView.anchor(top: safeAreaLayoutGuide.topAnchor, left: leftAnchor, right: rightAnchor, paddingTop: 50, height: 300)
-        
-        animationView.addSubview(menuControllerAnimation)
-        menuControllerAnimation.anchor(top: animationView.topAnchor, left: animationView.leftAnchor, bottom: animationView.bottomAnchor, right: animationView.rightAnchor)
+        addSubview(menuControllerAnimation)
+        menuControllerAnimation.anchor(top: safeAreaLayoutGuide.topAnchor, left: leftAnchor, right: rightAnchor, paddingTop: 20, height: 350)
         menuControllerAnimation.play()
         menuControllerAnimation.loopMode = .loop
         
         addSubview(premiumButton)
-        premiumButton.anchor(top: animationView.bottomAnchor, paddingTop: 50, width: 360, height: 80)
+        premiumButton.anchor(top: menuControllerAnimation.bottomAnchor, paddingTop: 10, width: 360, height: 80)
         premiumButton.centerX(inView: self)
         
         addSubview(favoritesButton)
@@ -58,10 +59,12 @@ class MenuView: UIView {
         addSubview(versionLabel)
         versionLabel.anchor(bottom: safeAreaLayoutGuide.bottomAnchor)
         versionLabel.centerX(inView: self)
+        
+        addSubview(scrollView)
+        
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
 }

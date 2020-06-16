@@ -18,6 +18,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window = UIWindow(frame: windowScene.coordinateSpace.bounds)
         window?.windowScene = windowScene
         window?.rootViewController = UINavigationController(rootViewController: PaletteController())
+//        window?.rootViewController = SliderController()
         window?.makeKeyAndVisible()
     }
 

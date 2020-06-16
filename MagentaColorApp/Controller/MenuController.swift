@@ -24,6 +24,7 @@ class MenuController: UIViewController, MFMailComposeViewControllerDelegate {
         view.backgroundColor = .systemBackground
         
         setupNavigationController()
+        menuView.premiumButton.addTarget(self, action: #selector(openPremium(sender:)), for: .touchUpInside)
         menuView.favoritesButton.addTarget(self, action: #selector(openFavorites), for: .touchUpInside)
         menuView.emailButton.addTarget(self, action: #selector(sendEmail), for: .touchUpInside)
     }
@@ -42,6 +43,11 @@ class MenuController: UIViewController, MFMailComposeViewControllerDelegate {
     
     @objc fileprivate func popToLeftBarButtonItemTapped() {
         navigationController?.popViewControllerToLeft()
+    }
+    
+    @objc func openPremium(sender: UIButton) {
+        let premiumController = PremiumController()
+        self.present(premiumController, animated: true, completion: nil)
     }
     
     @objc func sendEmail(sender: UIGestureRecognizer) {

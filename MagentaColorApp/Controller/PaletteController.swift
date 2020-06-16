@@ -183,7 +183,7 @@ class PaletteController: UIViewController, UITableViewDataSource, UITableViewDel
         
         let buttonTag = sender.tag
         
-        for i in 0..<4{
+        for i in 0..<5 {
             if buttonTag == i {
                 UIView.animate(withDuration: 0.7, animations: {
                     switch self.currentAnimation {
@@ -239,7 +239,7 @@ class PaletteController: UIViewController, UITableViewDataSource, UITableViewDel
     //A new palette is generated when user taps on the Generate button
     @objc func randomPalette(sender: UIButton) {
         let randomStart = Date()
-        paletteView.favoriteButton.setImage(#imageLiteral(resourceName: "favourite-empty-darkMode"), for: .selected)
+        paletteView.favoriteButton.setImage(#imageLiteral(resourceName: "favourite-pink"), for: .selected)
         newPalette()
         hapticFeedback.impactOccurred()
         let randomEnd = Date()

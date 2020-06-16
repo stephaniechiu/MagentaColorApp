@@ -99,7 +99,7 @@ class PaletteView: UIView {
 // MARK: - Helper Functions
     fileprivate func setupLayout() {
         bottomControllerView.addSubview(paletteGenerateButton)
-        paletteGenerateButton.anchor(top: bottomControllerView.topAnchor, bottom: bottomControllerView.safeAreaLayoutGuide.bottomAnchor, paddingTop: 15, width: 150)
+        paletteGenerateButton.anchor(top: bottomControllerView.topAnchor, bottom: bottomControllerView.safeAreaLayoutGuide.bottomAnchor, paddingTop: 15, width: 150, height: 10)
         paletteGenerateButton.centerX(inView: bottomControllerView)
         
         bottomControllerView.addSubview(leftStackView)

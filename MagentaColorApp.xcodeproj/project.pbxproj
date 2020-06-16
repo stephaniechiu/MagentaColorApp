@@ -23,6 +23,9 @@
 		904007882490DCD800BEFC4A /* FavoritesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904007872490DCD800BEFC4A /* FavoritesTableViewCell.swift */; };
 		9042986F2473C35A0053B216 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9042986E2473C35A0053B216 /* GradientView.swift */; };
 		904298712473C36F0053B216 /* GradientController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904298702473C36F0053B216 /* GradientController.swift */; };
+		904733F324981AD60016D222 /* PremiumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904733F224981AD60016D222 /* PremiumView.swift */; };
+		904733F524981AEC0016D222 /* PremiumController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904733F424981AEC0016D222 /* PremiumController.swift */; };
+		904733FB24981ED90016D222 /* premiumAnimation.json in Resources */ = {isa = PBXBuildFile; fileRef = 904733FA24981ED90016D222 /* premiumAnimation.json */; };
 		906F82732496945200D5967B /* SliderController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 906F82722496945100D5967B /* SliderController.swift */; };
 		906F82772496950300D5967B /* SliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 906F82762496950300D5967B /* SliderView.swift */; };
 		906F82792496E3B300D5967B /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 906F82782496E3B300D5967B /* StoreKit.framework */; };
@@ -56,6 +59,9 @@
 		904007872490DCD800BEFC4A /* FavoritesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesTableViewCell.swift; sourceTree = "<group>"; };
 		9042986E2473C35A0053B216 /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		904298702473C36F0053B216 /* GradientController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientController.swift; sourceTree = "<group>"; };
+		904733F224981AD60016D222 /* PremiumView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PremiumView.swift; sourceTree = "<group>"; };
+		904733F424981AEC0016D222 /* PremiumController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PremiumController.swift; sourceTree = "<group>"; };
+		904733FA24981ED90016D222 /* premiumAnimation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = premiumAnimation.json; sourceTree = "<group>"; };
 		906F82722496945100D5967B /* SliderController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SliderController.swift; sourceTree = "<group>"; };
 		906F82762496950300D5967B /* SliderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SliderView.swift; sourceTree = "<group>"; };
 		906F82782496E3B300D5967B /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
@@ -132,6 +138,7 @@
 				90400779248C93BA00BEFC4A /* MagentaColorAppRelease.entitlements */,
 				9040077D248D9C3A00BEFC4A /* favourite-darkMode.json */,
 				9040077C248D9C3900BEFC4A /* favourite-lightMode.json */,
+				904733FA24981ED90016D222 /* premiumAnimation.json */,
 				903E169B248468BB006348F1 /* Office Desk-dark mode.json */,
 				903E169A248468BB006348F1 /* Office Desk-light mode.json */,
 				90E4B6AF24675BD300ED3D29 /* Model */,
@@ -163,8 +170,9 @@
 				90E4B6B224675C0500ED3D29 /* PaletteView.swift */,
 				9042986E2473C35A0053B216 /* GradientView.swift */,
 				902D708B248229A500E24CF3 /* MenuView.swift */,
-				906F82762496950300D5967B /* SliderView.swift */,
+				904733F224981AD60016D222 /* PremiumView.swift */,
 				904007892490DCE300BEFC4A /* Favorites */,
+				906F82762496950300D5967B /* SliderView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -176,6 +184,7 @@
 				904298702473C36F0053B216 /* GradientController.swift */,
 				902D708D248229B800E24CF3 /* MenuController.swift */,
 				90400784248E03BC00BEFC4A /* FavoritesController.swift */,
+				904733F424981AEC0016D222 /* PremiumController.swift */,
 				906F82722496945100D5967B /* SliderController.swift */,
 			);
 			path = Controller;
@@ -258,6 +267,7 @@
 				903E169D248468BB006348F1 /* Office Desk-dark mode.json in Resources */,
 				90E4B6A8246755A800ED3D29 /* LaunchScreen.storyboard in Resources */,
 				90E4B6A5246755A800ED3D29 /* Assets.xcassets in Resources */,
+				904733FB24981ED90016D222 /* premiumAnimation.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -312,10 +322,12 @@
 			files = (
 				90E4B69D246755A400ED3D29 /* PaletteController.swift in Sources */,
 				904007882490DCD800BEFC4A /* FavoritesTableViewCell.swift in Sources */,
+				904733F524981AEC0016D222 /* PremiumController.swift in Sources */,
 				902D708C248229A500E24CF3 /* MenuView.swift in Sources */,
 				903DB8E624808CFA008474AC /* ColorExtensions.swift in Sources */,
 				90400785248E03BC00BEFC4A /* FavoritesController.swift in Sources */,
 				90E4B6A3246755A400ED3D29 /* MagentaColorApp.xcdatamodeld in Sources */,
+				904733F324981AD60016D222 /* PremiumView.swift in Sources */,
 				90E4B699246755A400ED3D29 /* AppDelegate.swift in Sources */,
 				90E4B6BA24676FC500ED3D29 /* UIViewExtensions.swift in Sources */,
 				90E4B6B324675C0500ED3D29 /* PaletteView.swift in Sources */,

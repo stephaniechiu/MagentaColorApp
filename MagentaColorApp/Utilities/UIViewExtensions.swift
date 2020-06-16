@@ -12,6 +12,8 @@ extension UIView {
     func containerView(color: UIColor) -> UIView {
         let container = UIView()
         container.backgroundColor = color
+        container.frame.size = CGSize(width: 350, height: 350)
+        container.layer.cornerRadius = 20
         return container
     }
     
@@ -25,7 +27,7 @@ extension UIView {
     
     func generateButton(borderColor: UIColor, textColor: UIColor) -> UIButton {
         let button = UIButton()
-        button.frame.size = CGSize(width: 80, height: 12)
+        button.frame.size = CGSize(width: 80, height: 10)
         button.setTitle("Generate", for: .normal)
         button.titleLabel?.font = UIFont(name: "HelveticaNeue", size: 16)
         button.setTitleColor(textColor, for: .normal)
@@ -66,6 +68,26 @@ extension UIView {
         imageView.anchor(left: button.leftAnchor, paddingLeft: 5)
         imageView.centerY(inView: button)
         button.titleLabel?.anchor(left: imageView.rightAnchor, paddingLeft: 10)
+        
+        return button
+    }
+    
+    func subscriptionButton(titleText: String, subtitle: String? = nil, titleColor: UIColor) -> UIButton {
+        let button = UIButton()
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineSpacing = 5
+        
+        let buttonText = NSMutableAttributedString(string: titleText, attributes: [NSAttributedString.Key.foregroundColor: titleColor, NSAttributedString.Key.font: UIFont(name: "HelveticaNeue", size: 16) ?? "HelveticaNeue"])
+        let subtitleText = NSMutableAttributedString(string: subtitle ?? "", attributes: [NSAttributedString.Key.foregroundColor: UIColor.black, NSAttributedString.Key.font: UIFont(name: "HelveticaNeue-Thin", size: 14) as Any])
+        buttonText.append(subtitleText)
+        
+        button.titleLabel?.textAlignment = .center
+        button.titleLabel?.lineBreakMode = .byWordWrapping
+        button.contentEdgeInsets = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
+        button.titleLabel?.numberOfLines = 0
+        button.setAttributedTitle(buttonText, for: .normal)
+        button.layer.cornerRadius = 10
+        button.backgroundColor = UIColor(red: 230/255, green: 230/255, blue: 230/255, alpha: 1.0)
         
         return button
     }
