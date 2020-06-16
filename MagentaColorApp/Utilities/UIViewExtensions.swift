@@ -46,7 +46,7 @@ extension UIView {
         return button
     }
     
-    func menuItemButton(title: String, subtitle: String, darkModeImage: UIImage, lightModeImage: UIImage) -> UIButton {
+    func menuItemButton(title: String, subtitle: String, darkModeImage: UIImage, lightModeImage: UIImage, textPadding: CGFloat) -> UIButton {
         let button = UIButton()
         
         let buttonText = NSMutableAttributedString(string: title, attributes: [NSAttributedString.Key.foregroundColor: UIColor.label, NSAttributedString.Key.font: UIFont(name: "HelveticaNeue-Bold", size: 12) ?? "HelveticaNeue"])
@@ -67,7 +67,7 @@ extension UIView {
         button.addSubview(imageView)
         imageView.anchor(left: button.leftAnchor, paddingLeft: 5)
         imageView.centerY(inView: button)
-        button.titleLabel?.anchor(left: imageView.rightAnchor, paddingLeft: 10)
+        button.titleLabel?.anchor(left: imageView.rightAnchor, paddingLeft: textPadding)
         
         return button
     }

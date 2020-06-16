@@ -50,6 +50,11 @@ class MenuController: UIViewController, MFMailComposeViewControllerDelegate {
         self.present(premiumController, animated: true, completion: nil)
     }
     
+    @objc func openFavorites(sender: UIButton) {
+        let favoritesController = FavoritesController()
+        self.navigationController?.pushViewControllerFromLeft(controller: favoritesController)
+    }
+    
     @objc func sendEmail(sender: UIGestureRecognizer) {
         if MFMailComposeViewController.canSendMail() {
             let mail = MFMailComposeViewController()
@@ -72,10 +77,5 @@ class MenuController: UIViewController, MFMailComposeViewControllerDelegate {
 
     func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
         controller.dismiss(animated: true)
-    }
-
-    @objc func openFavorites(sender: UIButton) {
-        let favoritesController = FavoritesController()
-        self.navigationController?.pushViewControllerFromLeft(controller: favoritesController)
     }
 }
