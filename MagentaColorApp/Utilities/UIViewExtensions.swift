@@ -46,7 +46,7 @@ extension UIView {
         return button
     }
     
-    func menuItemButton(title: String, subtitle: String, darkModeImage: UIImage, lightModeImage: UIImage, textPadding: CGFloat) -> UIButton {
+    func menuItemButton(title: String, subtitle: String, darkModeImage: UIImage, lightModeImage: UIImage, imagePadding: CGFloat, textPadding: CGFloat) -> UIButton {
         let button = UIButton()
         
         let buttonText = NSMutableAttributedString(string: title, attributes: [NSAttributedString.Key.foregroundColor: UIColor.label, NSAttributedString.Key.font: UIFont(name: "HelveticaNeue-Bold", size: 12) ?? "HelveticaNeue"])

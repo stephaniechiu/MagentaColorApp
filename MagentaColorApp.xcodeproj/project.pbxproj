@@ -23,6 +23,8 @@
 		904007882490DCD800BEFC4A /* FavoritesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904007872490DCD800BEFC4A /* FavoritesTableViewCell.swift */; };
 		9042986F2473C35A0053B216 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9042986E2473C35A0053B216 /* GradientView.swift */; };
 		904298712473C36F0053B216 /* GradientController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904298702473C36F0053B216 /* GradientController.swift */; };
+		9044DD9F249863FB0036004C /* IAPProduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9044DD9E249863FB0036004C /* IAPProduct.swift */; };
+		904581A62498793300885246 /* IAPService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904581A52498793300885246 /* IAPService.swift */; };
 		904733F324981AD60016D222 /* PremiumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904733F224981AD60016D222 /* PremiumView.swift */; };
 		904733F524981AEC0016D222 /* PremiumController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904733F424981AEC0016D222 /* PremiumController.swift */; };
 		904733FB24981ED90016D222 /* premiumAnimation.json in Resources */ = {isa = PBXBuildFile; fileRef = 904733FA24981ED90016D222 /* premiumAnimation.json */; };
@@ -59,6 +61,8 @@
 		904007872490DCD800BEFC4A /* FavoritesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesTableViewCell.swift; sourceTree = "<group>"; };
 		9042986E2473C35A0053B216 /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		904298702473C36F0053B216 /* GradientController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientController.swift; sourceTree = "<group>"; };
+		9044DD9E249863FB0036004C /* IAPProduct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IAPProduct.swift; sourceTree = "<group>"; };
+		904581A52498793300885246 /* IAPService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IAPService.swift; sourceTree = "<group>"; };
 		904733F224981AD60016D222 /* PremiumView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PremiumView.swift; sourceTree = "<group>"; };
 		904733F424981AEC0016D222 /* PremiumController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PremiumController.swift; sourceTree = "<group>"; };
 		904733FA24981ED90016D222 /* premiumAnimation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = premiumAnimation.json; sourceTree = "<group>"; };
@@ -160,6 +164,8 @@
 			children = (
 				90E4B6B424676DCD00ED3D29 /* Color.swift */,
 				90400780248DFB8700BEFC4A /* FavoritesPalettes.swift */,
+				9044DD9E249863FB0036004C /* IAPProduct.swift */,
+				904581A52498793300885246 /* IAPService.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -333,9 +339,11 @@
 				90E4B6B324675C0500ED3D29 /* PaletteView.swift in Sources */,
 				903DB8E824808D3F008474AC /* StringExtensions.swift in Sources */,
 				906F82732496945200D5967B /* SliderController.swift in Sources */,
+				904581A62498793300885246 /* IAPService.swift in Sources */,
 				90E4B69B246755A400ED3D29 /* SceneDelegate.swift in Sources */,
 				903E168C2483923A006348F1 /* NavigationExtension.swift in Sources */,
 				904298712473C36F0053B216 /* GradientController.swift in Sources */,
+				9044DD9F249863FB0036004C /* IAPProduct.swift in Sources */,
 				9042986F2473C35A0053B216 /* GradientView.swift in Sources */,
 				90400781248DFB8700BEFC4A /* FavoritesPalettes.swift in Sources */,
 				902D708E248229B800E24CF3 /* MenuController.swift in Sources */,
