@@ -10,15 +10,16 @@ import UIKit
 import Lottie
 import StoreKit
 
-class PremiumController: UIViewController {
+class PremiumController: UIViewController, SKPaymentTransactionObserver {
 
 // MARK: - Properties
     
+    let menuController = MenuController()
     let premiumView = PremiumView()
     let productID = "com.stephaniechiu.MagentaColorApp.MonthlyAutoRenewingSubscriptions"
     let cancelButton: UIButton = {
         let button = UIButton()
-        button.setTitle("Cancel", for: .normal)
+        button.setTitle("Close", for: .normal)
         button.addTarget(self, action: #selector(dismiss(sender:)), for: .touchUpInside)
         button.titleLabel?.font = UIFont(name: "HelveticaNeue-Bold", size: 16)
         button.setTitleColor(.label, for: .normal)
@@ -26,6 +27,7 @@ class PremiumController: UIViewController {
     }()
     
 // MARK: - Init
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view = premiumView
@@ -33,6 +35,7 @@ class PremiumController: UIViewController {
         setupNavigationController()
         setupLayout()
         
+        SKPaymentQueue.default().add(self)
         IAPService.shared.getProducts()
     }
     
@@ -48,7 +51,28 @@ class PremiumController: UIViewController {
     }
     
     fileprivate func setupLayout() {
-        premiumView.monthlySubscriptionButton.addTarget(self, action: #selector(purchase(sender:)), for: .touchUpInside)
+        premiumView.monthlySubscriptionButton.addTarget(self, action: #selector(purchaseMonthlySubscription), for: .touchUpInside)
+        premiumView.restoreSubscriptionButton.addTarget(self, action: #selector(restorePurchase(sender:)), for: .touchUpInside)
+    }
+    
+    func paymentQueue(_ queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
+        for transaction in transactions {
+            print(transaction.transactionState.status(), transaction.payment.productIdentifier)
+            
+            if transaction.transactionState == .purchased {
+
+                UserDefaults.standard.set(true, forKey: IAPProduct.autoRenewingSubscription.rawValue)
+                MenuController().showPremiumContent()
+                SKPaymentQueue.default().finishTransaction(transaction)
+                
+            } else if transaction.transactionState == .failed {
+                if let error = transaction.error {
+                    let errorDescription = error.localizedDescription
+                    print("Transaction failed due to error: \(errorDescription)")
+                }
+                SKPaymentQueue.default().finishTransaction(transaction)
+            }
+        }
     }
     
 // MARK: - Selectors
@@ -57,7 +81,7 @@ class PremiumController: UIViewController {
         self.dismiss(animated: true, completion: nil)
     }
     
-    @objc func purchase(sender: UIButton) {
+    @objc func purchaseMonthlySubscription(sender: UIButton) {
         IAPService.shared.purchase(product: .autoRenewingSubscription)
         
         if SKPaymentQueue.canMakePayments() {
@@ -67,5 +91,9 @@ class PremiumController: UIViewController {
         } else {
             print("User unable to make payments")
         }
+    }
+    
+    @objc func restorePurchase(sender: UIButton) {
+        IAPService.shared.restorePurchases()
     }
 }

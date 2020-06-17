@@ -63,7 +63,7 @@ class PremiumView: UIView {
         backgroundColor = .systemBackground
         
         addSubview(animationBackground)
-        animationBackground.anchor(top: safeAreaLayoutGuide.topAnchor, paddingTop: 50, width: 350, height: 350)
+        animationBackground.anchor(top: safeAreaLayoutGuide.topAnchor, paddingTop: 70, width: 330, height: 330)
         animationBackground.centerX(inView: self)
         
         animationBackground.addSubview(premiumControllerAnimation)
