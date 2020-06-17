@@ -34,7 +34,6 @@ class PremiumController: UIViewController, SKPaymentTransactionObserver {
         
         setupNavigationController()
         setupLayout()
-        
         SKPaymentQueue.default().add(self)
         IAPService.shared.getProducts()
     }
@@ -55,25 +54,9 @@ class PremiumController: UIViewController, SKPaymentTransactionObserver {
         premiumView.restoreSubscriptionButton.addTarget(self, action: #selector(restorePurchase(sender:)), for: .touchUpInside)
     }
     
-    func paymentQueue(_ queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
-        for transaction in transactions {
-            print(transaction.transactionState.status(), transaction.payment.productIdentifier)
-            
-            if transaction.transactionState == .purchased {
-
-                UserDefaults.standard.set(true, forKey: IAPProduct.autoRenewingSubscription.rawValue)
-                MenuController().showPremiumContent()
-                SKPaymentQueue.default().finishTransaction(transaction)
-                
-            } else if transaction.transactionState == .failed {
-                if let error = transaction.error {
-                    let errorDescription = error.localizedDescription
-                    print("Transaction failed due to error: \(errorDescription)")
-                }
-                SKPaymentQueue.default().finishTransaction(transaction)
-            }
-        }
-    }
+//    @objc func dataDownloaded(n: NSNotification) {
+//        print("triggered")
+//    }
     
 // MARK: - Selectors
     
@@ -88,8 +71,33 @@ class PremiumController: UIViewController, SKPaymentTransactionObserver {
             let paymentRequest = SKMutablePayment()
             paymentRequest.productIdentifier = productID
             SKPaymentQueue.default().add(paymentRequest)
+            
+//            showPremiumContent()
+
         } else {
             print("User unable to make payments")
+        }
+    }
+    
+    func paymentQueue(_ queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
+        for transaction in transactions {
+            print(transaction.transactionState.status(), transaction.payment.productIdentifier)
+            
+            if transaction.transactionState == .purchased {
+
+                UserDefaults.standard.set(true, forKey: IAPProduct.autoRenewingSubscription.rawValue)
+//                MenuController().showPremiumContent()
+//                 let menuView = MenuView()
+//                menuView.favoritesButton.isHidden = false
+                SKPaymentQueue.default().finishTransaction(transaction)
+                
+            } else if transaction.transactionState == .failed {
+                if let error = transaction.error {
+                    let errorDescription = error.localizedDescription
+                    print("Transaction failed due to error: \(errorDescription)")
+                }
+                SKPaymentQueue.default().finishTransaction(transaction)
+            }
         }
     }
     

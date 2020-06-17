@@ -28,6 +28,13 @@ class MenuController: UIViewController, MFMailComposeViewControllerDelegate {
         menuView.premiumButton.addTarget(self, action: #selector(openPremium(sender:)), for: .touchUpInside)
         menuView.favoritesButton.addTarget(self, action: #selector(openFavorites), for: .touchUpInside)
         menuView.emailButton.addTarget(self, action: #selector(sendEmail), for: .touchUpInside)
+    
+        print(UserDefaults.standard.bool(forKey: IAPProduct.autoRenewingSubscription.rawValue))
+        let checkForSubscription = UserDefaults.standard.bool(forKey: IAPProduct.autoRenewingSubscription.rawValue)
+        if (!checkForSubscription) {
+            menuView.favoritesButton.alpha = 0
+            menuView.favoritesButton.isHidden = true
+        }
     }
     
     // MARK: - Helper Functions
@@ -40,10 +47,10 @@ class MenuController: UIViewController, MFMailComposeViewControllerDelegate {
         navigationItem.setRightBarButton(popToLeftBarButtonItem, animated: true)
     }
     
-    func showPremiumContent() {
-        menuView.favoritesButton.isHidden = false
-        self.view.setNeedsDisplay()
-    }
+//    func showPremiumContent() {
+//        menuView.favoritesButton.isHidden = false
+//        self.view.setNeedsDisplay()
+//    }
     
     // MARK: - Selectors
     
