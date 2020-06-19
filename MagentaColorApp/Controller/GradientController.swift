@@ -46,7 +46,13 @@ class GradientController: UIViewController {
     
     fileprivate func setupBottomController() {
         gradientView.shareButton.addTarget(self, action: #selector(setupGradientaActivityViewController(sender:)), for: .touchUpInside)
-        gradientView.favoriteButton.addTarget(self, action: #selector(saveFavoriteGradient(sender:)), for: .touchUpInside)
+        
+        let checkForSubscription = UserDefaults.standard.bool(forKey: IAPProduct.autoRenewingSubscription.rawValue)
+        if (!checkForSubscription) {
+            gradientView.favoriteButton.addTarget(self, action: #selector(openPremium(sender:)), for: .touchUpInside)
+        } else {
+            gradientView.favoriteButton.addTarget(self, action: #selector(saveFavoriteGradient(sender:)), for: .touchUpInside)
+        }
     }
     
     fileprivate func setupThemeButton() {
@@ -178,6 +184,11 @@ class GradientController: UIViewController {
      
     
 // MARK: - Selectors
+    
+    @objc func openPremium(sender: UIButton) {
+        let premiumController = PremiumController()
+        self.present(premiumController, animated: true, completion: nil)
+    }
     
     //Generates two random colors to create a gradient
     @objc func randomGradient(sender: UIButton)

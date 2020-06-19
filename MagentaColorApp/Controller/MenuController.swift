@@ -25,16 +25,8 @@ class MenuController: UIViewController, MFMailComposeViewControllerDelegate {
         view.backgroundColor = .systemBackground
         
         setupNavigationController()
-        menuView.premiumButton.addTarget(self, action: #selector(openPremium(sender:)), for: .touchUpInside)
-        menuView.favoritesButton.addTarget(self, action: #selector(openFavorites), for: .touchUpInside)
-        menuView.emailButton.addTarget(self, action: #selector(sendEmail), for: .touchUpInside)
-    
-        print(UserDefaults.standard.bool(forKey: IAPProduct.autoRenewingSubscription.rawValue))
-        let checkForSubscription = UserDefaults.standard.bool(forKey: IAPProduct.autoRenewingSubscription.rawValue)
-        if (!checkForSubscription) {
-            menuView.favoritesButton.alpha = 0
-            menuView.favoritesButton.isHidden = true
-        }
+        menuButtonActions()
+        checkForSubscription()
     }
     
     // MARK: - Helper Functions
@@ -47,10 +39,21 @@ class MenuController: UIViewController, MFMailComposeViewControllerDelegate {
         navigationItem.setRightBarButton(popToLeftBarButtonItem, animated: true)
     }
     
-//    func showPremiumContent() {
-//        menuView.favoritesButton.isHidden = false
-//        self.view.setNeedsDisplay()
-//    }
+    func menuButtonActions() {
+        menuView.premiumButton.addTarget(self, action: #selector(openPremium(sender:)), for: .touchUpInside)
+        menuView.favoritesButton.addTarget(self, action: #selector(openFavorites), for: .touchUpInside)
+        menuView.emailButton.addTarget(self, action: #selector(sendEmail), for: .touchUpInside)
+    }
+    
+    func checkForSubscription() {
+    //Check if user is subscribed. If no subscription, then Favorites Button remains hidden
+        print(UserDefaults.standard.bool(forKey: IAPProduct.autoRenewingSubscription.rawValue))
+        let checkForSubscription = UserDefaults.standard.bool(forKey: IAPProduct.autoRenewingSubscription.rawValue)
+        if (!checkForSubscription) {
+            menuView.favoritesButton.alpha = 0
+            menuView.favoritesButton.isHidden = false
+        }
+    }
     
     // MARK: - Selectors
     
@@ -72,7 +75,7 @@ class MenuController: UIViewController, MFMailComposeViewControllerDelegate {
         if MFMailComposeViewController.canSendMail() {
             let mail = MFMailComposeViewController()
             mail.mailComposeDelegate = self
-            mail.setToRecipients(["stephaniechiu@outlook.com"])
+            mail.setToRecipients(["begoniastudios@gmail.com"])
             mail.setSubject("My Thoughts on Magenta")
             mail.setMessageBody("", isHTML: true)
 

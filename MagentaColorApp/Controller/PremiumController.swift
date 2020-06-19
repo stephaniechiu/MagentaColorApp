@@ -54,10 +54,6 @@ class PremiumController: UIViewController, SKPaymentTransactionObserver {
         premiumView.restoreSubscriptionButton.addTarget(self, action: #selector(restorePurchase(sender:)), for: .touchUpInside)
     }
     
-//    @objc func dataDownloaded(n: NSNotification) {
-//        print("triggered")
-//    }
-    
 // MARK: - Selectors
     
     @objc func dismiss(sender: UIBarButtonItem) {
@@ -71,11 +67,10 @@ class PremiumController: UIViewController, SKPaymentTransactionObserver {
             let paymentRequest = SKMutablePayment()
             paymentRequest.productIdentifier = productID
             SKPaymentQueue.default().add(paymentRequest)
-            
-//            showPremiumContent()
-
         } else {
-            print("User unable to make payments")
+            let alert = UIAlertController(title: "Payment Failed", message: "You were unable to subscribe. Please try again later", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+            self.present(alert,animated: true)
         }
     }
     
@@ -86,14 +81,16 @@ class PremiumController: UIViewController, SKPaymentTransactionObserver {
             if transaction.transactionState == .purchased {
 
                 UserDefaults.standard.set(true, forKey: IAPProduct.autoRenewingSubscription.rawValue)
-//                MenuController().showPremiumContent()
-//                 let menuView = MenuView()
-//                menuView.favoritesButton.isHidden = false
                 SKPaymentQueue.default().finishTransaction(transaction)
                 
             } else if transaction.transactionState == .failed {
                 if let error = transaction.error {
                     let errorDescription = error.localizedDescription
+                    
+                    let alert = UIAlertController(title: "Payment Failed", message: "You were unable to subscribe. Please try again later", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+                    self.present(alert,animated: true)
+                    
                     print("Transaction failed due to error: \(errorDescription)")
                 }
                 SKPaymentQueue.default().finishTransaction(transaction)
@@ -102,6 +99,10 @@ class PremiumController: UIViewController, SKPaymentTransactionObserver {
     }
     
     @objc func restorePurchase(sender: UIButton) {
-        IAPService.shared.restorePurchases()
+        
+        SKPaymentQueue.default().restoreCompletedTransactions()
+        let alert = UIAlertController(title: "Restored", message: "Welcome back! Your subscription has been successfully restored", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+        self.present(alert,animated: true)
     }
 }

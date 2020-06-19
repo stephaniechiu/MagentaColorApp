@@ -1,4 +1,4 @@
-//
+ //
 //  ViewController.swift
 //  MagentaColorApp
 //
@@ -74,7 +74,16 @@ class PaletteController: UIViewController, UITableViewDataSource, UITableViewDel
         paletteView.menuButton.addTarget(self, action: #selector(openMenu(sender:)), for: .touchUpInside)
         paletteView.shareButton.addTarget(self, action: #selector(setupPaletteActivityViewController), for: .touchUpInside)
         paletteView.paletteGenerateButton.addTarget(self, action: #selector(randomPalette(sender:)), for: .touchUpInside)
-        paletteView.favoriteButton.addTarget(self, action: #selector(saveFavoritePalette), for: .touchUpInside)
+        
+        //Check if user is subscribed. If no subscription, then show Premium Controller
+        let checkForSubscription = UserDefaults.standard.bool(forKey: IAPProduct.autoRenewingSubscription.rawValue)
+        if (!checkForSubscription) {
+            paletteView.favoriteButton.addTarget(self, action: #selector(openPremium(sender:)), for: .touchUpInside)
+//                menuView.favoritesButton.alpha = 0
+//                menuView.favoritesButton.isHidden = true
+        } else {
+            paletteView.favoriteButton.addTarget(self, action: #selector(saveFavoritePalette(sender:)), for: .touchUpInside)
+        }
         
         view.addSubview(paletteView.bottomControllerView)
         paletteView.bottomControllerView.anchor(top: paletteTableView.bottomAnchor, left: view.safeAreaLayoutGuide.leftAnchor, bottom: view.bottomAnchor, right: view.safeAreaLayoutGuide.rightAnchor, height: bottomControllerHeight)
@@ -90,7 +99,7 @@ class PaletteController: UIViewController, UITableViewDataSource, UITableViewDel
         paletteTableView.rowHeight = heightOfCells
         
         paletteTableView.register(UITableViewCell.self, forCellReuseIdentifier: cellIdentifier)
-        
+         
         view.addSubview(paletteView.colorStackView)
         paletteView.colorStackView.centerX(inView: view)
         paletteView.colorStackView.centerY(inView: view)
@@ -143,6 +152,11 @@ class PaletteController: UIViewController, UITableViewDataSource, UITableViewDel
     @objc func openMenu(sender: UIButton) {
         let menuController = MenuController()
         self.navigationController?.pushViewControllerFromLeft(controller: menuController)
+    }
+    
+    @objc func openPremium(sender: UIButton) {
+        let premiumController = PremiumController()
+        self.present(premiumController, animated: true, completion: nil)
     }
     
     //When user taps Share button when a palette is shown, t
@@ -253,6 +267,7 @@ class PaletteController: UIViewController, UITableViewDataSource, UITableViewDel
         DispatchQueue(label: "com.stephaniechiu.Magenta.PalettesQueue", attributes: .concurrent)
     
     func newPalette() {
+        
         //Retrieve JSON data in background thread. Write method to modify array object
         concurrentPalettesQueue.async(flags: .barrier) {
             [weak self] in
@@ -288,6 +303,7 @@ class PaletteController: UIViewController, UITableViewDataSource, UITableViewDel
         
         hapticFeedback.impactOccurred()
         
+    //Favorite button will change from empty heart to filled heart when user taps to save. If user taps on game palette before generating a new palette, then that record will delete
         if sender.isSelected {
             sender.isSelected = false
             paletteView.favoriteButton.setImage(#imageLiteral(resourceName: "favourite-pink"), for: .selected)
