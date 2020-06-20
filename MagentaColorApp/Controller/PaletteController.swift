@@ -159,17 +159,17 @@ class PaletteController: UIViewController, UITableViewDataSource, UITableViewDel
         self.present(premiumController, animated: true, completion: nil)
     }
     
-    //When user taps Share button when a palette is shown, t
+    //User is able to share all the colors in view
     @objc func setupPaletteActivityViewController(sender: UIButton) {
-        let string = "Magenta Color App: { \n\(arrayText) \n}"
-//        let pdf = Bundle.main.url(forResource: "Q4 Projections", withExtension: "pdf")
+        let string = "Magenta Color App: \n\(arrayText) \n".replacingOccurrences(of: ",", with:"\n", options: .literal, range: nil)
         let activityViewController = UIActivityViewController(activityItems: [string], applicationActivities: nil)
         
         present(activityViewController, animated: true, completion: nil)
     }
     
+    //User is able to share individual color
     @objc func setupColorActivityViewController(sender: UIButton) {
-        let string = "Magenta Color App: { \n\(cellColorFromAPI) \n}"
+        let string = "Magenta Color App: \n\(cellColorFromAPI) \n".replacingOccurrences(of: ",", with:"\n", options: .literal, range: nil)
 //        print(cellColorFromAPI)
         let activityViewController = UIActivityViewController(activityItems: [string], applicationActivities: nil)
             
@@ -247,7 +247,7 @@ class PaletteController: UIViewController, UITableViewDataSource, UITableViewDel
 //                print("click \(buttonTag)")
             }
         }
-        print("Magenta Color App: { \n\(arrayText) \n}")
+        print("Magenta Color App: \n\(arrayText)".replacingOccurrences(of: ",", with:"\n", options: .literal, range: nil))
     }
     
     //A new palette is generated when user taps on the Generate button

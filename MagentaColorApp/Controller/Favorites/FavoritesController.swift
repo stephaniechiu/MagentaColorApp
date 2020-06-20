@@ -14,6 +14,7 @@ class FavoritesController: UIViewController, UITableViewDataSource, UITableViewD
 // MARK: - Properties
 
     let paletteController = PaletteController()
+    let alertPopUpView = AlertPopUpView()
     let favoritesTableView = UITableView()
     let reuseIdentifier = "favoritesCell"
     let hapticFeedback = UIImpactFeedbackGenerator()
@@ -129,6 +130,11 @@ class FavoritesController: UIViewController, UITableViewDataSource, UITableViewD
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if retrieveFavoritePalette.count == 0 {
+            alertPopUpView.popupView.isHidden = false
+        } else {
+            alertPopUpView.isHidden = true
+        }
         return retrieveFavoritePalette.count
     }
     
@@ -178,7 +184,7 @@ class FavoritesController: UIViewController, UITableViewDataSource, UITableViewD
             var string = ""
             
             print(individualColorInRecord)
-            string = "Magenta Color App {\n\(individualGradientInRecord) \(individualColorInRecord)\n}"
+            string = "Magenta Color App \n\(individualGradientInRecord) \(individualColorInRecord)\n".replacingOccurrences(of: ",", with:"\n", options: .literal, range: nil)
             
             let activityViewController = UIActivityViewController(activityItems: [string], applicationActivities: nil)
             self.present(activityViewController, animated: true, completion: nil)

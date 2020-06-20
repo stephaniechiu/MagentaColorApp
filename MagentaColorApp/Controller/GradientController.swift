@@ -235,7 +235,7 @@ class GradientController: UIViewController {
     }
     
     @objc func setupGradientaActivityViewController(sender: UIButton) {
-        let string = "Magenta Color App: { \n\(shareLeftColor.uppercased()), \(shareRightColor.uppercased()) \n}"
+        let string = "Magenta Color App: \n\(shareLeftColor.uppercased()), \(shareRightColor.uppercased()) \n".replacingOccurrences(of: ",", with:"\n", options: .literal, range: nil)
         let activityViewController = UIActivityViewController(activityItems: [string], applicationActivities: nil)
         
         present(activityViewController, animated: true, completion: nil)
