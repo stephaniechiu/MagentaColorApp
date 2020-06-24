@@ -9,5 +9,5 @@
 import Foundation
 
 enum IAPProduct: String {
-    case autoRenewingSubscription = "com.stephaniechiu.MagentaColorApp.MonthlyAutoRenewingSubscriptions"
+    case nonConsumablePurchase = "com.stephaniechiu.MagentaColorApp.NonConsumablePurchase"
 }

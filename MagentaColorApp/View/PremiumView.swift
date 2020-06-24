@@ -42,7 +42,7 @@ class PremiumView: UIView {
         return label
     }()
     
-    let monthlySubscriptionButton = UIView().subscriptionButton(titleText: "$0.99", subtitle: " / Month \nMonthly auto-renewing subscription", titleColor: UIColor(red: 196/255, green: 33/255, blue: 131/255, alpha: 1.0))
+    let monthlySubscriptionButton = UIView().subscriptionButton(titleText: "$0.99", subtitle: "\nAdd your favorite palette and gradient colors by going Premium. This is a one time only purchase", titleColor: UIColor(red: 196/255, green: 33/255, blue: 131/255, alpha: 1.0))
     
     let restoreSubscriptionButton = UIView().subscriptionButton(titleText: "Restore Subscription\n", subtitle: "If you have purchased Premium for Magenta before, you can resore your purchase at anytime", titleColor: UIColor(red: 196/255, green: 33/255, blue: 131/255, alpha: 1.0))
     

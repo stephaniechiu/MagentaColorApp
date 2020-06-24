@@ -76,7 +76,7 @@ class PaletteController: UIViewController, UITableViewDataSource, UITableViewDel
         paletteView.paletteGenerateButton.addTarget(self, action: #selector(randomPalette(sender:)), for: .touchUpInside)
         
         //Check if user is subscribed. If no subscription, then show Premium Controller
-        let checkForSubscription = UserDefaults.standard.bool(forKey: IAPProduct.autoRenewingSubscription.rawValue)
+        let checkForSubscription = UserDefaults.standard.bool(forKey: IAPProduct.nonConsumablePurchase.rawValue)
         if (!checkForSubscription) {
             paletteView.favoriteButton.addTarget(self, action: #selector(openPremium(sender:)), for: .touchUpInside)
 //                menuView.favoritesButton.alpha = 0
@@ -176,24 +176,24 @@ class PaletteController: UIViewController, UITableViewDataSource, UITableViewDel
         present(activityViewController, animated: true, completion: nil)
     }
     
-    @objc func copyText(sender: UIGestureRecognizer) {
-        UIPasteboard.general.string = paletteView.colorLabelHEX.text
-        UIPasteboard.general.string = paletteView.colorLabelRGB.text
-        UIPasteboard.general.string = paletteView.colorLabelHSB.text
-        UIPasteboard.general.string = paletteView.colorLabelCMY.text
-        UIPasteboard.general.string = paletteView.colorLabelCMYK.text
-        
-        let alert = UIAlertController(title: "Copied!", message: "", preferredStyle: UIAlertController.Style.alert)
-        self.present(alert, animated: true, completion: nil)
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-              alert.dismiss(animated: true, completion: nil)
-          }
-    }
+//    @objc func copyText(sender: UIGestureRecognizer) {
+//        UIPasteboard.general.string = paletteView.colorLabelHEX.text
+//        UIPasteboard.general.string = paletteView.colorLabelRGB.text
+//        UIPasteboard.general.string = paletteView.colorLabelHSB.text
+//        UIPasteboard.general.string = paletteView.colorLabelCMY.text
+//        UIPasteboard.general.string = paletteView.colorLabelCMYK.text
+//
+//        let alert = UIAlertController(title: "Copied!", message: "", preferredStyle: UIAlertController.Style.alert)
+//        self.present(alert, animated: true, completion: nil)
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+//              alert.dismiss(animated: true, completion: nil)
+//          }
+//    }
     
     //When user taps on a color in the palette, it "opens" to fill the screen with that color with it's color codes
     @objc func openColor(sender: UIButton) {
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(copyText(sender:)))
-        view.addGestureRecognizer(tapGesture)
+//        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(copyText(sender:)))
+//        view.addGestureRecognizer(tapGesture)
         
         let buttonTag = sender.tag
         
@@ -275,7 +275,7 @@ class PaletteController: UIViewController, UITableViewDataSource, UITableViewDel
                 return
             }
             
-            guard let url = URL(string: "https://www.colourlovers.com/api/palettes/?format=json&numResults=100") else { return }
+            guard let url = URL(string: "https://www.colourlovers.com/api/palettes/?format=json&numResults=50") else { return }
             guard let data = try? Data(contentsOf: url) else { return }
             
             do {
@@ -323,6 +323,8 @@ class PaletteController: UIViewController, UITableViewDataSource, UITableViewDel
             
             saveToCloud(palette: arrayText)
         }
+        
+        
     }
     
     func saveToCloud(palette: [String]) {

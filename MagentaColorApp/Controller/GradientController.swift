@@ -47,7 +47,7 @@ class GradientController: UIViewController {
     fileprivate func setupBottomController() {
         gradientView.shareButton.addTarget(self, action: #selector(setupGradientaActivityViewController(sender:)), for: .touchUpInside)
         
-        let checkForSubscription = UserDefaults.standard.bool(forKey: IAPProduct.autoRenewingSubscription.rawValue)
+        let checkForSubscription = UserDefaults.standard.bool(forKey: IAPProduct.nonConsumablePurchase.rawValue)
         if (!checkForSubscription) {
             gradientView.favoriteButton.addTarget(self, action: #selector(openPremium(sender:)), for: .touchUpInside)
         } else {
@@ -250,7 +250,7 @@ class GradientController: UIViewController {
         if sender.isSelected {
             sender.isSelected = false
             gradientView.favoriteButton.setImage(#imageLiteral(resourceName: "favourite-pink"), for: .selected)
-//
+
             let recordID = recordIDs.first!
             
             privateDatabase.delete(withRecordID: recordID) { (deleteRecordID, error) in

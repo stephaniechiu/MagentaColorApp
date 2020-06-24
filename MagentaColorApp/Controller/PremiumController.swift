@@ -16,7 +16,7 @@ class PremiumController: UIViewController, SKPaymentTransactionObserver {
     
     let menuController = MenuController()
     let premiumView = PremiumView()
-    let productID = "com.stephaniechiu.MagentaColorApp.MonthlyAutoRenewingSubscriptions"
+    let productID = "com.stephaniechiu.MagentaColorApp.NonConsumablePurchase"
     let cancelButton: UIButton = {
         let button = UIButton()
         button.setTitle("Close", for: .normal)
@@ -51,7 +51,23 @@ class PremiumController: UIViewController, SKPaymentTransactionObserver {
     
     fileprivate func setupLayout() {
         premiumView.monthlySubscriptionButton.addTarget(self, action: #selector(purchaseMonthlySubscription), for: .touchUpInside)
-        premiumView.restoreSubscriptionButton.addTarget(self, action: #selector(restorePurchase(sender:)), for: .touchUpInside)
+        
+        let checkForSubscription = UserDefaults.standard.bool(forKey: IAPProduct.nonConsumablePurchase.rawValue)
+        if (!checkForSubscription) {
+            premiumView.restoreSubscriptionButton.isHidden = true
+        } else {
+            premiumView.restoreSubscriptionButton.isHidden = false
+            premiumView.restoreSubscriptionButton.addTarget(self, action: #selector(restorePurchase(sender:)), for: .touchUpInside)
+        }
+    }
+    
+    func checkForSubscription() {
+    //Check if user is subscribed. If no subscription, then Favorites Button remains hidden
+        print(UserDefaults.standard.bool(forKey: IAPProduct.nonConsumablePurchase.rawValue))
+        let checkForSubscription = UserDefaults.standard.bool(forKey: IAPProduct.nonConsumablePurchase.rawValue)
+        if (!checkForSubscription) {
+
+        }
     }
     
 // MARK: - Selectors
@@ -61,7 +77,7 @@ class PremiumController: UIViewController, SKPaymentTransactionObserver {
     }
     
     @objc func purchaseMonthlySubscription(sender: UIButton) {
-        IAPService.shared.purchase(product: .autoRenewingSubscription)
+        IAPService.shared.purchase(product: .nonConsumablePurchase)
         
         if SKPaymentQueue.canMakePayments() {
             let paymentRequest = SKMutablePayment()
@@ -80,7 +96,7 @@ class PremiumController: UIViewController, SKPaymentTransactionObserver {
             
             if transaction.transactionState == .purchased {
 
-                UserDefaults.standard.set(true, forKey: IAPProduct.autoRenewingSubscription.rawValue)
+                UserDefaults.standard.set(true, forKey: IAPProduct.nonConsumablePurchase.rawValue)
                 SKPaymentQueue.default().finishTransaction(transaction)
                 
             } else if transaction.transactionState == .failed {

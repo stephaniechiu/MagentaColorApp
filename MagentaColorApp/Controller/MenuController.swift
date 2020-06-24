@@ -47,8 +47,8 @@ class MenuController: UIViewController, MFMailComposeViewControllerDelegate {
     
     func checkForSubscription() {
     //Check if user is subscribed. If no subscription, then Favorites Button remains hidden
-        print(UserDefaults.standard.bool(forKey: IAPProduct.autoRenewingSubscription.rawValue))
-        let checkForSubscription = UserDefaults.standard.bool(forKey: IAPProduct.autoRenewingSubscription.rawValue)
+        print(UserDefaults.standard.bool(forKey: IAPProduct.nonConsumablePurchase.rawValue))
+        let checkForSubscription = UserDefaults.standard.bool(forKey: IAPProduct.nonConsumablePurchase.rawValue)
         if (!checkForSubscription) {
             menuView.favoritesButton.alpha = 0
             menuView.favoritesButton.isHidden = false

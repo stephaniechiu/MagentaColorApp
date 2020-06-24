@@ -21,6 +21,7 @@
 		90400781248DFB8700BEFC4A /* FavoritesPalettes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90400780248DFB8700BEFC4A /* FavoritesPalettes.swift */; };
 		90400785248E03BC00BEFC4A /* FavoritesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90400784248E03BC00BEFC4A /* FavoritesController.swift */; };
 		904007882490DCD800BEFC4A /* FavoritesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904007872490DCD800BEFC4A /* FavoritesTableViewCell.swift */; };
+		9042194524A1D0B800B5FE83 /* trophy-animated.json in Resources */ = {isa = PBXBuildFile; fileRef = 9042194424A1D0B700B5FE83 /* trophy-animated.json */; };
 		9042986F2473C35A0053B216 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9042986E2473C35A0053B216 /* GradientView.swift */; };
 		904298712473C36F0053B216 /* GradientController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904298702473C36F0053B216 /* GradientController.swift */; };
 		9044DD9F249863FB0036004C /* IAPProduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9044DD9E249863FB0036004C /* IAPProduct.swift */; };
@@ -51,7 +52,7 @@
 		903E168B2483923A006348F1 /* NavigationExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationExtension.swift; sourceTree = "<group>"; };
 		903E169A248468BB006348F1 /* Office Desk-light mode.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "Office Desk-light mode.json"; sourceTree = SOURCE_ROOT; };
 		903E169B248468BB006348F1 /* Office Desk-dark mode.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "Office Desk-dark mode.json"; sourceTree = SOURCE_ROOT; };
-		903E16A424847768006348F1 /* MagentaColorApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MagentaColorApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		903E16A424847768006348F1 /* MagentaColor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MagentaColor.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		90400779248C93BA00BEFC4A /* MagentaColorAppRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MagentaColorAppRelease.entitlements; sourceTree = "<group>"; };
 		9040077A248C93CF00BEFC4A /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		9040077C248D9C3900BEFC4A /* favourite-lightMode.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "favourite-lightMode.json"; sourceTree = "<group>"; };
@@ -60,6 +61,7 @@
 		90400784248E03BC00BEFC4A /* FavoritesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesController.swift; sourceTree = "<group>"; };
 		90400786248F39AE00BEFC4A /* MagentaColorAppDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MagentaColorAppDebug.entitlements; sourceTree = "<group>"; };
 		904007872490DCD800BEFC4A /* FavoritesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesTableViewCell.swift; sourceTree = "<group>"; };
+		9042194424A1D0B700B5FE83 /* trophy-animated.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "trophy-animated.json"; sourceTree = "<group>"; };
 		9042986E2473C35A0053B216 /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		904298702473C36F0053B216 /* GradientController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientController.swift; sourceTree = "<group>"; };
 		9044DD9E249863FB0036004C /* IAPProduct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IAPProduct.swift; sourceTree = "<group>"; };
@@ -140,7 +142,7 @@
 			isa = PBXGroup;
 			children = (
 				90E4B697246755A400ED3D29 /* MagentaColorApp */,
-				903E16A424847768006348F1 /* MagentaColorApp.app */,
+				903E16A424847768006348F1 /* MagentaColor.app */,
 				1EEA50155D89C262570C4D6E /* Pods */,
 				11CAE768F4D3FC9A09E779B6 /* Frameworks */,
 			);
@@ -154,6 +156,7 @@
 				9040077D248D9C3A00BEFC4A /* favourite-darkMode.json */,
 				9040077C248D9C3900BEFC4A /* favourite-lightMode.json */,
 				904733FA24981ED90016D222 /* premiumAnimation.json */,
+				9042194424A1D0B700B5FE83 /* trophy-animated.json */,
 				903E169B248468BB006348F1 /* Office Desk-dark mode.json */,
 				903E169A248468BB006348F1 /* Office Desk-light mode.json */,
 				90E4B6AF24675BD300ED3D29 /* Model */,
@@ -237,7 +240,7 @@
 			);
 			name = MagentaColorApp;
 			productName = MagentaColorApp;
-			productReference = 903E16A424847768006348F1 /* MagentaColorApp.app */;
+			productReference = 903E16A424847768006348F1 /* MagentaColor.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -280,6 +283,7 @@
 			files = (
 				9040077E248D9C3A00BEFC4A /* favourite-lightMode.json in Resources */,
 				903E169C248468BB006348F1 /* Office Desk-light mode.json in Resources */,
+				9042194524A1D0B800B5FE83 /* trophy-animated.json in Resources */,
 				9040077F248D9C3A00BEFC4A /* favourite-darkMode.json in Resources */,
 				903E169D248468BB006348F1 /* Office Desk-dark mode.json in Resources */,
 				90E4B6A8246755A800ED3D29 /* LaunchScreen.storyboard in Resources */,
@@ -506,7 +510,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.stephaniechiu.MagentaColorApp;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = MagentaColor;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -526,7 +530,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.stephaniechiu.MagentaColorApp;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = MagentaColor;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

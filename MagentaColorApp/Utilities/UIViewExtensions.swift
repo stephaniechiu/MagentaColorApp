@@ -17,9 +17,9 @@ extension UIView {
         return container
     }
     
-    func circleView(width: CGFloat, height: CGFloat) -> UIView{
+    func circleView() -> UIView{
         let circle = UIView()
-        circle.frame.size = CGSize(width: width, height: height)
+//        circle.frame.size = CGSize(width: width, height: height)
         circle.layer.cornerRadius = circle.frame.size.width / 2
         circle.clipsToBounds = true
         return circle

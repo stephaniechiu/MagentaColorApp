@@ -133,7 +133,7 @@ class FavoritesController: UIViewController, UITableViewDataSource, UITableViewD
         if retrieveFavoritePalette.count == 0 {
             alertPopUpView.popupView.isHidden = false
         } else {
-            alertPopUpView.isHidden = true
+            alertPopUpView.popupView.isHidden = true
         }
         return retrieveFavoritePalette.count
     }
