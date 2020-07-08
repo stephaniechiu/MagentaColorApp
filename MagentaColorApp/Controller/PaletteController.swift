@@ -217,19 +217,19 @@ class PaletteController: UIViewController, UITableViewDataSource, UITableViewDel
                         self.contrastColorForIcon(color: self.cellColorInRGB)
                         
                         self.paletteView.colorLabelHEX.textColor = UIColor().contrastColor(color: self.cellColorInRGB)
-                        self.paletteView.colorLabelHEX.attributedText = "HEX \n\(self.cellColorInRGB.toHexString().uppercased())".attributedStringWithBoldness(["HEX"], fontSize: 10, characterSpacing: 1)
+                        self.paletteView.colorLabelHEX.attributedText = "HEX \n\(self.cellColorInRGB.toHexString().uppercased())".attributedStringWithBoldness(["HEX"], characterSpacing: 1)
                
                         self.paletteView.colorLabelRGB.textColor = UIColor().contrastColor(color: self.cellColorInRGB)
-                        self.paletteView.colorLabelRGB.attributedText = "RGB \n\(Int(self.cellColorInRGB.rgba.red)), \(Int(self.cellColorInRGB.rgba.green)), \( Int(self.cellColorInRGB.rgba.blue))".attributedStringWithBoldness(["RGB"], fontSize: 10, characterSpacing: 1)
+                        self.paletteView.colorLabelRGB.attributedText = "RGB \n\(Int(self.cellColorInRGB.rgba.red)), \(Int(self.cellColorInRGB.rgba.green)), \( Int(self.cellColorInRGB.rgba.blue))".attributedStringWithBoldness(["RGB"], characterSpacing: 1)
                         
                         self.paletteView.colorLabelHSB.textColor = UIColor().contrastColor(color: self.cellColorInRGB)
-                        self.paletteView.colorLabelHSB.attributedText = "HSB \n\(Int(self.cellColorInRGB.hsba.hue)), \(Int(self.cellColorInRGB.hsba.saturation)), \(Int(self.cellColorInRGB.hsba.brightness))".attributedStringWithBoldness(["HSB"], fontSize: 10, characterSpacing: 1)
+                        self.paletteView.colorLabelHSB.attributedText = "HSB \n\(Int(self.cellColorInRGB.hsba.hue)), \(Int(self.cellColorInRGB.hsba.saturation)), \(Int(self.cellColorInRGB.hsba.brightness))".attributedStringWithBoldness(["HSB"], characterSpacing: 1)
                         
                         self.paletteView.colorLabelCMY.textColor = UIColor().contrastColor(color: self.cellColorInRGB)
-                        self.paletteView.colorLabelCMY.attributedText = "CMY \n\(Int(round(self.cellColorInRGB.cmy.cyan * 100))), \(Int(round(self.cellColorInRGB.cmy.magenta * 100))), \(Int(round(self.cellColorInRGB.cmy.yellow * 100)))".attributedStringWithBoldness(["CMY"], fontSize: 10, characterSpacing: 1)
+                        self.paletteView.colorLabelCMY.attributedText = "CMY \n\(Int(round(self.cellColorInRGB.cmy.cyan * 100))), \(Int(round(self.cellColorInRGB.cmy.magenta * 100))), \(Int(round(self.cellColorInRGB.cmy.yellow * 100)))".attributedStringWithBoldness(["CMY"], characterSpacing: 1)
                         
                         self.paletteView.colorLabelCMYK.textColor = UIColor().contrastColor(color: self.cellColorInRGB)
-                        self.paletteView.colorLabelCMYK.attributedText = "CMYK \n\(Int(round(self.cellColorInRGB.cmyk.cyan * 100))), \(Int(round(self.cellColorInRGB.cmyk.magenta * 100))), \(Int(round(self.cellColorInRGB.cmyk.yellow * 100))), \(Int(round(self.cellColorInRGB.cmyk.black * 100)))".attributedStringWithBoldness(["CMYK"], fontSize: 10, characterSpacing: 1)
+                        self.paletteView.colorLabelCMYK.attributedText = "CMYK \n\(Int(round(self.cellColorInRGB.cmyk.cyan * 100))), \(Int(round(self.cellColorInRGB.cmyk.magenta * 100))), \(Int(round(self.cellColorInRGB.cmyk.yellow * 100))), \(Int(round(self.cellColorInRGB.cmyk.black * 100)))".attributedStringWithBoldness(["CMYK"], characterSpacing: 1)
                         
 //                        print("This is the color \(self.cellColor)")
                     case 1:

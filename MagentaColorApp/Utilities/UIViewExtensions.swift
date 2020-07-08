@@ -17,12 +17,20 @@ extension UIView {
         return container
     }
     
-    func circleView() -> UIView{
+    func circleView(width: CGFloat, height: CGFloat) -> UIView{
         let circle = UIView()
-//        circle.frame.size = CGSize(width: width, height: height)
+        circle.frame.size = CGSize(width: width, height: height)
         circle.layer.cornerRadius = circle.frame.size.width / 2
         circle.clipsToBounds = true
         return circle
+    }
+    
+    func circleButton(width: CGFloat, height: CGFloat) -> UIButton {
+        let button = UIButton()
+        button.frame.size = CGSize(width: width, height: height)
+        button.layer.cornerRadius = button.frame.size.width / 2
+        button.clipsToBounds = true
+        return button
     }
     
     func generateButton(borderColor: UIColor, textColor: UIColor) -> UIButton {
@@ -50,7 +58,7 @@ extension UIView {
         let button = UIButton()
         
         let buttonText = NSMutableAttributedString(string: title, attributes: [NSAttributedString.Key.foregroundColor: UIColor.label, NSAttributedString.Key.font: UIFont(name: "HelveticaNeue-Bold", size: 12) ?? "HelveticaNeue"])
-        let subtitleText = NSMutableAttributedString(string: subtitle, attributes: [NSAttributedString.Key.foregroundColor: UIColor.label, NSAttributedString.Key.font: UIFont(name: "HelveticaNeue-Thin", size: 16) as Any])
+        let subtitleText = NSMutableAttributedString(string: subtitle, attributes: [NSAttributedString.Key.foregroundColor: UIColor.label, NSAttributedString.Key.font: UIFont(name: "HelveticaNeue", size: 16) as Any])
         buttonText.append(subtitleText)
         button.setAttributedTitle(buttonText, for: .normal)
         button.titleLabel?.lineBreakMode = .byWordWrapping
@@ -78,7 +86,7 @@ extension UIView {
         paragraphStyle.lineSpacing = 5
         
         let buttonText = NSMutableAttributedString(string: titleText, attributes: [NSAttributedString.Key.foregroundColor: titleColor, NSAttributedString.Key.font: UIFont(name: "HelveticaNeue", size: 16) ?? "HelveticaNeue"])
-        let subtitleText = NSMutableAttributedString(string: subtitle ?? "", attributes: [NSAttributedString.Key.foregroundColor: UIColor.black, NSAttributedString.Key.font: UIFont(name: "HelveticaNeue-Thin", size: 14) as Any])
+        let subtitleText = NSMutableAttributedString(string: subtitle ?? "", attributes: [NSAttributedString.Key.foregroundColor: UIColor.black, NSAttributedString.Key.font: UIFont(name: "HelveticaNeue", size: 14) as Any])
         buttonText.append(subtitleText)
         
         button.titleLabel?.textAlignment = .center
@@ -94,7 +102,7 @@ extension UIView {
     
     func colorInfoLabel(color: UIColor) -> UILabel {
         let label = UILabel()
-        label.font = UIFont(name: "HelveticaNeue-Thin", size: 17)
+        label.font = UIFont(name: "HelveticaNeue", size: 17)
         label.text = "RGB(0.0, 0.0, 0.0)"
         label.numberOfLines = 0
         return label

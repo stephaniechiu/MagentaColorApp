@@ -36,7 +36,7 @@ class PaletteView: UIView {
     let favoriteButton = UIView().imageButton(image: #imageLiteral(resourceName: "favourite-pink"), width: 30, height: 30)
     
     //Button for Gradient Controller
-    var gradientStackView: UIStackView
+//    var gradientStackView: UIStackView
     let gradientButton: UIButton = {
         let button = UIButton()
         button.layer.borderColor = UIColor.label.cgColor
@@ -47,14 +47,6 @@ class PaletteView: UIView {
         button.clipsToBounds = true
         button.addTarget(self, action: #selector(PaletteController.openGradientController), for: .touchUpInside)
         return button
-    }()
-    
-    let gradientLabel: UILabel = {
-        let label = UILabel()
-        label.textColor = .white
-        label.text = "Gradients"
-        label.font = label.font.withSize(12)
-        return label
     }()
     
     let copiedNotificationLabel: UILabel = {
@@ -74,10 +66,6 @@ class PaletteView: UIView {
         colorStackView.distribution = .fillEqually
         colorStackView.axis = .vertical
         
-        self.gradientStackView = UIStackView(arrangedSubviews: [gradientButton, gradientLabel])
-        gradientStackView.spacing = 3
-        gradientStackView.distribution = .fillEqually
-        gradientStackView.axis = .vertical
         
         self.leftStackView = UIStackView(arrangedSubviews: [menuButton, shareButton])
         leftStackView.spacing = 3

@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		5CB727CAA91680EF106DBC4B /* Pods_MagentaColorApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B61673D4F7B3A258D9DDB31 /* Pods_MagentaColorApp.framework */; };
+		9025540424B2CF6F00E6CDD3 /* ColorPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9025540324B2CF6F00E6CDD3 /* ColorPickerView.swift */; };
+		9025540624B5110A00E6CDD3 /* DeviceExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9025540524B5110A00E6CDD3 /* DeviceExtension.swift */; };
 		902D708C248229A500E24CF3 /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902D708B248229A500E24CF3 /* MenuView.swift */; };
 		902D708E248229B800E24CF3 /* MenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902D708D248229B800E24CF3 /* MenuController.swift */; };
 		903DB8E624808CFA008474AC /* ColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 903DB8E524808CF9008474AC /* ColorExtensions.swift */; };
@@ -30,7 +32,7 @@
 		904733F524981AEC0016D222 /* PremiumController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904733F424981AEC0016D222 /* PremiumController.swift */; };
 		904733FB24981ED90016D222 /* premiumAnimation.json in Resources */ = {isa = PBXBuildFile; fileRef = 904733FA24981ED90016D222 /* premiumAnimation.json */; };
 		905383AE249D86DC00D4FE21 /* AlertPopUpController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 905383AD249D86DC00D4FE21 /* AlertPopUpController.swift */; };
-		906F82732496945200D5967B /* SliderController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 906F82722496945100D5967B /* SliderController.swift */; };
+		906F82732496945200D5967B /* ColorPickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 906F82722496945100D5967B /* ColorPickerController.swift */; };
 		906F82772496950300D5967B /* SliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 906F82762496950300D5967B /* SliderView.swift */; };
 		906F82792496E3B300D5967B /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 906F82782496E3B300D5967B /* StoreKit.framework */; };
 		90E4B699246755A400ED3D29 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90E4B698246755A400ED3D29 /* AppDelegate.swift */; };
@@ -45,6 +47,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9025540324B2CF6F00E6CDD3 /* ColorPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPickerView.swift; sourceTree = "<group>"; };
+		9025540524B5110A00E6CDD3 /* DeviceExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceExtension.swift; sourceTree = "<group>"; };
 		902D708B248229A500E24CF3 /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
 		902D708D248229B800E24CF3 /* MenuController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuController.swift; sourceTree = "<group>"; };
 		903DB8E524808CF9008474AC /* ColorExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtensions.swift; sourceTree = "<group>"; };
@@ -70,7 +74,7 @@
 		904733F424981AEC0016D222 /* PremiumController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PremiumController.swift; sourceTree = "<group>"; };
 		904733FA24981ED90016D222 /* premiumAnimation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = premiumAnimation.json; sourceTree = "<group>"; };
 		905383AD249D86DC00D4FE21 /* AlertPopUpController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AlertPopUpController.swift; path = ../../View/Favorites/AlertPopUpController.swift; sourceTree = "<group>"; };
-		906F82722496945100D5967B /* SliderController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SliderController.swift; sourceTree = "<group>"; };
+		906F82722496945100D5967B /* ColorPickerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPickerController.swift; sourceTree = "<group>"; };
 		906F82762496950300D5967B /* SliderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SliderView.swift; sourceTree = "<group>"; };
 		906F82782496E3B300D5967B /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		90E4B698246755A400ED3D29 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -133,6 +137,7 @@
 			isa = PBXGroup;
 			children = (
 				90400784248E03BC00BEFC4A /* FavoritesController.swift */,
+				906F82722496945100D5967B /* ColorPickerController.swift */,
 				905383AD249D86DC00D4FE21 /* AlertPopUpController.swift */,
 			);
 			path = Favorites;
@@ -193,6 +198,7 @@
 				904733F224981AD60016D222 /* PremiumView.swift */,
 				904007892490DCE300BEFC4A /* Favorites */,
 				906F82762496950300D5967B /* SliderView.swift */,
+				9025540324B2CF6F00E6CDD3 /* ColorPickerView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -204,7 +210,6 @@
 				904298702473C36F0053B216 /* GradientController.swift */,
 				902D708D248229B800E24CF3 /* MenuController.swift */,
 				904733F424981AEC0016D222 /* PremiumController.swift */,
-				906F82722496945100D5967B /* SliderController.swift */,
 				905383AC249D869700D4FE21 /* Favorites */,
 			);
 			path = Controller;
@@ -217,6 +222,7 @@
 				903DB8E524808CF9008474AC /* ColorExtensions.swift */,
 				903DB8E724808D3F008474AC /* StringExtensions.swift */,
 				903E168B2483923A006348F1 /* NavigationExtension.swift */,
+				9025540524B5110A00E6CDD3 /* DeviceExtension.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -346,6 +352,7 @@
 				904733F524981AEC0016D222 /* PremiumController.swift in Sources */,
 				902D708C248229A500E24CF3 /* MenuView.swift in Sources */,
 				903DB8E624808CFA008474AC /* ColorExtensions.swift in Sources */,
+				9025540624B5110A00E6CDD3 /* DeviceExtension.swift in Sources */,
 				90400785248E03BC00BEFC4A /* FavoritesController.swift in Sources */,
 				90E4B6A3246755A400ED3D29 /* MagentaColorApp.xcdatamodeld in Sources */,
 				904733F324981AD60016D222 /* PremiumView.swift in Sources */,
@@ -353,8 +360,9 @@
 				90E4B6BA24676FC500ED3D29 /* UIViewExtensions.swift in Sources */,
 				90E4B6B324675C0500ED3D29 /* PaletteView.swift in Sources */,
 				903DB8E824808D3F008474AC /* StringExtensions.swift in Sources */,
-				906F82732496945200D5967B /* SliderController.swift in Sources */,
+				906F82732496945200D5967B /* ColorPickerController.swift in Sources */,
 				904581A62498793300885246 /* IAPService.swift in Sources */,
+				9025540424B2CF6F00E6CDD3 /* ColorPickerView.swift in Sources */,
 				905383AE249D86DC00D4FE21 /* AlertPopUpController.swift in Sources */,
 				90E4B69B246755A400ED3D29 /* SceneDelegate.swift in Sources */,
 				903E168C2483923A006348F1 /* NavigationExtension.swift in Sources */,

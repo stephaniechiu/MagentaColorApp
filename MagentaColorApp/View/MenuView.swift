@@ -24,8 +24,30 @@ class MenuView: UIView {
     let versionLabel: UILabel = {
         let label = UILabel()
         label.text = "Version 1.0.0"
-        label.font = UIFont(name: "HelveticaNeue", size: 14)
         label.textColor = .label
+        
+        let deviceType = UIDevice.current.deviceType
+
+        switch deviceType {
+
+        case .iPhones_5_5s_5c_SE:
+            label.font = UIFont.init(name: "HelveticaNeue", size: 12)
+        case .iPhones_6_6s_7_8:
+            label.font = UIFont.init(name: "HelveticaNeue", size: 12)
+        case .iPhones_6Plus_6sPlus_7Plus_8Plus:
+            label.font = UIFont.init(name: "HelveticaNeue", size: 12)
+        case .iPhones_X_Xs_11Pro:
+            label.font = UIFont.init(name: "HelveticaNeue", size: 14)
+        case .iPhones_Xr_11:
+            label.font = UIFont.init(name: "HelveticaNeue", size: 14)
+        case .iPhones_XsMax_11ProMax:
+            label.font = UIFont.init(name: "HelveticaNeue", size: 14)
+        default:
+            print("iPad or Unkown device")
+            label.font = UIFont.systemFont(ofSize: 20)
+
+        }
+        
         return label
     }()
     

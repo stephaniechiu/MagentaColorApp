@@ -19,6 +19,29 @@ class PremiumView: UIView {
         let label = UILabel()
         label.text = "So, what's Premium?"
         label.font = UIFont(name: "HelveticaNeue-Bold", size: 30)
+        
+        let deviceType = UIDevice.current.deviceType
+
+        switch deviceType {
+
+        case .iPhones_5_5s_5c_SE:
+            label.font = UIFont.init(name: "HelveticaNeue-Bold", size: 26)
+        case .iPhones_6_6s_7_8:
+            label.font = UIFont.init(name: "HelveticaNeue-Bold", size: 26)
+        case .iPhones_6Plus_6sPlus_7Plus_8Plus:
+            label.font = UIFont.init(name: "HelveticaNeue-Bold", size: 28)
+        case .iPhones_X_Xs_11Pro:
+            label.font = UIFont.init(name: "HelveticaNeue", size: 28)
+        case .iPhones_Xr_11:
+            label.font = UIFont.init(name: "HelveticaNeue", size: 26)
+        case .iPhones_XsMax_11ProMax:
+            label.font = UIFont.init(name: "HelveticaNeue", size: 28)
+        default:
+            print("iPad or Unkown device")
+            label.font = UIFont.systemFont(ofSize: 50)
+
+        }
+        
         label.textColor = .label
         return label
     }()

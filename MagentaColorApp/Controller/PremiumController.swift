@@ -82,7 +82,7 @@ class PremiumController: UIViewController, SKPaymentTransactionObserver {
         if SKPaymentQueue.canMakePayments() {
             let paymentRequest = SKMutablePayment()
             paymentRequest.productIdentifier = productID
-            SKPaymentQueue.default().add(paymentRequest)
+            SKPaymentQueue.default().add(paymentRequest) 
         } else {
             let alert = UIAlertController(title: "Payment Failed", message: "You were unable to subscribe. Please try again later", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
