@@ -24,13 +24,13 @@ extension UIView {
         return button
     }
     
-    func generateButton(borderColor: UIColor, textColor: UIColor) -> UIButton {
+    func generateButton(title: String, borderColor: UIColor, textColor: UIColor, backgroundColor: UIColor? = nil) -> UIButton {
         let button = UIButton()
         button.frame.size = CGSize(width: 80, height: 10)
-        button.setTitle("Generate", for: .normal)
+        button.setTitle(title, for: .normal)
         button.titleLabel?.font = UIFont(name: "HelveticaNeue", size: 16)
         button.setTitleColor(textColor, for: .normal)
-        button.backgroundColor = .clear
+        button.backgroundColor = backgroundColor
         button.layer.borderWidth = 2
         button.layer.borderColor = borderColor.cgColor
         button.layer.cornerRadius = 15
@@ -167,7 +167,7 @@ extension UIView {
     func rgbLabel() -> UILabel {
         let label = UILabel()
         label.font = UIFont(name: "HelveticaNeue-Bold", size: 16)
-        label.textColor = .black
+        label.textColor = .label
         return label
     }
     

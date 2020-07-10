@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		5CB727CAA91680EF106DBC4B /* Pods_MagentaColorApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B61673D4F7B3A258D9DDB31 /* Pods_MagentaColorApp.framework */; };
-		9025540424B2CF6F00E6CDD3 /* ColorPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9025540324B2CF6F00E6CDD3 /* ColorPickerView.swift */; };
 		9025540624B5110A00E6CDD3 /* DeviceExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9025540524B5110A00E6CDD3 /* DeviceExtension.swift */; };
 		902D708C248229A500E24CF3 /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902D708B248229A500E24CF3 /* MenuView.swift */; };
 		902D708E248229B800E24CF3 /* MenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902D708D248229B800E24CF3 /* MenuController.swift */; };
@@ -33,7 +32,6 @@
 		904733FB24981ED90016D222 /* premiumAnimation.json in Resources */ = {isa = PBXBuildFile; fileRef = 904733FA24981ED90016D222 /* premiumAnimation.json */; };
 		905383AE249D86DC00D4FE21 /* AlertPopUpController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 905383AD249D86DC00D4FE21 /* AlertPopUpController.swift */; };
 		906F82732496945200D5967B /* ColorPickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 906F82722496945100D5967B /* ColorPickerController.swift */; };
-		906F82772496950300D5967B /* SliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 906F82762496950300D5967B /* SliderView.swift */; };
 		906F82792496E3B300D5967B /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 906F82782496E3B300D5967B /* StoreKit.framework */; };
 		90E4B699246755A400ED3D29 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90E4B698246755A400ED3D29 /* AppDelegate.swift */; };
 		90E4B69B246755A400ED3D29 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90E4B69A246755A400ED3D29 /* SceneDelegate.swift */; };
@@ -47,7 +45,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		9025540324B2CF6F00E6CDD3 /* ColorPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPickerView.swift; sourceTree = "<group>"; };
 		9025540524B5110A00E6CDD3 /* DeviceExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceExtension.swift; sourceTree = "<group>"; };
 		902D708B248229A500E24CF3 /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
 		902D708D248229B800E24CF3 /* MenuController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuController.swift; sourceTree = "<group>"; };
@@ -75,7 +72,6 @@
 		904733FA24981ED90016D222 /* premiumAnimation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = premiumAnimation.json; sourceTree = "<group>"; };
 		905383AD249D86DC00D4FE21 /* AlertPopUpController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AlertPopUpController.swift; path = ../../View/Favorites/AlertPopUpController.swift; sourceTree = "<group>"; };
 		906F82722496945100D5967B /* ColorPickerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPickerController.swift; sourceTree = "<group>"; };
-		906F82762496950300D5967B /* SliderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SliderView.swift; sourceTree = "<group>"; };
 		906F82782496E3B300D5967B /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		90E4B698246755A400ED3D29 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		90E4B69A246755A400ED3D29 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -137,7 +133,6 @@
 			isa = PBXGroup;
 			children = (
 				90400784248E03BC00BEFC4A /* FavoritesController.swift */,
-				906F82722496945100D5967B /* ColorPickerController.swift */,
 				905383AD249D86DC00D4FE21 /* AlertPopUpController.swift */,
 			);
 			path = Favorites;
@@ -197,8 +192,6 @@
 				902D708B248229A500E24CF3 /* MenuView.swift */,
 				904733F224981AD60016D222 /* PremiumView.swift */,
 				904007892490DCE300BEFC4A /* Favorites */,
-				906F82762496950300D5967B /* SliderView.swift */,
-				9025540324B2CF6F00E6CDD3 /* ColorPickerView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -210,6 +203,7 @@
 				904298702473C36F0053B216 /* GradientController.swift */,
 				902D708D248229B800E24CF3 /* MenuController.swift */,
 				904733F424981AEC0016D222 /* PremiumController.swift */,
+				906F82722496945100D5967B /* ColorPickerController.swift */,
 				905383AC249D869700D4FE21 /* Favorites */,
 			);
 			path = Controller;
@@ -362,7 +356,6 @@
 				903DB8E824808D3F008474AC /* StringExtensions.swift in Sources */,
 				906F82732496945200D5967B /* ColorPickerController.swift in Sources */,
 				904581A62498793300885246 /* IAPService.swift in Sources */,
-				9025540424B2CF6F00E6CDD3 /* ColorPickerView.swift in Sources */,
 				905383AE249D86DC00D4FE21 /* AlertPopUpController.swift in Sources */,
 				90E4B69B246755A400ED3D29 /* SceneDelegate.swift in Sources */,
 				903E168C2483923A006348F1 /* NavigationExtension.swift in Sources */,
@@ -372,7 +365,6 @@
 				90400781248DFB8700BEFC4A /* FavoritesPalettes.swift in Sources */,
 				902D708E248229B800E24CF3 /* MenuController.swift in Sources */,
 				90E4B6B524676DCD00ED3D29 /* Color.swift in Sources */,
-				906F82772496950300D5967B /* SliderView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

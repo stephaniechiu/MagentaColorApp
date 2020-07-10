@@ -8,14 +8,21 @@
 
 import UIKit
 import CloudKit
+import Colorful
 
-class GradientController: UIViewController {
+protocol ColorPickerDelegate {
+    func newLeftColor(left: UIColor)
+    func newRightColor(right: UIColor)
+}
+
+class GradientController: UIViewController, ColorPickerDelegate {
+
     
 // MARK: - Properties
     
     let gradientView = GradientView()
-    let leftGradientColor: UIColor = .random
-    let rightGradientColor: UIColor = .random
+    var leftGradientColor: UIColor = .random
+    var rightGradientColor: UIColor = .random
     var shareLeftColor = String()
     var shareRightColor = String()
     let hapticFeedback = UIImpactFeedbackGenerator()
@@ -40,7 +47,7 @@ class GradientController: UIViewController {
 // MARK: - Helper Functions
     
     func setupNavigationController() {
-        navigationController?.navigationBar.barTintColor = .white
+        navigationController?.navigationBar.barTintColor = .systemBackground
         navigationController?.navigationBar.shadowImage = UIImage()
     }
     
@@ -76,8 +83,23 @@ class GradientController: UIViewController {
         }
     }
     
+    func newLeftColor(left: UIColor) {
+        gradientView.colorCircleLeftView.addTarget(self, action: #selector(openColorPicker(sender:)), for: .touchUpInside)
+        leftGradientColor = left
+        print("\(left.toHexString())")
+    }
+    
+    func newRightColor(right: UIColor) {
+        gradientView.colorCircleRightView.addTarget(self, action: #selector(openColorPicker(sender:)), for: .touchUpInside)
+        
+        print("\(right.toHexString())")
+        rightGradientColor = right
+        gradientView.colorCircleRightView.backgroundColor = rightGradientColor
+    }
+    
     func showColorPicker() {
         gradientView.colorCircleLeftView.addTarget(self, action: #selector(openColorPicker(sender:)), for: .touchUpInside)
+        gradientView.colorCircleRightView.addTarget(self, action: #selector(openColorPicker(sender:)), for: .touchUpInside)
     }
     
     //Randomly generates two new gradient colors
@@ -87,7 +109,7 @@ class GradientController: UIViewController {
         gradientView.colorCircleRightView.backgroundColor = rightGradientColor
         shareLeftColor = leftGradientColor.toHexString()
         shareRightColor = rightGradientColor.toHexString()
-        
+         
         var gradientColors: [String] = []
         let leftGradient = leftGradientColor.toHexString().uppercased().replacingOccurrences(of: "#", with: "")
         let rightGradient = rightGradientColor.toHexString().uppercased().replacingOccurrences(of: "#", with: "")
@@ -198,8 +220,8 @@ class GradientController: UIViewController {
     @objc func openColorPicker(sender: UIButton) {
         let colorPickerController = ColorPickerController()
         colorPickerController.modalPresentationStyle = .popover
+        colorPickerController.delegate = self
         self.present(colorPickerController, animated: true, completion: nil)
-        print("click")
     }
     
     //Generates two random colors to create a gradient

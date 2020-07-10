@@ -37,10 +37,10 @@ class GradientView: UIView {
     let colorLabelRightCMYK = UIView().colorInfoLabel(color: .label)
     
     //Objects
-    let generateGradientButton = UIView().generateButton(borderColor: .label, textColor: .label)
+    let generateGradientButton = UIView().generateButton(title: "Generate", borderColor: .label, textColor: .label)
     let circleGradientView: UIView = {
         let circle = UIView()
-        let circleDiameter: CGFloat = UIScreen.main.bounds.width - 60
+        let circleDiameter: CGFloat = UIScreen.main.bounds.width - 50
         circle.frame.size = CGSize(width: circleDiameter, height: circleDiameter)
         circle.layer.cornerRadius = circle.frame.size.width / 2
         circle.clipsToBounds = true
