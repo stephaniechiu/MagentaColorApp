@@ -31,14 +31,14 @@ class PremiumView: UIView {
         case .iPhones_6Plus_6sPlus_7Plus_8Plus:
             label.font = UIFont.init(name: "HelveticaNeue-Bold", size: 28)
         case .iPhones_X_Xs_11Pro:
-            label.font = UIFont.init(name: "HelveticaNeue", size: 28)
+            label.font = UIFont.init(name: "HelveticaNeue-Bold", size: 28)
         case .iPhones_Xr_11:
-            label.font = UIFont.init(name: "HelveticaNeue", size: 26)
+            label.font = UIFont.init(name: "HelveticaNeue-Bold", size: 26)
         case .iPhones_XsMax_11ProMax:
-            label.font = UIFont.init(name: "HelveticaNeue", size: 28)
+            label.font = UIFont.init(name: "HelveticaNeue-Bold", size: 28)
         default:
             print("iPad or Unkown device")
-            label.font = UIFont.systemFont(ofSize: 50)
+            label.font = UIFont.init(name: "HelveticaNeue-Bold", size: 40)
 
         }
         
@@ -56,11 +56,32 @@ class PremiumView: UIView {
         attributedString.addAttribute(NSAttributedString.Key.paragraphStyle, value: paragraphStyle, range: NSMakeRange(0, attributedString.length))
         
         label.attributedText = attributedString
-        label.font = UIFont(name: "HelveticaNeue", size: 14)
         label.textColor = .label
         label.lineBreakMode = .byWordWrapping
         label.numberOfLines = 0
         label.textAlignment = .center
+        
+        let deviceType = UIDevice.current.deviceType
+
+        switch deviceType {
+
+        case .iPhones_5_5s_5c_SE:
+            label.font = UIFont.init(name: "HelveticaNeue", size: 12)
+        case .iPhones_6_6s_7_8:
+            label.font = UIFont.init(name: "HelveticaNeue", size: 12)
+        case .iPhones_6Plus_6sPlus_7Plus_8Plus:
+            label.font = UIFont.init(name: "HelveticaNeue", size: 14)
+        case .iPhones_X_Xs_11Pro:
+            label.font = UIFont.init(name: "HelveticaNeue", size: 14)
+        case .iPhones_Xr_11:
+            label.font = UIFont.init(name: "HelveticaNeue", size: 14)
+        case .iPhones_XsMax_11ProMax:
+            label.font = UIFont.init(name: "HelveticaNeue", size: 14)
+        default:
+            print("iPad or Unkown device")
+            label.font = UIFont.systemFont(ofSize: 20)
+
+        }
         
         return label
     }()
@@ -105,7 +126,7 @@ class PremiumView: UIView {
         subtitleLabel.centerX(inView: self)
         
         addSubview(monthlySubscriptionButton)
-        monthlySubscriptionButton.anchor(top: subtitleLabel.bottomAnchor, paddingTop: 30, width: UIScreen.main.bounds.width - 50, height: 60)
+        monthlySubscriptionButton.anchor(top: subtitleLabel.bottomAnchor, paddingTop: 30, width: UIScreen.main.bounds.width - 50, height: 80)
         monthlySubscriptionButton.centerX(inView: self)
         
         addSubview(restoreSubscriptionButton)

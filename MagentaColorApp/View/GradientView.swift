@@ -38,9 +38,17 @@ class GradientView: UIView {
     
     //Objects
     let generateGradientButton = UIView().generateButton(borderColor: .label, textColor: .label)
-    let circleGradientView = UIView().circleView(width: 380, height: 380) //380
-    let colorCircleLeftView = UIView().circleButton(width: 50, height: 50)
-    let colorCircleRightView = UIView().circleButton(width: 50, height: 50)
+    let circleGradientView: UIView = {
+        let circle = UIView()
+        let circleDiameter: CGFloat = UIScreen.main.bounds.width - 60
+        circle.frame.size = CGSize(width: circleDiameter, height: circleDiameter)
+        circle.layer.cornerRadius = circle.frame.size.width / 2
+        circle.clipsToBounds = true
+        return circle
+    }()
+    
+    let colorCircleLeftView = UIView().circleButton(width: 60, height: 60)
+    let colorCircleRightView = UIView().circleButton(width: 60, height: 60)
     let shareButton = UIView().imageButton(image: #imageLiteral(resourceName: "share-office-color-blackpink"), width: 30, height: 30)
     let favoriteButton = UIView().imageButton(image: #imageLiteral(resourceName: "favourite-pink"), width: 30, height: 30)
     
@@ -50,6 +58,7 @@ class GradientView: UIView {
 // MARK: - Init
     
     override init(frame: CGRect) {
+//        self.topContainerView.backgroundColor = .black
         self.leftStackView = UIStackView(arrangedSubviews: [colorLabelLeftHEX, colorLabelLeftRGB, colorLabelLeftHSB, colorLabelLeftCMY, colorLabelLeftCMYK])
         leftStackView.spacing = 2
         leftStackView.distribution = .fillEqually
@@ -78,24 +87,24 @@ class GradientView: UIView {
         
         //Top container layout
         addSubview(topContainerView)
-        topContainerView.anchor(top: topAnchor, left: leftAnchor, right: rightAnchor)
-//        topContainerView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.6).isActive = true
+        topContainerView.anchor(top: safeAreaLayoutGuide.topAnchor, left: leftAnchor, right: rightAnchor)
         
         topContainerView.addSubview(circleGradientView)
         circleGradientView.centerX(inView: topContainerView)
         circleGradientView.centerY(inView: topContainerView)
-        circleGradientView.anchor(width: 380, height: 380)
-//        circleGradientView.heightAnchor.constraint(equalTo: topContainerView.heightAnchor, multiplier: 0.8).isActive = true
+        
+        let largeCircleDiameter: CGFloat = UIScreen.main.bounds.width - 50
+        circleGradientView.anchor(width: largeCircleDiameter, height: largeCircleDiameter)
         
         topContainerView.addSubview(colorCircleLeftView)
-        colorCircleLeftView.anchor(top: circleGradientView.bottomAnchor, left: topContainerView.leftAnchor, paddingTop: 10, paddingLeft: 50, width: 50, height: 50)
+        colorCircleLeftView.anchor(left: topContainerView.leftAnchor, bottom: topContainerView.bottomAnchor, paddingLeft: 15, width: 60, height: 60)
 
         topContainerView.addSubview(colorCircleRightView)
-        colorCircleRightView.anchor(top: circleGradientView.bottomAnchor, right: topContainerView.rightAnchor, paddingTop: 10, paddingRight: 50, width: 50, height: 50)
+        colorCircleRightView.anchor(bottom: topContainerView.bottomAnchor, right: topContainerView.rightAnchor, paddingRight: 15, width: 60, height: 60)
         
         //Middle container layout
         addSubview(middleStackView)
-        middleStackView.anchor(top: topContainerView.bottomAnchor, left: leftAnchor, right: rightAnchor, paddingLeft: 15, paddingBottom: 40, paddingRight: 10)
+        middleStackView.anchor(top: topContainerView.bottomAnchor, left: leftAnchor, right: rightAnchor, paddingTop: 20, paddingLeft: 15,  paddingRight: 10)
         
         //Bottom container layout
         addSubview(bottomContainerView)

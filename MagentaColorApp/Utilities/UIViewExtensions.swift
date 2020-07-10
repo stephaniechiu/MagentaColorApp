@@ -12,18 +12,9 @@ extension UIView {
     func containerView(color: UIColor) -> UIView {
         let container = UIView()
         container.backgroundColor = color
-        container.frame.size = CGSize(width: 350, height: 350)
-        container.layer.cornerRadius = 20
         return container
     }
     
-    func circleView(width: CGFloat, height: CGFloat) -> UIView{
-        let circle = UIView()
-        circle.frame.size = CGSize(width: width, height: height)
-        circle.layer.cornerRadius = circle.frame.size.width / 2
-        circle.clipsToBounds = true
-        return circle
-    }
     
     func circleButton(width: CGFloat, height: CGFloat) -> UIButton {
         let button = UIButton()
@@ -83,15 +74,48 @@ extension UIView {
     func subscriptionButton(titleText: String, subtitle: String? = nil, titleColor: UIColor) -> UIButton {
         let button = UIButton()
         let paragraphStyle = NSMutableParagraphStyle()
-        paragraphStyle.lineSpacing = 5
+            paragraphStyle.lineSpacing = 5
+        let deviceType = UIDevice.current.deviceType
+        var buttonText = NSMutableAttributedString()
+        var subtitleText = NSMutableAttributedString()
         
-        let buttonText = NSMutableAttributedString(string: titleText, attributes: [NSAttributedString.Key.foregroundColor: titleColor, NSAttributedString.Key.font: UIFont(name: "HelveticaNeue", size: 16) ?? "HelveticaNeue"])
-        let subtitleText = NSMutableAttributedString(string: subtitle ?? "", attributes: [NSAttributedString.Key.foregroundColor: UIColor.black, NSAttributedString.Key.font: UIFont(name: "HelveticaNeue", size: 14) as Any])
+        switch deviceType {
+
+        case .iPhones_5_5s_5c_SE:
+            buttonText = NSMutableAttributedString(string: titleText, attributes: [NSAttributedString.Key.foregroundColor: titleColor, NSAttributedString.Key.font: UIFont(name: "HelveticaNeue", size: 10) ?? "HelveticaNeue"])
+            subtitleText = NSMutableAttributedString(string: subtitle ?? "", attributes: [NSAttributedString.Key.foregroundColor: UIColor.black, NSAttributedString.Key.font: UIFont(name: "HelveticaNeue", size: 8) as Any])        //                    label.font = UIFont.init(name: "HelveticaNeue", size: 8)
+        case .iPhones_6_6s_7_8:
+            print("iPhone 8")
+            buttonText = NSMutableAttributedString(string: titleText, attributes: [NSAttributedString.Key.foregroundColor: titleColor, NSAttributedString.Key.font: UIFont(name: "HelveticaNeue", size: 14) ?? "HelveticaNeue"])
+            subtitleText = NSMutableAttributedString(string: subtitle ?? "", attributes: [NSAttributedString.Key.foregroundColor: UIColor.black, NSAttributedString.Key.font: UIFont(name: "HelveticaNeue", size: 12) as Any])
+        case .iPhones_6Plus_6sPlus_7Plus_8Plus:
+            print("iPhone 8Plus")
+            buttonText = NSMutableAttributedString(string: titleText, attributes: [NSAttributedString.Key.foregroundColor: titleColor, NSAttributedString.Key.font: UIFont(name: "HelveticaNeue", size: 14) ?? "HelveticaNeue"])
+            subtitleText = NSMutableAttributedString(string: subtitle ?? "", attributes: [NSAttributedString.Key.foregroundColor: UIColor.black, NSAttributedString.Key.font: UIFont(name: "HelveticaNeue", size: 12) as Any])
+        case .iPhones_X_Xs_11Pro:
+            print("iPhone X")
+            buttonText = NSMutableAttributedString(string: titleText, attributes: [NSAttributedString.Key.foregroundColor: titleColor, NSAttributedString.Key.font: UIFont(name: "HelveticaNeue", size: 14) ?? "HelveticaNeue"])
+            subtitleText = NSMutableAttributedString(string: subtitle ?? "", attributes: [NSAttributedString.Key.foregroundColor: UIColor.black, NSAttributedString.Key.font: UIFont(name: "HelveticaNeue", size: 12) as Any])
+        case .iPhones_Xr_11:
+            print("iPhone 11")
+            buttonText = NSMutableAttributedString(string: titleText, attributes: [NSAttributedString.Key.foregroundColor: titleColor, NSAttributedString.Key.font: UIFont(name: "HelveticaNeue", size: 14) ?? "HelveticaNeue"])
+            subtitleText = NSMutableAttributedString(string: subtitle ?? "", attributes: [NSAttributedString.Key.foregroundColor: UIColor.black, NSAttributedString.Key.font: UIFont(name: "HelveticaNeue", size: 12) as Any])
+        case .iPhones_XsMax_11ProMax:
+            print("iPhone 11ProMax")
+            buttonText = NSMutableAttributedString(string: titleText, attributes: [NSAttributedString.Key.foregroundColor: titleColor, NSAttributedString.Key.font: UIFont(name: "HelveticaNeue", size: 16) ?? "HelveticaNeue"])
+            subtitleText = NSMutableAttributedString(string: subtitle ?? "", attributes: [NSAttributedString.Key.foregroundColor: UIColor.black, NSAttributedString.Key.font: UIFont(name: "HelveticaNeue", size: 14) as Any])
+        default:
+            print("iPad or Unkown device")
+            buttonText = NSMutableAttributedString(string: titleText, attributes: [NSAttributedString.Key.foregroundColor: titleColor, NSAttributedString.Key.font: UIFont(name: "HelveticaNeue", size: 24) ?? "HelveticaNeue"])
+            subtitleText = NSMutableAttributedString(string: subtitle ?? "", attributes: [NSAttributedString.Key.foregroundColor: UIColor.black, NSAttributedString.Key.font: UIFont(name: "HelveticaNeue", size: 22) as Any])
+
+        }
+        
         buttonText.append(subtitleText)
         
         button.titleLabel?.textAlignment = .center
         button.titleLabel?.lineBreakMode = .byWordWrapping
-        button.contentEdgeInsets = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
+        button.contentEdgeInsets = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
         button.titleLabel?.numberOfLines = 0
         button.setAttributedTitle(buttonText, for: .normal)
         button.layer.cornerRadius = 10
@@ -102,9 +126,31 @@ extension UIView {
     
     func colorInfoLabel(color: UIColor) -> UILabel {
         let label = UILabel()
-        label.font = UIFont(name: "HelveticaNeue", size: 17)
         label.text = "RGB(0.0, 0.0, 0.0)"
         label.numberOfLines = 0
+        
+        let deviceType = UIDevice.current.deviceType
+
+        switch deviceType {
+
+        case .iPhones_5_5s_5c_SE:
+            label.font = UIFont.init(name: "HelveticaNeue", size: 12)
+        case .iPhones_6_6s_7_8:
+            label.font = UIFont.init(name: "HelveticaNeue", size: 13)
+        case .iPhones_6Plus_6sPlus_7Plus_8Plus:
+            label.font = UIFont.init(name: "HelveticaNeue", size: 14)
+        case .iPhones_X_Xs_11Pro:
+            label.font = UIFont.init(name: "HelveticaNeue", size: 14)
+        case .iPhones_Xr_11:
+            label.font = UIFont.init(name: "HelveticaNeue", size: 15)
+        case .iPhones_XsMax_11ProMax:
+            label.font = UIFont.init(name: "HelveticaNeue", size: 16)
+        default:
+            print("iPad or Unkown device")
+            label.font = UIFont.systemFont(ofSize: 20)
+
+        }
+        
         return label
     }
     

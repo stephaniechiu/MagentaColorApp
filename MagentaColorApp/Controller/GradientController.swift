@@ -40,8 +40,7 @@ class GradientController: UIViewController {
 // MARK: - Helper Functions
     
     func setupNavigationController() {
-        navigationController?.navigationBar.isTranslucent = true
-        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        navigationController?.navigationBar.barTintColor = .white
         navigationController?.navigationBar.shadowImage = UIImage()
     }
     

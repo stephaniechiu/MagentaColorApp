@@ -66,7 +66,6 @@ class PaletteView: UIView {
         colorStackView.distribution = .fillEqually
         colorStackView.axis = .vertical
         
-        
         self.leftStackView = UIStackView(arrangedSubviews: [menuButton, shareButton])
         leftStackView.spacing = 3
         leftStackView.distribution = .fillEqually
@@ -92,6 +91,12 @@ class PaletteView: UIView {
         
         bottomControllerView.addSubview(leftStackView)
         leftStackView.anchor(top: bottomControllerView.topAnchor, left: bottomControllerView.leftAnchor, bottom: bottomControllerView.safeAreaLayoutGuide.bottomAnchor, right: paletteGenerateButton.leftAnchor, paddingTop: 15, paddingLeft: 20, paddingRight: 20)
+        bottomControllerView.addSubview(menuButton)
+        menuButton.anchor(left: bottomControllerView.leftAnchor, paddingLeft: 20, width: 30, height: 30)
+        menuButton.centerY(inView: paletteGenerateButton)
+        bottomControllerView.addSubview(shareButton)
+        shareButton.anchor(right: paletteGenerateButton.leftAnchor, paddingRight: 20, width: 30, height: 30)
+        shareButton.centerY(inView: paletteGenerateButton)
         
         bottomControllerView.addSubview(rightStackView)
         rightStackView.anchor(top: bottomControllerView.topAnchor, left: paletteGenerateButton.rightAnchor, bottom: bottomControllerView.safeAreaLayoutGuide.bottomAnchor, right: bottomControllerView.rightAnchor, paddingTop: 15, paddingLeft: 20, paddingRight: 20)
