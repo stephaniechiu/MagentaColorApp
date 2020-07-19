@@ -9,6 +9,8 @@
 import UIKit
 
 extension UIView {
+    
+    //use static in front of func
     func containerView(color: UIColor) -> UIView {
         let container = UIView()
         container.backgroundColor = color
@@ -124,7 +126,7 @@ extension UIView {
         return button
     }
     
-    func colorInfoLabel(color: UIColor) -> UILabel {
+    static func colorInfoLabel(color: UIColor) -> UILabel {
         let label = UILabel()
         label.text = "RGB(0.0, 0.0, 0.0)"
         label.numberOfLines = 0

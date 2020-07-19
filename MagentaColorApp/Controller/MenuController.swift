@@ -36,6 +36,7 @@ class MenuController: UIViewController, MFMailComposeViewControllerDelegate {
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         navigationController?.navigationBar.shadowImage = UIImage()
         navigationItem.hidesBackButton = true
+        navigationController?.navigationBar.tintColor = .label
         navigationItem.setRightBarButton(popToLeftBarButtonItem, animated: true)
     }
     

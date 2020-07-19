@@ -23,18 +23,18 @@ class GradientView: UIView {
     let middleStackView: UIStackView
     
     //Color Codes - Left
-    let colorLabelLeftHEX = UIView().colorInfoLabel(color: .label)
-    let colorLabelLeftRGB = UIView().colorInfoLabel(color: .label)
-    let colorLabelLeftHSB = UIView().colorInfoLabel(color: .label)
-    let colorLabelLeftCMY = UIView().colorInfoLabel(color: .label)
-    let colorLabelLeftCMYK = UIView().colorInfoLabel(color: .label)
+    let colorLabelLeftHEX = UIView.colorInfoLabel(color: .label)
+    let colorLabelLeftRGB = UIView.colorInfoLabel(color: .label)
+    let colorLabelLeftHSB = UIView.colorInfoLabel(color: .label)
+    let colorLabelLeftCMY = UIView.colorInfoLabel(color: .label)
+    let colorLabelLeftCMYK = UIView.colorInfoLabel(color: .label)
     
     //Color Codes - Right
-    let colorLabelRightHEX = UIView().colorInfoLabel(color: .label)
-    let colorLabelRightRGB = UIView().colorInfoLabel(color: .label)
-    let colorLabelRightHSB = UIView().colorInfoLabel(color: .label)
-    let colorLabelRightCMY = UIView().colorInfoLabel(color: .label)
-    let colorLabelRightCMYK = UIView().colorInfoLabel(color: .label)
+    let colorLabelRightHEX = UIView.colorInfoLabel(color: .label)
+    let colorLabelRightRGB = UIView.colorInfoLabel(color: .label)
+    let colorLabelRightHSB = UIView.colorInfoLabel(color: .label)
+    let colorLabelRightCMY = UIView.colorInfoLabel(color: .label)
+    let colorLabelRightCMYK = UIView.colorInfoLabel(color: .label)
     
     //Objects
     let generateGradientButton = UIView().generateButton(title: "Generate", borderColor: .label, textColor: .label)

@@ -227,6 +227,14 @@ class GradientController: UIViewController, ColorPickerDelegate {
     //Generates two random colors to create a gradient
     @objc func randomGradient(sender: UIButton)
     {
+        //Spring animation to button
+        sender.transform = CGAffineTransform(scaleX: 0.6, y: 0.6)
+        UIView.animate(withDuration: 0.7, delay: 0, usingSpringWithDamping: CGFloat(0.2), initialSpringVelocity: CGFloat(4.0), options: UIView.AnimationOptions.allowUserInteraction, animations: {
+            sender.transform = CGAffineTransform.identity
+        }, completion: {
+            Void in()
+        })
+        
         hapticFeedback.impactOccurred()
         
         let leftGradient = UIColor.random
@@ -269,7 +277,7 @@ class GradientController: UIViewController, ColorPickerDelegate {
     }
     
     @objc func setupGradientaActivityViewController(sender: UIButton) {
-        let string = "Magenta Color App: \n\(shareLeftColor.uppercased()), \(shareRightColor.uppercased()) \n".replacingOccurrences(of: ",", with:"\n", options: .literal, range: nil)
+        let string = "Magenta Color App: [\n\(shareLeftColor.uppercased()), \(shareRightColor.uppercased()) \n]".replacingOccurrences(of: ",", with:"\n", options: .literal, range: nil)
         let activityViewController = UIActivityViewController(activityItems: [string], applicationActivities: nil)
         
         present(activityViewController, animated: true, completion: nil)

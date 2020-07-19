@@ -34,7 +34,6 @@ class PaletteController: UIViewController, UITableViewDataSource, UITableViewDel
     let pasteboard = UIPasteboard.general
     
     let privateDatabase = CKContainer.default().privateCloudDatabase
-//    var retrieveFavoritePalette = [CKRecord]()
     
 // MARK: - Lifecycle
     
@@ -65,15 +64,16 @@ class PaletteController: UIViewController, UITableViewDataSource, UITableViewDel
 
 // MARK: - Helper Functions
 
-    fileprivate func setupNavigationController() {
+    func setupNavigationController() {
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         navigationController?.navigationBar.tintColor = .label
     }
     
-    fileprivate func setupBottomController() {
+    func setupBottomController() {
         paletteView.menuButton.addTarget(self, action: #selector(openMenu(sender:)), for: .touchUpInside)
         paletteView.shareButton.addTarget(self, action: #selector(setupPaletteActivityViewController), for: .touchUpInside)
         paletteView.paletteGenerateButton.addTarget(self, action: #selector(randomPalette(sender:)), for: .touchUpInside)
+        paletteView.favoriteButton.addTarget(self, action: #selector(saveFavoritePalette(sender:)), for: .touchUpInside)
         
         //Check if user is subscribed. If no subscription, then show Premium Controller
         let checkForSubscription = UserDefaults.standard.bool(forKey: IAPProduct.nonConsumablePurchase.rawValue)
@@ -81,15 +81,13 @@ class PaletteController: UIViewController, UITableViewDataSource, UITableViewDel
             paletteView.favoriteButton.addTarget(self, action: #selector(openPremium(sender:)), for: .touchUpInside)
 //                menuView.favoritesButton.alpha = 0
 //                menuView.favoritesButton.isHidden = true
-        } else {
-            paletteView.favoriteButton.addTarget(self, action: #selector(saveFavoritePalette(sender:)), for: .touchUpInside)
         }
         
         view.addSubview(paletteView.bottomControllerView)
         paletteView.bottomControllerView.anchor(top: paletteTableView.bottomAnchor, left: view.safeAreaLayoutGuide.leftAnchor, bottom: view.bottomAnchor, right: view.safeAreaLayoutGuide.rightAnchor, height: bottomControllerHeight)
     }
     
-    fileprivate func setupTableView() {
+    func setupTableView() {
         paletteTableView.dataSource = self
         paletteTableView.delegate = self
         paletteTableView.isScrollEnabled = false
@@ -109,7 +107,7 @@ class PaletteController: UIViewController, UITableViewDataSource, UITableViewDel
     }
     
     //UI of the view when a color is tapped on
-    fileprivate func setupColorLayout() {
+    func setupColorLayout() {
         self.view.addSubview(self.paletteView.colorStackView)
         self.paletteView.colorStackView.centerX(inView: self.view)
         self.paletteView.colorStackView.centerY(inView: self.view)
@@ -169,8 +167,8 @@ class PaletteController: UIViewController, UITableViewDataSource, UITableViewDel
     
     //User is able to share individual color
     @objc func setupColorActivityViewController(sender: UIButton) {
-        let string = "Magenta Color App: \n\(cellColorFromAPI) \n".replacingOccurrences(of: ",", with:"\n", options: .literal, range: nil)
-//        print(cellColorFromAPI)
+        let string = "Magenta Color App: \(cellColorInRGB.toHexString().uppercased())"
+        print(cellColorFromAPI)
         let activityViewController = UIActivityViewController(activityItems: [string], applicationActivities: nil)
             
         present(activityViewController, animated: true, completion: nil)
@@ -247,12 +245,20 @@ class PaletteController: UIViewController, UITableViewDataSource, UITableViewDel
 //                print("click \(buttonTag)")
             }
         }
-        print("Magenta Color App: \n\(arrayText)".replacingOccurrences(of: ",", with:"\n", options: .literal, range: nil))
     }
     
     //A new palette is generated when user taps on the Generate button
     @objc func randomPalette(sender: UIButton) {
         let randomStart = Date()
+        
+        //Spring animation to generate button
+        sender.transform = CGAffineTransform(scaleX: 0.6, y: 0.6)
+        UIView.animate(withDuration: 0.7, delay: 0, usingSpringWithDamping: CGFloat(0.2), initialSpringVelocity: CGFloat(4.0), options: UIView.AnimationOptions.allowUserInteraction, animations: {
+            sender.transform = CGAffineTransform.identity
+        }, completion: {
+            Void in()
+        })
+        
         paletteView.favoriteButton.setImage(#imageLiteral(resourceName: "favourite-pink"), for: .selected)
         newPalette()
         hapticFeedback.impactOccurred()

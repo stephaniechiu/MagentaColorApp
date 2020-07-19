@@ -21,11 +21,11 @@ class PaletteView: UIView {
     var rightStackView: UIStackView
     var leftStackView: UIStackView
     
-    let colorLabelHEX = UIView().colorInfoLabel(color: .label)
-    let colorLabelRGB = UIView().colorInfoLabel(color: .label)
-    let colorLabelHSB = UIView().colorInfoLabel(color: .label)
-    let colorLabelCMY = UIView().colorInfoLabel(color: .label)
-    let colorLabelCMYK = UIView().colorInfoLabel(color: .label)
+    let colorLabelHEX = UIView.colorInfoLabel(color: .label) //Static function is called on UIView instead of using UIView()
+    let colorLabelRGB = UIView.colorInfoLabel(color: .label)
+    let colorLabelHSB = UIView.colorInfoLabel(color: .label)
+    let colorLabelCMY = UIView.colorInfoLabel(color: .label)
+    let colorLabelCMYK = UIView.colorInfoLabel(color: .label)
     let colorShareButton = UIView().imageButton(image: #imageLiteral(resourceName: "share-office-color-white"),width: 30, height: 30)
     
     //Bottom controller

@@ -184,7 +184,7 @@ class FavoritesController: UIViewController, UITableViewDataSource, UITableViewD
             var string = ""
             
             print(individualColorInRecord)
-            string = "Magenta Color App \n\(individualGradientInRecord) \(individualColorInRecord)\n".replacingOccurrences(of: ",", with:"\n", options: .literal, range: nil)
+            string = "Magenta Color App: \(individualGradientInRecord) \(individualColorInRecord)".replacingOccurrences(of: "[]", with:"\n", options: .literal, range: nil)
             
             let activityViewController = UIActivityViewController(activityItems: [string], applicationActivities: nil)
             self.present(activityViewController, animated: true, completion: nil)
