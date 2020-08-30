@@ -54,12 +54,12 @@ class GradientController: UIViewController, ColorPickerDelegate {
     func setupBottomController() {
         gradientView.shareButton.addTarget(self, action: #selector(setupGradientaActivityViewController(sender:)), for: .touchUpInside)
         
-        let checkForSubscription = UserDefaults.standard.bool(forKey: IAPProduct.nonConsumablePurchase.rawValue)
-        if (!checkForSubscription) {
-            gradientView.favoriteButton.addTarget(self, action: #selector(openPremium(sender:)), for: .touchUpInside)
-        } else {
-            gradientView.favoriteButton.addTarget(self, action: #selector(saveFavoriteGradient(sender:)), for: .touchUpInside)
-        }
+//        let checkForSubscription = UserDefaults.standard.bool(forKey: IAPProduct.nonConsumablePurchase.rawValue)
+//        if (!checkForSubscription) {
+//            gradientView.favoriteButton.addTarget(self, action: #selector(openPremium(sender:)), for: .touchUpInside)
+//        } else {
+//            gradientView.favoriteButton.addTarget(self, action: #selector(saveFavoriteGradient(sender:)), for: .touchUpInside)
+//        }
     }
     
     func setupThemeButton() {
@@ -285,29 +285,29 @@ class GradientController: UIViewController, ColorPickerDelegate {
     
 // MARK: - Data Persistance
     
-    @objc func saveFavoriteGradient(sender: UIButton) {
-         
-        hapticFeedback.impactOccurred()
-        
-        if sender.isSelected {
-            sender.isSelected = false
-            gradientView.favoriteButton.setImage(#imageLiteral(resourceName: "favourite-pink"), for: .selected)
-
-            let recordID = recordIDs.first!
-            
-            privateDatabase.delete(withRecordID: recordID) { (deleteRecordID, error) in
-                if error == nil {
-                    print("Record deleted")
-                } else {
-                    print("Record unable to delete: \(String(describing: error))")
-                }
-            }
-        } else {
-            sender.isSelected = true
-            gradientView.favoriteButton.setImage(#imageLiteral(resourceName: "favourite-filled"), for: .selected)
-            saveToCloud(palette: gradientArray)
-        }
-    }
+//    @objc func saveFavoriteGradient(sender: UIButton) {
+//
+//        hapticFeedback.impactOccurred()
+//
+//        if sender.isSelected {
+//            sender.isSelected = false
+//            gradientView.favoriteButton.setImage(#imageLiteral(resourceName: "favourite-pink"), for: .selected)
+//
+//            let recordID = recordIDs.first!
+//
+//            privateDatabase.delete(withRecordID: recordID) { (deleteRecordID, error) in
+//                if error == nil {
+//                    print("Record deleted")
+//                } else {
+//                    print("Record unable to delete: \(String(describing: error))")
+//                }
+//            }
+//        } else {
+//            sender.isSelected = true
+//            gradientView.favoriteButton.setImage(#imageLiteral(resourceName: "favourite-filled"), for: .selected)
+//            saveToCloud(palette: gradientArray)
+//        }
+//    }
     
     func saveToCloud(palette: [String]) {
         let record = CKRecord(recordType: "Favorite")

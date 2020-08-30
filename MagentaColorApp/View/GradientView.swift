@@ -50,7 +50,7 @@ class GradientView: UIView {
     let colorCircleLeftView = UIView().circleButton(width: 60, height: 60)
     let colorCircleRightView = UIView().circleButton(width: 60, height: 60)
     let shareButton = UIView().imageButton(image: #imageLiteral(resourceName: "share-office-color-blackpink"), width: 30, height: 30)
-    let favoriteButton = UIView().imageButton(image: #imageLiteral(resourceName: "favourite-pink"), width: 30, height: 30)
+//    let favoriteButton = UIView().imageButton(image: #imageLiteral(resourceName: "favourite-pink"), width: 30, height: 30)
     
     let darkModeImage = UIView().imageButton(image: #imageLiteral(resourceName: "light off-object-color"), width: 35, height: 35)
     let lightModeImage = UIView().imageButton(image: #imageLiteral(resourceName: "light on-object-color"), width: 35, height: 35)
@@ -119,8 +119,8 @@ class GradientView: UIView {
         shareButton.anchor(right: generateGradientButton.leftAnchor, paddingRight: 50, width: 30, height: 30)
         shareButton.centerY(inView: generateGradientButton)
         
-        bottomContainerView.addSubview(favoriteButton)
-        favoriteButton.anchor(left: generateGradientButton.rightAnchor, paddingLeft: 50, width: 30, height: 30)
-        favoriteButton.centerY(inView: generateGradientButton)
+//        bottomContainerView.addSubview(favoriteButton)
+//        favoriteButton.anchor(left: generateGradientButton.rightAnchor, paddingLeft: 50, width: 30, height: 30)
+//        favoriteButton.centerY(inView: generateGradientButton)
     }
 }

@@ -26,7 +26,7 @@ class MenuController: UIViewController, MFMailComposeViewControllerDelegate {
         
         setupNavigationController()
         menuButtonActions()
-        checkForSubscription()
+//        checkForSubscription()
     }
     
     // MARK: - Helper Functions
@@ -41,20 +41,20 @@ class MenuController: UIViewController, MFMailComposeViewControllerDelegate {
     }
     
     func menuButtonActions() {
-        menuView.premiumButton.addTarget(self, action: #selector(openPremium(sender:)), for: .touchUpInside)
-        menuView.favoritesButton.addTarget(self, action: #selector(openFavorites), for: .touchUpInside)
+//        menuView.premiumButton.addTarget(self, action: #selector(openPremium(sender:)), for: .touchUpInside)
+//        menuView.favoritesButton.addTarget(self, action: #selector(openFavorites), for: .touchUpInside)
         menuView.emailButton.addTarget(self, action: #selector(sendEmail), for: .touchUpInside)
     }
     
-    func checkForSubscription() {
-    //Check if user is subscribed. If no subscription, then Favorites Button remains hidden
-        print(UserDefaults.standard.bool(forKey: IAPProduct.nonConsumablePurchase.rawValue))
-        let checkForSubscription = UserDefaults.standard.bool(forKey: IAPProduct.nonConsumablePurchase.rawValue)
-        if (!checkForSubscription) {
-            menuView.favoritesButton.alpha = 0
-            menuView.favoritesButton.isHidden = false
-        }
-    }
+//    func checkForSubscription() {
+//    //Check if user is subscribed. If no subscription, then Favorites Button remains hidden
+//        print(UserDefaults.standard.bool(forKey: IAPProduct.nonConsumablePurchase.rawValue))
+//        let checkForSubscription = UserDefaults.standard.bool(forKey: IAPProduct.nonConsumablePurchase.rawValue)
+//        if (!checkForSubscription) {
+//            menuView.favoritesButton.alpha = 0
+//            menuView.favoritesButton.isHidden = false
+//        }
+//    }
     
     // MARK: - Selectors
     

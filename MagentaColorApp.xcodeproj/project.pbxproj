@@ -14,8 +14,6 @@
 		903DB8E624808CFA008474AC /* ColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 903DB8E524808CF9008474AC /* ColorExtensions.swift */; };
 		903DB8E824808D3F008474AC /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 903DB8E724808D3F008474AC /* StringExtensions.swift */; };
 		903E168C2483923A006348F1 /* NavigationExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 903E168B2483923A006348F1 /* NavigationExtension.swift */; };
-		903E169C248468BB006348F1 /* Office Desk-light mode.json in Resources */ = {isa = PBXBuildFile; fileRef = 903E169A248468BB006348F1 /* Office Desk-light mode.json */; };
-		903E169D248468BB006348F1 /* Office Desk-dark mode.json in Resources */ = {isa = PBXBuildFile; fileRef = 903E169B248468BB006348F1 /* Office Desk-dark mode.json */; };
 		9040077B248C93CF00BEFC4A /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9040077A248C93CF00BEFC4A /* CloudKit.framework */; };
 		9040077E248D9C3A00BEFC4A /* favourite-lightMode.json in Resources */ = {isa = PBXBuildFile; fileRef = 9040077C248D9C3900BEFC4A /* favourite-lightMode.json */; };
 		9040077F248D9C3A00BEFC4A /* favourite-darkMode.json in Resources */ = {isa = PBXBuildFile; fileRef = 9040077D248D9C3A00BEFC4A /* favourite-darkMode.json */; };
@@ -33,6 +31,9 @@
 		905383AE249D86DC00D4FE21 /* AlertPopUpController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 905383AD249D86DC00D4FE21 /* AlertPopUpController.swift */; };
 		906F82732496945200D5967B /* ColorPickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 906F82722496945100D5967B /* ColorPickerController.swift */; };
 		906F82792496E3B300D5967B /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 906F82782496E3B300D5967B /* StoreKit.framework */; };
+		909310C324C81439003FA1DE /* Office Desk-dark mode.json in Resources */ = {isa = PBXBuildFile; fileRef = 909310C224C81438003FA1DE /* Office Desk-dark mode.json */; };
+		909310C624C81471003FA1DE /* Office Desk-light mode.json in Resources */ = {isa = PBXBuildFile; fileRef = 909310C424C81471003FA1DE /* Office Desk-light mode.json */; };
+		909310C724C81471003FA1DE /* Office Desk-dark mode.json in Resources */ = {isa = PBXBuildFile; fileRef = 909310C524C81471003FA1DE /* Office Desk-dark mode.json */; };
 		90E4B699246755A400ED3D29 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90E4B698246755A400ED3D29 /* AppDelegate.swift */; };
 		90E4B69B246755A400ED3D29 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90E4B69A246755A400ED3D29 /* SceneDelegate.swift */; };
 		90E4B69D246755A400ED3D29 /* PaletteController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90E4B69C246755A400ED3D29 /* PaletteController.swift */; };
@@ -51,8 +52,6 @@
 		903DB8E524808CF9008474AC /* ColorExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtensions.swift; sourceTree = "<group>"; };
 		903DB8E724808D3F008474AC /* StringExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
 		903E168B2483923A006348F1 /* NavigationExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationExtension.swift; sourceTree = "<group>"; };
-		903E169A248468BB006348F1 /* Office Desk-light mode.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "Office Desk-light mode.json"; sourceTree = SOURCE_ROOT; };
-		903E169B248468BB006348F1 /* Office Desk-dark mode.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "Office Desk-dark mode.json"; sourceTree = SOURCE_ROOT; };
 		903E16A424847768006348F1 /* MagentaColor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MagentaColor.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		90400779248C93BA00BEFC4A /* MagentaColorAppRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MagentaColorAppRelease.entitlements; sourceTree = "<group>"; };
 		9040077A248C93CF00BEFC4A /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
@@ -73,6 +72,9 @@
 		905383AD249D86DC00D4FE21 /* AlertPopUpController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AlertPopUpController.swift; path = ../../View/Favorites/AlertPopUpController.swift; sourceTree = "<group>"; };
 		906F82722496945100D5967B /* ColorPickerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPickerController.swift; sourceTree = "<group>"; };
 		906F82782496E3B300D5967B /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		909310C224C81438003FA1DE /* Office Desk-dark mode.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "Office Desk-dark mode.json"; sourceTree = "<group>"; };
+		909310C424C81471003FA1DE /* Office Desk-light mode.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "Office Desk-light mode.json"; sourceTree = "<group>"; };
+		909310C524C81471003FA1DE /* Office Desk-dark mode.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "Office Desk-dark mode.json"; sourceTree = "<group>"; };
 		90E4B698246755A400ED3D29 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		90E4B69A246755A400ED3D29 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		90E4B69C246755A400ED3D29 /* PaletteController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaletteController.swift; sourceTree = "<group>"; };
@@ -155,10 +157,11 @@
 				90400779248C93BA00BEFC4A /* MagentaColorAppRelease.entitlements */,
 				9040077D248D9C3A00BEFC4A /* favourite-darkMode.json */,
 				9040077C248D9C3900BEFC4A /* favourite-lightMode.json */,
+				909310C524C81471003FA1DE /* Office Desk-dark mode.json */,
+				909310C424C81471003FA1DE /* Office Desk-light mode.json */,
 				904733FA24981ED90016D222 /* premiumAnimation.json */,
+				909310C224C81438003FA1DE /* Office Desk-dark mode.json */,
 				9042194424A1D0B700B5FE83 /* trophy-animated.json */,
-				903E169B248468BB006348F1 /* Office Desk-dark mode.json */,
-				903E169A248468BB006348F1 /* Office Desk-light mode.json */,
 				90E4B6AF24675BD300ED3D29 /* Model */,
 				90E4B6B024675BD800ED3D29 /* View */,
 				90E4B6B124675BDC00ED3D29 /* Controller */,
@@ -281,12 +284,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				909310C624C81471003FA1DE /* Office Desk-light mode.json in Resources */,
 				9040077E248D9C3A00BEFC4A /* favourite-lightMode.json in Resources */,
-				903E169C248468BB006348F1 /* Office Desk-light mode.json in Resources */,
 				9042194524A1D0B800B5FE83 /* trophy-animated.json in Resources */,
+				909310C724C81471003FA1DE /* Office Desk-dark mode.json in Resources */,
 				9040077F248D9C3A00BEFC4A /* favourite-darkMode.json in Resources */,
-				903E169D248468BB006348F1 /* Office Desk-dark mode.json in Resources */,
 				90E4B6A8246755A800ED3D29 /* LaunchScreen.storyboard in Resources */,
+				909310C324C81439003FA1DE /* Office Desk-dark mode.json in Resources */,
 				90E4B6A5246755A800ED3D29 /* Assets.xcassets in Resources */,
 				904733FB24981ED90016D222 /* premiumAnimation.json in Resources */,
 			);
@@ -503,12 +507,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = MagentaColorApp/MagentaColorAppDebug.entitlements;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = PAF88N9AZQ;
 				INFOPLIST_FILE = MagentaColorApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.stephaniechiu.MagentaColorApp;
 				PRODUCT_NAME = MagentaColor;
 				SWIFT_VERSION = 5.0;
@@ -523,12 +529,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = MagentaColorApp/MagentaColorAppRelease.entitlements;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = PAF88N9AZQ;
 				INFOPLIST_FILE = MagentaColorApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.stephaniechiu.MagentaColorApp;
 				PRODUCT_NAME = MagentaColor;
 				SWIFT_VERSION = 5.0;

@@ -18,7 +18,7 @@ class PaletteView: UIView {
     
     //Color info stack view
     var colorStackView: UIStackView
-    var rightStackView: UIStackView
+//    var rightStackView: UIStackView
     var leftStackView: UIStackView
     
     let colorLabelHEX = UIView.colorInfoLabel(color: .label) //Static function is called on UIView instead of using UIView()
@@ -33,7 +33,7 @@ class PaletteView: UIView {
     let paletteGenerateButton = UIView().generateButton(title: "Generate", borderColor: .white, textColor: .white)
     let menuButton = UIView().imageButton(image: #imageLiteral(resourceName: "menu editing-white"), width: 20, height: 20)
     let shareButton = UIView().imageButton(image: #imageLiteral(resourceName: "share-office-color-whitepink"), width: 20, height: 20)
-    let favoriteButton = UIView().imageButton(image: #imageLiteral(resourceName: "favourite-pink"), width: 30, height: 30)
+//    let favoriteButton = UIView().imageButton(image: #imageLiteral(resourceName: "favourite-pink"), width: 30, height: 30)
     
     //Button for Gradient Controller
     let gradientButton: UIButton = {
@@ -69,9 +69,9 @@ class PaletteView: UIView {
         leftStackView.spacing = 3
         leftStackView.distribution = .fillEqually
         
-        self.rightStackView = UIStackView(arrangedSubviews: [favoriteButton, gradientButton])
-        rightStackView.spacing = 3
-        rightStackView.distribution = .fillEqually
+//        self.rightStackView = UIStackView(arrangedSubviews: [gradientButton])
+//        rightStackView.spacing = 3
+//        rightStackView.distribution = .fillEqually
         
         super.init(frame: frame)
         backgroundColor = .clear
@@ -97,15 +97,16 @@ class PaletteView: UIView {
         shareButton.anchor(right: paletteGenerateButton.leftAnchor, paddingRight: 20, width: 30, height: 30)
         shareButton.centerY(inView: paletteGenerateButton)
         
-        bottomControllerView.addSubview(rightStackView)
-        rightStackView.anchor(top: bottomControllerView.topAnchor, left: paletteGenerateButton.rightAnchor, bottom: bottomControllerView.safeAreaLayoutGuide.bottomAnchor, right: bottomControllerView.rightAnchor, paddingTop: 15, paddingLeft: 20, paddingRight: 20)
-        bottomControllerView.addSubview(favoriteButton)
-        favoriteButton.anchor(left: paletteGenerateButton.rightAnchor, paddingLeft: 20, width: 35, height: 35)
-        favoriteButton.centerY(inView: paletteGenerateButton)
+//        bottomControllerView.addSubview(rightStackView)
+//        rightStackView.backgroundColor = .orange
+//        rightStackView.anchor(top: bottomControllerView.topAnchor, left: paletteGenerateButton.rightAnchor, bottom: bottomControllerView.safeAreaLayoutGuide.bottomAnchor, right: bottomControllerView.rightAnchor, paddingTop: 15, paddingLeft: 20, paddingRight: 20)
+//        bottomControllerView.addSubview(favoriteButton)
+//        favoriteButton.anchor(left: paletteGenerateButton.rightAnchor, paddingLeft: 20, width: 35, height: 35)
+//        favoriteButton.centerY(inView: paletteGenerateButton)
         
         bottomControllerView.addSubview(gradientButton)
         gradientButton.setupGradientBackground(colorOne: .magenta, colorTwo: .orange)
-        gradientButton.anchor(right: bottomControllerView.rightAnchor, paddingRight: 20, width: 30, height: 30)
+        gradientButton.anchor(right: bottomControllerView.rightAnchor, paddingRight: 50, width: 30, height: 30)
         gradientButton.centerY(inView: paletteGenerateButton)
     }
 }

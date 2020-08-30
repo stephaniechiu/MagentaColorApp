@@ -73,15 +73,15 @@ class PaletteController: UIViewController, UITableViewDataSource, UITableViewDel
         paletteView.menuButton.addTarget(self, action: #selector(openMenu(sender:)), for: .touchUpInside)
         paletteView.shareButton.addTarget(self, action: #selector(setupPaletteActivityViewController), for: .touchUpInside)
         paletteView.paletteGenerateButton.addTarget(self, action: #selector(randomPalette(sender:)), for: .touchUpInside)
-        paletteView.favoriteButton.addTarget(self, action: #selector(saveFavoritePalette(sender:)), for: .touchUpInside)
+//        paletteView.favoriteButton.addTarget(self, action: #selector(saveFavoritePalette(sender:)), for: .touchUpInside)
         
         //Check if user is subscribed. If no subscription, then show Premium Controller
-        let checkForSubscription = UserDefaults.standard.bool(forKey: IAPProduct.nonConsumablePurchase.rawValue)
-        if (!checkForSubscription) {
-            paletteView.favoriteButton.addTarget(self, action: #selector(openPremium(sender:)), for: .touchUpInside)
-//                menuView.favoritesButton.alpha = 0
-//                menuView.favoritesButton.isHidden = true
-        }
+//        let checkForSubscription = UserDefaults.standard.bool(forKey: IAPProduct.nonConsumablePurchase.rawValue)
+//        if (!checkForSubscription) {
+//            paletteView.favoriteButton.addTarget(self, action: #selector(openPremium(sender:)), for: .touchUpInside)
+////                menuView.favoritesButton.alpha = 0
+////                menuView.favoritesButton.isHidden = true
+//        }
         
         view.addSubview(paletteView.bottomControllerView)
         paletteView.bottomControllerView.anchor(top: paletteTableView.bottomAnchor, left: view.safeAreaLayoutGuide.leftAnchor, bottom: view.bottomAnchor, right: view.safeAreaLayoutGuide.rightAnchor, height: bottomControllerHeight)
@@ -190,9 +190,6 @@ class PaletteController: UIViewController, UITableViewDataSource, UITableViewDel
     
     //When user taps on a color in the palette, it "opens" to fill the screen with that color with it's color codes
     @objc func openColor(sender: UIButton) {
-//        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(copyText(sender:)))
-//        view.addGestureRecognizer(tapGesture)
-        
         let buttonTag = sender.tag
         
         for i in 0..<5 {
@@ -229,7 +226,6 @@ class PaletteController: UIViewController, UITableViewDataSource, UITableViewDel
                         self.paletteView.colorLabelCMYK.textColor = UIColor().contrastColor(color: self.cellColorInRGB)
                         self.paletteView.colorLabelCMYK.attributedText = "CMYK \n\(Int(round(self.cellColorInRGB.cmyk.cyan * 100))), \(Int(round(self.cellColorInRGB.cmyk.magenta * 100))), \(Int(round(self.cellColorInRGB.cmyk.yellow * 100))), \(Int(round(self.cellColorInRGB.cmyk.black * 100)))".attributedStringWithBoldness(["CMYK"], characterSpacing: 1)
                         
-//                        print("This is the color \(self.cellColor)")
                     case 1:
                         self.colorButton[i].transform = CGAffineTransform.identity
                         self.paletteView.colorStackView.alpha = 0
@@ -242,7 +238,6 @@ class PaletteController: UIViewController, UITableViewDataSource, UITableViewDel
                     if currentAnimation > 1 {
                         currentAnimation = 0
                     }
-//                print("click \(buttonTag)")
             }
         }
     }
@@ -259,7 +254,7 @@ class PaletteController: UIViewController, UITableViewDataSource, UITableViewDel
             Void in()
         })
         
-        paletteView.favoriteButton.setImage(#imageLiteral(resourceName: "favourite-pink"), for: .selected)
+//        paletteView.favoriteButton.setImage(#imageLiteral(resourceName: "favourite-pink"), for: .selected)
         newPalette()
         hapticFeedback.impactOccurred()
         let randomEnd = Date()
@@ -305,33 +300,33 @@ class PaletteController: UIViewController, UITableViewDataSource, UITableViewDel
     
 // MARK: - Data Persistance
     
-    @objc func saveFavoritePalette(sender: UIButton) {
-        
-        hapticFeedback.impactOccurred()
-        
-    //Favorite button will change from empty heart to filled heart when user taps to save. If user taps on game palette before generating a new palette, then that record will delete
-        if sender.isSelected {
-            sender.isSelected = false
-            paletteView.favoriteButton.setImage(#imageLiteral(resourceName: "favourite-pink"), for: .selected)
-            
-            let recordID = recordIDs.first!
-            
-            privateDatabase.delete(withRecordID: recordID) { (deleteRecordID, error) in
-                if error == nil {
-                    print("Record deleted")
-                } else {
-                    print("Record unable to delete: \(String(describing: error))")
-                }
-            }
-        } else {
-            sender.isSelected = true
-            paletteView.favoriteButton.setImage(#imageLiteral(resourceName: "favourite-filled"), for: .selected)
-            
-            saveToCloud(palette: arrayText)
-        }
-        
-        
-    }
+//    @objc func saveFavoritePalette(sender: UIButton) {
+//        
+//        hapticFeedback.impactOccurred()
+//        
+//    //Favorite button will change from empty heart to filled heart when user taps to save. If user taps on game palette before generating a new palette, then that record will delete
+//        if sender.isSelected {
+//            sender.isSelected = false
+//            paletteView.favoriteButton.setImage(#imageLiteral(resourceName: "favourite-pink"), for: .selected)
+//            
+//            let recordID = recordIDs.first!
+//            
+//            privateDatabase.delete(withRecordID: recordID) { (deleteRecordID, error) in
+//                if error == nil {
+//                    print("Record deleted")
+//                } else {
+//                    print("Record unable to delete: \(String(describing: error))")
+//                }
+//            }
+//        } else {
+//            sender.isSelected = true
+//            paletteView.favoriteButton.setImage(#imageLiteral(resourceName: "favourite-filled"), for: .selected)
+//            
+//            saveToCloud(palette: arrayText)
+//        }
+//        
+//        
+//    }
     
     func saveToCloud(palette: [String]) {
         let record = CKRecord(recordType: "Favorite")
