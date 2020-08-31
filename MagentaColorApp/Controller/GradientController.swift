@@ -30,6 +30,8 @@ class GradientController: UIViewController, LeftColorPickerDelegate, RightColorP
     let hapticFeedback = UIImpactFeedbackGenerator()
     var lightIsOn = false
     
+    let defaults = UserDefaults.standard
+    
     let privateDatabase = CKContainer.default().privateCloudDatabase
     var gradientArray = [String]()
 
@@ -42,13 +44,10 @@ class GradientController: UIViewController, LeftColorPickerDelegate, RightColorP
         setupBottomController()
         setupThemeButton()
         
+        checkForStylePreference()
+        
         showColorPicker()
-        leftGradientColor = .random
-        rightGradientColor = .random
-        newGradient(leftColor: leftGradientColor, rightColor: rightGradientColor)
-        contrastColorForIcon(color: leftGradientColor, button: gradientView.leftEditButton)
-        contrastColorForIcon(color: rightGradientColor, button: gradientView.rightEditButton)
-        gradientView.generateGradientButton.addTarget(self, action: #selector(randomGradient(sender:)), for: .touchUpInside)
+        displayGradient()
     }
     
 // MARK: - Helper Functions
@@ -67,6 +66,15 @@ class GradientController: UIViewController, LeftColorPickerDelegate, RightColorP
 //        } else {
 //            gradientView.favoriteButton.addTarget(self, action: #selector(saveFavoriteGradient(sender:)), for: .touchUpInside)
 //        }
+    }
+    
+    func displayGradient() {
+        leftGradientColor = .random
+        rightGradientColor = .random
+        newGradient(leftColor: leftGradientColor, rightColor: rightGradientColor)
+        contrastColorForIcon(color: leftGradientColor, button: gradientView.leftEditButton)
+        contrastColorForIcon(color: rightGradientColor, button: gradientView.rightEditButton)
+        gradientView.generateGradientButton.addTarget(self, action: #selector(randomGradient(sender:)), for: .touchUpInside)
     }
     
     func newLeftColor(left: UIColor) {
@@ -94,6 +102,20 @@ class GradientController: UIViewController, LeftColorPickerDelegate, RightColorP
         gradientView.rightEditButton.addTarget(self, action: #selector(openRightColorPicker(sender:)), for: .touchUpInside)
     }
     
+    func saveStylePreference() {
+        defaults.set(lightIsOn, forKey: Keys.prefersDarkMode)
+    }
+    
+    func checkForStylePreference() {
+        let prefersDarkMode = defaults.bool(forKey: Keys.prefersDarkMode)
+        
+        if prefersDarkMode {
+            lightIsOn = true
+            updateTheme()
+        }
+    }
+    
+    //Displays either a black or white icon depending on the luminance of the gradient color
     func contrastColorForIcon(color: UIColor, button: UIButton) {
         var r = CGFloat(0)
         var g = CGFloat(0)
@@ -182,7 +204,7 @@ class GradientController: UIViewController, LeftColorPickerDelegate, RightColorP
         
         let animation = Animation()
         animation.textFadeAnimation()
-        animation.springAnimation(sender: sender)
+        sender.shake(duration: 0.5, values: [-12.0, 12.0, -12.0, 12.0, -6.0, 6.0, -3.0, 3.0, 0.0])
     } 
     
     @objc func setupGradientaActivityViewController(sender: UIButton) {

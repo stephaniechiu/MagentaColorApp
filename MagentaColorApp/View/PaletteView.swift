@@ -35,6 +35,8 @@ class PaletteView: UIView {
     let shareButton = UIView().imageButton(image: #imageLiteral(resourceName: "share-office-color-whitepink"), width: 20, height: 20)
 //    let favoriteButton = UIView().imageButton(image: #imageLiteral(resourceName: "favourite-pink"), width: 30, height: 30)
     
+    let rightBottomContainer = UIView()
+    
     //Button for Gradient Controller
     let gradientButton: UIButton = {
         let button = UIButton()
@@ -69,10 +71,6 @@ class PaletteView: UIView {
         leftStackView.spacing = 3
         leftStackView.distribution = .fillEqually
         
-//        self.rightStackView = UIStackView(arrangedSubviews: [gradientButton])
-//        rightStackView.spacing = 3
-//        rightStackView.distribution = .fillEqually
-        
         super.init(frame: frame)
         backgroundColor = .clear
         setupLayout()
@@ -97,16 +95,20 @@ class PaletteView: UIView {
         shareButton.anchor(right: paletteGenerateButton.leftAnchor, paddingRight: 20, width: 30, height: 30)
         shareButton.centerY(inView: paletteGenerateButton)
         
+        bottomControllerView.addSubview(rightBottomContainer)
+        rightBottomContainer.anchor(top: bottomControllerView.topAnchor, left: paletteGenerateButton.rightAnchor, bottom: bottomControllerView.safeAreaLayoutGuide.bottomAnchor, right: bottomControllerView.rightAnchor, paddingTop: 15)
+        
+        bottomControllerView.addSubview(gradientButton)
+        gradientButton.setupGradientBackground(colorOne: .magenta, colorTwo: .orange)
+        gradientButton.anchor(width: 30, height: 30)
+        gradientButton.centerX(inView: rightBottomContainer)
+        gradientButton.centerY(inView: paletteGenerateButton)
+        
 //        bottomControllerView.addSubview(rightStackView)
 //        rightStackView.backgroundColor = .orange
 //        rightStackView.anchor(top: bottomControllerView.topAnchor, left: paletteGenerateButton.rightAnchor, bottom: bottomControllerView.safeAreaLayoutGuide.bottomAnchor, right: bottomControllerView.rightAnchor, paddingTop: 15, paddingLeft: 20, paddingRight: 20)
 //        bottomControllerView.addSubview(favoriteButton)
 //        favoriteButton.anchor(left: paletteGenerateButton.rightAnchor, paddingLeft: 20, width: 35, height: 35)
 //        favoriteButton.centerY(inView: paletteGenerateButton)
-        
-        bottomControllerView.addSubview(gradientButton)
-        gradientButton.setupGradientBackground(colorOne: .magenta, colorTwo: .orange)
-        gradientButton.anchor(right: bottomControllerView.rightAnchor, paddingRight: 50, width: 30, height: 30)
-        gradientButton.centerY(inView: paletteGenerateButton)
     }
 }

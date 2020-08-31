@@ -12,6 +12,11 @@ extension GradientController {
     
     //User can manually change the interface to Light if interface theme is Dark Mode, and vice versa
     @objc func themeButtonPressed(sender: UIButton) {
+        saveStylePreference()
+        updateTheme()
+    }
+    
+    func updateTheme() {
         if traitCollection.userInterfaceStyle == .dark {
             activatedDarkButton(bool: !lightIsOn)
         } else {

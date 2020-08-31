@@ -25,17 +25,6 @@ class Animation {
          gradientView.colorLabelRightHSB.fadeTransition(0.4)
          gradientView.colorLabelRightCMY.fadeTransition(0.4)
          gradientView.colorLabelRightCMYK.fadeTransition(0.4)
-     }
-    
-    func springAnimation(sender: UIButton) {
-        //Spring animation to button
-        sender.transform = CGAffineTransform(scaleX: 0.6, y: 0.6)
-        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: CGFloat(0.2), initialSpringVelocity: CGFloat(4.0), options: UIView.AnimationOptions.allowUserInteraction, animations: {
-            sender.transform = CGAffineTransform.identity
-        }, completion: {
-            Void in()
-        })
     }
-    
 }
 

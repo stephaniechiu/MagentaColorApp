@@ -10,13 +10,11 @@ import UIKit
 
 extension UIView {
     
-    //use static in front of func
     static func containerView(color: UIColor) -> UIView {
         let container = UIView()
         container.backgroundColor = color
         return container
     }
-    
     
     func circleButton(width: CGFloat, height: CGFloat) -> UIButton {
         let button = UIButton()
@@ -71,6 +69,14 @@ extension UIView {
         button.titleLabel?.anchor(left: imageView.rightAnchor, paddingLeft: textPadding)
         
         return button
+    }
+    
+    func shake(duration: TimeInterval = 0.5, values: [CGFloat]) {
+        let animation = CAKeyframeAnimation(keyPath: "transform.translation.x")
+        animation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.linear)
+        animation.duration = duration // You can set fix duration
+        animation.values = values  // You can set fix values here also
+        self.layer.add(animation, forKey: "shake")
     }
     
     func subscriptionButton(titleText: String, subtitle: String? = nil, titleColor: UIColor) -> UIButton {

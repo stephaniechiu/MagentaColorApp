@@ -246,8 +246,7 @@ class PaletteController: UIViewController, UITableViewDataSource, UITableViewDel
     @objc func randomPalette(sender: UIButton) {
         let randomStart = Date()
         
-        let animation = Animation()
-        animation.springAnimation(sender: sender)
+        sender.shake(duration: 0.5, values: [-12.0, 12.0, -12.0, 12.0, -6.0, 6.0, -3.0, 3.0, 0.0])
         
 //        paletteView.favoriteButton.setImage(#imageLiteral(resourceName: "favourite-pink"), for: .selected)
         newPalette()
