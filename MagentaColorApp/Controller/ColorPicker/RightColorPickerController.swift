@@ -1,5 +1,5 @@
 //
-//  ColorPickerController.swift
+//  RightColorPickerController.swift
 //  MagentaColorApp
 //
 //  Created by Stephanie on 6/14/20.
@@ -9,17 +9,16 @@
 import UIKit
 import Colorful
 
-class ColorPickerController: UIViewController {
+class RightColorPickerController: UIViewController {
     
 // MARK: - Properties
     
-    var delegate: ColorPickerDelegate?
+    var delegate: RightColorPickerDelegate?
     var gradientController = GradientController()
     let colorPicker = ColorPicker()
-    let label = UIView().rgbLabel()
+    var colorLabel = UIView().rgbLabel()
     var newColorString: String = ""
-    var newLeftColor: UIColor = .label
-    var newRightColor: UIColor = .label
+    var newRightColor = UIColor()
     let cancelButton = UIView().generateButton(title: "Cancel", borderColor: .label, textColor: .label)
     let selectButton = UIView().generateButton(title: "Select", borderColor: .label, textColor: .systemBackground, backgroundColor: .label)
     
@@ -35,28 +34,26 @@ class ColorPickerController: UIViewController {
     
     func setupLayout() {
         view.backgroundColor = .systemBackground
-        view.frame.size = CGSize(width: UIScreen.main.bounds.width, height: 800)
+        view.frame.size = CGSize(width: UIScreen.main.bounds.width, height: 300)
         
-        colorPicker.frame.size = CGSize(width: UIScreen.main.bounds.width - 40, height: 350)
         colorPicker.addTarget(self, action: #selector(handleColorChanged(picker:)), for: .valueChanged)
-        colorPicker.set(color: .red, colorSpace: .sRGB)
+        colorPicker.set(color: newRightColor, colorSpace: .sRGB)
         
-        label.text = "#FF0000"
+        colorLabel.text = "HEX: \(String(describing: colorLabel.text!).uppercased())"
+        
+        view.addSubview(colorLabel)
+        colorLabel.anchor(top: view.safeAreaLayoutGuide.topAnchor, paddingTop: UIScreen.main.bounds.height/5)
+        colorLabel.centerX(inView: view)
         
         view.addSubview(colorPicker)
         colorPicker.centerX(inView: view)
-        colorPicker.centerY(inView: view)
-        colorPicker.anchor(width: UIScreen.main.bounds.width - 40, height: 350)
-        
-        view.addSubview(label)
-        label.anchor(top: colorPicker.bottomAnchor, paddingTop: 10)
-        label.centerX(inView: view)
+        colorPicker.anchor(top: colorLabel.bottomAnchor, paddingTop: 30, width: UIScreen.main.bounds.width - 40, height: 300)
         
         view.addSubview(cancelButton)
-        cancelButton.anchor(top: label.bottomAnchor, left: view.leftAnchor, paddingTop: 20, paddingLeft: 30, width: 150, height: 30)
+        cancelButton.anchor(top: colorPicker.bottomAnchor, left: view.leftAnchor, paddingTop: 30, paddingLeft: 30, width: 150, height: 30)
         
         view.addSubview(selectButton)
-        selectButton.anchor(top: label.bottomAnchor, right: view.rightAnchor, paddingTop: 20, paddingRight: 30, width: 150, height: 30)
+        selectButton.anchor(top: colorPicker.bottomAnchor, right: view.rightAnchor, paddingTop: 30, paddingRight: 30, width: 150, height: 30)
     }
     
     func buttonActions() {
@@ -67,13 +64,8 @@ class ColorPickerController: UIViewController {
 // MARK: - Selectors
     
         @objc func handleColorChanged(picker: ColorPicker) {
-            label.text = "HEX: \(picker.color.toHexString().uppercased())"
+            colorLabel.text = "HEX: \(picker.color.toHexString().uppercased())"
             newColorString = picker.color.toHexString()
-            
-            //if left circle button was tapped
-            newLeftColor = picker.color
-            
-            //else right circle button was tapped
             newRightColor = picker.color
         }
     
@@ -82,7 +74,6 @@ class ColorPickerController: UIViewController {
         }
     
         @objc func selectColor(sender: UIButton) {
-            delegate?.newLeftColor(left: newLeftColor)
             delegate?.newRightColor(right: newRightColor)
             self.dismiss(animated: true, completion: nil)
         }

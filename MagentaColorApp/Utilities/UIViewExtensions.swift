@@ -11,7 +11,7 @@ import UIKit
 extension UIView {
     
     //use static in front of func
-    func containerView(color: UIColor) -> UIView {
+    static func containerView(color: UIColor) -> UIView {
         let container = UIView()
         container.backgroundColor = color
         return container
@@ -133,7 +133,7 @@ extension UIView {
         case .iPhones_5_5s_5c_SE:
             label.font = UIFont.init(name: "HelveticaNeue", size: 12)
         case .iPhones_6_6s_7_8:
-            label.font = UIFont.init(name: "HelveticaNeue", size: 13)
+            label.font = UIFont.init(name: "HelveticaNeue", size: 12)
         case .iPhones_6Plus_6sPlus_7Plus_8Plus:
             label.font = UIFont.init(name: "HelveticaNeue", size: 14)
         case .iPhones_X_Xs_11Pro:
@@ -151,20 +151,33 @@ extension UIView {
         return label
     }
     
-    func colorSlider(tintColor: UIColor) -> UISlider {
-        let slider = UISlider()
-        slider.minimumValue = 0
-        slider.maximumValue = 255
-        slider.isContinuous = true
-        slider.tintColor = tintColor
-        slider.frame.size = CGSize(width: 250, height: 20)
-        return slider
-    }
-    
     func rgbLabel() -> UILabel {
         let label = UILabel()
-        label.font = UIFont(name: "HelveticaNeue-Bold", size: 16)
+        label.font = UIFont(name: "HelveticaNeue-Bold", size: 20)
         label.textColor = .label
+        
+        let deviceType = UIDevice.current.deviceType
+
+        switch deviceType {
+
+        case .iPhones_5_5s_5c_SE:
+            label.font = UIFont.init(name: "HelveticaNeue-Bold", size: 14)
+        case .iPhones_6_6s_7_8:
+            label.font = UIFont.init(name: "HelveticaNeue-Bold", size: 18)
+        case .iPhones_6Plus_6sPlus_7Plus_8Plus:
+            label.font = UIFont.init(name: "HelveticaNeue-Bold", size: 18)
+        case .iPhones_X_Xs_11Pro:
+            label.font = UIFont.init(name: "HelveticaNeue-Bold", size: 18)
+        case .iPhones_Xr_11:
+            label.font = UIFont.init(name: "HelveticaNeue-Bold", size: 20)
+        case .iPhones_XsMax_11ProMax:
+            label.font = UIFont.init(name: "HelveticaNeue-Bold", size: 20)
+        default:
+            print("iPad or Unkown device")
+            label.font = UIFont.systemFont(ofSize: 24)
+
+        }
+        
         return label
     }
     

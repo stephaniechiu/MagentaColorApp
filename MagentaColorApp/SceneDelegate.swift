@@ -17,7 +17,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(frame: windowScene.coordinateSpace.bounds)
         window?.windowScene = windowScene
-        window?.rootViewController = UINavigationController(rootViewController: PaletteController())
+        window?.rootViewController = UINavigationController(rootViewController: GradientController())
 //        window?.rootViewController = SliderController()
         window?.makeKeyAndVisible()
     }

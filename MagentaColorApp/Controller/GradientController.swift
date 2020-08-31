@@ -10,19 +10,19 @@ import UIKit
 import CloudKit
 import Colorful
 
-protocol ColorPickerDelegate {
-    func newLeftColor(left: UIColor)
+protocol RightColorPickerDelegate {
     func newRightColor(right: UIColor)
 }
 
-class GradientController: UIViewController, ColorPickerDelegate {
+protocol LeftColorPickerDelegate {
+    func newLeftColor(left: UIColor)
+}
 
+class GradientController: UIViewController, LeftColorPickerDelegate, RightColorPickerDelegate {
     
 // MARK: - Properties
     
     let gradientView = GradientView()
-//    var leftGradientColor: UIColor = .random
-//    var rightGradientColor: UIColor = .random
     var leftGradientColor = UIColor()
     var rightGradientColor = UIColor()
     var shareLeftColor = String()
@@ -43,7 +43,10 @@ class GradientController: UIViewController, ColorPickerDelegate {
         setupThemeButton()
         
         showColorPicker()
-        newGradient(leftColor: .random, rightColor: .random)
+        leftGradientColor = .random
+        rightGradientColor = .random
+        newGradient(leftColor: leftGradientColor, rightColor: rightGradientColor)
+        gradientView.generateGradientButton.addTarget(self, action: #selector(randomGradient(sender:)), for: .touchUpInside)
     }
     
 // MARK: - Helper Functions
@@ -65,22 +68,30 @@ class GradientController: UIViewController, ColorPickerDelegate {
     }
     
     func newLeftColor(left: UIColor) {
-        gradientView.colorCircleLeftView.addTarget(self, action: #selector(openColorPicker(sender:)), for: .touchUpInside)
-        leftGradientColor = left
+        gradientView.colorCircleLeftView.addTarget(self, action: #selector(openLeftColorPicker(sender:)), for: .touchUpInside)
+
         print("\(left.toHexString())")
+        leftGradientColor = left
+        gradientView.colorCircleLeftView.backgroundColor = leftGradientColor
+        newGradient(leftColor: left, rightColor: rightGradientColor)
     }
     
     func newRightColor(right: UIColor) {
-        gradientView.colorCircleRightView.addTarget(self, action: #selector(openColorPicker(sender:)), for: .touchUpInside)
+        gradientView.colorCircleRightView.addTarget(self, action: #selector(openRightColorPicker(sender:)), for: .touchUpInside)
         
         print("\(right.toHexString())")
         rightGradientColor = right
         gradientView.colorCircleRightView.backgroundColor = rightGradientColor
+        newGradient(leftColor: leftGradientColor, rightColor: right)
+    }
+    
+    func updateGradient() {
+            
     }
     
     func showColorPicker() {
-        gradientView.colorCircleLeftView.addTarget(self, action: #selector(openColorPicker(sender:)), for: .touchUpInside)
-        gradientView.colorCircleRightView.addTarget(self, action: #selector(openColorPicker(sender:)), for: .touchUpInside)
+        gradientView.colorCircleLeftView.addTarget(self, action: #selector(openLeftColorPicker(sender:)), for: .touchUpInside)
+        gradientView.colorCircleRightView.addTarget(self, action: #selector(openRightColorPicker(sender:)), for: .touchUpInside)
     }
     
     //Randomly generates two new gradient colors
@@ -91,7 +102,8 @@ class GradientController: UIViewController, ColorPickerDelegate {
         gradientView.colorCircleRightView.backgroundColor = rightColor
         shareLeftColor = leftColor.toHexString()
         shareRightColor = rightColor.toHexString()
-         
+        
+        //Save colors as an array
         var gradientColors: [String] = []
         let leftGradient = leftColor.toHexString().uppercased().replacingOccurrences(of: "#", with: "")
         let rightGradient = rightColor.toHexString().uppercased().replacingOccurrences(of: "#", with: "")
@@ -99,9 +111,6 @@ class GradientController: UIViewController, ColorPickerDelegate {
         gradientColors.append(rightGradient)
         gradientArray = gradientColors
         print(gradientColors)
-
-        
-        gradientView.generateGradientButton.addTarget(self, action: #selector(randomGradient(sender:)), for: .touchUpInside)
         
         gradientView.colorLabelLeftHEX.attributedText = "HEX  \n\(leftColor.toHexString().uppercased())".attributedStringWithBoldness(["HEX"], characterSpacing: 1)
         gradientView.colorLabelLeftRGB.attributedText = "RGB \n\(Int(leftColor.rgba.red)), \(Int(leftColor.rgba.green)), \(Int(leftColor.rgba.blue))".attributedStringWithBoldness(["RGB"], characterSpacing: 1)
@@ -123,8 +132,21 @@ class GradientController: UIViewController, ColorPickerDelegate {
         self.present(premiumController, animated: true, completion: nil)
     }
     
-    @objc func openColorPicker(sender: UIButton) {
-        let colorPickerController = ColorPickerController()
+    @objc func openRightColorPicker(sender: UIButton) {
+        let colorPickerController = RightColorPickerController()
+        colorPickerController.colorLabel.text = rightGradientColor.toHexString()
+        colorPickerController.newRightColor = rightGradientColor
+        
+        colorPickerController.modalPresentationStyle = .popover
+        colorPickerController.delegate = self
+        self.present(colorPickerController, animated: true, completion: nil)
+    }
+    
+    @objc func openLeftColorPicker(sender: UIButton) {
+        let colorPickerController = LeftColorPickerController()
+        colorPickerController.colorLabel.text = leftGradientColor.toHexString()
+        colorPickerController.newLeftColor = leftGradientColor
+        
         colorPickerController.modalPresentationStyle = .popover
         colorPickerController.delegate = self
         self.present(colorPickerController, animated: true, completion: nil)
@@ -140,7 +162,7 @@ class GradientController: UIViewController, ColorPickerDelegate {
         let animation = Animation()
         animation.textFadeAnimation()
         animation.springAnimation(sender: sender)
-    }
+    } 
     
     @objc func setupGradientaActivityViewController(sender: UIButton) {
         let string = "Magenta Color App: [\n\(shareLeftColor.uppercased()), \(shareRightColor.uppercased()) \n]".replacingOccurrences(of: ",", with:"\n", options: .literal, range: nil)

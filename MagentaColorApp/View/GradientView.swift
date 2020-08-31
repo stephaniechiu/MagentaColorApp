@@ -12,10 +12,10 @@ class GradientView: UIView {
 
 // MARK: - Properties
     //Container Views
-    let topContainerView = UIView().containerView(color: .systemBackground)
-    let leftInfoContainerView = UIView().containerView(color: .systemBackground)
-    let rightInfoContainerView = UIView().containerView(color: .systemBackground)
-    let bottomContainerView = UIView().containerView(color: .systemBackground)
+    let topContainerView = UIView.containerView(color: .systemBackground)
+    let leftInfoContainerView = UIView.containerView(color: .systemBackground)
+    let rightInfoContainerView = UIView.containerView(color: .systemBackground)
+    let bottomContainerView = UIView.containerView(color: .systemBackground)
     
     //Stack Views
     let leftStackView: UIStackView
@@ -35,8 +35,6 @@ class GradientView: UIView {
     let colorLabelRightHSB = UIView.colorInfoLabel(color: .label)
     let colorLabelRightCMY = UIView.colorInfoLabel(color: .label)
     let colorLabelRightCMYK = UIView.colorInfoLabel(color: .label)
-    
-    let gradientViewWidth: CGFloat = UIScreen.main.bounds.width - 30
     
     //Objects
     let generateGradientButton = UIView().generateButton(title: "Generate", borderColor: .label, textColor: .label)
@@ -102,13 +100,12 @@ class GradientView: UIView {
         
         //Top container layout
         addSubview(topContainerView)
-        topContainerView.anchor(top: safeAreaLayoutGuide.topAnchor, left: leftAnchor, right: rightAnchor)
-        
+        topContainerView.anchor(top: safeAreaLayoutGuide.topAnchor, left: leftAnchor, right: rightAnchor, height: UIScreen.main.bounds.height/2 )
+//        topContainerView.backgroundColor = .orange
         topContainerView.addSubview(gradientView)
         gradientView.centerX(inView: topContainerView)
         
-        
-        gradientView.anchor(top: safeAreaLayoutGuide.topAnchor, paddingTop: 10, width: gradientViewWidth, height: gradientViewWidth + 20)
+        gradientView.anchor(top: safeAreaLayoutGuide.topAnchor, paddingTop: 20, width: UIScreen.main.bounds.width - 30, height: UIScreen.main.bounds.height/2 - 45)
         
         topContainerView.addSubview(colorCircleLeftView)
         colorCircleLeftView.anchor(left: topContainerView.leftAnchor, bottom: topContainerView.bottomAnchor, paddingLeft: 15)
@@ -118,11 +115,12 @@ class GradientView: UIView {
         
         //Middle container layout
         addSubview(middleStackView)
-        middleStackView.anchor(top: topContainerView.bottomAnchor, left: leftAnchor, right: rightAnchor, paddingTop: 5, paddingLeft: 15,  paddingRight: 10)
+        middleStackView.anchor(top: topContainerView.bottomAnchor, left: leftAnchor, right: rightAnchor, paddingTop: 0, paddingLeft: 15,  paddingRight: 10)
         
         //Bottom container layout
         addSubview(bottomContainerView)
-        bottomContainerView.anchor(top: middleStackView.bottomAnchor, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, height: 110)
+//        bottomContainerView.backgroundColor = .orange
+        bottomContainerView.anchor(top: middleStackView.bottomAnchor, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, height: 70)
         
         bottomContainerView.addSubview(generateGradientButton)
         generateGradientButton.anchor(width: 150, height: 30)

@@ -14,7 +14,7 @@ class PremiumView: UIView {
 // MARK: - Properties
 
     let premiumControllerAnimation = AnimationView(name: "premiumAnimation")
-    let animationBackground = UIView().containerView(color: .white)
+    let animationBackground = UIView.containerView(color: .white)
     let titleLabel: UILabel = {
         let label = UILabel()
         label.text = "So, what's Premium?"

@@ -25,13 +25,14 @@
 		904298712473C36F0053B216 /* GradientController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904298702473C36F0053B216 /* GradientController.swift */; };
 		9044182324FC6C6400AA74F7 /* DarkMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9044182224FC6C6400AA74F7 /* DarkMode.swift */; };
 		9044182824FC75D800AA74F7 /* Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9044182724FC75D800AA74F7 /* Animation.swift */; };
+		9044182A24FC7ADB00AA74F7 /* LeftColorPickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9044182924FC7ADB00AA74F7 /* LeftColorPickerController.swift */; };
 		9044DD9F249863FB0036004C /* IAPProduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9044DD9E249863FB0036004C /* IAPProduct.swift */; };
 		904581A62498793300885246 /* IAPService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904581A52498793300885246 /* IAPService.swift */; };
 		904733F324981AD60016D222 /* PremiumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904733F224981AD60016D222 /* PremiumView.swift */; };
 		904733F524981AEC0016D222 /* PremiumController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904733F424981AEC0016D222 /* PremiumController.swift */; };
 		904733FB24981ED90016D222 /* premiumAnimation.json in Resources */ = {isa = PBXBuildFile; fileRef = 904733FA24981ED90016D222 /* premiumAnimation.json */; };
 		905383AE249D86DC00D4FE21 /* AlertPopUpController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 905383AD249D86DC00D4FE21 /* AlertPopUpController.swift */; };
-		906F82732496945200D5967B /* ColorPickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 906F82722496945100D5967B /* ColorPickerController.swift */; };
+		906F82732496945200D5967B /* RightColorPickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 906F82722496945100D5967B /* RightColorPickerController.swift */; };
 		906F82792496E3B300D5967B /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 906F82782496E3B300D5967B /* StoreKit.framework */; };
 		909310C324C81439003FA1DE /* Office Desk-dark mode.json in Resources */ = {isa = PBXBuildFile; fileRef = 909310C224C81438003FA1DE /* Office Desk-dark mode.json */; };
 		909310C624C81471003FA1DE /* Office Desk-light mode.json in Resources */ = {isa = PBXBuildFile; fileRef = 909310C424C81471003FA1DE /* Office Desk-light mode.json */; };
@@ -68,13 +69,14 @@
 		904298702473C36F0053B216 /* GradientController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientController.swift; sourceTree = "<group>"; };
 		9044182224FC6C6400AA74F7 /* DarkMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarkMode.swift; sourceTree = "<group>"; };
 		9044182724FC75D800AA74F7 /* Animation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Animation.swift; sourceTree = "<group>"; };
+		9044182924FC7ADB00AA74F7 /* LeftColorPickerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftColorPickerController.swift; sourceTree = "<group>"; };
 		9044DD9E249863FB0036004C /* IAPProduct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IAPProduct.swift; sourceTree = "<group>"; };
 		904581A52498793300885246 /* IAPService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IAPService.swift; sourceTree = "<group>"; };
 		904733F224981AD60016D222 /* PremiumView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PremiumView.swift; sourceTree = "<group>"; };
 		904733F424981AEC0016D222 /* PremiumController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PremiumController.swift; sourceTree = "<group>"; };
 		904733FA24981ED90016D222 /* premiumAnimation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = premiumAnimation.json; sourceTree = "<group>"; };
 		905383AD249D86DC00D4FE21 /* AlertPopUpController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AlertPopUpController.swift; path = ../../View/Favorites/AlertPopUpController.swift; sourceTree = "<group>"; };
-		906F82722496945100D5967B /* ColorPickerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPickerController.swift; sourceTree = "<group>"; };
+		906F82722496945100D5967B /* RightColorPickerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RightColorPickerController.swift; sourceTree = "<group>"; };
 		906F82782496E3B300D5967B /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		909310C224C81438003FA1DE /* Office Desk-dark mode.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "Office Desk-dark mode.json"; sourceTree = "<group>"; };
 		909310C424C81471003FA1DE /* Office Desk-light mode.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "Office Desk-light mode.json"; sourceTree = "<group>"; };
@@ -141,6 +143,15 @@
 				9044182224FC6C6400AA74F7 /* DarkMode.swift */,
 			);
 			path = DarkMode;
+			sourceTree = "<group>";
+		};
+		9044182B24FC7B4100AA74F7 /* ColorPicker */ = {
+			isa = PBXGroup;
+			children = (
+				9044182924FC7ADB00AA74F7 /* LeftColorPickerController.swift */,
+				906F82722496945100D5967B /* RightColorPickerController.swift */,
+			);
+			path = ColorPicker;
 			sourceTree = "<group>";
 		};
 		905383AC249D869700D4FE21 /* Favorites */ = {
@@ -218,7 +229,7 @@
 				904298702473C36F0053B216 /* GradientController.swift */,
 				902D708D248229B800E24CF3 /* MenuController.swift */,
 				904733F424981AEC0016D222 /* PremiumController.swift */,
-				906F82722496945100D5967B /* ColorPickerController.swift */,
+				9044182B24FC7B4100AA74F7 /* ColorPicker */,
 				9044182424FC72A600AA74F7 /* DarkMode */,
 				905383AC249D869700D4FE21 /* Favorites */,
 			);
@@ -359,6 +370,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9044182A24FC7ADB00AA74F7 /* LeftColorPickerController.swift in Sources */,
 				90E4B69D246755A400ED3D29 /* PaletteController.swift in Sources */,
 				904007882490DCD800BEFC4A /* FavoritesTableViewCell.swift in Sources */,
 				904733F524981AEC0016D222 /* PremiumController.swift in Sources */,
@@ -374,7 +386,7 @@
 				9044182824FC75D800AA74F7 /* Animation.swift in Sources */,
 				90E4B6B324675C0500ED3D29 /* PaletteView.swift in Sources */,
 				903DB8E824808D3F008474AC /* StringExtensions.swift in Sources */,
-				906F82732496945200D5967B /* ColorPickerController.swift in Sources */,
+				906F82732496945200D5967B /* RightColorPickerController.swift in Sources */,
 				904581A62498793300885246 /* IAPService.swift in Sources */,
 				905383AE249D86DC00D4FE21 /* AlertPopUpController.swift in Sources */,
 				90E4B69B246755A400ED3D29 /* SceneDelegate.swift in Sources */,
