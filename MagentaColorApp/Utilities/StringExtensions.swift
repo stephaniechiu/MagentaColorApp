@@ -21,19 +21,14 @@ extension String {
                 case .iPhones_5_5s_5c_SE:
                     attributedString.addAttribute(NSAttributedString.Key.font, value: UIFont(name: "HelveticaNeue-Bold", size: 8) ?? "HelveticaNeue", range: range)
                 case .iPhones_6_6s_7_8:
-                    print("iPhone 8")
                     attributedString.addAttribute(NSAttributedString.Key.font, value: UIFont(name: "HelveticaNeue-Bold", size: 8) ?? "HelveticaNeue", range: range)
                 case .iPhones_6Plus_6sPlus_7Plus_8Plus:
-                    print("iPhone 8Plus")
                     attributedString.addAttribute(NSAttributedString.Key.font, value: UIFont(name: "HelveticaNeue-Bold", size: 8) ?? "HelveticaNeue", range: range)
                 case .iPhones_X_Xs_11Pro:
-                    print("iPhone X")
                     attributedString.addAttribute(NSAttributedString.Key.font, value: UIFont(name: "HelveticaNeue-Bold", size: 10) ?? "HelveticaNeue", range: range)
                 case .iPhones_Xr_11:
-                    print("iPhone 11")
                     attributedString.addAttribute(NSAttributedString.Key.font, value: UIFont(name: "HelveticaNeue-Bold", size: 10) ?? "HelveticaNeue", range: range)
                 case .iPhones_XsMax_11ProMax:
-                    print("iPhone 11ProMax")
                     attributedString.addAttribute(NSAttributedString.Key.font, value: UIFont(name: "HelveticaNeue-Bold", size: 11) ?? "HelveticaNeue", range: range)
                 default:
                     print("iPad or Unkown device")

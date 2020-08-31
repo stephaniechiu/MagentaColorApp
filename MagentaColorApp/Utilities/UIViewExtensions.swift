@@ -87,23 +87,18 @@ extension UIView {
             buttonText = NSMutableAttributedString(string: titleText, attributes: [NSAttributedString.Key.foregroundColor: titleColor, NSAttributedString.Key.font: UIFont(name: "HelveticaNeue", size: 10) ?? "HelveticaNeue"])
             subtitleText = NSMutableAttributedString(string: subtitle ?? "", attributes: [NSAttributedString.Key.foregroundColor: UIColor.black, NSAttributedString.Key.font: UIFont(name: "HelveticaNeue", size: 8) as Any])        //                    label.font = UIFont.init(name: "HelveticaNeue", size: 8)
         case .iPhones_6_6s_7_8:
-            print("iPhone 8")
             buttonText = NSMutableAttributedString(string: titleText, attributes: [NSAttributedString.Key.foregroundColor: titleColor, NSAttributedString.Key.font: UIFont(name: "HelveticaNeue", size: 14) ?? "HelveticaNeue"])
             subtitleText = NSMutableAttributedString(string: subtitle ?? "", attributes: [NSAttributedString.Key.foregroundColor: UIColor.black, NSAttributedString.Key.font: UIFont(name: "HelveticaNeue", size: 12) as Any])
         case .iPhones_6Plus_6sPlus_7Plus_8Plus:
-            print("iPhone 8Plus")
             buttonText = NSMutableAttributedString(string: titleText, attributes: [NSAttributedString.Key.foregroundColor: titleColor, NSAttributedString.Key.font: UIFont(name: "HelveticaNeue", size: 14) ?? "HelveticaNeue"])
             subtitleText = NSMutableAttributedString(string: subtitle ?? "", attributes: [NSAttributedString.Key.foregroundColor: UIColor.black, NSAttributedString.Key.font: UIFont(name: "HelveticaNeue", size: 12) as Any])
         case .iPhones_X_Xs_11Pro:
-            print("iPhone X")
             buttonText = NSMutableAttributedString(string: titleText, attributes: [NSAttributedString.Key.foregroundColor: titleColor, NSAttributedString.Key.font: UIFont(name: "HelveticaNeue", size: 14) ?? "HelveticaNeue"])
             subtitleText = NSMutableAttributedString(string: subtitle ?? "", attributes: [NSAttributedString.Key.foregroundColor: UIColor.black, NSAttributedString.Key.font: UIFont(name: "HelveticaNeue", size: 12) as Any])
         case .iPhones_Xr_11:
-            print("iPhone 11")
             buttonText = NSMutableAttributedString(string: titleText, attributes: [NSAttributedString.Key.foregroundColor: titleColor, NSAttributedString.Key.font: UIFont(name: "HelveticaNeue", size: 14) ?? "HelveticaNeue"])
             subtitleText = NSMutableAttributedString(string: subtitle ?? "", attributes: [NSAttributedString.Key.foregroundColor: UIColor.black, NSAttributedString.Key.font: UIFont(name: "HelveticaNeue", size: 12) as Any])
         case .iPhones_XsMax_11ProMax:
-            print("iPhone 11ProMax")
             buttonText = NSMutableAttributedString(string: titleText, attributes: [NSAttributedString.Key.foregroundColor: titleColor, NSAttributedString.Key.font: UIFont(name: "HelveticaNeue", size: 16) ?? "HelveticaNeue"])
             subtitleText = NSMutableAttributedString(string: subtitle ?? "", attributes: [NSAttributedString.Key.foregroundColor: UIColor.black, NSAttributedString.Key.font: UIFont(name: "HelveticaNeue", size: 14) as Any])
         default:

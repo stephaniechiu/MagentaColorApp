@@ -246,13 +246,8 @@ class PaletteController: UIViewController, UITableViewDataSource, UITableViewDel
     @objc func randomPalette(sender: UIButton) {
         let randomStart = Date()
         
-        //Spring animation to generate button
-        sender.transform = CGAffineTransform(scaleX: 0.6, y: 0.6)
-        UIView.animate(withDuration: 0.7, delay: 0, usingSpringWithDamping: CGFloat(0.2), initialSpringVelocity: CGFloat(4.0), options: UIView.AnimationOptions.allowUserInteraction, animations: {
-            sender.transform = CGAffineTransform.identity
-        }, completion: {
-            Void in()
-        })
+        let animation = Animation()
+        animation.springAnimation(sender: sender)
         
 //        paletteView.favoriteButton.setImage(#imageLiteral(resourceName: "favourite-pink"), for: .selected)
         newPalette()

@@ -23,6 +23,8 @@
 		9042194524A1D0B800B5FE83 /* trophy-animated.json in Resources */ = {isa = PBXBuildFile; fileRef = 9042194424A1D0B700B5FE83 /* trophy-animated.json */; };
 		9042986F2473C35A0053B216 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9042986E2473C35A0053B216 /* GradientView.swift */; };
 		904298712473C36F0053B216 /* GradientController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904298702473C36F0053B216 /* GradientController.swift */; };
+		9044182324FC6C6400AA74F7 /* DarkMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9044182224FC6C6400AA74F7 /* DarkMode.swift */; };
+		9044182824FC75D800AA74F7 /* Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9044182724FC75D800AA74F7 /* Animation.swift */; };
 		9044DD9F249863FB0036004C /* IAPProduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9044DD9E249863FB0036004C /* IAPProduct.swift */; };
 		904581A62498793300885246 /* IAPService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904581A52498793300885246 /* IAPService.swift */; };
 		904733F324981AD60016D222 /* PremiumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904733F224981AD60016D222 /* PremiumView.swift */; };
@@ -64,6 +66,8 @@
 		9042194424A1D0B700B5FE83 /* trophy-animated.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "trophy-animated.json"; sourceTree = "<group>"; };
 		9042986E2473C35A0053B216 /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		904298702473C36F0053B216 /* GradientController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientController.swift; sourceTree = "<group>"; };
+		9044182224FC6C6400AA74F7 /* DarkMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarkMode.swift; sourceTree = "<group>"; };
+		9044182724FC75D800AA74F7 /* Animation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Animation.swift; sourceTree = "<group>"; };
 		9044DD9E249863FB0036004C /* IAPProduct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IAPProduct.swift; sourceTree = "<group>"; };
 		904581A52498793300885246 /* IAPService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IAPService.swift; sourceTree = "<group>"; };
 		904733F224981AD60016D222 /* PremiumView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PremiumView.swift; sourceTree = "<group>"; };
@@ -129,6 +133,14 @@
 				904007872490DCD800BEFC4A /* FavoritesTableViewCell.swift */,
 			);
 			path = Favorites;
+			sourceTree = "<group>";
+		};
+		9044182424FC72A600AA74F7 /* DarkMode */ = {
+			isa = PBXGroup;
+			children = (
+				9044182224FC6C6400AA74F7 /* DarkMode.swift */,
+			);
+			path = DarkMode;
 			sourceTree = "<group>";
 		};
 		905383AC249D869700D4FE21 /* Favorites */ = {
@@ -207,6 +219,7 @@
 				902D708D248229B800E24CF3 /* MenuController.swift */,
 				904733F424981AEC0016D222 /* PremiumController.swift */,
 				906F82722496945100D5967B /* ColorPickerController.swift */,
+				9044182424FC72A600AA74F7 /* DarkMode */,
 				905383AC249D869700D4FE21 /* Favorites */,
 			);
 			path = Controller;
@@ -215,6 +228,7 @@
 		90E4B6B824676FB400ED3D29 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				9044182724FC75D800AA74F7 /* Animation.swift */,
 				90E4B6B924676FC500ED3D29 /* UIViewExtensions.swift */,
 				903DB8E524808CF9008474AC /* ColorExtensions.swift */,
 				903DB8E724808D3F008474AC /* StringExtensions.swift */,
@@ -351,11 +365,13 @@
 				902D708C248229A500E24CF3 /* MenuView.swift in Sources */,
 				903DB8E624808CFA008474AC /* ColorExtensions.swift in Sources */,
 				9025540624B5110A00E6CDD3 /* DeviceExtension.swift in Sources */,
+				9044182324FC6C6400AA74F7 /* DarkMode.swift in Sources */,
 				90400785248E03BC00BEFC4A /* FavoritesController.swift in Sources */,
 				90E4B6A3246755A400ED3D29 /* MagentaColorApp.xcdatamodeld in Sources */,
 				904733F324981AD60016D222 /* PremiumView.swift in Sources */,
 				90E4B699246755A400ED3D29 /* AppDelegate.swift in Sources */,
 				90E4B6BA24676FC500ED3D29 /* UIViewExtensions.swift in Sources */,
+				9044182824FC75D800AA74F7 /* Animation.swift in Sources */,
 				90E4B6B324675C0500ED3D29 /* PaletteView.swift in Sources */,
 				903DB8E824808D3F008474AC /* StringExtensions.swift in Sources */,
 				906F82732496945200D5967B /* ColorPickerController.swift in Sources */,
