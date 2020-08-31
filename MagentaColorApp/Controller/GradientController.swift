@@ -46,6 +46,8 @@ class GradientController: UIViewController, LeftColorPickerDelegate, RightColorP
         leftGradientColor = .random
         rightGradientColor = .random
         newGradient(leftColor: leftGradientColor, rightColor: rightGradientColor)
+        contrastColorForIcon(color: leftGradientColor, button: gradientView.leftEditButton)
+        contrastColorForIcon(color: rightGradientColor, button: gradientView.rightEditButton)
         gradientView.generateGradientButton.addTarget(self, action: #selector(randomGradient(sender:)), for: .touchUpInside)
     }
     
@@ -74,6 +76,7 @@ class GradientController: UIViewController, LeftColorPickerDelegate, RightColorP
         leftGradientColor = left
         gradientView.colorCircleLeftView.backgroundColor = leftGradientColor
         newGradient(leftColor: left, rightColor: rightGradientColor)
+        contrastColorForIcon(color: leftGradientColor, button: gradientView.leftEditButton)
     }
     
     func newRightColor(right: UIColor) {
@@ -83,15 +86,28 @@ class GradientController: UIViewController, LeftColorPickerDelegate, RightColorP
         rightGradientColor = right
         gradientView.colorCircleRightView.backgroundColor = rightGradientColor
         newGradient(leftColor: leftGradientColor, rightColor: right)
-    }
-    
-    func updateGradient() {
-            
+        contrastColorForIcon(color: rightGradientColor, button: gradientView.rightEditButton)
     }
     
     func showColorPicker() {
-        gradientView.colorCircleLeftView.addTarget(self, action: #selector(openLeftColorPicker(sender:)), for: .touchUpInside)
-        gradientView.colorCircleRightView.addTarget(self, action: #selector(openRightColorPicker(sender:)), for: .touchUpInside)
+        gradientView.leftEditButton.addTarget(self, action: #selector(openLeftColorPicker(sender:)), for: .touchUpInside)
+        gradientView.rightEditButton.addTarget(self, action: #selector(openRightColorPicker(sender:)), for: .touchUpInside)
+    }
+    
+    func contrastColorForIcon(color: UIColor, button: UIButton) {
+        var r = CGFloat(0)
+        var g = CGFloat(0)
+        var b = CGFloat(0)
+        var a = CGFloat(0)
+    
+        color.getRed(&r, green: &g, blue: &b, alpha: &a)
+        
+        let luminance = 1 - ((0.299 * r) + (0.587 * g) + (0.114 * b))
+        if luminance < 0.5 {
+            button.setImage(#imageLiteral(resourceName: "write-editing-black"), for: .normal)
+        } else {
+            button.setImage(#imageLiteral(resourceName: "write-editing-white"), for: .normal)
+        }
     }
     
     //Randomly generates two new gradient colors
@@ -157,7 +173,12 @@ class GradientController: UIViewController, LeftColorPickerDelegate, RightColorP
     {
         hapticFeedback.impactOccurred()
         
-        newGradient(leftColor: .random, rightColor: .random)
+        leftGradientColor = .random
+        rightGradientColor = .random
+        newGradient(leftColor: leftGradientColor, rightColor: rightGradientColor)
+        
+        contrastColorForIcon(color: leftGradientColor, button: gradientView.leftEditButton)
+        contrastColorForIcon(color: rightGradientColor, button: gradientView.rightEditButton)
         
         let animation = Animation()
         animation.textFadeAnimation()

@@ -37,6 +37,18 @@ class GradientView: UIView {
     let colorLabelRightCMYK = UIView.colorInfoLabel(color: .label)
     
     //Objects
+    var leftEditButton: UIButton = {
+        let button = UIView().imageButton(image: #imageLiteral(resourceName: "write-editing-white"), width: 15, height: 15)
+        button.alpha = 0.5
+        return button
+    }()
+    
+    let rightEditButton: UIButton = {
+        let button = UIView().imageButton(image: #imageLiteral(resourceName: "write-editing-white"), width: 15, height: 15)
+        button.alpha = 0.5
+        return button
+    }()
+    
     let generateGradientButton = UIView().generateButton(title: "Generate", borderColor: .label, textColor: .label)
     let gradientView: UIView = {
         let view = UIView()
@@ -45,20 +57,6 @@ class GradientView: UIView {
         view.layer.cornerRadius = 15
         view.clipsToBounds = true
         return view
-    }()
-    
-    let leftEditButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("Edit", for: .normal)
-        button.setTitleColor(.blue, for: .normal)
-        return button
-    }()
-    
-    let rightEditButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("Edit", for: .normal)
-        button.setTitleColor(.blue, for: .normal)
-        return button
     }()
     
     let colorCircleLeftView = UIView().circleButton(width: 60, height: 60)
@@ -95,7 +93,7 @@ class GradientView: UIView {
     }
 
 // MARK: - Helper Functions
-    fileprivate func setupLayout() {
+    func setupLayout() {
         backgroundColor = .systemBackground
         
         //Top container layout
@@ -107,11 +105,17 @@ class GradientView: UIView {
         
         gradientView.anchor(top: safeAreaLayoutGuide.topAnchor, paddingTop: 20, width: UIScreen.main.bounds.width - 30, height: UIScreen.main.bounds.height/2 - 45)
         
-        topContainerView.addSubview(colorCircleLeftView)
-        colorCircleLeftView.anchor(left: topContainerView.leftAnchor, bottom: topContainerView.bottomAnchor, paddingLeft: 15)
-
-        topContainerView.addSubview(colorCircleRightView)
-        colorCircleRightView.anchor(bottom: topContainerView.bottomAnchor, right: topContainerView.rightAnchor, paddingRight: 15)
+        gradientView.addSubview(leftEditButton)
+        leftEditButton.anchor(left: gradientView.leftAnchor, bottom: gradientView.bottomAnchor, paddingLeft: 10, paddingBottom: 10, width: 20, height: 20)
+        
+        gradientView.addSubview(rightEditButton)
+        rightEditButton.anchor(top: gradientView.topAnchor, right: gradientView.rightAnchor, paddingTop: 10,  paddingRight: 10, width: 20, height: 20)
+        
+//        topContainerView.addSubview(colorCircleLeftView)
+//        colorCircleLeftView.anchor(left: topContainerView.leftAnchor, bottom: topContainerView.bottomAnchor, paddingLeft: 15)
+//
+//        topContainerView.addSubview(colorCircleRightView)
+//        colorCircleRightView.anchor(bottom: topContainerView.bottomAnchor, right: topContainerView.rightAnchor, paddingRight: 15)
         
         //Middle container layout
         addSubview(middleStackView)
