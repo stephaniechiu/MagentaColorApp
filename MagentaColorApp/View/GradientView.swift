@@ -39,13 +39,13 @@ class GradientView: UIView {
     //Objects
     var leftEditButton: UIButton = {
         let button = UIView().imageButton(image: #imageLiteral(resourceName: "write-editing-white"), width: 15, height: 15)
-        button.alpha = 0.5
+        button.alpha = 0.3
         return button
     }()
     
     let rightEditButton: UIButton = {
         let button = UIView().imageButton(image: #imageLiteral(resourceName: "write-editing-white"), width: 15, height: 15)
-        button.alpha = 0.5
+        button.alpha = 0.3
         return button
     }()
     
@@ -119,11 +119,10 @@ class GradientView: UIView {
         
         //Middle container layout
         addSubview(middleStackView)
-        middleStackView.anchor(top: topContainerView.bottomAnchor, left: leftAnchor, right: rightAnchor, paddingTop: 0, paddingLeft: 15,  paddingRight: 10)
+        middleStackView.anchor(top: topContainerView.bottomAnchor, left: leftAnchor, right: rightAnchor, paddingTop: 0, paddingLeft: 20,  paddingRight: 10)
         
         //Bottom container layout
         addSubview(bottomContainerView)
-//        bottomContainerView.backgroundColor = .orange
         bottomContainerView.anchor(top: middleStackView.bottomAnchor, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, height: 70)
         
         bottomContainerView.addSubview(generateGradientButton)

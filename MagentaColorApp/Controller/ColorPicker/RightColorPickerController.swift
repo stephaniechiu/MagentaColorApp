@@ -50,10 +50,10 @@ class RightColorPickerController: UIViewController {
         colorPicker.anchor(top: colorLabel.bottomAnchor, paddingTop: 30, width: UIScreen.main.bounds.width - 40, height: 300)
         
         view.addSubview(cancelButton)
-        cancelButton.anchor(top: colorPicker.bottomAnchor, left: view.leftAnchor, paddingTop: 30, paddingLeft: 30, width: 150, height: 30)
+        cancelButton.anchor(left: view.leftAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, paddingLeft: 30, paddingBottom: 15, width: 150, height: 40)
         
         view.addSubview(selectButton)
-        selectButton.anchor(top: colorPicker.bottomAnchor, right: view.rightAnchor, paddingTop: 30, paddingRight: 30, width: 150, height: 30)
+        selectButton.anchor(bottom: view.safeAreaLayoutGuide.bottomAnchor, right: view.rightAnchor, paddingBottom: 15, paddingRight: 30, width: 150, height: 40)
     }
     
     func buttonActions() {

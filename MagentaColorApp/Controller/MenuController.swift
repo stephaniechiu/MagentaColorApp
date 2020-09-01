@@ -15,7 +15,7 @@ class MenuController: UIViewController, MFMailComposeViewControllerDelegate {
     // MARK: - Properties
     
     let menuView = MenuView()
-    lazy var popToLeftBarButtonItem = UIBarButtonItem(title: "Back", style: .done, target: self, action: #selector(popToLeftBarButtonItemTapped))
+//    lazy var popToLeftBarButtonItem = UIBarButtonItem(title: "Back", style: .done, target: self, action: #selector(popToLeftBarButtonItemTapped))
         
     // MARK: - Init
     
@@ -26,6 +26,7 @@ class MenuController: UIViewController, MFMailComposeViewControllerDelegate {
         
         setupNavigationController()
         menuButtonActions()
+        swipeGesture()
 //        checkForSubscription()
     }
     
@@ -37,13 +38,19 @@ class MenuController: UIViewController, MFMailComposeViewControllerDelegate {
         navigationController?.navigationBar.shadowImage = UIImage()
         navigationItem.hidesBackButton = true
         navigationController?.navigationBar.tintColor = .label
-        navigationItem.setRightBarButton(popToLeftBarButtonItem, animated: true)
+//        navigationItem.setRightBarButton(popToLeftBarButtonItem, animated: true)
     }
     
     func menuButtonActions() {
 //        menuView.premiumButton.addTarget(self, action: #selector(openPremium(sender:)), for: .touchUpInside)
 //        menuView.favoritesButton.addTarget(self, action: #selector(openFavorites), for: .touchUpInside)
         menuView.emailButton.addTarget(self, action: #selector(sendEmail), for: .touchUpInside)
+    }
+    
+    func swipeGesture() {
+        let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(self.respondToSwipeGesture))
+        swipeLeft.direction = UISwipeGestureRecognizer.Direction.left
+        self.view.addGestureRecognizer(swipeLeft)
     }
     
 //    func checkForSubscription() {
@@ -57,6 +64,18 @@ class MenuController: UIViewController, MFMailComposeViewControllerDelegate {
 //    }
     
     // MARK: - Selectors
+    
+    @objc func respondToSwipeGesture(gesture: UIGestureRecognizer) {
+    if let swipeGesture = gesture as? UISwipeGestureRecognizer {
+        switch swipeGesture.direction {
+        case UISwipeGestureRecognizer.Direction.left:
+            self.navigationController?.popViewControllerToLeft()
+            print("Swiped left")
+        default:
+            break
+            }
+        }
+    }
     
     @objc fileprivate func popToLeftBarButtonItemTapped() {
         navigationController?.popViewControllerToLeft()
@@ -76,8 +95,8 @@ class MenuController: UIViewController, MFMailComposeViewControllerDelegate {
         if MFMailComposeViewController.canSendMail() {
             let mail = MFMailComposeViewController()
             mail.mailComposeDelegate = self
-            mail.setToRecipients(["begoniastudios@gmail.com"])
-            mail.setSubject("My Thoughts on Magenta")
+            mail.setToRecipients(["magentacolorapp@gmail.com"])
+            mail.setSubject("My Thoughts on MagentaColor")
             mail.setMessageBody("", isHTML: true)
 
             present(mail, animated: true)

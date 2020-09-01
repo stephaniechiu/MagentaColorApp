@@ -18,9 +18,9 @@ extension GradientController {
     
     func updateTheme() {
         if traitCollection.userInterfaceStyle == .dark {
-            activatedDarkButton(bool: !lightIsOn)
+            activatedDarkButton(bool: !prefersDarkMode)
         } else {
-            activatedLightButton(bool: !lightIsOn)
+            activatedLightButton(bool: !prefersDarkMode)
         }
     }
     
@@ -79,7 +79,7 @@ extension GradientController {
     
     //When user interface style is in Light Mode, this function allow users to manually switch the view to Dark Mode
     func activatedDarkButton(bool: Bool) {
-        lightIsOn = bool
+        prefersDarkMode = bool
         let color = bool ? UIColor.black : UIColor.white
         let image = bool ? #imageLiteral(resourceName: "light on-object-color") : #imageLiteral(resourceName: "light off-object-color")
         let share = bool ? #imageLiteral(resourceName: "share-office-color-whitepink") : #imageLiteral(resourceName: "share-office-color-blackpink")
@@ -93,7 +93,7 @@ extension GradientController {
     
     //When user interface style is in Dark Mode, this function allow users to manually switch the view to Light Mode
     func activatedLightButton(bool: Bool) {
-        lightIsOn = bool
+        prefersDarkMode = bool
         let color = bool ? UIColor.white : UIColor.black
         let image = bool ? #imageLiteral(resourceName: "light off-object-color") : #imageLiteral(resourceName: "light on-object-color")
         let share = bool ? #imageLiteral(resourceName: "share-office-color-blackpink") : #imageLiteral(resourceName: "share-office-color-whitepink")

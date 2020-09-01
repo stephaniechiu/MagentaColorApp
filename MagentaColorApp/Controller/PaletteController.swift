@@ -14,6 +14,7 @@ class PaletteController: UIViewController, UITableViewDataSource, UITableViewDel
 // MARK: - Properties
     
     let paletteView = PaletteView()
+    let swipeGesture = SwipeGesture()
     let paletteTableView = UITableView()
     var colorPalette = [Color]()
     var colorButton = [UIButton]() //Array of buttons the size and color of each tableView cell
@@ -48,6 +49,14 @@ class PaletteController: UIViewController, UITableViewDataSource, UITableViewDel
         setupTableView()
         setupBottomController()
         
+        let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(self.respondToSwipeGesture))
+        swipeRight.direction = UISwipeGestureRecognizer.Direction.right
+        self.view.addGestureRecognizer(swipeRight)
+        
+        let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(self.respondToSwipeGesture))
+        swipeLeft.direction = UISwipeGestureRecognizer.Direction.left
+        self.view.addGestureRecognizer(swipeLeft)
+        
         let end = Date()
         print("Elapsed Time at start of app: \(end.timeIntervalSince(start))")
     }
@@ -65,6 +74,8 @@ class PaletteController: UIViewController, UITableViewDataSource, UITableViewDel
 // MARK: - Helper Functions
 
     func setupNavigationController() {
+        self.navigationController?.navigationBar.backIndicatorImage = UIImage(named: "BackButton_blank")
+        self.navigationController?.navigationBar.backIndicatorTransitionMaskImage = UIImage(named: "BackButton_blank")
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         navigationController?.navigationBar.tintColor = .label
     }
@@ -142,6 +153,24 @@ class PaletteController: UIViewController, UITableViewDataSource, UITableViewDel
 
     // MARK: - Selectors
     
+    @objc func respondToSwipeGesture(gesture: UIGestureRecognizer) {
+    if let swipeGesture = gesture as? UISwipeGestureRecognizer {
+        let gradientController = GradientController()
+        let menuController = MenuController()
+        
+        switch swipeGesture.direction {
+        case UISwipeGestureRecognizer.Direction.right:
+            self.navigationController?.pushViewControllerFromLeft(controller: menuController)
+            print("Swiped right")
+        case UISwipeGestureRecognizer.Direction.left:
+            self.navigationController?.pushViewController(gradientController, animated: true)
+            print("Swiped left")
+        default:
+            break
+            }
+        }
+    }
+    
     @objc func openGradientController() {
         let gradientController = GradientController()
         self.navigationController?.pushViewController(gradientController, animated: true)
@@ -194,7 +223,7 @@ class PaletteController: UIViewController, UITableViewDataSource, UITableViewDel
         
         for i in 0..<5 {
             if buttonTag == i {
-                UIView.animate(withDuration: 0.7, animations: {
+                UIView.animate(withDuration: 0.5, animations: {
                     switch self.currentAnimation {
                     case 0:
                         self.cellColorInRGB = UIColor(hexString: self.appendedPalettes[0].colors[i])

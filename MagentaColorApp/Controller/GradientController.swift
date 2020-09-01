@@ -28,7 +28,7 @@ class GradientController: UIViewController, LeftColorPickerDelegate, RightColorP
     var shareLeftColor = String()
     var shareRightColor = String()
     let hapticFeedback = UIImpactFeedbackGenerator()
-    var lightIsOn = false
+    var prefersDarkMode = false
     
     let defaults = UserDefaults.standard
     
@@ -48,6 +48,7 @@ class GradientController: UIViewController, LeftColorPickerDelegate, RightColorP
         
         showColorPicker()
         displayGradient()
+        swipeGesture()
     }
     
 // MARK: - Helper Functions
@@ -103,14 +104,14 @@ class GradientController: UIViewController, LeftColorPickerDelegate, RightColorP
     }
     
     func saveStylePreference() {
-        defaults.set(lightIsOn, forKey: Keys.prefersDarkMode)
+        defaults.set(prefersDarkMode, forKey: Keys.prefersDarkMode)
     }
     
     func checkForStylePreference() {
-        let prefersDarkMode = defaults.bool(forKey: Keys.prefersDarkMode)
+        let userDefaultDarkMode = defaults.bool(forKey: Keys.prefersDarkMode)
         
-        if prefersDarkMode {
-            lightIsOn = true
+        if userDefaultDarkMode {
+            prefersDarkMode = true
             updateTheme()
         }
     }
@@ -130,6 +131,12 @@ class GradientController: UIViewController, LeftColorPickerDelegate, RightColorP
         } else {
             button.setImage(#imageLiteral(resourceName: "write-editing-white"), for: .normal)
         }
+    }
+    
+    func swipeGesture() {
+        let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(self.respondToSwipeGesture))
+        swipeRight.direction = UISwipeGestureRecognizer.Direction.right
+        self.view.addGestureRecognizer(swipeRight)
     }
     
     //Randomly generates two new gradient colors
@@ -212,6 +219,20 @@ class GradientController: UIViewController, LeftColorPickerDelegate, RightColorP
         let activityViewController = UIActivityViewController(activityItems: [string], applicationActivities: nil)
         
         present(activityViewController, animated: true, completion: nil)
+    }
+    
+    @objc func respondToSwipeGesture(gesture: UIGestureRecognizer) {
+        if let swipeGesture = gesture as? UISwipeGestureRecognizer {
+        let paletteController = PaletteController()
+        
+        switch swipeGesture.direction {
+        case UISwipeGestureRecognizer.Direction.right:
+            self.navigationController?.pushViewControllerFromLeft(controller: paletteController)
+            print("Swiped right")
+        default:
+            break
+            }
+        }
     }
     
 // MARK: - Data Persistance
