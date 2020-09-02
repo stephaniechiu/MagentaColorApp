@@ -9,6 +9,7 @@
 import UIKit
 import Lottie
 import MessageUI
+import StoreKit
 
 class MenuController: UIViewController, MFMailComposeViewControllerDelegate {
     
@@ -45,6 +46,7 @@ class MenuController: UIViewController, MFMailComposeViewControllerDelegate {
 //        menuView.premiumButton.addTarget(self, action: #selector(openPremium(sender:)), for: .touchUpInside)
 //        menuView.favoritesButton.addTarget(self, action: #selector(openFavorites), for: .touchUpInside)
         menuView.emailButton.addTarget(self, action: #selector(sendEmail), for: .touchUpInside)
+        menuView.reviewButton.addTarget(self, action: #selector(leaveReview(sender:)), for: .touchUpInside)
     }
     
     func swipeGesture() {
@@ -91,7 +93,7 @@ class MenuController: UIViewController, MFMailComposeViewControllerDelegate {
         self.navigationController?.pushViewControllerFromLeft(controller: favoritesController)
     }
     
-    @objc func sendEmail(sender: UIGestureRecognizer) {
+    @objc func sendEmail(sender: UIButton) {
         if MFMailComposeViewController.canSendMail() {
             let mail = MFMailComposeViewController()
             mail.mailComposeDelegate = self
@@ -103,12 +105,17 @@ class MenuController: UIViewController, MFMailComposeViewControllerDelegate {
         } else {
             let sendMailErrorAlert = UIAlertController(title: "Could Not Send Email", message: "Your device could not send e-mail.  Please check if Apple Mail is installed and try again.", preferredStyle: UIAlertController.Style.alert)
             sendMailErrorAlert.addAction(UIAlertAction(title: "Open App Store", style: UIAlertAction.Style.default, handler: {(action:UIAlertAction!) in
-                    let urlStr = "itms-apps://apps.apple.com/us/app/mail/id1108187098"
-                    UIApplication.shared.openURL(URL(string: urlStr)!)
+                let urlStr = URL(string: "itms-apps://apps.apple.com/us/app/mail/id1108187098")
+                    UIApplication.shared.open(urlStr!)
                 }))
             sendMailErrorAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
             self.present(sendMailErrorAlert, animated: true)
         }
+    }
+    
+    @objc func leaveReview(sender: UIButton) {
+        guard let url = URL(string: "itms-apps://itunes.apple.com/app/" + "1518505127") else { return }
+        UIApplication.shared.open(url)
     }
 
     func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {

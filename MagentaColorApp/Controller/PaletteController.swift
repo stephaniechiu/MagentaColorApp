@@ -14,7 +14,6 @@ class PaletteController: UIViewController, UITableViewDataSource, UITableViewDel
 // MARK: - Properties
     
     let paletteView = PaletteView()
-    let swipeGesture = SwipeGesture()
     let paletteTableView = UITableView()
     var colorPalette = [Color]()
     var colorButton = [UIButton]() //Array of buttons the size and color of each tableView cell
@@ -49,13 +48,8 @@ class PaletteController: UIViewController, UITableViewDataSource, UITableViewDel
         setupTableView()
         setupBottomController()
         
-        let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(self.respondToSwipeGesture))
-        swipeRight.direction = UISwipeGestureRecognizer.Direction.right
-        self.view.addGestureRecognizer(swipeRight)
-        
-        let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(self.respondToSwipeGesture))
-        swipeLeft.direction = UISwipeGestureRecognizer.Direction.left
-        self.view.addGestureRecognizer(swipeLeft)
+        requestReview()
+        swipeGestures()
         
         let end = Date()
         print("Elapsed Time at start of app: \(end.timeIntervalSince(start))")
@@ -96,6 +90,21 @@ class PaletteController: UIViewController, UITableViewDataSource, UITableViewDel
         
         view.addSubview(paletteView.bottomControllerView)
         paletteView.bottomControllerView.anchor(top: paletteTableView.bottomAnchor, left: view.safeAreaLayoutGuide.leftAnchor, bottom: view.bottomAnchor, right: view.safeAreaLayoutGuide.rightAnchor, height: bottomControllerHeight)
+    }
+    
+    func swipeGestures() {
+        let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(self.respondToSwipeGesture))
+        swipeRight.direction = UISwipeGestureRecognizer.Direction.right
+        self.view.addGestureRecognizer(swipeRight)
+        
+        let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(self.respondToSwipeGesture))
+        swipeLeft.direction = UISwipeGestureRecognizer.Direction.left
+        self.view.addGestureRecognizer(swipeLeft)
+    }
+    
+    func requestReview() {
+        let requestReview = RequestReview()
+        requestReview.showReview()
     }
     
     func setupTableView() {
