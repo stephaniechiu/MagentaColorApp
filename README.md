@@ -2,6 +2,8 @@
 
 An iOS app for choosing right colors for your next project using the top color palettes or the latest gradient trends!
 
+Available to download on the App Store: https://apps.apple.com/us/app/magentacolor/id1518505127
+
 ## Features
 * Individual colors are shown in HEX, RGB, HSB, CMY, and CMYK
 * Copy and share the palettes or gradient colors
