@@ -1,4 +1,4 @@
-## Magenta
+# Magenta
 
 An iOS app for choosing right colors for your next project using the top color palettes or the latest gradient trends!
 
@@ -16,3 +16,8 @@ An iOS app for choosing right colors for your next project using the top color p
 * CloudKit
 * Core Animation
 * [Lottie](https://github.com/airbnb/lottie-ios) library
+
+## Visual
+
+https://user-images.githubusercontent.com/37680110/229698796-9221db02-514e-4403-81ba-f26d3cf2803a.MOV
+
