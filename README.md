@@ -4,6 +4,8 @@ An iOS app for choosing right colors for your next project using the top color p
 
 Available to download on the App Store: https://apps.apple.com/us/app/magentacolor/id1518505127
 
+https://user-images.githubusercontent.com/37680110/229698796-9221db02-514e-4403-81ba-f26d3cf2803a.MOV
+
 ## Features
 * Individual colors are shown in HEX, RGB, HSB, CMY, and CMYK
 * Copy and share the palettes or gradient colors
@@ -18,8 +20,4 @@ Available to download on the App Store: https://apps.apple.com/us/app/magentacol
 * CloudKit
 * Core Animation
 * [Lottie](https://github.com/airbnb/lottie-ios) library
-
-## Visual
-
-https://user-images.githubusercontent.com/37680110/229698796-9221db02-514e-4403-81ba-f26d3cf2803a.MOV
 
